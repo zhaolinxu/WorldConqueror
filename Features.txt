@@ -1,0 +1,77 @@
+﻿Version 0.0.1 Features
+1) Economic Buildings and Economic Stats.
+2) Food Buildings and Consumption Stats.
+3) Housing Buildings and Demographic Stats.
+4) Add Color Coded growth meters
+5) Add ability to Pause the game.
+6) Buy 10, 100 buttons
+7) Speed up Buttons
+
+
+Version 0.0.2 Features
+1) Add Custom City Name selections.
+2) Add Base Happiness factor and happiness multiplier
+3) Add Description for each building.
+4) Made numbers nicer to see
+5) Add upkeep
+
+
+
+Version 0.1.0 Features
+1) Add custom titles
+2) Add Local Saves
+3) Conver the City Name to HQ Section and create another Stats section.
+4) Give player ability to tweak the parameters
+5) Add Land and Land Limits
+6) Add Research and Science Buildings
+
+
+Version 0.2.0 Features
+1) Add Armies
+2) Add Human Resources
+3) Add a more complex happiness formula which falls faster with higher negative stats. Rather than an even fall as it is now.
+
+Version 0.3.0 Features
+1) Add Other Countries and Their stats
+2) Add War Area
+3) Achievements
+4) Offline Data Gathering.
+
+
+Version 1.0.0 Features
+1) Difficulty Levels
+2) Server saves
+3) Leaderboard
+4) Different speeds
+5) Land and Land growth.
+6) Public Sector and Private Sector Jobs
+7) Pick what type of job do you prefer. Public of Private
+8) Build Constant Feedback
+9) Build Premium Model.
+
+
+Version 1.1.0 Features
+1) Add growth from campsite to country.
+2) Add a prestige system.
+3) Add random events.
+4) Humor in research and building names.
+
+
+Version 2.0.0 Features
+1) Multiplayer
+2) Global Events
+3) Global Stats affecting local stats (After Research globalization)
+4) Wonders
+5) Heroes
+6) Buildings affecting multiples genres
+7) Buildings changing names with level up.
+8) Secret futuristic buildings
+9) Graphs
+10) Add Commodities
+11) Add Import and Export
+12) Add logic where too much of a type of building will reduce its multiplier
+13) Add Real Map action
+
+
+Version 3.0.0 Features
+1) Eras

@@ -1,0 +1,30 @@
+﻿.margin-top-20 {
+  margin-top: 20px;
+}
+
+.margin-bottom-20 {
+  margin-bottom: 20px;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+
+.align-right {
+    text-align: right;
+}
+
+.align-middle {
+    vertical-align: middle;
+}
+
+
+
+.font-9pt {
+    font-size: 9pt;
+}
+
+.bold {
+    font-weight: bold;
+}

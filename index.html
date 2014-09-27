@@ -27,7 +27,7 @@
 
                 <div id="Game" ng-show="showScreen ==='game'">
                     <div class="col-sm-12">
-                        <div id="CountryInfo" class="col-sm-4" ng-controller="CountryController as countryCtrl">
+                        <div id="CountryInfo" class="col-sm-3" ng-controller="CountryController as countryCtrl">
                             <h3>
                                 <span class="glyphicon glyphicon-flag"></span> {{countryCtrl.myCountry.name}}
                                 <button class="btn btn-primary" ng-click="pauseGame()">
@@ -44,10 +44,10 @@
                                 <!--TODO: Add color coding on stats.-->
                                 <!--TODO: Update UI to show +/- stat in the same row.-->
                                 <div id="demographics">
-                                    <h4 class="col-sm-12">
+                                    <h4 class="col-sm-12 font-color-blue">
                                         <span class="fa fa-users"></span> Demographics:
                                     </h4>
-                                    <span class="control-label col-sm-4 align-right bold">
+                                    <span class="control-label col-sm-4 align-right bold font-9pt">
                                         Population:
                                     </span>
                                     <span>
@@ -57,7 +57,7 @@
                                         </span>)
                                     </span>
                                     <br />
-                                    <span class="control-label col-sm-4 align-right bold">
+                                    <span class="control-label col-sm-4 align-right bold font-9pt">
                                         Happiness:
                                     </span>
                                     <span>
@@ -66,28 +66,28 @@
                                         </span>
                                     </span>
                                     <br />
-                                    <span class="control-label col-sm-4 align-right bold">
+                                    <span class="control-label col-sm-4 align-right bold font-9pt">
                                         Growth Rate:
                                     </span>
                                     <span>
                                         {{countryCtrl.myCountry.actualGrowthRate()}}%
                                     </span>
                                     <br />
-                                    <span class="control-label col-sm-4 align-right bold">
+                                    <span class="control-label col-sm-4 align-right bold font-9pt">
                                         Mortality Rate:
                                     </span>
                                     <span>
                                         {{countryCtrl.myCountry.actualMortalityRate()}}%
                                     </span>
                                     <br />
-                                    <span class="control-label col-sm-4 align-right bold">
-                                        Housing Capacity:
+                                    <span class="control-label col-sm-4 align-right bold font-9pt">
+                                        Total Housing:
                                     </span>
                                     <span>
                                         {{countryCtrl.myCountry.housingCapacity}}
                                     </span>
                                     <br />
-                                    <span class="control-label col-sm-4 align-right bold">
+                                    <span class="control-label col-sm-4 align-right bold font-9pt">
                                         Homelessness:
                                     </span>
                                     <span>
@@ -98,11 +98,11 @@
                                 </div>
                                 <hr />
                                 <div id="consumption">
-                                    <h4 class="col-sm-12">
+                                    <h4 class="col-sm-12 font-color-orange">
                                         <span class="fa fa-bar-chart-o"></span> Consumption:
                                     </h4>
-                                    <span class="control-label col-sm-4 align-right bold">
-                                        Total Food:
+                                    <span class="control-label col-sm-4 align-right bold font-9pt">
+                                        Food Stock:
                                     </span>
                                     <span>
                                         {{countryCtrl.myCountry.totalFood}}
@@ -111,7 +111,7 @@
                                         </span>)
                                     </span>
                                     <br />
-                                    <span class="control-label col-sm-4 align-right bold">
+                                    <span class="control-label col-sm-4 align-right bold font-9pt">
                                         Hunger:
                                     </span>
                                     <span>
@@ -120,14 +120,14 @@
                                         </span>
                                         </span>
                                     <br />
-                                    <span class="control-label col-sm-4 align-right bold">
+                                    <span class="control-label col-sm-4 align-right bold font-9pt">
                                         Food Demand:
                                     </span>
                                     <span>
                                         {{countryCtrl.myCountry.foodDemand()}}
                                     </span>
                                     <br />
-                                    <span class="control-label col-sm-4 align-right bold">
+                                    <span class="control-label col-sm-4 align-right bold font-9pt">
                                         Food Growth:
                                     </span>
                                     <span>
@@ -136,24 +136,24 @@
                                 </div>
                                 <hr />
                                 <div id="economics">
-                                    <h4 class="col-sm-12">
+                                    <h4 class="col-sm-12 font-color-green">
                                         <span class="fa fa-money"></span> Economics:
                                     </h4>
-                                    <span class="control-label col-sm-4 align-right bold">
+                                    <span class="control-label col-sm-4 align-right bold font-9pt">
                                         GDP:
                                     </span>
                                     <span>
                                         {{countryCtrl.myCountry.gdp()}}
                                     </span>
                                     <br />
-                                    <span class="control-label col-sm-4 align-right bold">
+                                    <span class="control-label col-sm-4 align-right bold font-9pt">
                                         Size:
                                     </span>
                                     <span>
                                         {{countryCtrl.myCountry.size}}
                                     </span>
                                     <br />
-                                    <span class="control-label col-sm-4 align-right bold">
+                                    <span class="control-label col-sm-4 align-right bold font-9pt">
                                         Money:
                                     </span>
                                     <span>
@@ -174,7 +174,7 @@
                                         {{countryCtrl.myCountry.jobGdpMultiplier}}
                                     </span>
                                     <br />
-                                    <span class="control-label col-sm-4 align-right bold">
+                                    <span class="control-label col-sm-4 align-right bold font-9pt">
                                         Unemployment:
                                     </span>
                                     <span>
@@ -232,15 +232,18 @@
                                 </tabset>
                             </div>
                         </div>
-                        <div id="Army" class="col-sm-2" ng-controller="ArmyController as armyCtrl">
+                        <div id="Army" class="col-sm-3" ng-controller="ArmyController as armyCtrl">
                             <h3>
                                 <span class="glyphicon glyphicon-screenshot"></span> Army
+                                <button class="btn btn-primary pull-right" ng-click="openSettings()">
+                                    <i class="fa fa-cogs"></i> settings
+                                </button>
                             </h3>
                             <hr>
                         </div>
                         <div id="Research" class="col-sm-2" ng-controller="ResearchController as researchCtrl">
                             <h3>
-                                <span class="glyphicon glyphicon-cog"></span> Research
+                                <span class="fa fa-flask"></span> Research
                             </h3>
                             <hr>
                         </div>

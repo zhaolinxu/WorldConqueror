@@ -13,9 +13,9 @@ wciApp.factory('myCountryData', function () {
         //Demographics
         size: 1,
         //isCountry: false, //Use this when the feature is built to start from a campsite and grow upto a city and then ask for independence.
-        population: 4,
-        baseGrowthRate: 10, //Based on the size of the country (lower size = higher growth rate)
-        baseMortalityRate: 8, //Based on the size (lower size = higher mortality rate)
+        population: 5,
+        baseGrowthRate: 8, //Based on the size of the country (lower size = lower growth rate)
+        baseMortalityRate: 12, //Based on the size (lower size = higher mortality rate)
         actualGrowthRate: function () {
             return Math.round(this.baseGrowthRate * ((2 * this.happiness) / 100));
         },
@@ -27,12 +27,12 @@ wciApp.factory('myCountryData', function () {
         },
 
         //Consumption
-        perCapitaConsumption: 30, // 1 person's monthly consumption = 3 Mcal * 30 ~ 100 Mcal. (3Mcal is based on the nation's development level. http://www.who.int/nutrition/topics/3_foodconsumption/en/)
-        totalFood: 1000, // In megaCalorie = 1000*kcal... 
+        perCapitaConsumption: 50, // 1 person's monthly consumption = 3 Mcal * 30 ~ 100 Mcal. (3Mcal is based on the nation's development level. http://www.who.int/nutrition/topics/3_foodconsumption/en/)
+        totalFood: 800, // In megaCalorie = 1000*kcal... 
         foodFlow: function() {
             return this.foodGrowth() - this.foodDemand();
         },
-        basefoodGrowth: 400,
+        basefoodGrowth: 800,
         foodGrowth: function () {
             return Math.round(this.basefoodGrowth * (this.happiness / 100));
         },
@@ -51,12 +51,12 @@ wciApp.factory('myCountryData', function () {
             return gdp;
         },
 
-        totalJobs: 4,
+        totalJobs: 16,
         filledJobs: function () {
             var jobs = Math.min(this.totalJobs, this.population)
             return jobs;
         }, //How many of these jobs are actually filled.
-        jobGdpMultiplier: 10, //This is how jobs effect the gdp.
+        jobGdpMultiplier: 100, //This is how jobs effect the gdp.
 
         //TODO: Move this to Demographics
         unemployment: function () {
@@ -67,7 +67,7 @@ wciApp.factory('myCountryData', function () {
 
             return unemployment;
         },
-        housingCapacity: 8,
+        housingCapacity: 16,
         homelessness: function () {
             var homelessness = Math.round(((this.population - this.housingCapacity)/(this.population))*100);
             if (homelessness < 0) {
@@ -87,24 +87,100 @@ wciApp.factory('myCountryData', function () {
     myCountry.getNewDemographics = function () {
 
         this.population += this.populationGrowth();
-        this.happiness = Math.round( 100 - (this.unemployment()/3) - (this.hunger/3) - (this.homelessness()/3));
 
-        if (this.gdp() > 10000 && this.gdp() <= 1000000) {
+        //TODO: Figure out a more elegant solution for this.. but currently. happiness goes down slowly a first, then speeds up as the individual ratios go up, then slows down again after the ratios hit a certain point.
+        var unemployment = this.unemployment();
+        var unempHappinessFactor = 0;
+        var hunger = this.hunger;
+        var hungerHappinessFactor = 0;
+        var homeless = this.homelessness();
+        var homelessHappinessFactor = 0;
+
+        ////========================================
+        //if (unemployment <= 10) {
+        //    unempHappinessFactor = unemployment / 5;
+        //}
+        //else if (unemployment <= 25) {
+        //    unempHappinessFactor = unemployment / 4;
+        //}
+        //else if (unemployment <= 45) {
+        //    unempHappinessFactor = unemployment / 3;
+        //}
+        //else if (unemployment <= 65) {
+        //    unempHappinessFactor = unemployment / 2;
+        //}
+        //else if (unemployment <= 85) {
+        //    unempHappinessFactor = unemployment / 3;
+        //}
+        //else {
+        //    unempHappinessFactor = unemployment / 4;
+        //}
+
+        ////========================================
+        //if (hunger <= 10) {
+        //    hungerHappinessFactor = hunger / 5;
+        //}
+        //else if (hunger <= 25) {
+        //    hungerHappinessFactor = hunger / 4;
+        //}
+        //else if (hunger <= 45) {
+        //    hungerHappinessFactor = hunger / 3;
+        //}
+        //else if (hunger <= 65) {
+        //    hungerHappinessFactor = hunger / 2;
+        //}
+        //else if (hunger <= 85) {
+        //    hungerHappinessFactor = hunger / 3;
+        //}
+        //else {
+        //    hungerHappinessFactor = hunger / 4;
+        //}
+
+        ////========================================
+        //if (homeless <= 10) {
+        //    homelessHappinessFactor = homeless / 5;
+        //}
+        //else if (homeless <= 25) {
+        //    homelessHappinessFactor = homeless / 4;
+        //}
+        //else if (homeless <= 45) {
+        //    homelessHappinessFactor = homeless / 3;
+        //}
+        //else if (homeless <= 65) {
+        //    homelessHappinessFactor = homeless / 2;
+        //}
+        //else if (homeless <= 85) {
+        //    homelessHappinessFactor = homeless / 3;
+        //}
+        //else {
+        //    homelessHappinessFactor = homeless / 4;
+        //}
+
+
+
+        this.happiness = Math.round(100 - (unemployment/3) - (hunger/3) - (homeless/3));
+
+
+        //Set the size.
+        if (this.gdp() <= 10000) {
+            this.size = 1;
+        }
+        else if (this.gdp() <= 1000000) {
             this.size = 2;
         }
-        else if (this.gdp() > 1000000 && this.gdp() <= 100000000) {
+        else if (this.gdp() <= 100000000) {
             this.size = 3;
         }
-        else if (this.gdp() > 100000000 && this.gdp() <= 10000000000) {
+        else if (this.gdp() <= 10000000000) {
             this.size = 4;
         }
-        else if (this.gdp() > 10000000000 && this.gdp() <= 1000000000000) {
+        else if (this.gdp() <= 1000000000000) {
             this.size = 5;
         }
-        else if (this.gdp() > 1000000000000 && this.gdp() <= 10000000000000) {
+        else if (this.gdp() <= 10000000000000) {
             this.size = 6;
         }
-        else if (this.gdp() > 10000000000000) {
+        else {
             this.size = 7;
         }
 
@@ -136,7 +212,7 @@ wciApp.factory('myCountryData', function () {
 
     myCountry.getNewEconomics = function () {
 
-        this.money += Math.round(this.gdp() * 0.05);
+        this.money += Math.round(this.gdp() * 0.04);
     };
 
 

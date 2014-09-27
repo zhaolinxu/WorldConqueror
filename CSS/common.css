@@ -1,4 +1,5 @@
-﻿.margin-top-20 {
+﻿/*Margins and Paddings*/
+.margin-top-20 {
   margin-top: 20px;
 }
 
@@ -6,11 +7,12 @@
   margin-bottom: 20px;
 }
 
+/*Custom Controls*/
 .clickable {
     cursor: pointer;
 }
 
-
+/*Alignment*/
 .align-right {
     text-align: right;
 }
@@ -20,11 +22,27 @@
 }
 
 
-
+/*Font Styles*/
 .font-9pt {
     font-size: 9pt;
 }
 
 .bold {
     font-weight: bold;
+}
+
+.font-color-green {
+    color: green;
+}
+
+.font-color-blue {
+    color: blue;
+}
+
+.font-color-yellow {
+    color: yellow;
+}
+
+.font-color-orange {
+    color: orange;
 }

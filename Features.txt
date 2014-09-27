@@ -14,7 +14,7 @@ Version 0.0.2 Features
 3) Add Description for each building.
 4) Made numbers nicer to see
 5) Add upkeep
-
+6) Add time period, showing how long realistically this country has lasted.
 
 
 Version 0.1.0 Features
@@ -48,6 +48,7 @@ Version 1.0.0 Features
 7) Pick what type of job do you prefer. Public of Private
 8) Build Constant Feedback
 9) Build Premium Model.
+10) Add Food Storage and over stockage.
 
 
 Version 1.1.0 Features

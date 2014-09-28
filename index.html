@@ -28,17 +28,21 @@
                 <div id="Game" ng-show="showScreen ==='game'">
                     <div class="col-sm-12">
                         <div id="CountryInfo" class="col-sm-3" ng-controller="CountryController as countryCtrl">
-                            <h3>
-                                <span class="glyphicon glyphicon-flag"></span> {{countryCtrl.myCountry.name}}
-                                <button class="btn btn-primary" ng-click="pauseGame()">
-                                    <span ng-show="paused">
-                                        Start
-                                    </span>
-                                    <span ng-show="!paused">
-                                        Pause
-                                    </span>
-                                </button>
-                            </h3>
+                            <div class="form-inline">
+                                <h3>
+                                    <span class="glyphicon glyphicon-flag"></span>
+                                    <input type="text" class="form-control" ng-model="countryCtrl.myCountry.name" />
+                                    <button class="btn btn-primary" ng-click="pauseGame()">
+                                        <span ng-show="paused">
+                                            Start
+                                        </span>
+                                        <span ng-show="!paused">
+                                            Pause
+                                        </span>
+                                    </button>
+                                </h3>
+
+                            </div>
                             <hr>
                             <div class="row">
                                 <!--TODO: Add color coding on stats.-->

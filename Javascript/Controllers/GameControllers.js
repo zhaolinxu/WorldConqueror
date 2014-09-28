@@ -75,6 +75,13 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData) 
     };
 
 
+    $scope.openSettings = function () {
+
+    };
+
+
+
+
     //Making sure interval is cancelled on destroy
     $scope.$on(
         "$destroy",
@@ -83,10 +90,6 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData) 
             $interval.cancel(timer)
         }
     );
-
-
-    
-
 
 });
 

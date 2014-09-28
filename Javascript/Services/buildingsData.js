@@ -10,8 +10,8 @@ wciApp.factory('buildingsData', function (myCountryData) {
             structures: [
                 {
                     name: 'Market',
-                    description: 'This building increases money growth.',
-                    count: 1,
+                    description: 'This building adds 2 jobs per structure.',
+                    count: 80,
                     cost: 50,
                     costMultiplier: 1,
                     unlocked: function () {
@@ -41,8 +41,8 @@ wciApp.factory('buildingsData', function (myCountryData) {
                 },
                 {
                     name: 'Port',
-                    description: 'This building increases money growth.',
-                    count: 1,
+                    description: 'This building adds 50 jobs per structure.',
+                    count: 0,
                     cost: 5000,
                     costMultiplier: 1,
                     unlocked: function () {
@@ -52,30 +52,30 @@ wciApp.factory('buildingsData', function (myCountryData) {
                         return false;
                     },
                     statAffected: 'jobGdpMultiplier',
-                    statMultiplier: 1.01,
-                    countMultiplier: 1.01,
+                    statMultiplier: 1,
+                    countMultiplier: 1,
                     jobsIncreased: 50,
                     build: function (count) {
 
-                        var cost = this.cost * Math.pow(this.costMultiplier, count);
+                        var cost = this.cost * count;
 
                         if ((myCountryData.money > cost) && this.unlocked()) {
 
-                            myCountryData[this.statAffected] *= count*(this.statMultiplier * this.countMultiplier);
+                            myCountryData[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
                             myCountryData.totalJobs += (this.jobsIncreased * count);
                             myCountryData.money -= cost;
 
                             this.count += count;
-                            this.cost = cost;
+                            //this.cost = cost;
                         }
                     }
                 },
                 {
                     name: 'Bank',
-                    description: 'This building increases money growth.',
-                    count: 1,
+                    description: 'This building adds 1000 jobs per structure and also increases the income from every job.',
+                    count: 0,
                     cost: 100000,
-                    costMultiplier: 2,
+                    costMultiplier: 1,
                     unlocked: function () {
                         if (myCountryData.size > 2) {
                             return true;
@@ -83,30 +83,30 @@ wciApp.factory('buildingsData', function (myCountryData) {
                         return false;
                     },
                     statAffected: 'jobGdpMultiplier',
-                    statMultiplier: 1.1,
-                    countMultiplier: 1.01,
+                    statMultiplier: 1.001,
+                    countMultiplier: 1.001,
                     jobsIncreased: 1000,
                     build: function (count) {
 
-                        var cost = this.cost * Math.pow(this.costMultiplier, count);
+                        var cost = this.cost * count;
 
                         if ((myCountryData.money > cost) && this.unlocked()) {
 
-                            myCountryData[this.statAffected] *= count*(this.statMultiplier * this.countMultiplier);
+                            myCountryData[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
                             myCountryData.totalJobs += (this.jobsIncreased * count);
                             myCountryData.money -= cost;
 
                             this.count += count;
-                            this.cost = cost;
+                            //this.cost = this.cost * Math.pow(this.costMultiplier, count);
                         }
                     }
                 },
                 {
                     name: 'Industry',
-                    description: 'This building increases money growth.',
-                    count: 1,
+                    description: 'This building adds 100,000 jobs per structure and also increases the income from every job.',
+                    count: 0,
                     cost: 1000000,
-                    costMultiplier: 2,
+                    costMultiplier: 1,
                     unlocked: function () {
                         if (myCountryData.size > 3) {
                             return true;
@@ -114,30 +114,30 @@ wciApp.factory('buildingsData', function (myCountryData) {
                         return false;
                     },
                     statAffected: 'jobGdpMultiplier',
-                    statMultiplier: 1.1,
-                    countMultiplier: 1.02,
+                    statMultiplier: 1.005,
+                    countMultiplier: 1.005,
                     jobsIncreased: 100000,
                     build: function (count) {
 
-                        var cost = this.cost * Math.pow(this.costMultiplier, count);
+                        var cost = this.cost * count;
 
                         if ((myCountryData.money > cost) && this.unlocked()) {
 
-                            myCountryData[this.statAffected] *= count*(this.statMultiplier * this.countMultiplier);
+                            myCountryData[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
                             myCountryData.totalJobs += (this.jobsIncreased * count);
                             myCountryData.money -= cost;
 
                             this.count += count;
-                            this.cost = cost;
+                            //this.cost = cost;
                         }
                     }
                 },
                 {
                     name: 'Services',
-                    description: 'This building increases money growth.',
-                    count: 1,
+                    description: 'This building adds 100,000 jobs per structure and also increases the income from every job.',
+                    count: 0,
                     cost: 6500000,
-                    costMultiplier: 4,
+                    costMultiplier: 1,
                     unlocked: function () {
                         if (myCountryData.size > 4) {
                             return true;
@@ -145,30 +145,30 @@ wciApp.factory('buildingsData', function (myCountryData) {
                         return false;
                     },
                     statAffected: 'jobGdpMultiplier',
-                    statMultiplier: 1.5,
+                    statMultiplier: 1.1,
                     countMultiplier: 1.1,
                     jobsIncreased: 100000,
                     build: function (count) {
 
-                        var cost = this.cost * Math.pow(this.costMultiplier, count);
+                        var cost = this.cost * count;
 
                         if ((myCountryData.money > cost) && this.unlocked()) {
 
-                            myCountryData[this.statAffected] *= count*(this.statMultiplier * this.countMultiplier);
+                            myCountryData[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
                             myCountryData.totalJobs += (this.jobsIncreased * count);
                             myCountryData.money -= cost;
 
                             this.count += count;
-                            this.cost = cost;
+                            //this.cost = cost;
                         }
                     }
                 },
                 {
                     name: 'Stock Exchange',
-                    description: 'This building increases money growth.',
-                    count: 1,
+                    description: 'This building adds 100,000 jobs per structure and also increases the income from every job.',
+                    count: 0,
                     cost: 1000000000,
-                    costMultiplier: 10,
+                    costMultiplier: 1,
                     unlocked: function () {
                         if (myCountryData.size > 5) {
                             return true;
@@ -176,22 +176,23 @@ wciApp.factory('buildingsData', function (myCountryData) {
                         return false;
                     },
                     statAffected: 'jobGdpMultiplier',
-                    statMultiplier: 2,
-                    countMultiplier: 1.1,
+                    statMultiplier: 1.5,
+                    countMultiplier: 1.5,
                     jobsIncreased: 1000000,
                     build: function (count) {
 
                         //Geometric progression sum
-                        var cost = (this.cost * (1 - Math.pow(this.costMultiplier, count))) / (1 - this.costMultiplier);
+                        //var cost = (this.cost * (1 - Math.pow(this.costMultiplier, count))) / (1 - this.costMultiplier);
+                        var cost = this.cost * count;
 
                         if ((myCountryData.money > cost) && this.unlocked()) {
 
-                            myCountryData[this.statAffected] *= ((1 - Math.pow((this.statMultiplier * this.countMultiplier), count)) / (1 - (this.statMultiplier * this.countMultiplier)));
+                            myCountryData[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
                             myCountryData.totalJobs += (this.jobsIncreased * count);
                             myCountryData.money -= cost;
 
                             this.count += count;
-                            this.cost = cost;
+                            //this.cost = cost;
                         }
                     }
                 }
@@ -203,7 +204,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
                 {
                     name: 'Library',
                     description: 'This building unlocks researches and gives research points.',
-                    count: 1,
+                    count: 0,
                     cost: 100,
                     costMultiplier: 9,
                     unlocked: false,
@@ -221,7 +222,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
                 {
                     name: 'School',
                     description: 'This building increases money growth.',
-                    count: 1,
+                    count: 0,
                     cost: 100,
                     costMultiplier: 9,
                     unlocked: false,
@@ -239,7 +240,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
                 {
                     name: 'University',
                     description: 'This building increases money growth.',
-                    count: 1,
+                    count: 0,
                     cost: 100,
                     costMultiplier: 9,
                     unlocked: false,
@@ -257,7 +258,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
                 {
                     name: 'Laboratory',
                     description: 'This building increases money growth.',
-                    count: 1,
+                    count: 0,
                     cost: 100,
                     costMultiplier: 9,
                     unlocked: false,
@@ -275,7 +276,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
                 {
                     name: 'Observatory',
                     description: 'This building increases money growth.',
-                    count: 1,
+                    count: 0,
                     cost: 100,
                     costMultiplier: 9,
                     unlocked: false,
@@ -293,7 +294,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
                 {
                     name: 'Space Station',
                     description: 'This building increases money growth.',
-                    count: 1,
+                    count: 0,
                     cost: 100,
                     costMultiplier: 9,
                     unlocked: false,
@@ -315,8 +316,8 @@ wciApp.factory('buildingsData', function (myCountryData) {
             structures: [
                 {
                     name: 'Shack',
-                    description: 'This building increases money growth.',
-                    count: 1,
+                    description: 'This building adds 2 housing capacity.',
+                    count: 80,
                     cost: 50,
                     costMultiplier: 1,
                     unlocked: function () {
@@ -346,8 +347,8 @@ wciApp.factory('buildingsData', function (myCountryData) {
                 },
                 {
                     name: 'House',
-                    description: 'This building increases money growth.',
-                    count: 1,
+                    description: 'This building adds 6 housing capacity and 1 new job.',
+                    count: 0,
                     cost: 500,
                     costMultiplier: 1,
                     unlocked: function () {
@@ -362,7 +363,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     jobsIncreased: 1,
                     build: function (count) {
 
-                        var cost = this.cost * Math.pow(this.costMultiplier, count);
+                        var cost = this.cost * count;
 
                         if ((myCountryData.money > cost) && this.unlocked()) {
 
@@ -371,16 +372,16 @@ wciApp.factory('buildingsData', function (myCountryData) {
                             myCountryData.money -= cost;
 
                             this.count += count;
-                            this.cost = cost;
+                            //this.cost = cost;
                         }
                     }
                 },
                 {
                     name: 'Duplex',
-                    description: 'This building increases money growth.',
-                    count: 1,
+                    description: 'This building adds 12 housing capacity and 3 new jobs.',
+                    count: 0,
                     cost: 10000,
-                    costMultiplier: 2,
+                    costMultiplier: 1,
                     unlocked: function () {
                         if (myCountryData.size > 2) {
                             return true;
@@ -393,7 +394,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     jobsIncreased: 3,
                     build: function (count) {
 
-                        var cost = this.cost * Math.pow(this.costMultiplier, count);
+                        var cost = this.cost * count;
 
                         if ((myCountryData.money > cost) && this.unlocked()) {
 
@@ -402,49 +403,18 @@ wciApp.factory('buildingsData', function (myCountryData) {
                             myCountryData.money -= cost;
 
                             this.count += count;
-                            this.cost = cost;
+                            //this.cost = cost;
                         }
                     }
                 },
                 {
                     name: 'Small Apartments',
-                    description: 'This building increases money growth.',
-                    count: 1,
+                    description: 'This building adds 1000 housing capacity and 50 new jobs.',
+                    count: 0,
                     cost: 10000000,
-                    costMultiplier: 3,
+                    costMultiplier: 1,
                     unlocked: function () {
                         if (myCountryData.size > 3) {
-                            return true;
-                        }
-                        return false;
-                    },
-                    statAffected: 'housingCapacity',
-                    statMultiplier: 100,
-                    countMultiplier: 1,
-                    jobsIncreased: 20,
-                    build: function (count) {
-
-                        var cost = this.cost * Math.pow(this.costMultiplier, count);
-
-                        if ((myCountryData.money > cost) && this.unlocked()) {
-
-                            myCountryData[this.statAffected] += count * (this.statMultiplier * this.countMultiplier);
-                            myCountryData.totalJobs += (this.jobsIncreased * count);
-                            myCountryData.money -= cost;
-
-                            this.count += count;
-                            this.cost = cost;
-                        }
-                    }
-                },
-                {
-                    name: 'Apartment Complex',
-                    description: 'This building increases money growth.',
-                    count: 1,
-                    cost: 100000000,
-                    costMultiplier: 4,
-                    unlocked: function () {
-                        if (myCountryData.size > 4) {
                             return true;
                         }
                         return false;
@@ -455,7 +425,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     jobsIncreased: 50,
                     build: function (count) {
 
-                        var cost = this.cost * Math.pow(this.costMultiplier, count);
+                        var cost = this.cost * count;
 
                         if ((myCountryData.money > cost) && this.unlocked()) {
 
@@ -464,16 +434,47 @@ wciApp.factory('buildingsData', function (myCountryData) {
                             myCountryData.money -= cost;
 
                             this.count += count;
-                            this.cost = cost;
+                            //this.cost = cost;
+                        }
+                    }
+                },
+                {
+                    name: 'Apartment Complex',
+                    description: 'This building adds 10000 housing capacity and 500 new jobs.',
+                    count: 0,
+                    cost: 100000000,
+                    costMultiplier: 1,
+                    unlocked: function () {
+                        if (myCountryData.size > 4) {
+                            return true;
+                        }
+                        return false;
+                    },
+                    statAffected: 'housingCapacity',
+                    statMultiplier: 10000,
+                    countMultiplier: 1,
+                    jobsIncreased: 500,
+                    build: function (count) {
+
+                        var cost = this.cost * count;
+
+                        if ((myCountryData.money > cost) && this.unlocked()) {
+
+                            myCountryData[this.statAffected] += count * (this.statMultiplier * this.countMultiplier);
+                            myCountryData.totalJobs += (this.jobsIncreased * count);
+                            myCountryData.money -= cost;
+
+                            this.count += count;
+                            //this.cost = cost;
                         }
                     }
                 },
                 {
                     name: 'High Rise',
-                    description: 'This building increases money growth.',
-                    count: 1,
+                    description: 'This building adds 50000 housing capacity and 1000 new jobs',
+                    count: 0,
                     cost: 5000000000,
-                    costMultiplier: 5,
+                    costMultiplier: 1,
                     unlocked: function () {
                         if (myCountryData.size > 5) {
                             return true;
@@ -481,12 +482,12 @@ wciApp.factory('buildingsData', function (myCountryData) {
                         return false;
                     },
                     statAffected: 'housingCapacity',
-                    statMultiplier: 5000,
+                    statMultiplier: 50000,
                     countMultiplier: 1,
-                    jobsIncreased: 200,
+                    jobsIncreased: 1000,
                     build: function (count) {
 
-                        var cost = this.cost * Math.pow(this.costMultiplier, count);
+                        var cost = this.cost * count;
 
                         if ((myCountryData.money > cost) && this.unlocked()) {
 
@@ -495,7 +496,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
                             myCountryData.money -= cost;
 
                             this.count += count;
-                            this.cost = cost;
+                            //this.cost = cost;
                         }
                     }
                 }
@@ -506,8 +507,8 @@ wciApp.factory('buildingsData', function (myCountryData) {
             structures: [
                 {
                     name: 'Garden',
-                    description: 'This building increases money growth.',
-                    count: 1,
+                    description: 'This building increases base food growth by 200.',
+                    count: 50,
                     cost: 50,
                     costMultiplier: 1,
                     unlocked: function () {
@@ -537,10 +538,10 @@ wciApp.factory('buildingsData', function (myCountryData) {
                 },
                 {
                     name: 'Fishery',
-                    description: 'This building increases money growth.',
-                    count: 1,
+                    description: 'This building increases base food growth by 50,000 and adds 10 jobs',
+                    count: 0,
                     cost: 10000,
-                    costMultiplier: 2,
+                    costMultiplier: 1,
                     unlocked: function () {
                         if (myCountryData.size > 1) {
                             return true;
@@ -549,11 +550,11 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     },
                     statAffected: 'basefoodGrowth',
                     statMultiplier: 50000,
-                    countMultiplier: 0.99,
+                    countMultiplier: 0.999,
                     jobsIncreased: 10,
                     build: function (count) {
 
-                        var cost = this.cost * Math.pow(this.costMultiplier, count);
+                        var cost = this.cost * count;
 
                         if ((myCountryData.money > cost) && this.unlocked()) {
 
@@ -562,16 +563,16 @@ wciApp.factory('buildingsData', function (myCountryData) {
                             myCountryData.money -= cost;
 
                             this.count += count;
-                            this.cost = cost;
+                            //this.cost = cost;
                         }
                     }
                 },
                 {
                     name: 'Farm',
-                    description: 'This building increases money growth.',
-                    count: 1,
+                    description: 'This building increases base food growth by 40,000 and adds 100 jobs',
+                    count: 0,
                     cost: 10000,
-                    costMultiplier: 2,
+                    costMultiplier: 1,
                     unlocked: function () {
                         if (myCountryData.size > 2) {
                             return true;
@@ -581,10 +582,10 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     statAffected: 'basefoodGrowth',
                     statMultiplier: 40000,
                     countMultiplier: 1,
-                    jobsIncreased: 50,
+                    jobsIncreased: 100,
                     build: function (count) {
 
-                        var cost = this.cost * Math.pow(this.costMultiplier, count);
+                        var cost = this.cost * count;
 
                         if ((myCountryData.money > cost) && this.unlocked()) {
 
@@ -593,16 +594,16 @@ wciApp.factory('buildingsData', function (myCountryData) {
                             myCountryData.money -= cost;
 
                             this.count += count;
-                            this.cost = cost;
+                            //this.cost = cost;
                         }
                     }
                 },
                 {
                     name: 'Husbandry',
-                    description: 'This building increases money growth.',
-                    count: 1,
+                    description: 'This building increases base food growth by 250,000 and adds 500 jobs',
+                    count: 0,
                     cost: 100000,
-                    costMultiplier: 2,
+                    costMultiplier: 1,
                     unlocked: function () {
                         if (myCountryData.size > 3) {
                             return true;
@@ -611,11 +612,11 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     },
                     statAffected: 'basefoodGrowth',
                     statMultiplier: 250000,
-                    countMultiplier: 1.1,
-                    jobsIncreased: 50,
+                    countMultiplier: 1.001,
+                    jobsIncreased: 500,
                     build: function (count) {
 
-                        var cost = this.cost * Math.pow(this.costMultiplier, count);
+                        var cost = this.cost * count;
 
                         if ((myCountryData.money > cost) && this.unlocked()) {
 
@@ -624,17 +625,17 @@ wciApp.factory('buildingsData', function (myCountryData) {
                             myCountryData.money -= cost;
 
                             this.count += count;
-                            this.cost = cost;
+                            //this.cost = cost;
                         }
                     }
                 },
                 //GMO Lab and Hydro Dam.. multiply the total production, rather than adding to it. (TODO: Think about other food places and convert these to researches down the line)
                 {
                     name: 'Hydro Dam',
-                    description: 'This building increases money growth.',
-                    count: 1,
+                    description: 'This building increases food growth by a factor of 3 and adds 1000 jobs',
+                    count: 0,
                     cost: 15000000,
-                    costMultiplier: 2,
+                    costMultiplier: 1,
                     unlocked: function () {
                         if (myCountryData.size > 4) {
                             return true;
@@ -644,10 +645,10 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     statAffected: 'basefoodGrowth',
                     statMultiplier: 3,
                     countMultiplier: 0.95,
-                    jobsIncreased: 200,
+                    jobsIncreased: 1000,
                     build: function (count) {
 
-                        var cost = this.cost * Math.pow(this.costMultiplier, count);
+                        var cost = this.cost * count;
 
                         if ((myCountryData.money > cost) && this.unlocked()) {
 
@@ -656,16 +657,16 @@ wciApp.factory('buildingsData', function (myCountryData) {
                             myCountryData.money -= cost;
 
                             this.count += count;
-                            this.cost = cost;
+                            //this.cost = cost;
                         }
                     }
                 },
                 {
                     name: 'GMO Lab',
-                    description: 'This building increases money growth.',
-                    count: 1,
+                    description: 'This building increases food growth by a factor of 2.5 and adds 500 jobs',
+                    count: 0,
                     cost: 100000000,
-                    costMultiplier: 2,
+                    costMultiplier: 1,
                     unlocked: function () {
                         if (myCountryData.size > 5) {
                             return true;
@@ -678,7 +679,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     jobsIncreased: 500,
                     build: function (count) {
 
-                        var cost = this.cost * Math.pow(this.costMultiplier, count);
+                        var cost = this.cost * count;
 
                         if ((myCountryData.money > cost) && this.unlocked()) {
 
@@ -687,7 +688,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
                             myCountryData.money -= cost;
 
                             this.count += count;
-                            this.cost = cost;
+                            //this.cost = cost;
                         }
                     }
                 }
@@ -699,7 +700,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
                 {
                     name: 'Barracks',
                     description: 'This building increases money growth.',
-                    count: 1,
+                    count: 0,
                     cost: 100,
                     costMultiplier: 9,
                     unlocked: false,
@@ -717,7 +718,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
                 {
                     name: 'Weapons Factory',
                     description: 'This building increases money growth.',
-                    count: 1,
+                    count: 0,
                     cost: 100,
                     costMultiplier: 9,
                     unlocked: false,
@@ -735,7 +736,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
                 {
                     name: 'Naval Base',
                     description: 'This building increases money growth.',
-                    count: 1,
+                    count: 0,
                     cost: 100,
                     costMultiplier: 9,
                     unlocked: false,
@@ -753,7 +754,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
                 {
                     name: 'Air Base',
                     description: 'This building increases money growth.',
-                    count: 1,
+                    count: 0,
                     cost: 100,
                     costMultiplier: 9,
                     unlocked: false,
@@ -771,7 +772,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
                 {
                     name: 'Special Forces',
                     description: 'This building increases money growth.',
-                    count: 1,
+                    count: 0,
                     cost: 100,
                     costMultiplier: 9,
                     unlocked: false,
@@ -789,7 +790,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
                 {
                     name: 'Satelitte uplink',
                     description: 'This building increases money growth.',
-                    count: 1,
+                    count: 0,
                     cost: 100,
                     costMultiplier: 9,
                     unlocked: false,

@@ -13,11 +13,11 @@ wciApp.factory('myCountryData', function () {
         //Demographics
         size: 1,
         //isCountry: false, //Use this when the feature is built to start from a campsite and grow upto a city and then ask for independence.
-        population: 5,
-        baseGrowthRate: 8, //Based on the size of the country (lower size = lower growth rate)
-        baseMortalityRate: 12, //Based on the size (lower size = higher mortality rate)
+        population: 100,
+        baseGrowthRate: 1.2, //Based on the size of the country (lower size = lower growth rate)
+        baseMortalityRate: 3, //Based on the size (lower size = higher mortality rate)
         actualGrowthRate: function () {
-            return Math.round(this.baseGrowthRate * ((2 * this.happiness) / 100));
+            return Math.round(this.baseGrowthRate * ((3 * this.happiness) / 100));
         },
         actualMortalityRate: function () {
             return Math.round(this.baseMortalityRate * (100 / (2 * this.happiness)));
@@ -28,11 +28,11 @@ wciApp.factory('myCountryData', function () {
 
         //Consumption
         perCapitaConsumption: 50, // 1 person's monthly consumption = 3 Mcal * 30 ~ 100 Mcal. (3Mcal is based on the nation's development level. http://www.who.int/nutrition/topics/3_foodconsumption/en/)
-        totalFood: 800, // In megaCalorie = 1000*kcal... 
+        totalFood: 80000, // In megaCalorie = 1000*kcal... 
         foodFlow: function() {
             return this.foodGrowth() - this.foodDemand();
         },
-        basefoodGrowth: 800,
+        basefoodGrowth: 10000,
         foodGrowth: function () {
             return Math.round(this.basefoodGrowth * (this.happiness / 100));
         },
@@ -51,7 +51,7 @@ wciApp.factory('myCountryData', function () {
             return gdp;
         },
 
-        totalJobs: 16,
+        totalJobs: 160,
         filledJobs: function () {
             var jobs = Math.min(this.totalJobs, this.population)
             return jobs;
@@ -67,7 +67,7 @@ wciApp.factory('myCountryData', function () {
 
             return unemployment;
         },
-        housingCapacity: 16,
+        housingCapacity: 160,
         homelessness: function () {
             var homelessness = Math.round(((this.population - this.housingCapacity)/(this.population))*100);
             if (homelessness < 0) {
@@ -75,10 +75,20 @@ wciApp.factory('myCountryData', function () {
             }
 
             return homelessness;
-        }
+        },
         //Army
 
         //Science
+
+        //Descriptions
+        description: {
+            happiness: "Happiness affects the productivity of the population and its growth rate.",
+            homelessness: "Homelessness is the percentage of the population without a roof on their head. This reduces the happiness.",
+            hunger: "Hunger is the percentage of the population without sufficient food because of shortage. This reduces the happiness.",
+            unemployment: "Unemployment is the percentage of the population without a job. <br /> This reduces the happiness.",
+            jobGdp: "This is how much each job affects the gdp"
+
+        }
         
     };
 
@@ -162,22 +172,22 @@ wciApp.factory('myCountryData', function () {
 
 
         //Set the size.
-        if (this.gdp() <= 10000) {
+        if (this.gdp() <= 100000) {
             this.size = 1;
         }
-        else if (this.gdp() <= 1000000) {
+        else if (this.gdp() <= 10000000) {
             this.size = 2;
         }
-        else if (this.gdp() <= 100000000) {
+        else if (this.gdp() <= 1000000000) {
             this.size = 3;
         }
-        else if (this.gdp() <= 10000000000) {
+        else if (this.gdp() <= 100000000000) {
             this.size = 4;
         }
-        else if (this.gdp() <= 1000000000000) {
+        else if (this.gdp() <= 10000000000000) {
             this.size = 5;
         }
-        else if (this.gdp() <= 10000000000000) {
+        else if (this.gdp() <= 1000000000000000) {
             this.size = 6;
         }
         else {

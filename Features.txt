@@ -15,9 +15,10 @@ Version 0.0.2 Features
 4) Made numbers nicer to see
 5) Add upkeep
 6) Add time period, showing how long realistically this country has lasted.
+7) Use verbiage for size.
 
 
-Version 0.1.0 Features
+Version 0.0.3 Features
 1) Add custom titles
 2) Add Local Saves
 3) Conver the City Name to HQ Section and create another Stats section.
@@ -26,12 +27,16 @@ Version 0.1.0 Features
 6) Add Research and Science Buildings
 
 
-Version 0.2.0 Features
+Version 0.0.4 Features
 1) Add Armies
 2) Add Human Resources
 3) Add a more complex happiness formula which falls faster with higher negative stats. Rather than an even fall as it is now.
 
-Version 0.3.0 Features
+Version 0.0.5 Features
+1) Tourism
+2) Immigration
+
+Version 0.1.0 Features
 1) Add Other Countries and Their stats
 2) Add War Area
 3) Achievements
@@ -49,7 +54,7 @@ Version 1.0.0 Features
 8) Build Constant Feedback
 9) Build Premium Model.
 10) Add Food Storage and over stockage.
-
+11) Add Inflation
 
 Version 1.1.0 Features
 1) Add growth from campsite to country.

@@ -20,6 +20,9 @@ wciApp.config(function ($routeProvider) {
         templateUrl: 'Views/hq.html',
         controller: 'HQController'
     })
+    .otherwise({
+        redirectTo: '/hq'
+    });
     
 });
 

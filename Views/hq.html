@@ -93,7 +93,7 @@
                     <span>
                         {{countryCtrl.myCountry.totalFood | number: 0}}
                         (<span class="bold" ng-class="countryCtrl.myCountry.foodFlow() > 0 ? 'text-success' : 'text-danger'">
-                            {{countryCtrl.myCountry.foodFlow()}}
+                            {{countryCtrl.myCountry.foodFlow() | number: 0}}
                         </span>)
                     </span>
                     <br />
@@ -111,7 +111,7 @@
                         Food Demand:
                     </span>
                     <span>
-                        {{countryCtrl.myCountry.foodDemand()}}
+                        {{countryCtrl.myCountry.foodDemand() | number: 0}}
                     </span>
                     <br />
                     <span class="control-label col-sm-4 align-right bold font-9pt">

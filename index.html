@@ -5,259 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>World Conqueror Idle</title>
     <!--Javascript-->
-    <script src="Libraries/jquery.min.js"></script>
-    <script src="Libraries/angular.min.js"></script>
-    <script src="Libraries/ui-bootstrap-tps-0.11.0.min.js"></script>
+    <script src="Libraries/js/jquery.min.js"></script>
+    <script src="Libraries/js/angular.min.js"></script>
+    <script src="Libraries/js/angular-route.js"></script>
+    <script src="Libraries/js/ui-bootstrap-tps-0.11.0.min.js"></script>
     <!--CSS-->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <!--<link rel="stylesheet" href="Libraries/css/metro-bootstrap.css">
+    <link rel="stylesheet" href="Libraries/fonts/metroSysIcons.svg">
+    <link rel="stylesheet" href="Libraries/fonts/metroSysIcons.tff">
+    <link rel="stylesheet" href="Libraries/fonts/metroSysIcons.woff">
+    <link rel="stylesheet" href="Libraries/font-awesome.min.css">-->
 </head>
 <body ng-controller="GameController">
     <div class="main_overlay">
         <div class="container-fluid">
             <div class="row">
 
-                <!--<div id="Menu" class="div-center" ng-show="showScreen ==='menu'">
-                    <input type="button" class="btn btn-primary" value="New Game" ng-click="MenuClick('new')" />
-                    <br />
-                    <input type="button" class="btn btn-primary margin-top-20" value="Continue Game" ng-click="MenuClick('continue')" />
-                    <br />
-                    <input type="button" class="btn btn-primary margin-top-20" value="Options" ng-click="MenuClick('options')" />
-                </div>-->
-
-                <div id="Game" ng-show="showScreen ==='game'">
-                    <div class="col-sm-12">
-                        <div id="CountryInfo" class="col-sm-3" ng-controller="CountryController as countryCtrl">
-                            <div class="form-inline">
-                                <h3>
-                                    <span class="glyphicon glyphicon-flag"></span>
-                                    <input type="text" class="form-control" ng-model="countryCtrl.myCountry.name" />
-                                    <button class="btn btn-primary" ng-click="pauseGame()">
-                                        <span ng-show="paused">
-                                            Start
-                                        </span>
-                                        <span ng-show="!paused">
-                                            Pause
-                                        </span>
-                                    </button>
-                                </h3>
-
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <!--TODO: Add color coding on stats.-->
-                                <!--TODO: Update UI to show +/- stat in the same row.-->
-                                <div id="demographics">
-                                    <h4 class="col-sm-12 font-color-blue">
-                                        <span class="fa fa-users"></span> Demographics:
-                                    </h4>
-                                    <span class="control-label col-sm-4 align-right bold font-9pt">
-                                        Population:
-                                    </span>
-                                    <span>
-                                        {{countryCtrl.myCountry.population}}
-                                        (<span class="bold" ng-class="countryCtrl.myCountry.populationGrowth() > 0 ? 'text-success' : 'text-danger'">
-                                            {{countryCtrl.myCountry.populationGrowth()}}
-                                        </span>)
-                                    </span>
-                                    <br />
-                                    <span class="control-label col-sm-4 align-right bold font-9pt">
-                                        Size:
-                                    </span>
-                                    <span>
-                                        {{countryCtrl.myCountry.size}}
-                                    </span>
-                                    <br />
-                                    <span class="control-label col-sm-4 align-right bold font-9pt">
-                                        <i class="fa fa-info-circle" tooltip="{{countryCtrl.myCountry.description.happiness}}" tooltip-placement="right"></i>
-                                        Happiness:
-                                    </span>
-                                    <span>
-                                        <span class="bold" ng-class="countryCtrl.myCountry.happiness > 60 ? 'text-success' : 'text-danger'">
-                                            {{countryCtrl.myCountry.happiness}}
-                                        </span>
-                                    </span>
-                                    <br />
-                                    <span class="control-label col-sm-4 align-right bold font-9pt">
-                                        Birth Rate:
-                                    </span>
-                                    <span>
-                                        {{countryCtrl.myCountry.actualGrowthRate()}}%
-                                    </span>
-                                    <br />
-                                    <span class="control-label col-sm-4 align-right bold font-9pt">
-                                        Mortality Rate:
-                                    </span>
-                                    <span>
-                                        {{countryCtrl.myCountry.actualMortalityRate()}}%
-                                    </span>
-                                    <br />
-                                    <span class="control-label col-sm-4 align-right bold font-9pt">
-                                        Total Housing:
-                                    </span>
-                                    <span>
-                                        {{countryCtrl.myCountry.housingCapacity}}
-                                    </span>
-                                    <br />
-                                    <span class="control-label col-sm-4 align-right bold font-9pt">
-                                        <i class="fa fa-info-circle" tooltip="{{countryCtrl.myCountry.description.homelessness}}" tooltip-placement="right"></i>
-                                        Homelessness:
-                                    </span>
-                                    <span>
-                                        <span class="bold" ng-class="countryCtrl.myCountry.homelessness() === 0 ? 'text-success' : 'text-danger'">
-                                            {{countryCtrl.myCountry.homelessness()}}%
-                                        </span>
-                                    </span>
-                                </div>
-                                <hr />
-                                <div id="consumption">
-                                    <h4 class="col-sm-12 font-color-orange">
-                                        <span class="fa fa-bar-chart-o"></span> Consumption:
-                                    </h4>
-                                    <span class="control-label col-sm-4 align-right bold font-9pt">
-                                        Food Stock:
-                                    </span>
-                                    <span>
-                                        {{countryCtrl.myCountry.totalFood}}
-                                        (<span class="bold" ng-class="countryCtrl.myCountry.foodFlow() > 0 ? 'text-success' : 'text-danger'">
-                                            {{countryCtrl.myCountry.foodFlow()}}
-                                        </span>)
-                                    </span>
-                                    <br />
-                                    <span class="control-label col-sm-4 align-right bold font-9pt">
-                                        <i class="fa fa-info-circle" tooltip="{{countryCtrl.myCountry.description.hunger}}" tooltip-placement="right"></i>
-                                        Hunger:
-                                    </span>
-                                    <span>
-                                        <span class="bold" ng-class="countryCtrl.myCountry.hunger === 0 ? 'text-success' : 'text-danger'">
-                                            {{countryCtrl.myCountry.hunger}}%
-                                        </span>
-                                    </span>
-                                    <br />
-                                    <span class="control-label col-sm-4 align-right bold font-9pt">
-                                        Food Demand:
-                                    </span>
-                                    <span>
-                                        {{countryCtrl.myCountry.foodDemand()}}
-                                    </span>
-                                    <br />
-                                    <span class="control-label col-sm-4 align-right bold font-9pt">
-                                        Food Growth:
-                                    </span>
-                                    <span>
-                                        {{countryCtrl.myCountry.foodGrowth()}}
-                                    </span>
-                                </div>
-                                <hr />
-                                <div id="economics">
-                                    <h4 class="col-sm-12 font-color-green">
-                                        <span class="fa fa-money"></span> Economics:
-                                    </h4>
-                                    <span class="control-label col-sm-4 align-right bold font-9pt">
-                                        GDP:
-                                    </span>
-                                    <span>
-                                        {{countryCtrl.myCountry.gdp()}}
-                                    </span>
-                                    <br />
-
-                                    <span class="control-label col-sm-4 align-right bold font-9pt">
-                                        Money:
-                                    </span>
-                                    <span>
-                                        {{countryCtrl.myCountry.money}}
-                                    </span>
-                                    <br />
-                                    <span class="control-label col-sm-4 align-right bold font-9pt">
-                                        Total Jobs:
-                                    </span>
-                                    <span>
-                                        {{countryCtrl.myCountry.totalJobs}}
-                                    </span>
-                                    <br />
-                                    <span class="control-label col-sm-4 align-right bold font-9pt">
-                                        <i class="fa fa-info-circle" tooltip="{{countryCtrl.myCountry.description.jobGdp}}" tooltip-placement="right"></i>
-                                        Job gdp:
-                                    </span>
-                                    <span>
-                                        {{countryCtrl.myCountry.jobGdpMultiplier}}
-                                    </span>
-                                    <br />
-                                    <span class="control-label col-sm-4 align-right bold font-9pt">
-                                        <i class="fa fa-info-circle" tooltip-html-unsafe="{{countryCtrl.myCountry.description.unemployment}}" tooltip-placement="right"></i>
-                                        Unemployment:
-                                    </span>
-                                    <span>
-                                        <span class="bold" ng-class="countryCtrl.myCountry.unemployment() === 0 ? 'text-success' : 'text-danger'">
-                                            {{countryCtrl.myCountry.unemployment()}}%
-                                        </span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="Buildings" class="col-sm-4" ng-controller="BuildingsController as buildingsCtrl">
-                            <h3>
-                                <span class="glyphicon glyphicon-home"></span> Buildings
-                                <button class="btn btn-primary clickableArea" ng-click="adjustGameSpeed(1)">
-                                    <span>
-                                        x1
-                                    </span>
-                                </button>
-                                <button class="btn btn-primary clickableArea" ng-click="adjustGameSpeed(10)">
-                                    <span>
-                                        x10
-                                    </span>
-                                </button>
-                                <button class="btn btn-primary clickableArea" ng-click="adjustGameSpeed(100)">
-                                    <span>
-                                        x100
-                                    </span>
-                                </button>
-                            </h3>
-                            <hr>
-                            <div class="col-sm-12">
-                                <tabset>
-                                    <tab ng-repeat="building in buildingsCtrl.buildings" heading="{{building.name}}" class="clickable margin-bottom-20 bg-success">
-                                        <div class="panel panel-primary structureLocked" ng-repeat="structure in building.structures"
-                                             ng-class="{'clickable clickableArea structureUnlocked':structure.unlocked()}">
-                                            <div class="panel-body">
-                                                <span class="fa fa-info-circle" tooltip="{{structure.description}}"></span>
-                                                {{structure.name}} - Count: {{structure.count}} || Cost: {{structure.cost}}
-                                                <!--TODO: Remove some padding around the icon-->
-                                                <span ng-show="!structure.unlocked()" class="fa fa-lock pull-left"></span>
-                                                <div class="pull-right" ng-show="structure.unlocked()">
-                                                    <button class="btn btn-primary" ng-click="structure.build(1)">
-                                                        x1
-                                                    </button>
-                                                    <button class="btn btn-primary" ng-click="structure.build(10)">
-                                                        x10
-                                                    </button>
-                                                    <button class="btn btn-primary" ng-click="structure.build(100)">
-                                                        x100
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </tab>
-                                </tabset>
-                            </div>
-                        </div>
-                        <div id="Army" class="col-sm-3" ng-controller="ArmyController as armyCtrl">
-                            <h3>
-                                <span class="glyphicon glyphicon-screenshot"></span> Army
-                                <button class="btn btn-primary pull-right" ng-click="openSettings()">
-                                    <i class="fa fa-cogs"></i> settings
-                                </button>
-                            </h3>
-                            <hr>
-                        </div>
-                        <div id="Research" class="col-sm-2" ng-controller="ResearchController as researchCtrl">
-                            <h3>
-                                <span class="fa fa-flask"></span> Research
-                            </h3>
-                            <hr>
-                        </div>
+                <nav class="navbar navbar-default" role="navigation">
+                    <div class="navbar-header">
+                        <a class="navbar-brand font-large" href="#">
+                            W<i class="glyphicon glyphicon-globe font-9pt"></i>rld Conqueror
+                        </a>
                     </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="menu-divider"></li>
+                            <li ng-class="{ active: isActive('/')}">
+                                <a href="#/hq">HQ</a>
+                            </li>
+                            <li class="menu-divider"></li>
+                            <li>
+                                <a href="#">Structures</a>
+                            </li>
+                            <li class="menu-divider"></li>
+                            <li>
+                                <a href="#">Army</a>
+                            </li>
+                            <li class="menu-divider"></li>
+                            <li>
+                                <a href="#">Research Lab</a>
+                            </li>
+                            <li class="menu-divider"></li>
+                        </ul>
+                    </div>
+                </nav>
+                <div ng-view>
+
                 </div>
             </div>
         </div>
@@ -265,15 +60,15 @@
 
     <!--Google Analytics-->
     <script>
-    (function (i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-            (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date(); a = s.createElement(o),
-        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-    ga('create', 'UA-55219778-1', 'auto');
-    ga('send', 'pageview');
+        ga('create', 'UA-55219778-1', 'auto');
+        ga('send', 'pageview');
 
     </script>
 
@@ -282,7 +77,13 @@
         <script src="Javascript/WCI.js"></script>
         <script src="Javascript/Services/myCountryData.js"></script>
         <script src="Javascript/Services/buildingsData.js"></script>
+
         <script src="Javascript/Controllers/GameControllers.js"></script>
+        <script src="Javascript/Controllers/ChangeLogController.js"></script>
+        <script src="Javascript/Controllers/HQController.js"></script>
+
+        <script src="Javascript/Filters/NumberFilters.js"></script>
+
 
         <link rel="stylesheet" href="CSS/main.css" />
         <link rel="stylesheet" href="CSS/common.css" />

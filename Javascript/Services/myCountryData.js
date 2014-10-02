@@ -23,7 +23,7 @@ wciApp.factory('myCountryData', function () {
             return Math.round(this.baseMortalityRate * (100 / (2 * this.happiness)));
         },
         populationGrowth: function () {
-            return Math.round(this.population * ((this.actualGrowthRate() - this.actualMortalityRate()) / 100));
+            return this.population * ((this.actualGrowthRate() - this.actualMortalityRate()) / 100);
         },
 
         //Consumption

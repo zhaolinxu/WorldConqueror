@@ -1,26 +1,18 @@
-﻿html {
-  background: url('http://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg') no-repeat;
-  background-size: cover;
+﻿body {
+    background: url('http://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg') no-repeat;
+    background-size: cover;
+}
+
+a {
+    text-decoration: none;
 }
 
 .main_overlay {
     width: 100%;
     height: 100%;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
-}
-
-.div-center {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto; 
-  height: 150px;
-  width: 100px;
-  text-align: center;
 }
 
 .clickableArea {
@@ -35,10 +27,35 @@
     background-color: rgb(222,222,222);
 }*/
 
+
+
+/*Menu Styles*/
+
+.menu-divider {
+    border-left: 1px #ccc solid;
+    width: 1px;
+    padding: 15px 0;
+    height: 50px; 
+    position: relative;
+}
+
+.navbar li:hover{
+    background-color: #aaa;
+}
+
+
+/*Structure Styles*/
 .structureLocked {
     color: #aaa;
 }
 
 .structureUnlocked {
     color: #000;
+}
+
+
+
+/*Overriding twitter bootstrap*/
+.btn {
+    border-radius: 0;
 }

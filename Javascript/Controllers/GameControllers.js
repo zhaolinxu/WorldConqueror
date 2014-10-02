@@ -24,6 +24,11 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData) 
 
     //#region Click Events
 
+    //Used to set the active tab in the menu
+    //$scope.isActive = function (viewLocation) {
+    //    return viewLocation === $location.path();
+    //};
+
     //$scope.menuClick = function (action) {
 
     //    if (action === 'new') {
@@ -73,14 +78,11 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData) 
         timer = $interval(timerfunction, $scope.speed);
 
     };
-
-
+    
     $scope.openSettings = function () {
 
     };
-
-
-
+    
 
     //Making sure interval is cancelled on destroy
     $scope.$on(

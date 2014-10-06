@@ -14,7 +14,7 @@
                         {{structure.name}} - Count: {{structure.count}} || Cost: {{structure.cost}}
                         <!--TODO: Remove some padding around the icon-->
                         <span ng-show="!structure.unlocked()" class="fa fa-lock pull-left"></span>
-                        <div class="pull-right" ng-show="structure.unlocked()">
+                        <div class="pull-right clickableArea" ng-show="structure.unlocked()">
                             <button class="btn btn-primary" ng-click="structure.build(1)">
                                 x1
                             </button>

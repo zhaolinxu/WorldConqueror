@@ -44,10 +44,25 @@
     color: blue;
 }
 
+.font-color-lightblue {
+    color: #1C6BA0;
+}
+
+
 .font-color-yellow {
     color: yellow;
 }
 
 .font-color-orange {
     color: orange;
+}
+
+.font-color-red {
+    color: red;
+}
+
+
+/*Background Colors*/
+.bg-color-green {
+    background-color: green;
 }

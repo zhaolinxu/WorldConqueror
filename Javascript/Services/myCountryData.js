@@ -45,6 +45,9 @@ wciApp.factory('myCountryData', function () {
         taxRate: 40, //In percentage... high tax affects happiness. 
         avgSalary: 10, //Based on size, gdp, job types.
         money: 100, //Earned from Taxes and economic factors.
+        moneyGrowth: function() {
+            return this.gdp() * 0.04;
+        },
         //Determine what curreny do we want to use? or allow user to name the currency. This is dependent to employment rate, productivity (which is based on happiness).
         gdp: function () {
             var gdp = Math.round(((this.filledJobs() * this.jobGdpMultiplier)) * (this.happiness / 100));
@@ -162,7 +165,7 @@ wciApp.factory('myCountryData', function () {
 
     myCountry.getNewEconomics = function () {
 
-        this.money += Math.round(this.gdp() * 0.04);
+        this.money += this.moneyGrowth();
     };
 
 

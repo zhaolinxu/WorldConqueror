@@ -10,38 +10,38 @@ var wciApp = angular.module(
 
 wciApp.config(function ($routeProvider, $locationProvider) {
     $routeProvider
-    .when('/',
-    {
-        templateUrl: 'Views/internalAffairs.html',
-        controller: 'InternalAffairsController'
-    })
     .when('/changelog',
     {
         templateUrl: 'Views/changelog.html',
-        controller: 'ChangelogController'
+        controller: 'ChangelogController',
+        controllerAs: 'cl'
     })
     .when('/ia',
     {
         templateUrl: 'Views/internalAffairs.html',
-        controller: 'InternalAffairsController'
+        controller: 'InternalAffairsController',
+        controllerAs: 'ia'
     })
     .when('/structure',
     {
         templateUrl: 'Views/structures.html',
-        controller: 'StructureController'
+        controller: 'StructureController',
+        controllerAs: 'st'
     })
     .when('/army',
     {
         templateUrl: 'Views/army.html',
-        controller: 'ArmyController'
+        controller: 'ArmyController',
+        controllerAs: 'ar'
     })
     .when('/research',
     {
         templateUrl: 'Views/research.html',
-        controller: 'ResearchController'
+        controller: 'ResearchController',
+        controllerAs: 're'
     })
     .otherwise({
-        redirectTo: '/hq'
+        redirectTo: '/ia'
     });
     
 });

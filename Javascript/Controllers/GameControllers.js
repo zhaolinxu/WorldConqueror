@@ -3,46 +3,52 @@
 wciApp.controller('GameController', function ($scope, $interval, myCountryData) {
 
     //#region Default Values
+    var game = this;
 
-    $scope.myCountry = myCountryData;
+    game.myCountry = myCountryData;
 
-    $scope.gameData = {
-        gameType: 'new'
+    game.initialization = {
+        isFirstTime: true
     };
 
-    $scope.showScreen = 'game';
-    $scope.paused = false;
+    game.paused = false;
 
-    $scope.speed = 1000;
+    game.speed = 1000;
 
-    $scope.version = '0.0.1';
+    game.version = '0.0.1';
 
     //#endregion
 
     //#region Page Load
 
+    if (game.initialization.isFirstTime) {
+
+    }
+    else {
+        //Load Game
+    }
 
     //#endregion
 
     //#region Click Events
 
     //Used to set the active tab in the menu
-    //$scope.isActive = function (viewLocation) {
+    //this.isActive = function (viewLocation) {
     //    return viewLocation === $location.path();
     //};
 
-    //$scope.menuClick = function (action) {
+    //this.menuClick = function (action) {
 
     //    if (action === 'new') {
-    //        $scope.gameData.gameType = 'new';
-    //        $scope.showScreen = 'game';
+    //        this.gameData.gameType = 'new';
+    //        this.showScreen = 'game';
     //    }
     //    else if (action === 'continue') {
-    //        $scope.gameData.gameType = 'existing';
-    //        $scope.showScreen = 'game';
+    //        this.gameData.gameType = 'existing';
+    //        this.showScreen = 'game';
     //    }
     //    else {
-    //        $scope.showScreen = 'options';
+    //        this.showScreen = 'options';
     //    }
     //};
 
@@ -51,37 +57,37 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData) 
     var timerfunction = function () {
 
         //TODO: Put logic here to prompt user of game ending/death due to 0 population.
-        $scope.myCountry.getNewConsumption();
-        $scope.myCountry.getNewEconomics();
-        $scope.myCountry.getNewDemographics();
+        game.myCountry.getNewConsumption();
+        game.myCountry.getNewEconomics();
+        game.myCountry.getNewDemographics();
 
     };
 
 
-    var timer = $interval(timerfunction, $scope.speed);
+    var timer = $interval(timerfunction, game.speed);
 
-    $scope.pauseGame = function () {
-        $scope.paused = !$scope.paused;
+    game.pauseGame = function () {
+        game.paused = !game.paused;
 
-        if (!$scope.paused) {
-            timer = $interval(timerfunction, $scope.speed);
+        if (!game.paused) {
+            timer = $interval(timerfunction, game.speed);
         }
         else {
             $interval.cancel(timer)
         }
     };
 
-    $scope.adjustGameSpeed = function (speed) {
+    game.adjustGameSpeed = function (speed) {
         
-        $scope.speed = (1000 / speed);
+        game.speed = (1000 / speed);
 
         $interval.cancel(timer);
 
-        timer = $interval(timerfunction, $scope.speed);
+        timer = $interval(timerfunction, game.speed);
 
     };
     
-    $scope.openSettings = function () {
+    game.openSettings = function () {
 
     };
     

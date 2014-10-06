@@ -4,7 +4,7 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData) 
 
     //#region Default Values
 
-    var myCountry = myCountryData;
+    $scope.myCountry = myCountryData;
 
     $scope.gameData = {
         gameType: 'new'
@@ -14,6 +14,8 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData) 
     $scope.paused = false;
 
     $scope.speed = 1000;
+
+    $scope.version = '0.0.1';
 
     //#endregion
 
@@ -49,9 +51,9 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData) 
     var timerfunction = function () {
 
         //TODO: Put logic here to prompt user of game ending/death due to 0 population.
-        myCountry.getNewConsumption();
-        myCountry.getNewEconomics();
-        myCountry.getNewDemographics();
+        $scope.myCountry.getNewConsumption();
+        $scope.myCountry.getNewEconomics();
+        $scope.myCountry.getNewDemographics();
 
     };
 
@@ -100,6 +102,15 @@ wciApp.controller('ArmyController', function () {
 });
 
 wciApp.controller('BuildingsController', function (buildingsData) {
+    this.buildings = buildingsData;
+
+    this.buildingClick = function (structure) {
+        var structureBuilt = structure.build();
+    }
+
+});
+
+wciApp.controller('StructureController', function (buildingsData) {
     this.buildings = buildingsData;
 
     this.buildingClick = function (structure) {

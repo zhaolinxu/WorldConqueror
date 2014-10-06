@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-wciApp.controller('HQController', function ($scope, $interval, myCountryData) {
+wciApp.controller('InternalAffairsController', function ($scope, $interval, myCountryData) {
 
     //#region Default Values
 

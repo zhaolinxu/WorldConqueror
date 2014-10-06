@@ -13,14 +13,14 @@ wciApp.factory('myCountryData', function () {
         //Demographics
         size: 1,
         //isCountry: false, //Use this when the feature is built to start from a campsite and grow upto a city and then ask for independence.
-        population: 100,
-        baseGrowthRate: 1.2, //Based on the size of the country (lower size = lower growth rate)
-        baseMortalityRate: 3, //Based on the size (lower size = higher mortality rate)
+        population: 10,
+        baseGrowthRate: 1, //Based on the size of the country (lower size = lower growth rate)
+        baseMortalityRate: 6, //Based on the size (lower size = higher mortality rate)
         actualGrowthRate: function () {
-            return Math.round(this.baseGrowthRate * ((3 * this.happiness) / 100));
+            return Math.round(this.baseGrowthRate * ((2 * this.happiness) / 100));
         },
         actualMortalityRate: function () {
-            return Math.round(this.baseMortalityRate * (100 / (2 * this.happiness)));
+            return this.baseMortalityRate * (100 / (4 * this.happiness));
         },
         populationGrowth: function () {
             return this.population * ((this.actualGrowthRate() - this.actualMortalityRate()) / 100);
@@ -28,11 +28,11 @@ wciApp.factory('myCountryData', function () {
 
         //Consumption
         perCapitaConsumption: 50, // 1 person's monthly consumption = 3 Mcal * 30 ~ 100 Mcal. (3Mcal is based on the nation's development level. http://www.who.int/nutrition/topics/3_foodconsumption/en/)
-        totalFood: 80000, // In megaCalorie = 1000*kcal... 
+        totalFood: 8000, // In megaCalorie = 1000*kcal... 
         foodFlow: function() {
             return this.foodGrowth() - this.foodDemand();
         },
-        basefoodGrowth: 10000,
+        basefoodGrowth: 1000,
         foodGrowth: function () {
             return Math.round(this.basefoodGrowth * (this.happiness / 100));
         },
@@ -51,7 +51,7 @@ wciApp.factory('myCountryData', function () {
             return gdp;
         },
 
-        totalJobs: 160,
+        totalJobs: 16,
         filledJobs: function () {
             var jobs = Math.min(this.totalJobs, this.population)
             return jobs;
@@ -67,7 +67,7 @@ wciApp.factory('myCountryData', function () {
 
             return unemployment;
         },
-        housingCapacity: 160,
+        housingCapacity: 16,
         homelessness: function () {
             var homelessness = Math.round(((this.population - this.housingCapacity)/(this.population))*100);
             if (homelessness < 0) {
@@ -105,66 +105,6 @@ wciApp.factory('myCountryData', function () {
         var hungerHappinessFactor = 0;
         var homeless = this.homelessness();
         var homelessHappinessFactor = 0;
-
-        ////========================================
-        //if (unemployment <= 10) {
-        //    unempHappinessFactor = unemployment / 5;
-        //}
-        //else if (unemployment <= 25) {
-        //    unempHappinessFactor = unemployment / 4;
-        //}
-        //else if (unemployment <= 45) {
-        //    unempHappinessFactor = unemployment / 3;
-        //}
-        //else if (unemployment <= 65) {
-        //    unempHappinessFactor = unemployment / 2;
-        //}
-        //else if (unemployment <= 85) {
-        //    unempHappinessFactor = unemployment / 3;
-        //}
-        //else {
-        //    unempHappinessFactor = unemployment / 4;
-        //}
-
-        ////========================================
-        //if (hunger <= 10) {
-        //    hungerHappinessFactor = hunger / 5;
-        //}
-        //else if (hunger <= 25) {
-        //    hungerHappinessFactor = hunger / 4;
-        //}
-        //else if (hunger <= 45) {
-        //    hungerHappinessFactor = hunger / 3;
-        //}
-        //else if (hunger <= 65) {
-        //    hungerHappinessFactor = hunger / 2;
-        //}
-        //else if (hunger <= 85) {
-        //    hungerHappinessFactor = hunger / 3;
-        //}
-        //else {
-        //    hungerHappinessFactor = hunger / 4;
-        //}
-
-        ////========================================
-        //if (homeless <= 10) {
-        //    homelessHappinessFactor = homeless / 5;
-        //}
-        //else if (homeless <= 25) {
-        //    homelessHappinessFactor = homeless / 4;
-        //}
-        //else if (homeless <= 45) {
-        //    homelessHappinessFactor = homeless / 3;
-        //}
-        //else if (homeless <= 65) {
-        //    homelessHappinessFactor = homeless / 2;
-        //}
-        //else if (homeless <= 85) {
-        //    homelessHappinessFactor = homeless / 3;
-        //}
-        //else {
-        //    homelessHappinessFactor = homeless / 4;
-        //}
 
 
 

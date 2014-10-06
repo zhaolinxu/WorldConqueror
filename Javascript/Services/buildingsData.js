@@ -11,7 +11,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
                 {
                     name: 'Market',
                     description: 'This building adds 2 jobs per structure.',
-                    count: 80,
+                    count: 8,
                     cost: 500,
                     costMultiplier: 1,
                     unlocked: function () {
@@ -317,7 +317,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
                 {
                     name: 'Shack',
                     description: 'This building adds 2 housing capacity.',
-                    count: 80,
+                    count: 8,
                     cost: 500,
                     costMultiplier: 1,
                     unlocked: function () {
@@ -508,7 +508,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
                 {
                     name: 'Garden',
                     description: 'This building increases base food growth by 200.',
-                    count: 50,
+                    count: 5,
                     cost: 500,
                     costMultiplier: 1,
                     unlocked: function () {

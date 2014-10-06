@@ -1,0 +1,33 @@
+﻿<div id="Buildings" ng-controller="BuildingsController as buildingsCtrl" ng-cloak>
+    <h3>
+        <span class="glyphicon glyphicon-home"></span> Buildings
+        
+    </h3>
+    <hr>
+    <div class="col-sm-12">
+        <tabset>
+            <tab ng-repeat="building in buildingsCtrl.buildings" heading="{{building.name}}" class="clickable margin-bottom-20 bg-success">
+                <div class="panel panel-primary structureLocked" ng-repeat="structure in building.structures"
+                     ng-class="{'clickable clickableArea structureUnlocked':structure.unlocked()}">
+                    <div class="panel-body">
+                        <span class="fa fa-info-circle" tooltip="{{structure.description}}"></span>
+                        {{structure.name}} - Count: {{structure.count}} || Cost: {{structure.cost}}
+                        <!--TODO: Remove some padding around the icon-->
+                        <span ng-show="!structure.unlocked()" class="fa fa-lock pull-left"></span>
+                        <div class="pull-right" ng-show="structure.unlocked()">
+                            <button class="btn btn-primary" ng-click="structure.build(1)">
+                                x1
+                            </button>
+                            <button class="btn btn-primary" ng-click="structure.build(10)">
+                                x10
+                            </button>
+                            <button class="btn btn-primary" ng-click="structure.build(100)">
+                                x100
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </tab>
+        </tabset>
+    </div>
+</div>

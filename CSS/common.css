@@ -7,6 +7,11 @@
   margin-bottom: 20px;
 }
 
+.margin-left-15 {
+  margin-left: 15px;
+}
+
+
 /*Custom Controls*/
 .clickable {
     cursor: pointer;

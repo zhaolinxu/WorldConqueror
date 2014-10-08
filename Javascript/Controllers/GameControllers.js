@@ -5,91 +5,92 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData) 
     //#region Default Values
     var game = this;
 
-    game.myCountry = myCountryData;
+    game.data = {};
 
-    game.initialization = {
+    game.data.myCountry = myCountryData;
+
+    game.data.initialization = {
         isFirstTime: true
     };
 
-    game.paused = false;
-
-    game.speed = 1000;
-
+    game.data.paused = false;
+    game.data.speed = 1000;
     game.version = '0.0.1';
 
     //#endregion
 
+
     //#region Page Load
 
-    if (game.initialization.isFirstTime) {
-
+    if (!localStorage['wci_gameData']) {
+        return;
     }
     else {
-        //Load Game
+        game.data = JSON.parse(atob(localStorage['wci_gameData']));
     }
+    //if (game.data.initialization.isFirstTime) {
+
+    //}
+    //else {
+    //    game.data = JSON.parse(atob(localStorage['wci_gameData']));
+    //}
 
     //#endregion
+
 
     //#region Click Events
 
-    //Used to set the active tab in the menu
-    //this.isActive = function (viewLocation) {
-    //    return viewLocation === $location.path();
-    //};
+    game.startGame = function () {
+        game.data.initialization.isFirstTime = false;
+    };
 
-    //this.menuClick = function (action) {
-
-    //    if (action === 'new') {
-    //        this.gameData.gameType = 'new';
-    //        this.showScreen = 'game';
-    //    }
-    //    else if (action === 'continue') {
-    //        this.gameData.gameType = 'existing';
-    //        this.showScreen = 'game';
-    //    }
-    //    else {
-    //        this.showScreen = 'options';
-    //    }
-    //};
-
+    game.saveGame = function () {
+        saveGame();
+    };
     //#endregion
+
+
+    //#region Automated Functions
 
     var timerfunction = function () {
 
         //TODO: Put logic here to prompt user of game ending/death due to 0 population.
-        game.myCountry.getNewConsumption();
-        game.myCountry.getNewEconomics();
-        game.myCountry.getNewDemographics();
+        game.data.myCountry.getNewConsumption();
+        game.data.myCountry.getNewEconomics();
+        game.data.myCountry.getNewDemographics();
+        game.saveGame();
 
     };
-
-
-    var timer = $interval(timerfunction, game.speed);
+    var timer = $interval(timerfunction, game.data.speed);
 
     game.pauseGame = function () {
-        game.paused = !game.paused;
+        game.data.paused = !game.data.paused;
 
-        if (!game.paused) {
-            timer = $interval(timerfunction, game.speed);
+        if (!game.data.paused) {
+            timer = $interval(timerfunction, game.data.speed);
         }
         else {
             $interval.cancel(timer)
         }
     };
-
     game.adjustGameSpeed = function (speed) {
-        
-        game.speed = (1000 / speed);
+
+        game.data.speed = (1000 / speed);
 
         $interval.cancel(timer);
 
-        timer = $interval(timerfunction, game.speed);
+        timer = $interval(timerfunction, game.data.speed);
 
     };
+
+    var saveGame = function () {
+        localStorage['wci_gameData'] = btoa(JSON.stringify(game.data));
+    };
+
+
+    //#endregion
+
     
-    game.openSettings = function () {
-
-    };
     
 
     //Making sure interval is cancelled on destroy

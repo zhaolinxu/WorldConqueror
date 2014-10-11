@@ -7,9 +7,9 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData) 
 
     game.data = {};
 
-    game.data.myCountry = myCountryData;
+    game.myCountry = myCountryData;
 
-    game.data.initialization = {
+    game.data.init = {
         isFirstTime: true
     };
 
@@ -17,19 +17,27 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData) 
     game.data.speed = 1000;
     game.version = '0.0.1';
 
+    game.validation = {
+        initCountryName: true,
+        initCountryTitle: true
+    }
+
     //#endregion
 
 
     //#region Page Load
 
-    if (!localStorage['wci_gameData']) {
-        return;
+    if (!localStorage['myCountry_baseStats']) {
+        localStorage.clear();
+        //return;
     }
     else {
-        game.data = JSON.parse(atob(localStorage['wci_gameData']));
+        game.data = JSON.parse(localStorage['myCountry_data']);
+        game.myCountry.baseStats = JSON.parse(localStorage['myCountry_baseStats']);
+
+            //JSON.parse(atob(localStorage['wci_gameData']));
     }
     //if (game.data.initialization.isFirstTime) {
-
     //}
     //else {
     //    game.data = JSON.parse(atob(localStorage['wci_gameData']));
@@ -41,11 +49,29 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData) 
     //#region Click Events
 
     game.startGame = function () {
-        game.data.initialization.isFirstTime = false;
+        if (game.myCountry.baseStats.name.length > 0 && game.myCountry.baseStats.title.length > 0)
+        {
+            game.validation.initCountryName = true;
+            game.validation.initCountryTitle = true;
+            game.data.init.isFirstTime = false;
+
+        } else {
+            if (game.myCountry.baseStats.name.length < 1){
+                game.validation.initCountryName = false;
+            }
+
+            if (game.myCountry.baseStats.title.length < 1) {
+                game.validation.initCountryTitle = false;
+            }
+        }
     };
 
     game.saveGame = function () {
         saveGame();
+    };
+
+    game.resetGame = function () {
+        resetGame();
     };
     //#endregion
 
@@ -55,9 +81,9 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData) 
     var timerfunction = function () {
 
         //TODO: Put logic here to prompt user of game ending/death due to 0 population.
-        game.data.myCountry.getNewConsumption();
-        game.data.myCountry.getNewEconomics();
-        game.data.myCountry.getNewDemographics();
+        game.myCountry.functions.getNewConsumption();
+        game.myCountry.functions.getNewEconomics();
+        game.myCountry.functions.getNewDemographics();
         game.saveGame();
 
     };
@@ -84,7 +110,16 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData) 
     };
 
     var saveGame = function () {
-        localStorage['wci_gameData'] = btoa(JSON.stringify(game.data));
+        localStorage['myCountry_baseStats'] = JSON.stringify(game.myCountry.baseStats);
+        localStorage['myCountry_data'] = JSON.stringify(game.data);
+
+
+            //btoa(JSON.stringify(game.data));
+    };
+
+    var resetGame = function () {
+        game.myCountry.functions.resetStats();
+        localStorage.clear();
     };
 
 

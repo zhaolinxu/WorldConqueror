@@ -21,7 +21,7 @@
 <body ng-controller="GameController as game">
     <div class="main_overlay">
         <div class="container">
-            <div class="row" ng-show="game.data.initialization.isFirstTime != true">
+            <div class="row" ng-show="game.data.init.isFirstTime != true">
 
                 <nav class="navbar navbar-default" role="navigation">
                     <div class="navbar-header">
@@ -92,6 +92,11 @@
                                     x100
                                 </span>
                             </button>
+                            <button class="btn btn-primary" ng-click="game.resetGame()">
+                                <span>
+                                    Reset
+                                </span>
+                            </button>
                             <button type="button" class="btn btn-primary navbar-right" ng-click="game.openSettings()">
                                 <i class="fa fa-cogs"></i>
                             </button>
@@ -110,9 +115,9 @@
                                             <i class="fa fa-users" tooltip="Population"></i>
                                         </span>
                                         <span>
-                                            {{game.data.myCountry.population | number: 0}}
-                                            (<span class="bold" ng-class="game.data.myCountry.populationGrowth() > 0 ? 'text-success' : 'text-danger'">
-                                                {{game.data.myCountry.populationGrowth() | number: 0}}
+                                            {{game.myCountry.baseStats.population | number: 0}}
+                                            (<span class="bold" ng-class="game.myCountry.dependentStats.populationGrowth() > 0 ? 'text-success' : 'text-danger'">
+                                                {{game.myCountry.dependentStats.populationGrowth() | number: 0}}
                                             </span>)
                                         </span>
                                     </div>
@@ -122,9 +127,9 @@
                                             <i class="fa fa-money" tooltip="Money"></i>
                                         </span>
                                         <span>
-                                            {{game.data.myCountry.money | number: 0}}
-                                            (<span class="bold" ng-class="game.data.myCountry.moneyGrowth() > 0 ? 'text-success': 'text-danger'">
-                                                {{game.data.myCountry.moneyGrowth() | number: 0}}
+                                            {{game.myCountry.baseStats.money | number: 0}}
+                                            (<span class="bold" ng-class="game.myCountry.dependentStats.moneyGrowth() > 0 ? 'text-success': 'text-danger'">
+                                                {{game.myCountry.dependentStats.moneyGrowth() | number: 0}}
                                             </span>)
                                         </span>
                                     </div>
@@ -134,11 +139,11 @@
                                 <div class="row">
                                     <div id="happiness" class="col-sm-6">
                                         <span>
-                                            <i class="fa bold" ng-class="game.data.myCountry.happiness > 75 ? 'fa-smile-o text-success' : game.data.myCountry.happiness > 50 ? 'fa-meh-o text-warning' : 'fa-frown-o text-danger'"
+                                            <i class="fa bold" ng-class="game.myCountry.baseStats.happiness > 75 ? 'fa-smile-o text-success' : game.myCountry.baseStats.happiness > 50 ? 'fa-meh-o text-warning' : 'fa-frown-o text-danger'"
                                                tooltip="Happiness"></i>
                                         </span>
-                                        <span class="bold" ng-class="game.data.myCountry.happiness > 75 ? 'text-success' : game.data.myCountry.happiness > 50 ? 'text-warning' : 'text-danger'">
-                                            {{game.data.myCountry.happiness}}
+                                        <span class="bold" ng-class="game.myCountry.baseStats.happiness > 75 ? 'text-success' : game.myCountry.baseStats.happiness > 50 ? 'text-warning' : 'text-danger'">
+                                            {{game.myCountry.baseStats.happiness}}
                                         </span>
                                     </div>
 
@@ -156,9 +161,9 @@
                                                 <i class="glyphicon glyphicon-cutlery"></i> Food:
                                             </span>
                                             <span>
-                                                {{game.data.myCountry.totalFood | number: 0}}
-                                                (<span class="bold" ng-class="game.data.myCountry.foodFlow() > 0 ? 'text-success' : 'text-danger'">
-                                                    {{game.data.myCountry.foodFlow() | number: 0}}
+                                                {{game.myCountry.baseStats.totalFood | number: 0}}
+                                                (<span class="bold" ng-class="game.myCountry.dependentStats.foodFlow() > 0 ? 'text-success' : 'text-danger'">
+                                                    {{game.myCountry.dependentStats.foodFlow() | number: 0}}
                                                 </span>)
                                             </span>
                                         </div>
@@ -166,8 +171,8 @@
                                             <span class="font-color-orange">
                                                 <i class="fa fa-area-chart"></i> Hunger:
                                             </span>
-                                            <span class="bold" ng-class="game.data.myCountry.hunger === 0 ? 'text-success' : 'text-danger'">
-                                                {{game.data.myCountry.hunger}}%
+                                            <span class="bold" ng-class="game.myCountry.baseStats.hunger === 0 ? 'text-success' : 'text-danger'">
+                                                {{game.myCountry.baseStats.hunger}}%
                                             </span>
                                         </div>
                                     </div>
@@ -177,15 +182,15 @@
                                                 <i class="fa fa-briefcase"></i> Jobs:
                                             </span>
                                             <span>
-                                                {{game.data.myCountry.totalJobs}}
+                                                {{game.myCountry.baseStats.totalJobs}}
                                             </span>
                                         </div>
                                         <div id="happiness">
                                             <span class="font-color-blue">
                                                 <i class="fa fa-area-chart"></i> Unemployment:
                                             </span>
-                                            <span class="bold" ng-class="game.data.myCountry.unemployment() === 0 ? 'text-success' : 'text-danger'">
-                                                {{game.data.myCountry.unemployment()}}%
+                                            <span class="bold" ng-class="game.myCountry.dependentStats.unemployment() === 0 ? 'text-success' : 'text-danger'">
+                                                {{game.myCountry.dependentStats.unemployment()}}%
                                             </span>
                                         </div>
                                     </div>
@@ -195,15 +200,15 @@
                                                 <i class="fa fa-home"></i> Housing:
                                             </span>
                                             <span>
-                                                {{game.data.myCountry.housingCapacity}}
+                                                {{game.myCountry.baseStats.housingCapacity}}
                                             </span>
                                         </div>
                                         <div id="happiness">
                                             <span class="font-color-blue">
                                                 <i class="fa fa-area-chart"></i> Homeless:
                                             </span>
-                                            <span class="bold" ng-class="game.data.myCountry.homelessness() === 0 ? 'text-success' : 'text-danger'">
-                                                {{game.data.myCountry.homelessness()}}%
+                                            <span class="bold" ng-class="game.myCountry.dependentStats.homelessness() === 0 ? 'text-success' : 'text-danger'">
+                                                {{game.myCountry.dependentStats.homelessness()}}%
                                             </span>
                                         </div>
                                     </div>
@@ -218,7 +223,7 @@
 
             </div>
 
-            <div class="row introScreen" ng-show="game.data.initialization.isFirstTime === true">
+            <div class="row introScreen" ng-show="game.data.init.isFirstTime === true">
                 <div class="">
                     <div id="IntroScreen">
                         <h3>
@@ -229,21 +234,28 @@
                             Banded with a group of like minded individuals you venture to one of the few pieces of unclaimed lands in the middle of pacific. <br />
                         </span>
                         <hr />
+
                         <div class="form-inline">
-                            <div class="col-sm-12">
-                                <span class="form-label bold col-sm-5">
+                            <div class="col-sm-12" ng-class="game.validation.initCountryName === false ? 'has-error':'' ">
+                                <span class="control-label bold col-sm-5">
                                     Name your new nation:
                                 </span>
-                                <input type="text" class="form-control" ng-model="game.data.myCountry.name" />
+                                <input type="text" class="form-control" ng-model="game.myCountry.baseStats.name" />
                             </div>
-                            <div class="col-sm-12 margin-top-20">
-
-                                <span class="form-label bold col-sm-5">
+                            <div class="col-sm-12 margin-top-20" ng-class="game.validation.initCountryTitle === false ? 'has-error':'' ">
+                                <span class="control-label bold col-sm-5">
                                     What are your people going to call you?
                                 </span>
-                                <input type="text" class="form-control" ng-model="game.data.myCountry.title" />
+                                <input type="text" class="form-control" ng-model="game.myCountry.baseStats.title" />
                             </div>
                         </div>
+
+                        <div class="has-error margin-top-20 col-md-12" ng-show="(game.validation.initCountryTitle && game.validation.initCountryName) === false">
+                            <p class="control-label">
+                                We all want to be nameless, but come on... give me something to work with here.. will ya?
+                            </p>
+                        </div>
+
                         <div class="margin-top-20 pull-right">
                             <button type="button" class="btn btn-info" ng-click="game.startGame()">
                                 Start!
@@ -253,7 +265,7 @@
                 </div>
             </div>
             <!--Leave this blank, this is what sets the background to black.-->
-            <div class="fade_overlay" ng-show="game.data.initialization.isFirstTime === true">
+            <div class="fade_overlay" ng-show="game.data.init.isFirstTime === true">
 
             </div>
         </div>

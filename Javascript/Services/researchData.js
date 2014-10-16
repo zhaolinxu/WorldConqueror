@@ -16,7 +16,10 @@ wciApp.factory('researchData', function (myCountryData, buildingsData) {
             },
             isCompleted: false,
             researchIcon: 'fa-flask',
+            statAffected: '',
+            research: function () {
 
+            }
         }
     };
 

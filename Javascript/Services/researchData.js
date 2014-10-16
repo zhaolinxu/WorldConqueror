@@ -8,6 +8,16 @@ wciApp.factory('researchData', function (myCountryData, buildingsData) {
         //Energy Grid - imrpoves economy.. max housing capacity of buildings
         //Horticulture - Food
         //Fertilizer
+        tech1: {
+            name: "Tech1",
+            cost: 1,
+            isUnlocked: function () {
+                return true;
+            },
+            isCompleted: false,
+            researchIcon: 'fa-flask',
+
+        }
     };
 
 

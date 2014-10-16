@@ -1,0 +1,37 @@
+﻿<div id="Army" ng-controller="MilitaryController as militaryCtrl" ng-cloak>
+    <h3>
+        <span class="glyphicon glyphicon-screenshot"></span> Army
+
+    </h3>
+    <hr>
+    <div class="col-sm-12">
+        <tabset>
+            <tab ng-repeat="military in militaryCtrl.military" heading="{{military.name}}" class="clickable margin-bottom-20 bg-success">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="panel panel-primary panelLocked" ng-repeat="unit in military.units"
+                             ng-class="{'clickable clickableArea panelUnlocked':structure.unlocked()}">
+                            <div class="panel-body">
+                                <span class="fa fa-info-circle" tooltip="{{unit.description}}"></span>
+                                {{unit.name}} - Count: {{unit.count}} || Cost: {{unit.cost}}
+                                <!--TODO: Remove some padding around the icon-->
+                                <span ng-show="!unit.unlocked()" class="fa fa-lock pull-left"></span>
+                                <div class="pull-right clickableArea" ng-show="unit.isUnlocked()">
+                                    <button class="btn btn-primary" ng-click="unit.build(1)">
+                                        x1
+                                    </button>
+                                    <button class="btn btn-primary" ng-click="unit.build(10)">
+                                        x10
+                                    </button>
+                                    <button class="btn btn-primary" ng-click="unit.build(100)">
+                                        x100
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </tab>
+        </tabset>
+    </div>
+</div>

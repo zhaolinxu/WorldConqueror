@@ -50,10 +50,10 @@ a {
 
 
 /*Structure Styles*/
-.structureLocked {
+.panelLocked {
     color: #aaa;
 }
-.structureUnlocked {
+.panelUnlocked {
     color: #000;
 }
 

@@ -7,23 +7,73 @@
     <div class="col-sm-12">
         <tabset>
             <tab ng-repeat="building in buildingsCtrl.buildings" heading="{{building.name}}" class="clickable margin-bottom-20 bg-success">
-                <div class="panel panel-primary structureLocked" ng-repeat="structure in building.structures"
-                     ng-class="{'clickable clickableArea structureUnlocked':structure.unlocked()}">
-                    <div class="panel-body">
-                        <span class="fa fa-info-circle" tooltip="{{structure.description}}"></span>
-                        {{structure.name}} - Count: {{structure.count}} || Cost: {{structure.cost}}
-                        <!--TODO: Remove some padding around the icon-->
-                        <span ng-show="!structure.unlocked()" class="fa fa-lock pull-left"></span>
-                        <div class="pull-right clickableArea" ng-show="structure.unlocked()">
-                            <button class="btn btn-primary" ng-click="structure.build(1)">
-                                x1
-                            </button>
-                            <button class="btn btn-primary" ng-click="structure.build(10)">
-                                x10
-                            </button>
-                            <button class="btn btn-primary" ng-click="structure.build(100)">
-                                x100
-                            </button>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="panel panel-primary panelLocked" ng-repeat="structure in building.structures.baseStructures"
+                             ng-class="{'clickable clickableArea panelUnlocked':structure.unlocked()}">
+                            <div class="panel-body">
+                                <span class="fa fa-info-circle" tooltip="{{structure.description}}"></span>
+                                {{structure.name}} - Count: {{structure.count}} || Cost: {{structure.cost}}
+                                <!--TODO: Remove some padding around the icon-->
+                                <span ng-show="!structure.unlocked()" class="fa fa-lock pull-left"></span>
+                                <div class="pull-right clickableArea" ng-show="structure.unlocked()">
+                                    <button class="btn btn-primary" ng-click="structure.build(1)">
+                                        x1
+                                    </button>
+                                    <button class="btn btn-primary" ng-click="structure.build(10)">
+                                        x10
+                                    </button>
+                                    <button class="btn btn-primary" ng-click="structure.build(100)">
+                                        x100
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="panel panel-primary panelLocked" ng-repeat="structure in building.structures.baseStructures2"
+                             ng-class="{'clickable clickableArea panelUnlocked':structure.unlocked()}">
+                            <div class="panel-body">
+                                <span class="fa fa-info-circle" tooltip="{{structure.description}}"></span>
+                                {{structure.name}} - Count: {{structure.count}} || Cost: {{structure.cost}}
+                                <!--TODO: Remove some padding around the icon-->
+                                <span ng-show="!structure.unlocked()" class="fa fa-lock pull-left"></span>
+                                <div class="pull-right clickableArea" ng-show="structure.unlocked()">
+                                    <button class="btn btn-primary" ng-click="structure.build(1)">
+                                        x1
+                                    </button>
+                                    <button class="btn btn-primary" ng-click="structure.build(10)">
+                                        x10
+                                    </button>
+                                    <button class="btn btn-primary" ng-click="structure.build(100)">
+                                        x100
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="panel panel-primary panelLocked" ng-repeat="structure in building.structures.baseStructures3"
+                             ng-class="{'clickable clickableArea panelUnlocked':structure.unlocked()}">
+                            <div class="panel-body">
+                                <span class="fa fa-info-circle" tooltip="{{structure.description}}"></span>
+                                {{structure.name}} - Count: {{structure.count}} || Cost: {{structure.cost}}
+                                <!--TODO: Remove some padding around the icon-->
+                                <span ng-show="!structure.unlocked()" class="fa fa-lock pull-left"></span>
+                                <div class="pull-right clickableArea" ng-show="structure.unlocked()">
+                                    <button class="btn btn-primary" ng-click="structure.build(1)">
+                                        x1
+                                    </button>
+                                    <button class="btn btn-primary" ng-click="structure.build(10)">
+                                        x10
+                                    </button>
+                                    <button class="btn btn-primary" ng-click="structure.build(100)">
+                                        x100
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -5,127 +5,91 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData) 
     //#region Default Values
     var game = this;
 
-    game.data = {};
-
     game.myCountry = myCountryData;
 
-    game.data.init = {
+    game.initialization = {
         isFirstTime: true
     };
 
-    game.data.paused = false;
-    game.data.speed = 1000;
+    game.paused = false;
+
+    game.speed = 1000;
+
     game.version = '0.0.1';
 
-    game.validation = {
-        initCountryName: true,
-        initCountryTitle: true
-    }
-
     //#endregion
-
 
     //#region Page Load
 
-    if (!localStorage['myCountry_baseStats']) {
-        localStorage.clear();
-        //return;
+    if (game.initialization.isFirstTime) {
+
     }
     else {
-        game.data = JSON.parse(localStorage['myCountry_data']);
-        game.myCountry.baseStats = JSON.parse(localStorage['myCountry_baseStats']);
-
-            //JSON.parse(atob(localStorage['wci_gameData']));
+        //Load Game
     }
-    //if (game.data.initialization.isFirstTime) {
-    //}
-    //else {
-    //    game.data = JSON.parse(atob(localStorage['wci_gameData']));
-    //}
 
     //#endregion
-
 
     //#region Click Events
 
-    game.startGame = function () {
-        if (game.myCountry.baseStats.name.length > 0 && game.myCountry.baseStats.title.length > 0)
-        {
-            game.validation.initCountryName = true;
-            game.validation.initCountryTitle = true;
-            game.data.init.isFirstTime = false;
+    //Used to set the active tab in the menu
+    //this.isActive = function (viewLocation) {
+    //    return viewLocation === $location.path();
+    //};
 
-        } else {
-            if (game.myCountry.baseStats.name.length < 1){
-                game.validation.initCountryName = false;
-            }
+    //this.menuClick = function (action) {
 
-            if (game.myCountry.baseStats.title.length < 1) {
-                game.validation.initCountryTitle = false;
-            }
-        }
-    };
+    //    if (action === 'new') {
+    //        this.gameData.gameType = 'new';
+    //        this.showScreen = 'game';
+    //    }
+    //    else if (action === 'continue') {
+    //        this.gameData.gameType = 'existing';
+    //        this.showScreen = 'game';
+    //    }
+    //    else {
+    //        this.showScreen = 'options';
+    //    }
+    //};
 
-    game.saveGame = function () {
-        saveGame();
-    };
-
-    game.resetGame = function () {
-        resetGame();
-    };
     //#endregion
-
-
-    //#region Automated Functions
 
     var timerfunction = function () {
 
         //TODO: Put logic here to prompt user of game ending/death due to 0 population.
-        game.myCountry.functions.getNewConsumption();
-        game.myCountry.functions.getNewEconomics();
-        game.myCountry.functions.getNewDemographics();
-        game.saveGame();
+        game.myCountry.getNewConsumption();
+        game.myCountry.getNewEconomics();
+        game.myCountry.getNewDemographics();
 
     };
-    var timer = $interval(timerfunction, game.data.speed);
+
+
+    var timer = $interval(timerfunction, game.speed);
 
     game.pauseGame = function () {
-        game.data.paused = !game.data.paused;
+        game.paused = !game.paused;
 
-        if (!game.data.paused) {
-            timer = $interval(timerfunction, game.data.speed);
+        if (!game.paused) {
+            timer = $interval(timerfunction, game.speed);
         }
         else {
             $interval.cancel(timer)
         }
     };
-    game.adjustGameSpeed = function (speed) {
 
-        game.data.speed = (1000 / speed);
+    game.adjustGameSpeed = function (speed) {
+        
+        game.speed = (1000 / speed);
 
         $interval.cancel(timer);
 
-        timer = $interval(timerfunction, game.data.speed);
+        timer = $interval(timerfunction, game.speed);
 
     };
-
-    var saveGame = function () {
-        localStorage['myCountry_baseStats'] = JSON.stringify(game.myCountry.baseStats);
-        localStorage['myCountry_data'] = JSON.stringify(game.data);
-
-
-            //btoa(JSON.stringify(game.data));
-    };
-
-    var resetGame = function () {
-        game.myCountry.functions.resetStats();
-        localStorage.clear();
-    };
-
-
-    //#endregion
-
     
+    game.openSettings = function () {
+
+    };
     
 
     //Making sure interval is cancelled on destroy

@@ -6,24 +6,78 @@
     <hr>
     <div class="col-sm-12">
         <tabset>
-            <tab ng-repeat="military in militaryCtrl.units.baseStats" heading="{{military.name}}" class="clickable margin-bottom-20 bg-success">
+            <tab heading="Army" class="clickable margin-bottom-20">
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="panel panel-primary panelLocked" ng-repeat="unit in military.units"
-                             ng-class="{'clickable clickableArea panelUnlocked':structure.unlocked()}">
+                        <div class="panel panel-primary panelLocked" ng-repeat="unit in militaryCtrl.military.baseStats.army"
+                             ng-class="{'clickable clickableArea panelUnlocked':unit.isUnlocked}">
                             <div class="panel-body">
                                 <span class="fa fa-info-circle" tooltip="{{unit.description}}"></span>
                                 {{unit.name}} - Count: {{unit.count}} || Cost: {{unit.cost}}
                                 <!--TODO: Remove some padding around the icon-->
-                                <span ng-show="!unit.unlocked()" class="fa fa-lock pull-left"></span>
-                                <div class="pull-right clickableArea" ng-show="unit.isUnlocked()">
-                                    <button class="btn btn-primary" ng-click="unit.build(1)">
+                                <span ng-show="!unit.unlocked" class="fa fa-lock pull-left"></span>
+                                <div class="pull-right clickableArea" ng-show="unit.isUnlocked">
+                                    <button class="btn btn-primary" ng-click="unit.hire(1)">
                                         x1
                                     </button>
-                                    <button class="btn btn-primary" ng-click="unit.build(10)">
+                                    <button class="btn btn-primary" ng-click="unit.hire(10)">
                                         x10
                                     </button>
-                                    <button class="btn btn-primary" ng-click="unit.build(100)">
+                                    <button class="btn btn-primary" ng-click="unit.hire(100)">
+                                        x100
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </tab>
+
+            <tab heading="Navy" class="clickable margin-bottom-20">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="panel panel-primary panelLocked" ng-repeat="unit in militaryCtrl.military.baseStats.navy"
+                             ng-class="{'clickable clickableArea panelUnlocked':unit.isUnlocked}">
+                            <div class="panel-body">
+                                <span class="fa fa-info-circle" tooltip="{{unit.description}}"></span>
+                                {{unit.name}} - Count: {{unit.count}} || Cost: {{unit.cost}}
+                                <!--TODO: Remove some padding around the icon-->
+                                <span ng-show="!unit.unlocked" class="fa fa-lock pull-left"></span>
+                                <div class="pull-right clickableArea" ng-show="unit.isUnlocked">
+                                    <button class="btn btn-primary" ng-click="unit.hire(1)">
+                                        x1
+                                    </button>
+                                    <button class="btn btn-primary" ng-click="unit.hire(10)">
+                                        x10
+                                    </button>
+                                    <button class="btn btn-primary" ng-click="unit.hire(100)">
+                                        x100
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </tab>
+
+            <tab heading="Air Force" class="clickable margin-bottom-20">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="panel panel-primary panelLocked" ng-repeat="unit in militaryCtrl.military.baseStats.airForce"
+                             ng-class="{'clickable clickableArea panelUnlocked':unit.isUnlocked}">
+                            <div class="panel-body">
+                                <span class="fa fa-info-circle" tooltip="{{unit.description}}"></span>
+                                {{unit.name}} - Count: {{unit.count}} || Cost: {{unit.cost}}
+                                <!--TODO: Remove some padding around the icon-->
+                                <span ng-show="!unit.unlocked" class="fa fa-lock pull-left"></span>
+                                <div class="pull-right clickableArea" ng-show="unit.isUnlocked">
+                                    <button class="btn btn-primary" ng-click="unit.hire(1)">
+                                        x1
+                                    </button>
+                                    <button class="btn btn-primary" ng-click="unit.hire(10)">
+                                        x10
+                                    </button>
+                                    <button class="btn btn-primary" ng-click="unit.hire(100)">
                                         x100
                                     </button>
                                 </div>

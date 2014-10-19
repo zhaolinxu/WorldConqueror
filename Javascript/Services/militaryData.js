@@ -46,7 +46,8 @@ var setInitialUnitsData = function (units) {
     units.baseStats = {
         army: [
             {
-                name: "Militia",
+                name: 'Militia',
+                description: 'desc',
                 cost: 1,
                 count: 1,
                 upkeep: 1,
@@ -54,11 +55,23 @@ var setInitialUnitsData = function (units) {
                 attack: 1,
                 defense: 1,
                 siege: 0,
+                isUnlocked: true
+            },
+            {
+                name: 'Infantry',
+                description: 'desc',
+                cost: 1,
+                count: 1,
+                upkeep: 1,
 
+                attack: 1,
+                defense: 1,
+                siege: 0,
                 isUnlocked: false
             },
             {
-                name: "Infantry",
+                name: 'Artillery',
+                description: 'desc',
                 cost: 1,
                 count: 1,
                 upkeep: 1,
@@ -66,11 +79,11 @@ var setInitialUnitsData = function (units) {
                 attack: 1,
                 defense: 1,
                 siege: 0,
-
                 isUnlocked: false
             },
             {
-                name: "Artillery",
+                name: 'Anti-Air gun',
+                description: 'desc',
                 cost: 1,
                 count: 1,
                 upkeep: 1,
@@ -78,11 +91,11 @@ var setInitialUnitsData = function (units) {
                 attack: 1,
                 defense: 1,
                 siege: 0,
-
                 isUnlocked: false
             },
             {
-                name: "Anti-Air gun",
+                name: 'Tank',
+                description: 'desc',
                 cost: 1,
                 count: 1,
                 upkeep: 1,
@@ -90,11 +103,11 @@ var setInitialUnitsData = function (units) {
                 attack: 1,
                 defense: 1,
                 siege: 0,
-
                 isUnlocked: false
             },
             {
-                name: "Tank",
+                name: 'Landship',
+                description: 'desc',
                 cost: 1,
                 count: 1,
                 upkeep: 1,
@@ -102,19 +115,6 @@ var setInitialUnitsData = function (units) {
                 attack: 1,
                 defense: 1,
                 siege: 0,
-
-                isUnlocked: false
-            },
-            {
-                name: "Landship",
-                cost: 1,
-                count: 1,
-                upkeep: 1,
-
-                attack: 1,
-                defense: 1,
-                siege: 0,
-
                 isUnlocked: false
             },
         ]

@@ -11,32 +11,7 @@ wciApp.factory('myCountryData', function () {
         descriptions: {}
     };
 
-    myCountry.baseStats = {
-        //One Month is signfied as one second
-        name: '',
-        title: '',
-        happiness: 100, //% calculated based on hunger(fg-fc), homelessness, unemployment.. etc.
-
-        //Demographics
-        size: 1,
-        //isCountry: false, //Use this when the feature is built to start from a campsite and grow upto a city and then ask for independence.
-        population: 10,
-        baseGrowthRate: 1, //Based on the size of the country (lower size = lower growth rate)
-        baseMortalityRate: 6, //Based on the size (lower size = higher mortality rate)
-        //Consumption
-        perCapitaConsumption: 50, // 1 person's monthly consumption = 3 Mcal * 30 ~ 100 Mcal. (3Mcal is based on the nation's development level. http://www.who.int/nutrition/topics/3_foodconsumption/en/)
-        totalFood: 8000, // In megaCalorie = 1000*kcal... 
-        basefoodGrowth: 1000,
-        hunger: 0,
-        //Economics
-        taxRate: 40, //In percentage... high tax affects happiness. 
-        avgSalary: 10, //Based on size, gdp, job types.
-        money: 100, //Earned from Taxes and economic factors.
-        totalJobs: 16,
-        jobGdpMultiplier: 100, //This is how jobs effect the gdp.
-        //TODO: Move this to Demographics
-        housingCapacity: 16
-    };
+    setInitialStats(myCountry);
 
     myCountry.dependentStats = {
         actualGrowthRate: function () {
@@ -172,27 +147,40 @@ wciApp.factory('myCountryData', function () {
 
 
     myCountry.functions.resetStats = function () {
-        myCountry.baseStats = {
-            name: '',
-            title: '',
-            happiness: 100,
-            size: 1,
-            population: 10,
-            baseGrowthRate: 1,
-            baseMortalityRate: 6,
-            perCapitaConsumption: 50,
-            totalFood: 8000,
-            basefoodGrowth: 1000,
-            hunger: 0,
-            taxRate: 40,
-            avgSalary: 10,
-            money: 100,
-            totalJobs: 16,
-            jobGdpMultiplier: 100,
-            housingCapacity: 16
-        };
+        setInitialStats(myCountry);
     };
 
 
     return myCountry;
 });
+
+
+
+var setInitialStats = function (myCountry) {
+    myCountry.baseStats = {
+        //One Month is signfied as one second
+        name: '',
+        title: '',
+        happiness: 100, //% calculated based on hunger(fg-fc), homelessness, unemployment.. etc.
+
+        //Demographics
+        size: 1,
+        //isCountry: false, //Use this when the feature is built to start from a campsite and grow upto a city and then ask for independence.
+        population: 10,
+        baseGrowthRate: 1, //Based on the size of the country (lower size = lower growth rate)
+        baseMortalityRate: 6, //Based on the size (lower size = higher mortality rate)
+        //Consumption
+        perCapitaConsumption: 50, // 1 person's monthly consumption = 3 Mcal * 30 ~ 100 Mcal. (3Mcal is based on the nation's development level. http://www.who.int/nutrition/topics/3_foodconsumption/en/)
+        totalFood: 8000, // In megaCalorie = 1000*kcal... 
+        basefoodGrowth: 1000,
+        hunger: 0,
+        //Economics
+        taxRate: 40, //In percentage... high tax affects happiness. 
+        avgSalary: 10, //Based on size, gdp, job types.
+        money: 100, //Earned from Taxes and economic factors.
+        totalJobs: 16,
+        jobGdpMultiplier: 100, //This is how jobs effect the gdp.
+        //TODO: Move this to Demographics
+        housingCapacity: 16
+    };
+};

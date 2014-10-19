@@ -41,6 +41,7 @@ Version 0.1.0 Features
 2) Add War Area
 3) Achievements
 4) Offline Data Gathering.
+7) World Stats
 
 
 Version 1.0.0 Features
@@ -55,6 +56,7 @@ Version 1.0.0 Features
 9) Build Premium Model.
 10) Add Food Storage and over stockage.
 11) Add Inflation
+12) Government
 
 Version 1.1.0 Features
 1) Add growth from campsite to country.

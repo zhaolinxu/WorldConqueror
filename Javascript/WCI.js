@@ -28,11 +28,11 @@ wciApp.config(function ($routeProvider, $locationProvider) {
         controller: 'StructureController',
         controllerAs: 'st'
     })
-    .when('/army',
+    .when('/military',
     {
-        templateUrl: 'Views/army.html',
-        controller: 'ArmyController',
-        controllerAs: 'ar'
+        templateUrl: 'Views/military.html',
+        controller: 'militaryController',
+        controllerAs: 'militaryCtrl'
     })
     .when('/research',
     {

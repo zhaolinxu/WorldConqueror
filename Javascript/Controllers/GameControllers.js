@@ -138,7 +138,7 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData) 
 
 });
 
-wciApp.controller('ArmyController', function () {
+wciApp.controller('MilitaryController', function (militaryData) {
 
 });
 

@@ -1,15 +1,15 @@
-﻿<div id="Buildings" ng-controller="BuildingsController as buildingsCtrl" ng-cloak>
+﻿<div id="Buildings" ng-controller="StructureController as structureCtrl" ng-cloak>
     <h3>
         <span class="glyphicon glyphicon-home"></span> Buildings
-        
+
     </h3>
     <hr>
     <div class="col-sm-12">
         <tabset>
-            <tab ng-repeat="building in buildingsCtrl.buildings" heading="{{building.name}}" class="clickable margin-bottom-20 bg-success">
+            <tab ng-repeat="building in structureCtrl.buildings" heading="{{building.name}}" class="clickable margin-bottom-20 bg-success">
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="panel panel-primary panelLocked" ng-repeat="structure in building.structures.baseStructures"
+                        <div class="panel panel-primary panelLocked" ng-repeat="structure in building.structures"
                              ng-class="{'clickable clickableArea panelUnlocked':structure.unlocked()}">
                             <div class="panel-body">
                                 <span class="fa fa-info-circle" tooltip="{{structure.description}}"></span>

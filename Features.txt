@@ -57,6 +57,7 @@ Version 1.0.0 Features
 10) Add Food Storage and over stockage.
 11) Add Inflation
 12) Government
+13) Interactive map
 
 Version 1.1.0 Features
 1) Add growth from campsite to country.

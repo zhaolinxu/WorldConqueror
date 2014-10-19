@@ -31,7 +31,7 @@ wciApp.config(function ($routeProvider, $locationProvider) {
     .when('/military',
     {
         templateUrl: 'Views/military.html',
-        controller: 'militaryController',
+        controller: 'MilitaryController',
         controllerAs: 'militaryCtrl'
     })
     .when('/research',

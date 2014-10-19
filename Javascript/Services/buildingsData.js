@@ -14,30 +14,11 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 8,
                     cost: 500,
                     costMultiplier: 1,
-                    unlocked: function () {
-                        if (myCountryData.size > 0) {
-                            return true;
-                        }
-                        return false;
-                    },
+                    isUnlocked: true,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1,
                     countMultiplier: 1,
-                    jobsIncreased: 2,
-                    build: function (count) {
-                        var cost = this.cost * count;
-
-                        if ((myCountryData.money > cost) && this.unlocked()) {
-
-                            myCountryData[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier),count);
-                            myCountryData.totalJobs += (this.jobsIncreased * count);
-                            myCountryData.money -= cost;
-
-                            this.count += count;
-                            //this.cost = cost;
-                        }
-                    }
-
+                    jobsIncreased: 2
                 },
                 {
                     name: 'Port',
@@ -45,30 +26,11 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 0,
                     cost: 50000,
                     costMultiplier: 1,
-                    unlocked: function () {
-                        if (myCountryData.size > 1) {
-                            return true;
-                        }
-                        return false;
-                    },
+                    isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1,
                     countMultiplier: 1,
-                    jobsIncreased: 50,
-                    build: function (count) {
-
-                        var cost = this.cost * count;
-
-                        if ((myCountryData.money > cost) && this.unlocked()) {
-
-                            myCountryData[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
-                            myCountryData.totalJobs += (this.jobsIncreased * count);
-                            myCountryData.money -= cost;
-
-                            this.count += count;
-                            //this.cost = cost;
-                        }
-                    }
+                    jobsIncreased: 50
                 },
                 {
                     name: 'Bank',
@@ -76,30 +38,11 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 0,
                     cost: 1000000,
                     costMultiplier: 1,
-                    unlocked: function () {
-                        if (myCountryData.size > 2) {
-                            return true;
-                        }
-                        return false;
-                    },
+                    isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.001,
                     countMultiplier: 1.001,
-                    jobsIncreased: 1000,
-                    build: function (count) {
-
-                        var cost = this.cost * count;
-
-                        if ((myCountryData.money > cost) && this.unlocked()) {
-
-                            myCountryData[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
-                            myCountryData.totalJobs += (this.jobsIncreased * count);
-                            myCountryData.money -= cost;
-
-                            this.count += count;
-                            //this.cost = this.cost * Math.pow(this.costMultiplier, count);
-                        }
-                    }
+                    jobsIncreased: 1000
                 },
                 {
                     name: 'Industry',
@@ -107,30 +50,11 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 0,
                     cost: 100000000,
                     costMultiplier: 1,
-                    unlocked: function () {
-                        if (myCountryData.size > 3) {
-                            return true;
-                        }
-                        return false;
-                    },
+                    isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.005,
                     countMultiplier: 1.005,
-                    jobsIncreased: 100000,
-                    build: function (count) {
-
-                        var cost = this.cost * count;
-
-                        if ((myCountryData.money > cost) && this.unlocked()) {
-
-                            myCountryData[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
-                            myCountryData.totalJobs += (this.jobsIncreased * count);
-                            myCountryData.money -= cost;
-
-                            this.count += count;
-                            //this.cost = cost;
-                        }
-                    }
+                    jobsIncreased: 100000
                 },
                 {
                     name: 'Services',
@@ -138,30 +62,11 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 0,
                     cost: 650000000,
                     costMultiplier: 1,
-                    unlocked: function () {
-                        if (myCountryData.size > 4) {
-                            return true;
-                        }
-                        return false;
-                    },
+                    isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.1,
                     countMultiplier: 1.1,
-                    jobsIncreased: 100000,
-                    build: function (count) {
-
-                        var cost = this.cost * count;
-
-                        if ((myCountryData.money > cost) && this.unlocked()) {
-
-                            myCountryData[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
-                            myCountryData.totalJobs += (this.jobsIncreased * count);
-                            myCountryData.money -= cost;
-
-                            this.count += count;
-                            //this.cost = cost;
-                        }
-                    }
+                    jobsIncreased: 100000
                 },
                 {
                     name: 'Stock Exchange',
@@ -169,32 +74,11 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 0,
                     cost: 10000000000,
                     costMultiplier: 1,
-                    unlocked: function () {
-                        if (myCountryData.size > 5) {
-                            return true;
-                        }
-                        return false;
-                    },
+                    isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
                     countMultiplier: 1.5,
-                    jobsIncreased: 1000000,
-                    build: function (count) {
-
-                        //Geometric progression sum
-                        //var cost = (this.cost * (1 - Math.pow(this.costMultiplier, count))) / (1 - this.costMultiplier);
-                        var cost = this.cost * count;
-
-                        if ((myCountryData.money > cost) && this.unlocked()) {
-
-                            myCountryData[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
-                            myCountryData.totalJobs += (this.jobsIncreased * count);
-                            myCountryData.money -= cost;
-
-                            this.count += count;
-                            //this.cost = cost;
-                        }
-                    }
+                    jobsIncreased: 1000000
                 }
             ]
         },
@@ -207,17 +91,10 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 0,
                     cost: 100,
                     costMultiplier: 9,
-                    unlocked: false,
+                    isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
-                    countMultiplier: 1.8,
-                    build: function () {
-                        if ((myCountryData.money > this.cost) && this.unlocked()) {
-                            this.cost *= this.costMultiplier;
-                            myCountryData[this.statAffected] *= (this.statMultiplier * this.countMultiplier)
-                            this.count++;
-                        }
-                    }
+                    countMultiplier: 1.8
                 },
                 {
                     name: 'School',
@@ -225,17 +102,10 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 0,
                     cost: 100,
                     costMultiplier: 9,
-                    unlocked: false,
+                    isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
-                    countMultiplier: 1.8,
-                    build: function () {
-                        if ((myCountryData.money > this.cost) && this.unlocked()) {
-                            this.cost *= this.costMultiplier;
-                            myCountryData[this.statAffected] *= (this.statMultiplier * this.countMultiplier)
-                            this.count++;
-                        }
-                    }
+                    countMultiplier: 1.8
                 },
                 {
                     name: 'University',
@@ -243,17 +113,10 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 0,
                     cost: 100,
                     costMultiplier: 9,
-                    unlocked: false,
+                    isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
-                    countMultiplier: 1.8,
-                    build: function () {
-                        if ((myCountryData.money > this.cost) && this.unlocked()) {
-                            this.cost *= this.costMultiplier;
-                            myCountryData[this.statAffected] *= (this.statMultiplier * this.countMultiplier)
-                            this.count++;
-                        }
-                    }
+                    countMultiplier: 1.8
                 },
                 {
                     name: 'Laboratory',
@@ -261,17 +124,10 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 0,
                     cost: 100,
                     costMultiplier: 9,
-                    unlocked: false,
+                    isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
-                    countMultiplier: 1.8,
-                    build: function () {
-                        if ((myCountryData.money > this.cost) && this.unlocked()) {
-                            this.cost *= this.costMultiplier;
-                            myCountryData[this.statAffected] *= (this.statMultiplier * this.countMultiplier)
-                            this.count++;
-                        }
-                    }
+                    countMultiplier: 1.8
                 },
                 {
                     name: 'Observatory',
@@ -279,17 +135,10 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 0,
                     cost: 100,
                     costMultiplier: 9,
-                    unlocked: false,
+                    isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
-                    countMultiplier: 1.8,
-                    build: function () {
-                        if ((myCountryData.money > this.cost) && this.unlocked()) {
-                            this.cost *= this.costMultiplier;
-                            myCountryData[this.statAffected] *= (this.statMultiplier * this.countMultiplier)
-                            this.count++;
-                        }
-                    }
+                    countMultiplier: 1.8
                 },
                 {
                     name: 'Space Station',
@@ -297,17 +146,10 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 0,
                     cost: 100,
                     costMultiplier: 9,
-                    unlocked: false,
+                    isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
-                    countMultiplier: 1.8,
-                    build: function () {
-                        if ((myCountryData.money > this.cost) && this.unlocked()) {
-                            this.cost *= this.costMultiplier;
-                            myCountryData[this.statAffected] *= (this.statMultiplier * this.countMultiplier)
-                            this.count++;
-                        }
-                    }
+                    countMultiplier: 1.8
                 }
             ]
         },
@@ -320,30 +162,11 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 8,
                     cost: 500,
                     costMultiplier: 1,
-                    unlocked: function () {
-                        if (myCountryData.size > 0) {
-                            return true;
-                        }
-                        return false;
-                    },
+                    isUnlocked: true,
                     statAffected: 'housingCapacity',
                     statMultiplier: 2,
                     countMultiplier: 1,
-                    jobsIncreased: 0,
-                    build: function (count) {
-
-                        var cost = this.cost * count;
-
-                        if ((myCountryData.money > cost) && this.unlocked()) {
-
-                            myCountryData[this.statAffected] += (this.statMultiplier * this.countMultiplier) * count;
-                            myCountryData.totalJobs += (this.jobsIncreased * count);
-                            myCountryData.money -= cost;
-
-                            this.count += count;
-                            //this.cost = cost;
-                        }
-                    }
+                    jobsIncreased: 0
                 },
                 {
                     name: 'House',
@@ -351,30 +174,11 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 0,
                     cost: 5000,
                     costMultiplier: 1,
-                    unlocked: function () {
-                        if (myCountryData.size > 1) {
-                            return true;
-                        }
-                        return false;
-                    },
+                    isUnlocked: false,
                     statAffected: 'housingCapacity',
                     statMultiplier: 6,
                     countMultiplier: 1,
-                    jobsIncreased: 1,
-                    build: function (count) {
-
-                        var cost = this.cost * count;
-
-                        if ((myCountryData.money > cost) && this.unlocked()) {
-
-                            myCountryData[this.statAffected] += count * (this.statMultiplier * this.countMultiplier);
-                            myCountryData.totalJobs += (this.jobsIncreased * count);
-                            myCountryData.money -= cost;
-
-                            this.count += count;
-                            //this.cost = cost;
-                        }
-                    }
+                    jobsIncreased: 1
                 },
                 {
                     name: 'Duplex',
@@ -382,30 +186,11 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 0,
                     cost: 100000,
                     costMultiplier: 1,
-                    unlocked: function () {
-                        if (myCountryData.size > 2) {
-                            return true;
-                        }
-                        return false;
-                    },
+                    isUnlocked: false,
                     statAffected: 'housingCapacity',
                     statMultiplier: 12,
                     countMultiplier: 1,
-                    jobsIncreased: 3,
-                    build: function (count) {
-
-                        var cost = this.cost * count;
-
-                        if ((myCountryData.money > cost) && this.unlocked()) {
-
-                            myCountryData[this.statAffected] += count * (this.statMultiplier * this.countMultiplier);
-                            myCountryData.totalJobs += (this.jobsIncreased * count);
-                            myCountryData.money -= cost;
-
-                            this.count += count;
-                            //this.cost = cost;
-                        }
-                    }
+                    jobsIncreased: 3
                 },
                 {
                     name: 'Small Apartments',
@@ -413,30 +198,11 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 0,
                     cost: 100000000,
                     costMultiplier: 1,
-                    unlocked: function () {
-                        if (myCountryData.size > 3) {
-                            return true;
-                        }
-                        return false;
-                    },
+                    isUnlocked: false,
                     statAffected: 'housingCapacity',
                     statMultiplier: 1000,
                     countMultiplier: 1,
-                    jobsIncreased: 50,
-                    build: function (count) {
-
-                        var cost = this.cost * count;
-
-                        if ((myCountryData.money > cost) && this.unlocked()) {
-
-                            myCountryData[this.statAffected] += count * (this.statMultiplier * this.countMultiplier);
-                            myCountryData.totalJobs += (this.jobsIncreased * count);
-                            myCountryData.money -= cost;
-
-                            this.count += count;
-                            //this.cost = cost;
-                        }
-                    }
+                    jobsIncreased: 50
                 },
                 {
                     name: 'Apartment Complex',
@@ -444,30 +210,11 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 0,
                     cost: 5000000000,
                     costMultiplier: 1,
-                    unlocked: function () {
-                        if (myCountryData.size > 4) {
-                            return true;
-                        }
-                        return false;
-                    },
+                    isUnlocked: false,
                     statAffected: 'housingCapacity',
                     statMultiplier: 10000,
                     countMultiplier: 1,
-                    jobsIncreased: 500,
-                    build: function (count) {
-
-                        var cost = this.cost * count;
-
-                        if ((myCountryData.money > cost) && this.unlocked()) {
-
-                            myCountryData[this.statAffected] += count * (this.statMultiplier * this.countMultiplier);
-                            myCountryData.totalJobs += (this.jobsIncreased * count);
-                            myCountryData.money -= cost;
-
-                            this.count += count;
-                            //this.cost = cost;
-                        }
-                    }
+                    jobsIncreased: 500
                 },
                 {
                     name: 'High Rise',
@@ -475,30 +222,11 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 0,
                     cost: 50000000000,
                     costMultiplier: 1,
-                    unlocked: function () {
-                        if (myCountryData.size > 5) {
-                            return true;
-                        }
-                        return false;
-                    },
+                    isUnlocked: false,
                     statAffected: 'housingCapacity',
                     statMultiplier: 50000,
                     countMultiplier: 1,
-                    jobsIncreased: 1000,
-                    build: function (count) {
-
-                        var cost = this.cost * count;
-
-                        if ((myCountryData.money > cost) && this.unlocked()) {
-
-                            myCountryData[this.statAffected] += count * (this.statMultiplier * this.countMultiplier);
-                            myCountryData.totalJobs += (this.jobsIncreased * count);
-                            myCountryData.money -= cost;
-
-                            this.count += count;
-                            //this.cost = cost;
-                        }
-                    }
+                    jobsIncreased: 1000
                 }
             ]
         },
@@ -511,30 +239,11 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 5,
                     cost: 500,
                     costMultiplier: 1,
-                    unlocked: function () {
-                        if (myCountryData.size > 0) {
-                            return true;
-                        }
-                        return false;
-                    },
+                    isUnlocked: true,
                     statAffected: 'basefoodGrowth',
                     statMultiplier: 200,
                     countMultiplier: 1,
-                    jobsIncreased: 0,
-                    build: function (count) {
-
-                        var cost = this.cost * count;
-
-                        if ((myCountryData.money > cost) && this.unlocked()) {
-
-                            myCountryData[this.statAffected] += (this.statMultiplier * this.countMultiplier) * count;
-                            myCountryData.totalJobs += (this.jobsIncreased * count);
-                            myCountryData.money -= cost;
-
-                            this.count += count;
-                            //this.cost = cost;
-                        }
-                    }
+                    jobsIncreased: 0
                 },
                 {
                     name: 'Fishery',
@@ -542,30 +251,11 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 0,
                     cost: 100000,
                     costMultiplier: 1,
-                    unlocked: function () {
-                        if (myCountryData.size > 1) {
-                            return true;
-                        }
-                        return false;
-                    },
+                    isUnlocked: false,
                     statAffected: 'basefoodGrowth',
                     statMultiplier: 50000,
                     countMultiplier: 0.999,
-                    jobsIncreased: 10,
-                    build: function (count) {
-
-                        var cost = this.cost * count;
-
-                        if ((myCountryData.money > cost) && this.unlocked()) {
-
-                            myCountryData[this.statAffected] += count * (this.statMultiplier * this.countMultiplier);
-                            myCountryData.totalJobs += (this.jobsIncreased * count);
-                            myCountryData.money -= cost;
-
-                            this.count += count;
-                            //this.cost = cost;
-                        }
-                    }
+                    jobsIncreased: 10
                 },
                 {
                     name: 'Farm',
@@ -573,30 +263,11 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 0,
                     cost: 100000,
                     costMultiplier: 1,
-                    unlocked: function () {
-                        if (myCountryData.size > 2) {
-                            return true;
-                        }
-                        return false;
-                    },
+                    isUnlocked: false,
                     statAffected: 'basefoodGrowth',
                     statMultiplier: 40000,
                     countMultiplier: 1,
-                    jobsIncreased: 100,
-                    build: function (count) {
-
-                        var cost = this.cost * count;
-
-                        if ((myCountryData.money > cost) && this.unlocked()) {
-
-                            myCountryData[this.statAffected] += count * (this.statMultiplier * this.countMultiplier);
-                            myCountryData.totalJobs += (this.jobsIncreased * count);
-                            myCountryData.money -= cost;
-
-                            this.count += count;
-                            //this.cost = cost;
-                        }
-                    }
+                    jobsIncreased: 100
                 },
                 {
                     name: 'Husbandry',
@@ -604,30 +275,11 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 0,
                     cost: 5000000,
                     costMultiplier: 1,
-                    unlocked: function () {
-                        if (myCountryData.size > 3) {
-                            return true;
-                        }
-                        return false;
-                    },
+                    isUnlocked: false,
                     statAffected: 'basefoodGrowth',
                     statMultiplier: 250000,
                     countMultiplier: 1.001,
-                    jobsIncreased: 500,
-                    build: function (count) {
-
-                        var cost = this.cost * count;
-
-                        if ((myCountryData.money > cost) && this.unlocked()) {
-
-                            myCountryData[this.statAffected] += count * (this.statMultiplier * this.countMultiplier);
-                            myCountryData.totalJobs += (this.jobsIncreased * count);
-                            myCountryData.money -= cost;
-
-                            this.count += count;
-                            //this.cost = cost;
-                        }
-                    }
+                    jobsIncreased: 500
                 },
                 //GMO Lab and Hydro Dam.. multiply the total production, rather than adding to it. (TODO: Think about other food places and convert these to researches down the line)
                 {
@@ -636,30 +288,11 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 0,
                     cost: 1500000000,
                     costMultiplier: 1,
-                    unlocked: function () {
-                        if (myCountryData.size > 4) {
-                            return true;
-                        }
-                        return false;
-                    },
+                    isUnlocked: false,
                     statAffected: 'basefoodGrowth',
                     statMultiplier: 3,
                     countMultiplier: 0.95,
-                    jobsIncreased: 1000,
-                    build: function (count) {
-
-                        var cost = this.cost * count;
-
-                        if ((myCountryData.money > cost) && this.unlocked()) {
-
-                            myCountryData[this.statAffected] *= count * (this.statMultiplier * this.countMultiplier);
-                            myCountryData.totalJobs += (this.jobsIncreased * count);
-                            myCountryData.money -= cost;
-
-                            this.count += count;
-                            //this.cost = cost;
-                        }
-                    }
+                    jobsIncreased: 1000
                 },
                 {
                     name: 'GMO Lab',
@@ -667,30 +300,11 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 0,
                     cost: 10000000000,
                     costMultiplier: 1,
-                    unlocked: function () {
-                        if (myCountryData.size > 5) {
-                            return true;
-                        }
-                        return false;
-                    },
+                    isUnlocked: false,
                     statAffected: 'basefoodGrowth',
                     statMultiplier: 2.5,
                     countMultiplier: 1.5,
-                    jobsIncreased: 500,
-                    build: function (count) {
-
-                        var cost = this.cost * count;
-
-                        if ((myCountryData.money > cost) && this.unlocked()) {
-
-                            myCountryData[this.statAffected] *= count * (this.statMultiplier * this.countMultiplier);
-                            myCountryData.totalJobs += (this.jobsIncreased * count);
-                            myCountryData.money -= cost;
-
-                            this.count += count;
-                            //this.cost = cost;
-                        }
-                    }
+                    jobsIncreased: 500
                 }
             ]
         },
@@ -703,17 +317,10 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 0,
                     cost: 100,
                     costMultiplier: 9,
-                    unlocked: false,
+                    isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
-                    countMultiplier: 1.8,
-                    build: function () {
-                        if ((myCountryData.money > this.cost) && this.unlocked()) {
-                            this.cost *= this.costMultiplier;
-                            myCountryData[this.statAffected] *= (this.statMultiplier * this.countMultiplier)
-                            this.count++;
-                        }
-                    }
+                    countMultiplier: 1.8
                 },
                 {
                     name: 'Weapons Factory',
@@ -721,17 +328,10 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 0,
                     cost: 100,
                     costMultiplier: 9,
-                    unlocked: false,
+                    isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
-                    countMultiplier: 1.8,
-                    build: function () {
-                        if ((myCountryData.money > this.cost) && this.unlocked()) {
-                            this.cost *= this.costMultiplier;
-                            myCountryData[this.statAffected] *= (this.statMultiplier * this.countMultiplier)
-                            this.count++;
-                        }
-                    }
+                    countMultiplier: 1.8
                 },
                 {
                     name: 'Naval Base',
@@ -739,17 +339,10 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 0,
                     cost: 100,
                     costMultiplier: 9,
-                    unlocked: false,
+                    isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
-                    countMultiplier: 1.8,
-                    build: function () {
-                        if ((myCountryData.money > this.cost) && this.unlocked()) {
-                            this.cost *= this.costMultiplier;
-                            myCountryData[this.statAffected] *= (this.statMultiplier * this.countMultiplier)
-                            this.count++;
-                        }
-                    }
+                    countMultiplier: 1.8
                 },
                 {
                     name: 'Air Base',
@@ -757,17 +350,10 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 0,
                     cost: 100,
                     costMultiplier: 9,
-                    unlocked: false,
+                    isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
-                    countMultiplier: 1.8,
-                    build: function () {
-                        if ((myCountryData.money > this.cost) && this.unlocked()) {
-                            this.cost *= this.costMultiplier;
-                            myCountryData[this.statAffected] *= (this.statMultiplier * this.countMultiplier)
-                            this.count++;
-                        }
-                    }
+                    countMultiplier: 1.8
                 },
                 {
                     name: 'Special Forces',
@@ -775,17 +361,10 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 0,
                     cost: 100,
                     costMultiplier: 9,
-                    unlocked: false,
+                    isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
-                    countMultiplier: 1.8,
-                    build: function () {
-                        if ((myCountryData.money > this.cost) && this.unlocked()) {
-                            this.cost *= this.costMultiplier;
-                            myCountryData[this.statAffected] *= (this.statMultiplier * this.countMultiplier)
-                            this.count++;
-                        }
-                    }
+                    countMultiplier: 1.8
                 },
                 {
                     name: 'Satelitte uplink',
@@ -793,21 +372,126 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     count: 0,
                     cost: 100,
                     costMultiplier: 9,
-                    unlocked: false,
+                    isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
-                    countMultiplier: 1.8,
-                    build: function () {
-                        if ((myCountryData.money > this.cost) && this.unlocked()) {
-                            this.cost *= this.costMultiplier;
-                            myCountryData[this.statAffected] *= (this.statMultiplier * this.countMultiplier)
-                            this.count++;
-                        }
-                    }
+                    countMultiplier: 1.8
                 }
             ]
         }
     };
+
+
+    //Build logic for Economic buildings.
+    for (var i = 0; i < buildings.Economic.structures.length; i++) {
+
+        angular.extend(buildings.Economic.structures[i], {
+
+            build: function (count) {
+                var cost = this.cost * count;
+
+                if ((myCountryData.baseStats.money > cost) && this.isUnlocked) {
+
+                    myCountryData.baseStats[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
+                    myCountryData.baseStats.totalJobs += (this.jobsIncreased * count);
+                    myCountryData.baseStats.money -= cost;
+
+                    this.count += count;
+                    //this.cost = cost;
+                }
+            }
+
+        });
+    }
+
+    //Build logic for Science buildings.
+    for (var i = 0; i < buildings.Science.structures.length; i++) {
+
+        angular.extend(buildings.Science.structures[i], {
+
+            build: function (count) {
+                var cost = this.cost * count;
+
+                if ((myCountryData.baseStats.money > cost) && this.isUnlocked) {
+
+                    myCountryData.baseStats[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
+                    myCountryData.baseStats.totalJobs += (this.jobsIncreased * count);
+                    myCountryData.baseStats.money -= cost;
+
+                    this.count += count;
+                    //this.cost = cost;
+                }
+            }
+
+        });
+    }
+
+    //Build logic for Housing buildings.
+    for (var i = 0; i < buildings.Housing.structures.length; i++) {
+
+        angular.extend(buildings.Housing.structures[i], {
+
+            build: function (count) {
+                var cost = this.cost * count;
+
+                if ((myCountryData.baseStats.money > cost) && this.isUnlocked) {
+
+                    myCountryData.baseStats[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
+                    myCountryData.baseStats.totalJobs += (this.jobsIncreased * count);
+                    myCountryData.baseStats.money -= cost;
+
+                    this.count += count;
+                    //this.cost = cost;
+                }
+            }
+
+        });
+    }
+
+    //Build logic for Housing buildings.
+    for (var i = 0; i < buildings.Food.structures.length; i++) {
+
+        angular.extend(buildings.Food.structures[i], {
+
+            build: function (count) {
+                var cost = this.cost * count;
+
+                if ((myCountryData.baseStats.money > cost) && this.isUnlocked) {
+
+                    myCountryData.baseStats[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
+                    myCountryData.baseStats.totalJobs += (this.jobsIncreased * count);
+                    myCountryData.baseStats.money -= cost;
+
+                    this.count += count;
+                    //this.cost = cost;
+                }
+            }
+
+        });
+    }
+
+    //Build logic for Housing buildings.
+    for (var i = 0; i < buildings.Military.structures.length; i++) {
+
+        angular.extend(buildings.Military.structures[i], {
+
+            build: function (count) {
+                var cost = this.cost * count;
+
+                if ((myCountryData.baseStats.money > cost) && this.isUnlocked) {
+
+                    myCountryData.baseStats[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
+                    myCountryData.baseStats.totalJobs += (this.jobsIncreased * count);
+                    myCountryData.baseStats.money -= cost;
+
+                    this.count += count;
+                    //this.cost = cost;
+                }
+            }
+
+        });
+    }
+
 
 
     return buildings;

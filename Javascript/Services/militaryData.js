@@ -4,8 +4,8 @@ wciApp.factory('militaryData', function (myCountryData) {
 
     var units = {
 
-        army: {
-            militia: {
+        army: [
+            {
                 name: "Militia",
                 cost: 1,
                 count: 1,
@@ -15,13 +15,27 @@ wciApp.factory('militaryData', function (myCountryData) {
                 defense: 1,
                 siege: 0,
 
-                isUnlocked: false,
-                hire: function () {
+                isUnlocked: false
+            }
+        ]
+    };
 
+
+    for (var i = 0; i < units.army.length; i++) {
+
+        angular.extend(units.army[i], {
+            
+            hire: function (count) {
+                var cost = this.cost * count;
+
+                if ((myCountryData.baseStats.money > cost) && this.isUnlocked) {
+
+                    myCountryData.baseStats.money -= cost;
+                    this.count += count;
                 }
             }
-        }
-    };
+        });
+    }
 
     return units;
 });

@@ -139,16 +139,7 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData) 
 });
 
 wciApp.controller('MilitaryController', function (militaryData) {
-
-});
-
-wciApp.controller('BuildingsController', function (buildingsData) {
-    this.buildings = buildingsData;
-
-    this.buildingClick = function (structure) {
-        var structureBuilt = structure.build();
-    }
-
+    this.military = militaryData;
 });
 
 wciApp.controller('StructureController', function (buildingsData) {
@@ -169,3 +160,8 @@ wciApp.controller('CountryController', function ($interval, myCountryData) {
 wciApp.controller('ResearchController', function () {
 
 });
+
+wciApp.controller('AchievementController', function () {
+
+});
+

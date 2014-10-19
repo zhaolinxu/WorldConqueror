@@ -1,20 +1,64 @@
 ﻿'use strict';
 
-wciApp.controller('GameController', function ($scope, $interval, myCountryData) {
+wciApp.controller('GameController', function ($scope, $interval, myCountryData, buildingsData, militaryData) {
+
+    //#region Private Methods
+
+    var timerfunction = function () {
+
+        //TODO: Put logic here to prompt user of game ending/death due to 0 population.
+        game.myCountry.functions.getNewConsumption();
+        game.myCountry.functions.getNewEconomics();
+        game.myCountry.functions.getNewDemographics();
+        //game.saveGame();
+
+    };
+	var saveGame = function () {
+
+        game.myCountry.functions.saveData();
+        game.buildings.functions.saveData();
+        localStorage['gameData'] = JSON.stringify(game.data);
+    };
+    var resetGame = function () {
+
+        game.data = {
+            init: {
+                isFirstTime: false
+            },
+            paused: false,
+            speed: 1000
+        };
+
+        game.myCountry.functions.resetStats();
+        game.buildings.functions.resetData();
+        localStorage.clear();
+    };
+
+    //#endregion
 
     //#region Default Values
-    var game = this;
 
+    var game = this;
     game.data = {};
 
     game.myCountry = myCountryData;
+    game.buildings = buildingsData;
+    game.military = militaryData;
 
-    game.data.init = {
-        isFirstTime: true
-    };
+    //Load Game's Settings
+    if (!localStorage['gameData']) {
+        game.data = {
+            init: {
+                isFirstTime: false
+            },
+            paused: false,
+            speed: 1000
+        };
+    }
+    else {
+        game.data = JSON.parse(localStorage['gameData']);
+    }
 
-    game.data.paused = false;
-    game.data.speed = 1000;
     game.version = '0.0.1';
 
     game.validation = {
@@ -27,21 +71,6 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData) 
 
     //#region Page Load
 
-    if (!localStorage['myCountry_baseStats']) {
-        localStorage.clear();
-        //return;
-    }
-    else {
-        game.data = JSON.parse(localStorage['myCountry_data']);
-        game.myCountry.baseStats = JSON.parse(localStorage['myCountry_baseStats']);
-
-        //JSON.parse(atob(localStorage['wci_gameData']));
-    }
-    //if (game.data.initialization.isFirstTime) {
-    //}
-    //else {
-    //    game.data = JSON.parse(atob(localStorage['wci_gameData']));
-    //}
 
     //#endregion
 
@@ -72,59 +101,46 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData) 
     game.resetGame = function () {
         resetGame();
     };
+
     //#endregion
 
 
     //#region Automated Functions
 
-    var timerfunction = function () {
-
-        //TODO: Put logic here to prompt user of game ending/death due to 0 population.
-        game.myCountry.functions.getNewConsumption();
-        game.myCountry.functions.getNewEconomics();
-        game.myCountry.functions.getNewDemographics();
-        game.saveGame();
-
+    if (!game.data.paused) {
+        var playTimer = $interval(timerfunction, game.data.speed);
     };
-    var timer = $interval(timerfunction, game.data.speed);
+
+    var saveTimer = $interval(saveGame, 1000);
+
 
     game.pauseGame = function () {
         game.data.paused = !game.data.paused;
 
         if (!game.data.paused) {
-            timer = $interval(timerfunction, game.data.speed);
+            playTimer = $interval(timerfunction, game.data.speed);
         }
         else {
-            $interval.cancel(timer)
+            $interval.cancel(playTimer)
         }
     };
     game.adjustGameSpeed = function (speed) {
 
         game.data.speed = (1000 / speed);
-
-        $interval.cancel(timer);
-
-        timer = $interval(timerfunction, game.data.speed);
-
-    };
-
-    var saveGame = function () {
-        localStorage['myCountry_baseStats'] = JSON.stringify(game.myCountry.baseStats);
-        localStorage['myCountry_data'] = JSON.stringify(game.data);
+        game.data.paused = false;
 
 
-        //btoa(JSON.stringify(game.data));
-    };
+        $interval.cancel(playTimer);
 
-    var resetGame = function () {
-        game.myCountry.functions.resetStats();
-        localStorage.clear();
+        playTimer = $interval(timerfunction, game.data.speed);
+
     };
 
 
     //#endregion
 
 
+    
 
 
     //Making sure interval is cancelled on destroy

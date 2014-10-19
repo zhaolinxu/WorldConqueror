@@ -3,28 +3,21 @@
 wciApp.factory('militaryData', function (myCountryData) {
 
     var units = {
-
-        army: [
-            {
-                name: "Militia",
-                cost: 1,
-                count: 1,
-                upkeep: 1,
-
-                attack: 1,
-                defense: 1,
-                siege: 0,
-
-                isUnlocked: false
-            }
-        ]
+        baseStats: {},
+        functions: {}
     };
 
+    if (!localStorage['armyData']) {
+        setInitialUnitsData(units);
+    }
+    else {
+        units.baseStats = JSON.parse(localStorage['armyData']);
+    }
 
-    for (var i = 0; i < units.army.length; i++) {
+    for (var i = 0; i < units.baseStats.army.length; i++) {
 
-        angular.extend(units.army[i], {
-            
+        angular.extend(units.baseStats.army[i], {
+
             hire: function (count) {
                 var cost = this.cost * count;
 
@@ -37,9 +30,96 @@ wciApp.factory('militaryData', function (myCountryData) {
         });
     }
 
+    units.functions.saveData = function () {
+        localStorage['armyData'] = JSON.stringify(units.baseStats);
+    };
+    units.functions.resetData = function () {
+        setInitialUnitsData(units);
+    };
+
+
     return units;
 });
 
+
+var setInitialUnitsData = function (units) {
+    units.baseStats = {
+        army: [
+            {
+                name: "Militia",
+                cost: 1,
+                count: 1,
+                upkeep: 1,
+
+                attack: 1,
+                defense: 1,
+                siege: 0,
+
+                isUnlocked: false
+            },
+            {
+                name: "Infantry",
+                cost: 1,
+                count: 1,
+                upkeep: 1,
+
+                attack: 1,
+                defense: 1,
+                siege: 0,
+
+                isUnlocked: false
+            },
+            {
+                name: "Artillery",
+                cost: 1,
+                count: 1,
+                upkeep: 1,
+
+                attack: 1,
+                defense: 1,
+                siege: 0,
+
+                isUnlocked: false
+            },
+            {
+                name: "Anti-Air gun",
+                cost: 1,
+                count: 1,
+                upkeep: 1,
+
+                attack: 1,
+                defense: 1,
+                siege: 0,
+
+                isUnlocked: false
+            },
+            {
+                name: "Tank",
+                cost: 1,
+                count: 1,
+                upkeep: 1,
+
+                attack: 1,
+                defense: 1,
+                siege: 0,
+
+                isUnlocked: false
+            },
+            {
+                name: "Landship",
+                cost: 1,
+                count: 1,
+                upkeep: 1,
+
+                attack: 1,
+                defense: 1,
+                siege: 0,
+
+                isUnlocked: false
+            },
+        ]
+    }
+};
 
 /*
  * Army:

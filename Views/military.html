@@ -6,7 +6,7 @@
     <hr>
     <div class="col-sm-12">
         <tabset>
-            <tab ng-repeat="military in militaryCtrl.military" heading="{{military.name}}" class="clickable margin-bottom-20 bg-success">
+            <tab ng-repeat="military in militaryCtrl.units.baseStats" heading="{{military.name}}" class="clickable margin-bottom-20 bg-success">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="panel panel-primary panelLocked" ng-repeat="unit in military.units"

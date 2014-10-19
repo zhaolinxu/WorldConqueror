@@ -3,6 +3,143 @@
 wciApp.factory('buildingsData', function (myCountryData) {
 
     var buildings = {
+        baseStats: {},
+        functions: {}
+    };
+
+    if (!localStorage['buildingData']) {
+        setInitialBuildingData(buildings);
+    }
+    else {
+        buildings.baseStats = JSON.parse(localStorage['buildingData']);
+    }
+
+
+    //Build logic for Economic buildings.
+    for (var i = 0; i < buildings.baseStats.Economic.structures.length; i++) {
+
+        angular.extend(buildings.baseStats.Economic.structures[i], {
+
+            build: function (count) {
+                var cost = this.cost * count;
+
+                if ((myCountryData.baseStats.money > cost) && this.isUnlocked) {
+
+                    myCountryData.baseStats[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
+                    myCountryData.baseStats.totalJobs += (this.jobsIncreased * count);
+                    myCountryData.baseStats.money -= cost;
+
+                    this.count += count;
+                    //this.cost = cost;
+                }
+            }
+
+        });
+    }
+
+    //Build logic for Science buildings.
+    for (var i = 0; i < buildings.baseStats.Science.structures.length; i++) {
+
+        angular.extend(buildings.baseStats.Science.structures[i], {
+
+            build: function (count) {
+                var cost = this.cost * count;
+
+                if ((myCountryData.baseStats.money > cost) && this.isUnlocked) {
+
+                    myCountryData.baseStats[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
+                    myCountryData.baseStats.totalJobs += (this.jobsIncreased * count);
+                    myCountryData.baseStats.money -= cost;
+
+                    this.count += count;
+                    //this.cost = cost;
+                }
+            }
+
+        });
+    }
+
+    //Build logic for Housing buildings.
+    for (var i = 0; i < buildings.baseStats.Housing.structures.length; i++) {
+
+        angular.extend(buildings.baseStats.Housing.structures[i], {
+
+            build: function (count) {
+                var cost = this.cost * count;
+
+                if ((myCountryData.baseStats.money > cost) && this.isUnlocked) {
+
+                    myCountryData.baseStats[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
+                    myCountryData.baseStats.totalJobs += (this.jobsIncreased * count);
+                    myCountryData.baseStats.money -= cost;
+
+                    this.count += count;
+                    //this.cost = cost;
+                }
+            }
+
+        });
+    }
+
+    //Build logic for Housing buildings.
+    for (var i = 0; i < buildings.baseStats.Food.structures.length; i++) {
+
+        angular.extend(buildings.baseStats.Food.structures[i], {
+
+            build: function (count) {
+                var cost = this.cost * count;
+
+                if ((myCountryData.baseStats.money > cost) && this.isUnlocked) {
+
+                    myCountryData.baseStats[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
+                    myCountryData.baseStats.totalJobs += (this.jobsIncreased * count);
+                    myCountryData.baseStats.money -= cost;
+
+                    this.count += count;
+                    //this.cost = cost;
+                }
+            }
+
+        });
+    }
+
+    //Build logic for Housing buildings.
+    for (var i = 0; i < buildings.baseStats.Military.structures.length; i++) {
+
+        angular.extend(buildings.baseStats.Military.structures[i], {
+
+            build: function (count) {
+                var cost = this.cost * count;
+
+                if ((myCountryData.baseStats.money > cost) && this.isUnlocked) {
+
+                    myCountryData.baseStats[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
+                    myCountryData.baseStats.totalJobs += (this.jobsIncreased * count);
+                    myCountryData.baseStats.money -= cost;
+
+                    this.count += count;
+                    //this.cost = cost;
+                }
+            }
+
+        });
+    }
+
+
+    buildings.functions.saveData = function () {
+        localStorage['buildingData'] = JSON.stringify(buildings.baseStats);
+    };
+    buildings.functions.resetData = function () {
+        setInitialBuildingData(buildings);
+    };
+ 
+    return buildings;
+
+});
+
+
+var setInitialBuildingData = function (buildings) {
+    buildings.baseStats = {
         //TODO: Store this information in a json.
         //TODO: Think about setting the type of building as a structure stat and use that to show specific in the list.
         Economic: {
@@ -380,120 +517,4 @@ wciApp.factory('buildingsData', function (myCountryData) {
             ]
         }
     };
-
-
-    //Build logic for Economic buildings.
-    for (var i = 0; i < buildings.Economic.structures.length; i++) {
-
-        angular.extend(buildings.Economic.structures[i], {
-
-            build: function (count) {
-                var cost = this.cost * count;
-
-                if ((myCountryData.baseStats.money > cost) && this.isUnlocked) {
-
-                    myCountryData.baseStats[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
-                    myCountryData.baseStats.totalJobs += (this.jobsIncreased * count);
-                    myCountryData.baseStats.money -= cost;
-
-                    this.count += count;
-                    //this.cost = cost;
-                }
-            }
-
-        });
-    }
-
-    //Build logic for Science buildings.
-    for (var i = 0; i < buildings.Science.structures.length; i++) {
-
-        angular.extend(buildings.Science.structures[i], {
-
-            build: function (count) {
-                var cost = this.cost * count;
-
-                if ((myCountryData.baseStats.money > cost) && this.isUnlocked) {
-
-                    myCountryData.baseStats[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
-                    myCountryData.baseStats.totalJobs += (this.jobsIncreased * count);
-                    myCountryData.baseStats.money -= cost;
-
-                    this.count += count;
-                    //this.cost = cost;
-                }
-            }
-
-        });
-    }
-
-    //Build logic for Housing buildings.
-    for (var i = 0; i < buildings.Housing.structures.length; i++) {
-
-        angular.extend(buildings.Housing.structures[i], {
-
-            build: function (count) {
-                var cost = this.cost * count;
-
-                if ((myCountryData.baseStats.money > cost) && this.isUnlocked) {
-
-                    myCountryData.baseStats[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
-                    myCountryData.baseStats.totalJobs += (this.jobsIncreased * count);
-                    myCountryData.baseStats.money -= cost;
-
-                    this.count += count;
-                    //this.cost = cost;
-                }
-            }
-
-        });
-    }
-
-    //Build logic for Housing buildings.
-    for (var i = 0; i < buildings.Food.structures.length; i++) {
-
-        angular.extend(buildings.Food.structures[i], {
-
-            build: function (count) {
-                var cost = this.cost * count;
-
-                if ((myCountryData.baseStats.money > cost) && this.isUnlocked) {
-
-                    myCountryData.baseStats[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
-                    myCountryData.baseStats.totalJobs += (this.jobsIncreased * count);
-                    myCountryData.baseStats.money -= cost;
-
-                    this.count += count;
-                    //this.cost = cost;
-                }
-            }
-
-        });
-    }
-
-    //Build logic for Housing buildings.
-    for (var i = 0; i < buildings.Military.structures.length; i++) {
-
-        angular.extend(buildings.Military.structures[i], {
-
-            build: function (count) {
-                var cost = this.cost * count;
-
-                if ((myCountryData.baseStats.money > cost) && this.isUnlocked) {
-
-                    myCountryData.baseStats[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
-                    myCountryData.baseStats.totalJobs += (this.jobsIncreased * count);
-                    myCountryData.baseStats.money -= cost;
-
-                    this.count += count;
-                    //this.cost = cost;
-                }
-            }
-
-        });
-    }
-
-
-
-    return buildings;
-
-});
+};

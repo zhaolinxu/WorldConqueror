@@ -11,7 +11,13 @@ wciApp.factory('myCountryData', function () {
         descriptions: {}
     };
 
-    setInitialStats(myCountry);
+    if (!localStorage['baseStats']) {
+        setInitialStats(myCountry);
+    }
+    else {
+        //JSON.parse(atob(localStorage['wci_gameData']));
+        myCountry.baseStats = JSON.parse(localStorage['baseStats']);
+    }
 
     myCountry.dependentStats = {
         actualGrowthRate: function () {
@@ -149,7 +155,10 @@ wciApp.factory('myCountryData', function () {
     myCountry.functions.resetStats = function () {
         setInitialStats(myCountry);
     };
-
+    myCountry.functions.saveData = function () {
+        //btoa(JSON.stringify(game.data));
+        localStorage['baseStats'] = JSON.stringify(myCountry.baseStats);
+    };
 
     return myCountry;
 });
@@ -170,9 +179,9 @@ var setInitialStats = function (myCountry) {
         baseGrowthRate: 1, //Based on the size of the country (lower size = lower growth rate)
         baseMortalityRate: 6, //Based on the size (lower size = higher mortality rate)
         //Consumption
-        perCapitaConsumption: 50, // 1 person's monthly consumption = 3 Mcal * 30 ~ 100 Mcal. (3Mcal is based on the nation's development level. http://www.who.int/nutrition/topics/3_foodconsumption/en/)
-        totalFood: 8000, // In megaCalorie = 1000*kcal... 
-        basefoodGrowth: 1000,
+        perCapitaConsumption: 5, // 1 person's monthly consumption = 3 Mcal * 30 ~ 100 Mcal. (3Mcal is based on the nation's development level. http://www.who.int/nutrition/topics/3_foodconsumption/en/)
+        totalFood: 800, // In megaCalorie = 1000*kcal... 
+        basefoodGrowth: 100,
         hunger: 0,
         //Economics
         taxRate: 40, //In percentage... high tax affects happiness. 

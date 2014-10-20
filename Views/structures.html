@@ -12,20 +12,24 @@
                         <div class="panel panel-primary panelLocked" ng-repeat="structure in building.structures"
                              ng-class="{'clickable clickableArea panelUnlocked':structure.isUnlocked}">
                             <div class="panel-body">
-                                <span class="fa fa-info-circle" tooltip="{{structure.description}}"></span>
-                                {{structure.name}} - Count: {{structure.count}} || Cost: {{structure.displayCost | niceNumber}}
-                                <!--TODO: Remove some padding around the icon-->
-                                <span ng-show="!structure.unlocked()" class="fa fa-lock pull-left"></span>
-                                <div class="pull-right clickableArea" ng-show="structure.isUnlocked">
-                                    <button class="btn btn-primary" ng-click="structure.build(1)">
-                                        x1
-                                    </button>
-                                    <button class="btn btn-primary" ng-click="structure.build(10)" ng-mouseover="structure.updateCost(10)" ng-mouseleave="structure.updateCost(1)">
-                                        x10
-                                    </button>
-                                    <button class="btn btn-primary" ng-click="structure.build(100)" ng-mouseover="structure.updateCost(100)" ng-mouseleave="structure.updateCost(1)">
-                                        x100
-                                    </button>
+                                <div class="col-md-6">
+                                    <span class="fa fa-info-circle" tooltip="{{structure.description}}"></span>
+                                    {{structure.name}} - Count: {{structure.count}} <br />
+                                    <b>Cost: {{structure.displayCost | niceNumber}}</b>
+                                    <!--TODO: Remove some padding around the icon-->
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="pull-right clickableArea" ng-show="structure.isUnlocked">
+                                        <button class="btn btn-primary" ng-click="structure.build(1)">
+                                            x1
+                                        </button>
+                                        <button class="btn btn-primary" ng-click="structure.build(10)" ng-mouseover="structure.updateCost(10)" ng-mouseleave="structure.updateCost(1)">
+                                            x10
+                                        </button>
+                                        <button class="btn btn-primary" ng-click="structure.build(100)" ng-mouseover="structure.updateCost(100)" ng-mouseleave="structure.updateCost(1)">
+                                            x100
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

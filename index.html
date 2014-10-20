@@ -115,9 +115,9 @@
                                             <i class="fa fa-users" tooltip="Population"></i>
                                         </span>
                                         <span>
-                                            {{game.myCountry.baseStats.population | number: 0}}
+                                            {{game.myCountry.baseStats.population | number: 0 | niceNumber }}
                                             (<span class="bold" ng-class="game.myCountry.dependentStats.populationGrowth() > 0 ? 'text-success' : 'text-danger'">
-                                                {{game.myCountry.dependentStats.populationGrowth() | number: 0}}
+                                                {{game.myCountry.dependentStats.populationGrowth() | number: 0 | niceNumber }}
                                             </span>)
                                         </span>
                                     </div>
@@ -127,9 +127,9 @@
                                             <i class="fa fa-money" tooltip="Money"></i>
                                         </span>
                                         <span>
-                                            {{game.myCountry.baseStats.money | number: 0}}
+                                            {{game.myCountry.baseStats.money | number:0 | niceNumber}}
                                             (<span class="bold" ng-class="game.myCountry.dependentStats.moneyGrowth() > 0 ? 'text-success': 'text-danger'">
-                                                {{game.myCountry.dependentStats.moneyGrowth() | number: 0}}
+                                                {{game.myCountry.dependentStats.moneyGrowth() | number: 0 | niceNumber}}
                                             </span>)
                                         </span>
                                     </div>
@@ -161,9 +161,9 @@
                                                 <i class="glyphicon glyphicon-cutlery"></i> Food:
                                             </span>
                                             <span>
-                                                {{game.myCountry.baseStats.totalFood | number: 0}}
+                                                {{game.myCountry.baseStats.totalFood | number: 0 | niceNumber}}
                                                 (<span class="bold" ng-class="game.myCountry.dependentStats.foodFlow() > 0 ? 'text-success' : 'text-danger'">
-                                                    {{game.myCountry.dependentStats.foodFlow() | number: 0}}
+                                                    {{game.myCountry.dependentStats.foodFlow() | number: 0 | niceNumber}}
                                                 </span>)
                                             </span>
                                         </div>
@@ -182,7 +182,7 @@
                                                 <i class="fa fa-briefcase"></i> Jobs:
                                             </span>
                                             <span>
-                                                {{game.myCountry.baseStats.totalJobs}}
+                                                {{game.myCountry.baseStats.totalJobs | niceNumber}}
                                             </span>
                                         </div>
                                         <div id="happiness">
@@ -200,7 +200,7 @@
                                                 <i class="fa fa-home"></i> Housing:
                                             </span>
                                             <span>
-                                                {{game.myCountry.baseStats.housingCapacity}}
+                                                {{game.myCountry.baseStats.housingCapacity | niceNumber}}
                                             </span>
                                         </div>
                                         <div id="happiness">

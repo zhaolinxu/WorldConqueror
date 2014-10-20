@@ -237,6 +237,7 @@ var setInitialBuildingData = function (buildings) {
                     description: 'This building unlocks researches and gives research points.',
                     count: 0,
                     cost: 100,
+                    displayCost: 500,
                     costMultiplier: 9,
                     isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',

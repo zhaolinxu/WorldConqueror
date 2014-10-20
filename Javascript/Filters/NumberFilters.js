@@ -12,6 +12,8 @@ wciApp.filter('roundInt', function (input) {
 wciApp.filter('niceNumber', ['$filter', function ($filter) {
 
     return function (number) {
+
+        var number = number.toString().replace(',', '');
         var absVal = Math.abs(number);
 
         if (absVal >= Math.pow(10, 15)) {

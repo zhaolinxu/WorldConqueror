@@ -1,1 +1,4 @@
 ﻿Convert the speed buttons to icon buttons
+
+
+Ask whether users prefer cost updated on button hover and have 3 types of build buttons together. Or have a setting at top which sets the global build amount.

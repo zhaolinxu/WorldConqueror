@@ -32,6 +32,10 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     this.count += count;
                     //this.cost = cost;
                 }
+            },
+            updateCost: function (count) {
+                var cost = this.cost * count;
+                this.displayCost = cost;
             }
 
         });
@@ -150,6 +154,7 @@ var setInitialBuildingData = function (buildings) {
                     description: 'This building adds 2 jobs per structure.',
                     count: 8,
                     cost: 500,
+                    displayCost: 500,
                     costMultiplier: 1,
                     isUnlocked: true,
                     statAffected: 'jobGdpMultiplier',
@@ -161,7 +166,8 @@ var setInitialBuildingData = function (buildings) {
                     name: 'Port',
                     description: 'This building adds 50 jobs per structure.',
                     count: 0,
-                    cost: 50000,
+                    cost: 50004,
+                    displayCost: 50004,
                     costMultiplier: 1,
                     isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
@@ -174,6 +180,7 @@ var setInitialBuildingData = function (buildings) {
                     description: 'This building adds 1000 jobs per structure and also increases the income from every job.',
                     count: 0,
                     cost: 1000000,
+                    displayCost: 1000000,
                     costMultiplier: 1,
                     isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
@@ -186,6 +193,7 @@ var setInitialBuildingData = function (buildings) {
                     description: 'This building adds 100,000 jobs per structure and also increases the income from every job.',
                     count: 0,
                     cost: 100000000,
+                    displayCost: 100000000,
                     costMultiplier: 1,
                     isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
@@ -198,6 +206,7 @@ var setInitialBuildingData = function (buildings) {
                     description: 'This building adds 100,000 jobs per structure and also increases the income from every job.',
                     count: 0,
                     cost: 650000000,
+                    displayCost: 650000000,
                     costMultiplier: 1,
                     isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
@@ -210,6 +219,7 @@ var setInitialBuildingData = function (buildings) {
                     description: 'This building adds 100,000 jobs per structure and also increases the income from every job.',
                     count: 0,
                     cost: 10000000000,
+                    displayCost: 10000000000,
                     costMultiplier: 1,
                     isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',

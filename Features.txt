@@ -58,6 +58,7 @@ Version 1.0.0 Features
 11) Add Inflation
 12) Government
 13) Interactive map
+14) Add options for different numbering schemes.
 
 Version 1.1.0 Features
 1) Add growth from campsite to country.

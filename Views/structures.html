@@ -1,4 +1,4 @@
-﻿<div id="Buildings" ng-controller="StructureController as structureCtrl" ng-cloak>
+﻿<div id="Buildings">
     <h3>
         <span class="glyphicon glyphicon-home"></span> Buildings
 
@@ -8,29 +8,31 @@
         <tabset>
             <tab ng-repeat="building in structureCtrl.buildings.baseStats" heading="{{building.name}}" class="clickable margin-bottom-20 bg-success">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div id="build" class="col-md-6">
                         <div class="panel panel-primary panelLocked" ng-repeat="structure in building.structures"
                              ng-class="{'clickable clickableArea panelUnlocked':structure.isUnlocked}">
                             <div class="panel-body">
                                 <span class="fa fa-info-circle" tooltip="{{structure.description}}"></span>
-                                {{structure.name}} - Count: {{structure.count}} || Cost: {{structure.cost}}
+                                {{structure.name}} - Count: {{structure.count}} || Cost: {{structure.displayCost | niceNumber}}
                                 <!--TODO: Remove some padding around the icon-->
                                 <span ng-show="!structure.unlocked()" class="fa fa-lock pull-left"></span>
                                 <div class="pull-right clickableArea" ng-show="structure.isUnlocked">
                                     <button class="btn btn-primary" ng-click="structure.build(1)">
                                         x1
                                     </button>
-                                    <button class="btn btn-primary" ng-click="structure.build(10)">
+                                    <button class="btn btn-primary" ng-click="structure.build(10)" ng-mouseover="structure.updateCost(10)" ng-mouseleave="structure.updateCost(1)">
                                         x10
                                     </button>
-                                    <button class="btn btn-primary" ng-click="structure.build(100)">
+                                    <button class="btn btn-primary" ng-click="structure.build(100)" ng-mouseover="structure.updateCost(100)" ng-mouseleave="structure.updateCost(1)">
                                         x100
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div id="Info" class="col-md-6">
 
+                    </div>
                 </div>
             </tab>
         </tabset>

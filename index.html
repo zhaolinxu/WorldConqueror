@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="Libraries/fonts/metroSysIcons.woff">
     <link rel="stylesheet" href="Libraries/font-awesome.min.css">-->
 </head>
-<body ng-controller="GameController as game">
+<body ng-controller="GameController as game" ng-cloak>
     <div class="main_overlay">
         <div class="container">
             <div class="row" ng-show="game.data.init.isFirstTime != true">
@@ -36,13 +36,13 @@
                         <ul class="nav navbar-nav">
                             <li class="menu-divider"></li>
                             <!--<li>
-                                <a href="#/ia">
-                                    <i class="glyphicon glyphicon-flag"></i>
-                                    <span class="hidden-sm hidden-xs">
-                                        Governance
-                                    </span>
-                                </a>
-                            </li>-->
+                        <a href="#/ia">
+                            <i class="glyphicon glyphicon-flag"></i>
+                            <span class="hidden-sm hidden-xs">
+                                Governance
+                            </span>
+                        </a>
+                    </li>-->
                             <li class="menu-divider"></li>
                             <li>
                                 <a href="#/structure">
@@ -219,7 +219,6 @@
                     <div id="views" ng-view>
                     </div>
                 </div>
-
 
             </div>
 

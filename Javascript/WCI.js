@@ -26,7 +26,7 @@ wciApp.config(function ($routeProvider, $locationProvider) {
     {
         templateUrl: 'Views/structures.html',
         controller: 'StructureController',
-        controllerAs: 'st'
+        controllerAs: 'structureCtrl'
     })
     .when('/military',
     {
@@ -41,7 +41,7 @@ wciApp.config(function ($routeProvider, $locationProvider) {
         controllerAs: 're'
     })
     .otherwise({
-        redirectTo: '/ia'
+        redirectTo: '/structure'
     });
     
 });

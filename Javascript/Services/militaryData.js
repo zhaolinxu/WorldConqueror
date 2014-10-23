@@ -60,13 +60,13 @@ var setInitialUnitsData = function (units) {
             {
                 name: 'Infantry',
                 description: 'desc',
-                cost: 1,
-                count: 1,
-                upkeep: 1,
+                cost: 10,
+                count: 0,
+                upkeep: 10,
 
-                attack: 1,
-                defense: 1,
-                siege: 0,
+                attack: 10,
+                defense: 5,
+                siege: 0.1,
                 isUnlocked: false
             },
             {
@@ -117,40 +117,154 @@ var setInitialUnitsData = function (units) {
                 siege: 0,
                 isUnlocked: false
             },
+        ],
+        navy: [
+            {
+                name: 'Attack ship',
+                description: 'desc',
+                cost: 1,
+                count: 1,
+                upkeep: 1,
+
+                attack: 1,
+                defense: 1,
+                siege: 0,
+                isUnlocked: true
+            },
+            {
+                name: 'Submarine',
+                description: 'desc',
+                cost: 1,
+                count: 1,
+                upkeep: 1,
+
+                attack: 1,
+                defense: 1,
+                siege: 0,
+                isUnlocked: false
+            },
+            {
+                name: 'Destroyer',
+                description: 'desc',
+                cost: 1,
+                count: 1,
+                upkeep: 1,
+
+                attack: 1,
+                defense: 1,
+                siege: 0,
+                isUnlocked: false
+            },
+            {
+                name: 'Battlership',
+                description: 'desc',
+                cost: 1,
+                count: 1,
+                upkeep: 1,
+
+                attack: 1,
+                defense: 1,
+                siege: 0,
+                isUnlocked: false
+            },
+            {
+                name: 'Cruiser',
+                description: 'desc',
+                cost: 1,
+                count: 1,
+                upkeep: 1,
+
+                attack: 1,
+                defense: 1,
+                siege: 0,
+                isUnlocked: false
+            },
+            {
+                name: 'Aircraft Carrier',
+                description: 'desc',
+                cost: 1,
+                count: 1,
+                upkeep: 1,
+
+                attack: 1,
+                defense: 1,
+                siege: 0,
+                isUnlocked: false
+            },
+        ],
+        airForce: [
+            {
+                name: 'Fighter',
+                description: 'desc',
+                cost: 1,
+                count: 1,
+                upkeep: 1,
+
+                attack: 1,
+                defense: 1,
+                siege: 0,
+                isUnlocked: true
+            },
+            {
+                name: 'Drone',
+                description: 'desc',
+                cost: 1,
+                count: 1,
+                upkeep: 1,
+
+                attack: 1,
+                defense: 1,
+                siege: 0,
+                isUnlocked: false
+            },
+            {
+                name: 'Helicopter',
+                description: 'desc',
+                cost: 1,
+                count: 1,
+                upkeep: 1,
+
+                attack: 1,
+                defense: 1,
+                siege: 0,
+                isUnlocked: false
+            },
+            {
+                name: 'Gunship',
+                description: 'desc',
+                cost: 1,
+                count: 1,
+                upkeep: 1,
+
+                attack: 1,
+                defense: 1,
+                siege: 0,
+                isUnlocked: false
+            },
+            {
+                name: 'Bomber',
+                description: 'desc',
+                cost: 1,
+                count: 1,
+                upkeep: 1,
+
+                attack: 1,
+                defense: 1,
+                siege: 0,
+                isUnlocked: false
+            },
+            {
+                name: 'Air force One.',
+                description: 'desc',
+                cost: 1,
+                count: 1,
+                upkeep: 1,
+
+                attack: 1,
+                defense: 1,
+                siege: 0,
+                isUnlocked: false
+            },
         ]
     }
 };
-
-/*
- * Army:
- * 
- * MIlitia,
- * Artillery,
- * Infantry,
- * Anti-Air gun,
- * Landship,
- * Tank,
- * 
- * 
- * 
- * 
- * Navy:
- * 
- * Submarine,
- * destroyer,
- * Attack ship,
- * Battlership,
- * Cruiser,
- * Aircraft Carrier,
- * 
- * 
- * 
- * 
- * Air: 
- * Figher,
- * Bomber,
- * Gunship,
- * Drone,
- * Helicopter
- * 
- */

@@ -5,7 +5,7 @@ wciApp.factory('researchData', function (myCountryData, buildingsData) {
     var researches = {
         baseStats: {},
         functions: {},
-        
+
     };
 
     if (!localStorage['researchData']) {
@@ -14,7 +14,7 @@ wciApp.factory('researchData', function (myCountryData, buildingsData) {
     else {
         researches.baseStats = JSON.parse(localStorage['researchData']);
     }
-    
+
     for (var i = 0; i < researches.baseStats.tech; i++) {
         angular.extend(researches.baseStats.tech[i], {
             research: function () {
@@ -39,13 +39,26 @@ wciApp.factory('researchData', function (myCountryData, buildingsData) {
 var setInitialResearchData = function (researches) {
     researches.baseStats.tech = [
        {
-            name: "Tech1",
-            cost: 1,
-            isUnlocked: true,
-            isCompleted: false,
-            researchIcon: 'fa-flask',
-            statAffected: ''
-        }
+           name: "Tech1",
+           cost: 1,
+           isUnlocked: true,
+           isCompleted: false,
+           researchIcon: 'fa-flask',
+           countryStat: '',
+           countryStatAffect: '',
+           structureType: '',
+           building: '',
+           buildingStat: '',
+           buildingStatAffect: '',
+           militaryType: '',
+           unit: '',
+           unitStat: '',
+           unitStatAffect: '',
+           researchType: '',
+           tech: '',
+           techStat: '',
+           tectStatAffect: ''
+       }
     ]
 };
 

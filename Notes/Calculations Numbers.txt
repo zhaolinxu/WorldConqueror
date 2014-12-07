@@ -1,31 +1,4 @@
-﻿Value of one house:
-
-Value of one GCal food:
-
-Value of one Job: 
-
-
-
-Use these values to determine what a building should cost and what should be its multiplier
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-================================================================================================
+﻿================================================================================================
 UNit numbers:
 
 Land

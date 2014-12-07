@@ -70,3 +70,9 @@
 .bg-color-green {
     background-color: green;
 }
+
+
+/*Custom Controls*/
+.big-banner {
+    padding:15px;
+}

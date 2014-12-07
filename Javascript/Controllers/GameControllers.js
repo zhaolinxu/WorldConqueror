@@ -180,4 +180,3 @@ wciApp.controller('ResearchController', function () {
 wciApp.controller('AchievementController', function () {
 
 });
-

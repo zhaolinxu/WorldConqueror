@@ -85,7 +85,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
         });
     }
 
-    //Build logic for Housing buildings.
+    //Build logic for Food buildings.
     for (var i = 0; i < buildings.baseStats.Food.structures.length; i++) {
 
         angular.extend(buildings.baseStats.Food.structures[i], {
@@ -107,7 +107,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
         });
     }
 
-    //Build logic for Housing buildings.
+    //Build logic for Military buildings.
     for (var i = 0; i < buildings.baseStats.Military.structures.length; i++) {
 
         angular.extend(buildings.baseStats.Military.structures[i], {
@@ -153,79 +153,91 @@ var setInitialBuildingData = function (buildings) {
                     name: 'Market',
                     description: 'This building adds 2 jobs per structure.',
                     count: 8,
+                    upkeep: 500,
                     cost: 500,
                     displayCost: 500,
                     costMultiplier: 1,
+
                     isUnlocked: true,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1,
                     countMultiplier: 1,
-                    jobsIncreased: 2
-                },
-                {
-                    name: 'Port',
-                    description: 'This building adds 50 jobs per structure.',
-                    count: 0,
-                    cost: 50004,
-                    displayCost: 50004,
-                    costMultiplier: 1,
-                    isUnlocked: false,
-                    statAffected: 'jobGdpMultiplier',
-                    statMultiplier: 1,
-                    countMultiplier: 1,
-                    jobsIncreased: 50
+                    jobsIncreased: 10
                 },
                 {
                     name: 'Bank',
-                    description: 'This building adds 1000 jobs per structure and also increases the income from every job.',
+                    description: 'This building adds 50 jobs per structure.',
                     count: 0,
-                    cost: 1000000,
-                    displayCost: 1000000,
+                    upkeep: 25000,
+                    cost: 50000,
+                    displayCost: 50000,
                     costMultiplier: 1,
+
                     isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
-                    statMultiplier: 1.001,
-                    countMultiplier: 1.001,
-                    jobsIncreased: 1000
+                    statMultiplier: 1.00001, //20,000 power = 1.221
+                    countMultiplier: 1,
+                    jobsIncreased: 500
+                },
+                {
+                    name: 'Port',
+                    description: 'This building adds 1000 jobs per structure and also increases the income from every job.',
+                    count: 0,
+                    upkeep: 250000,
+                    cost: 1000000, //1M
+                    displayCost: 1000000,
+                    costMultiplier: 1,
+
+                    isUnlocked: false,
+                    statAffected: 'jobGdpMultiplier',
+                    statMultiplier: 1.003, //100 power = 1.349
+                    countMultiplier: 1,
+                    jobsIncreased: 10000 //10k
                 },
                 {
                     name: 'Industry',
                     description: 'This building adds 100,000 jobs per structure and also increases the income from every job.',
                     count: 0,
-                    cost: 100000000,
-                    displayCost: 100000000,
+                    upkeep: 1000000, //1M
+                    cost: 100000000, //100M
+                    displayCost: 100000000, 
                     costMultiplier: 1,
+
                     isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
-                    statMultiplier: 1.005,
-                    countMultiplier: 1.005,
-                    jobsIncreased: 100000
+                    statMultiplier: 1.04, //10 power = 1.480
+                    countMultiplier: 1,
+                    jobsIncreased: 50000 //50k
                 },
                 {
                     name: 'Services',
                     description: 'This building adds 100,000 jobs per structure and also increases the income from every job.',
                     count: 0,
-                    cost: 650000000,
-                    displayCost: 650000000,
+                    upkeep: 1000000, //1M
+                    cost: 500000000, //500M
+                    displayCost: 500000000, 
                     costMultiplier: 1,
+
                     isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
-                    statMultiplier: 1.1,
-                    countMultiplier: 1.1,
-                    jobsIncreased: 100000
+                    statMultiplier: 1.2, //2 power = 1.44
+                    countMultiplier: 1,
+                    jobsIncreased: 1000000 //1M
                 },
                 {
                     name: 'Stock Exchange',
                     description: 'This building adds 100,000 jobs per structure and also increases the income from every job.',
                     count: 0,
-                    cost: 10000000000,
+                    upkeep: 10000000, //10M
+                    cost: 10000000000, //10B
                     displayCost: 10000000000,
                     costMultiplier: 1,
+
                     isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
-                    statMultiplier: 1.5,
-                    countMultiplier: 1.5,
-                    jobsIncreased: 1000000
+                    statMultiplier: 3,
+                    countMultiplier: 1,
+                    jobsIncreased: 100000
                 }
             ]
         },

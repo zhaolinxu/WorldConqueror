@@ -83,3 +83,15 @@ a {
 	z-index:1002;
 	overflow: auto;
 }
+
+/*Governance Screen*/
+.law-panel {
+    /*border-width: 1px;
+    border-radius: 2.5px;
+    border-style: solid;*/
+}
+
+.law-panel:hover {
+    background-color: #888;
+    color: white;
+}

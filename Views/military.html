@@ -15,7 +15,7 @@
                                 <span class="fa fa-info-circle" tooltip="{{unit.description}}"></span>
                                 {{unit.name}} - Count: {{unit.count}} || Cost: {{unit.cost}}
                                 <!--TODO: Remove some padding around the icon-->
-                                <span ng-show="!unit.unlocked" class="fa fa-lock pull-left"></span>
+                                <span ng-show="!unit.isUnlocked" class="fa fa-lock pull-left"></span>
                                 <div class="pull-right clickableArea" ng-show="unit.isUnlocked">
                                     <button class="btn btn-primary" ng-click="unit.hire(1)">
                                         x1
@@ -42,7 +42,7 @@
                                 <span class="fa fa-info-circle" tooltip="{{unit.description}}"></span>
                                 {{unit.name}} - Count: {{unit.count}} || Cost: {{unit.cost}}
                                 <!--TODO: Remove some padding around the icon-->
-                                <span ng-show="!unit.unlocked" class="fa fa-lock pull-left"></span>
+                                <span ng-show="!unit.isUnlocked" class="fa fa-lock pull-left"></span>
                                 <div class="pull-right clickableArea" ng-show="unit.isUnlocked">
                                     <button class="btn btn-primary" ng-click="unit.hire(1)">
                                         x1
@@ -69,7 +69,7 @@
                                 <span class="fa fa-info-circle" tooltip="{{unit.description}}"></span>
                                 {{unit.name}} - Count: {{unit.count}} || Cost: {{unit.cost}}
                                 <!--TODO: Remove some padding around the icon-->
-                                <span ng-show="!unit.unlocked" class="fa fa-lock pull-left"></span>
+                                <span ng-show="!unit.isUnlocked" class="fa fa-lock pull-left"></span>
                                 <div class="pull-right clickableArea" ng-show="unit.isUnlocked">
                                     <button class="btn btn-primary" ng-click="unit.hire(1)">
                                         x1

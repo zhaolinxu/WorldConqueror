@@ -76,3 +76,10 @@
 .big-banner {
     padding:15px;
 }
+
+/*Borders*/
+.all-border {
+    border-width: 1px;
+    border-radius: 2.5px;
+    border-style: solid;
+}

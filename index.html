@@ -108,6 +108,16 @@
                     <div id="Common Header">
                         <div class="row well font-11pt">
 
+                            <div class="col-md-12">
+                                <span class="fa fa-clock-o"></span>
+                                <span class="bold">
+                                    {{game.myCountry.baseStats.timeYears}} Year,
+                                    {{game.myCountry.baseStats.timeMonths}} Month, 
+                                    {{game.myCountry.baseStats.timeDays}} Days,
+                                    {{game.myCountry.baseStats.timeHours}} Hours
+                                </span>
+                            </div>
+
                             <div id="Main Stats" class="col-sm-4">
                                 <div class="row">
                                     <div id="population" class="col-sm-6">
@@ -137,18 +147,27 @@
                                 </div>
 
                                 <div class="row">
-                                    <div id="happiness" class="col-sm-6">
+                                    <div id="happiness" class="col-sm-6" ng-class="game.myCountry.baseStats.happiness > 75 ? 'text-success' : game.myCountry.baseStats.happiness > 50 ? 'text-warning' : 'text-danger'">
                                         <span>
-                                            <i class="fa bold" ng-class="game.myCountry.baseStats.happiness > 75 ? 'fa-smile-o text-success' : game.myCountry.baseStats.happiness > 50 ? 'fa-meh-o text-warning' : 'fa-frown-o text-danger'"
+                                            <i class="fa bold" ng-class="game.myCountry.baseStats.happiness > 75 ? 'fa-smile-o' : game.myCountry.baseStats.happiness > 50 ? 'fa-meh-o' : 'fa-frown-o'"
                                                tooltip="Happiness"></i>
                                         </span>
-                                        <span class="bold" ng-class="game.myCountry.baseStats.happiness > 75 ? 'text-success' : game.myCountry.baseStats.happiness > 50 ? 'text-warning' : 'text-danger'">
+                                        <span class="bold">
                                             {{game.myCountry.baseStats.happiness}}
                                         </span>
                                     </div>
 
-                                    <div id="size" class="col-sm-6">
+                                    <!--<div id="size" class="col-sm-6">
                                         N/A
+                                    </div>-->
+
+                                    <div id="stability" class="col-sm-6" ng-class="game.myCountry.baseStats.stability > 66 ? 'text-success' : game.myCountry.baseStats.stability > 33 ? 'text-warning' : 'text-danger'">
+                                        <span>
+                                            <i class="fa bold fa-anchor" tooltip="Stability"></i>
+                                        </span>
+                                        <span class="bold">
+                                            {{game.myCountry.baseStats.stability}}
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -214,6 +233,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                     <div id="views" ng-view>

@@ -81,6 +81,53 @@ wciApp.factory('myCountryData', function () {
 
 
     //Timer Methods
+    myCountry.functions.getGameTime = function () {
+
+        var currentStabilityIndex = myCountry.baseStats.currentStabilityIndex;
+        var previousStabilityIndex = myCountry.baseStats.previousStabilityIndex;
+        
+        //Hour
+        myCountry.baseStats.timeHours++;
+        
+        //Day
+        if (myCountry.baseStats.timeHours > 23) {
+            myCountry.baseStats.timeHours = 0;
+            myCountry.baseStats.timeDays++;
+
+            //Month
+            if (myCountry.baseStats.timeDays > 30) {
+                myCountry.baseStats.timeDays = 1;
+                myCountry.baseStats.timeMonths++;
+
+                //This checks and see if current and previous were either both +ve or both -ve.
+                if (((currentStabilityIndex >= 0) && (previousStabilityIndex >= 0)) ||
+                    ((currentStabilityIndex < 0) && (previousStabilityIndex < 0)))
+                {
+                    myCountry.baseStats.stability += currentStabilityIndex * myCountry.baseStats.turnsAtCurrentState;
+                    myCountry.baseStats.turnsAtCurrentState++;
+                    
+                    if (myCountry.baseStats.stability > 100)
+                    {
+                        myCountry.baseStats.stability = 100;
+                    }
+                    else if (myCountry.baseStats.stability < 0)
+                    {
+                        myCountry.baseStats.stability = 0;
+                    }
+                }
+
+                previousStabilityIndex = currentStabilityIndex;
+
+                //Year
+                if (myCountry.baseStats.timeMonths > 13) {
+                    myCountry.baseStats.timeMonths = 1;
+                    myCountry.baseStats.timeYears++;
+                }
+            }
+        }
+
+    };
+
     myCountry.functions.getNewDemographics = function () {
 
         myCountry.baseStats.population += myCountry.dependentStats.populationGrowth();
@@ -92,11 +139,9 @@ wciApp.factory('myCountryData', function () {
         var hungerHappinessFactor = 0;
         var homeless = myCountry.dependentStats.homelessness();
         var homelessHappinessFactor = 0;
+        var stability = myCountry.baseStats.stability;
 
-
-
-        myCountry.baseStats.happiness = Math.round(100 - (unemployment / 3) - (hunger / 3) - (homeless / 3));
-
+        myCountry.baseStats.happiness = Math.round(100 - (unemployment / 4) - (hunger / 4) - (homeless / 4) - ((100-stability)/4));
 
         //Set the size.
         if (myCountry.dependentStats.gdp() <= 100000) {
@@ -130,7 +175,6 @@ wciApp.factory('myCountryData', function () {
             myCountry.baseStats.happiness = 1;
         }
 
-
     };
     myCountry.functions.getNewConsumption = function () {
 
@@ -151,7 +195,6 @@ wciApp.factory('myCountryData', function () {
         myCountry.baseStats.money += myCountry.dependentStats.moneyGrowth();
     };
 
-
     myCountry.functions.resetStats = function () {
         setInitialStats(myCountry);
     };
@@ -168,16 +211,23 @@ wciApp.factory('myCountryData', function () {
 var setInitialStats = function (myCountry) {
     myCountry.baseStats = {
         //One Month is signfied as one second
-        name: '',
-        title: '',
-        happiness: 100, //% calculated based on hunger(fg-fc), homelessness, unemployment.. etc.
-
+        name: 'World',
+        title: 'Conqueror',
+        timeYears: 0,
+        timeMonths: 0,
+        timeDays: 0,
+        timeHours: 0,
+        currentStabilityIndex: 1, //This is used to determine whether stability will grow or decrease this turn. +ve means growth in stability, -ve means decrease. This is set by various policies etc.
+        previousStabilityIndex: 1, //Storing previous stability index to determine if stability has gone down or not.
+        turnsAtCurrentState: 1, //This is the number of months current state has been present (stable or unstable), which determines the exponential factor for the stability
         //Demographics
+        happiness: 100, //% calculated based on hunger(fg-fc), homelessness, unemployment, stability.. etc.
+        stability: 25, //% calculated based on warring history, friendly laws.
         size: 1,
-        //isCountry: false, //Use this when the feature is built to start from a campsite and grow upto a city and then ask for independence.
         population: 10,
         baseGrowthRate: 1, //Based on the size of the country (lower size = lower growth rate)
         baseMortalityRate: 6, //Based on the size (lower size = higher mortality rate)
+        housingCapacity: 16,
         //Consumption
         perCapitaConsumption: 5, // 1 person's monthly consumption = 3 Mcal * 30 ~ 100 Mcal. (3Mcal is based on the nation's development level. http://www.who.int/nutrition/topics/3_foodconsumption/en/)
         totalFood: 800, // In megaCalorie = 1000*kcal... 
@@ -188,8 +238,9 @@ var setInitialStats = function (myCountry) {
         avgSalary: 10, //Based on size, gdp, job types.
         money: 100, //Earned from Taxes and economic factors.
         totalJobs: 16,
-        jobGdpMultiplier: 100, //This is how jobs effect the gdp.
-        //TODO: Move this to Demographics
-        housingCapacity: 16
+        jobGdpMultiplier: 100 //This is how jobs effect the gdp.
+
+
+        //isCountry: false, //Use this when the feature is built to start from a campsite and grow upto a city and then ask for independence.
     };
 };

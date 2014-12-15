@@ -1,24 +1,40 @@
 ﻿<div ng-cloak ng-controller="CountryController as countryCtrl">
-    <h3>
+    <h4>
         <span class="glyphicon glyphicon-flag"></span>
         <span>
-            {{countryCtrl.myCountry.baseStats.name}}
+            Welcome {{countryCtrl.myCountry.baseStats.title}} of {{countryCtrl.myCountry.baseStats.name}}!
         </span>
-
-    </h3>
+    </h4>
     <hr>
     <div class="row">
         <div class="col-sm-12">
-            <div class="bg-primary big-banner">
-                Welcome {{countryCtrl.myCountry.baseStats.title}}!
+            <div class="col-md-6 col-sm-12">
+                <div id="laws" class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <span>
+                                Laws
+                            </span>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        Test
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-12">
-            <div id="advisors">
-
-            </div>
-            <div id="laws">
-
+            <div class="col-md-6 col-sm-12">
+                <div id="advisors" class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <span>
+                                Advisors
+                            </span>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        Test
+                    </div>
+                </div>
             </div>
         </div>
     </div>

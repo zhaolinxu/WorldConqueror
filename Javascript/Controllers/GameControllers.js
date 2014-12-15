@@ -7,6 +7,7 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData, 
     var timerfunction = function () {
 
         //TODO: Put logic here to prompt user of game ending/death due to 0 population.
+        game.myCountry.functions.getGameTime();
         game.myCountry.functions.getNewConsumption();
         game.myCountry.functions.getNewEconomics();
         game.myCountry.functions.getNewDemographics();
@@ -23,12 +24,13 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData, 
 
         game.data = {
             init: {
-                isFirstTime: false
+                isFirstTime: true
             },
             paused: false,
-            speed: 1000
+            speed: 10000
         };
 
+        //TODO: The extend functions don't attach themselves on reset. Fix
         game.myCountry.functions.resetStats();
         game.buildings.functions.resetData();
         localStorage.clear();

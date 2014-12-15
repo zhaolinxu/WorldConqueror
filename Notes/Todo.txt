@@ -1,0 +1,11 @@
+﻿1) Add Country Rule of "Mandatory One Child Policy": This reduces the birth rate to equal death rate.. hence no pop growth.
+
+2) Add Stat Stability, which is dependent on wars, friendly rules. It decreases and increases exponentially.
+
+3) Add Game Time in Years (Add a note next to it saying: "You don't believe in Arcane calculations for the years, for you today is Year 1'")
+
+Add Rule of Mandatory Conception ban.. this reduces birth rate to be 0, hence -ve pop growth.
+
+Add War Room UI
+
+Add Research room.

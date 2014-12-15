@@ -47,7 +47,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
         angular.extend(buildings.baseStats.Science.structures[i], {
 
             build: function (count) {
-                var cost = this.cost * count;
+                var cost = this.cost;
 
                 if ((myCountryData.baseStats.money > cost) && this.isUnlocked) {
 

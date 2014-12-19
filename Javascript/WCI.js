@@ -20,7 +20,7 @@ wciApp.config(function ($routeProvider, $locationProvider) {
     {
         templateUrl: 'Views/internalAffairs.html',
         controller: 'CountryController',
-        controllerAs: 'ia'
+        controllerAs: 'countryCtrl'
     })
     .when('/structure',
     {

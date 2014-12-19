@@ -1,4 +1,4 @@
-﻿<div ng-cloak ng-controller="CountryController as countryCtrl">
+﻿<div id="Internal Affairs">
     <h4>
         <span class="glyphicon glyphicon-flag"></span>
         <span>
@@ -17,24 +17,29 @@
                             </span>
                         </div>
                     </div>
-                    <div class="panel-body clickable clickableArea law-panel" ng-click="enactLaw(1)">
-                        <div class="col-md-12">
-                            <span class="fa fa-users font-color-red"></span>
-                            <span class="bold">
-                                Mandatory One Child Policy
-                            </span>
+                    <div ng-repeat="law in countryCtrl.laws.baseStats">
+                        <div class="panel-body law-panel" ng-click="law.enactLaw()">
+                            <div class="col-md-6">
+                                <span class="fa fa-info-circle" tooltip="{{law.description}}"></span>
+                                <span class="fa" ng-class="law.icon"></span>
+                                <span class="bold">
+                                    {{law.name}} <br />
+                                    <span class="font-9pt">
+                                        Active for: {{law.activeFor | niceTime}}
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="pull-right clickableArea" ng-show="law.isUnlocked">
+                                    <button class="btn" ng-click="law.act()" ng-class="!law.isActive ? 'btn-sucess': ''" ng-disabled="!law.isActive">
+                                        Enact
+                                    </button>
+                                    <button class="btn" ng-click="law.act()" ng-class="law.isActive ? 'btn-danger': ''" ng-disabled="law.isActive">
+                                        Repeal
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="panel-body clickable clickableArea law-panel" ng-click="enactLaw(2)">
-                        <div class="col-md-12">
-                            <span class="fa fa-users font-color-red"></span>
-                            <span class="bold">
-                                No population Growth
-                            </span>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        Test
                     </div>
                 </div>
             </div>

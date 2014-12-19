@@ -111,10 +111,7 @@
                             <div class="col-md-12">
                                 <span class="fa fa-clock-o"></span>
                                 <span class="bold">
-                                    {{game.myCountry.baseStats.timeYears}} Year,
-                                    {{game.myCountry.baseStats.timeMonths}} Month,
-                                    {{game.myCountry.baseStats.timeDays}} Days,
-                                    {{game.myCountry.baseStats.timeHours}} Hours
+                                    {{game.myCountry.baseStats.time | niceTime }}
                                 </span>
                             </div>
 
@@ -310,12 +307,14 @@
         <script src="Javascript/Services/myCountryData.js"></script>
         <script src="Javascript/Services/buildingsData.js"></script>
         <script src="Javascript/Services/militaryData.js"></script>
+        <script src="Javascript/Services/lawsData.js"></script>
+        <script src="Javascript/Services/researchData.js"></script>
 
         <script src="Javascript/Controllers/GameControllers.js"></script>
         <script src="Javascript/Controllers/ChangeLogController.js"></script>
-        <script src="Javascript/Controllers/InternalAffairsController.js"></script>
 
         <script src="Javascript/Filters/NumberFilters.js"></script>
+        <script src="Javascript/Filters/DateTimeFilters.js"></script>
 
 
         <link rel="stylesheet" href="CSS/main.css" />

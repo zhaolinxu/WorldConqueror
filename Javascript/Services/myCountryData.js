@@ -85,45 +85,27 @@ wciApp.factory('myCountryData', function () {
 
         var currentStabilityIndex = myCountry.baseStats.currentStabilityIndex;
         var previousStabilityIndex = myCountry.baseStats.previousStabilityIndex;
-        
+
         //Hour
-        myCountry.baseStats.timeHours++;
-        
-        //Day
-        if (myCountry.baseStats.timeHours > 23) {
-            myCountry.baseStats.timeHours = 0;
-            myCountry.baseStats.timeDays++;
+        myCountry.baseStats.time++;
 
-            //Month
-            if (myCountry.baseStats.timeDays > 30) {
-                myCountry.baseStats.timeDays = 1;
-                myCountry.baseStats.timeMonths++;
+        //Every Month
+        if (myCountry.baseStats.time % 720 == 0) {
+            //This checks and see if current and previous were either both +ve or both -ve.
+            if (((currentStabilityIndex >= 0) && (previousStabilityIndex >= 0)) ||
+                ((currentStabilityIndex < 0) && (previousStabilityIndex < 0))) {
+                myCountry.baseStats.stability += currentStabilityIndex * myCountry.baseStats.turnsAtCurrentState;
+                myCountry.baseStats.turnsAtCurrentState++;
 
-                //This checks and see if current and previous were either both +ve or both -ve.
-                if (((currentStabilityIndex >= 0) && (previousStabilityIndex >= 0)) ||
-                    ((currentStabilityIndex < 0) && (previousStabilityIndex < 0)))
-                {
-                    myCountry.baseStats.stability += currentStabilityIndex * myCountry.baseStats.turnsAtCurrentState;
-                    myCountry.baseStats.turnsAtCurrentState++;
-                    
-                    if (myCountry.baseStats.stability > 100)
-                    {
-                        myCountry.baseStats.stability = 100;
-                    }
-                    else if (myCountry.baseStats.stability < 0)
-                    {
-                        myCountry.baseStats.stability = 0;
-                    }
+                if (myCountry.baseStats.stability > 100) {
+                    myCountry.baseStats.stability = 100;
                 }
-
-                previousStabilityIndex = currentStabilityIndex;
-
-                //Year
-                if (myCountry.baseStats.timeMonths > 13) {
-                    myCountry.baseStats.timeMonths = 1;
-                    myCountry.baseStats.timeYears++;
+                else if (myCountry.baseStats.stability < 0) {
+                    myCountry.baseStats.stability = 0;
                 }
             }
+            previousStabilityIndex = currentStabilityIndex;
+
         }
 
     };
@@ -141,7 +123,7 @@ wciApp.factory('myCountryData', function () {
         var homelessHappinessFactor = 0;
         var stability = myCountry.baseStats.stability;
 
-        myCountry.baseStats.happiness = Math.round(100 - (unemployment / 4) - (hunger / 4) - (homeless / 4) - ((100-stability)/4));
+        myCountry.baseStats.happiness = Math.round(100 - (unemployment / 4) - (hunger / 4) - (homeless / 4) - ((100 - stability) / 4));
 
         //Set the size.
         if (myCountry.dependentStats.gdp() <= 100000) {
@@ -213,10 +195,7 @@ var setInitialStats = function (myCountry) {
         //One Month is signfied as one second
         name: 'World',
         title: 'Conqueror',
-        timeYears: 0,
-        timeMonths: 0,
-        timeDays: 0,
-        timeHours: 0,
+        time: 0, //in hours
         currentStabilityIndex: 1, //This is used to determine whether stability will grow or decrease this turn. +ve means growth in stability, -ve means decrease. This is set by various policies etc.
         previousStabilityIndex: 1, //Storing previous stability index to determine if stability has gone down or not.
         turnsAtCurrentState: 1, //This is the number of months current state has been present (stable or unstable), which determines the exponential factor for the stability

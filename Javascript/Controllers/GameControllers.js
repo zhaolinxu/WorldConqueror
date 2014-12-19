@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-wciApp.controller('GameController', function ($scope, $interval, myCountryData, buildingsData, militaryData) {
+wciApp.controller('GameController', function ($scope, $interval, myCountryData, buildingsData, militaryData, lawsData) {
 
     //#region Private Methods
 
@@ -18,6 +18,8 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData, 
 
         game.myCountry.functions.saveData();
         game.buildings.functions.saveData();
+        game.military.functions.saveData();
+        game.laws.functions.saveData();
         localStorage['gameData'] = JSON.stringify(game.data);
     };
     var resetGame = function () {
@@ -33,6 +35,8 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData, 
         //TODO: The extend functions don't attach themselves on reset. Fix
         game.myCountry.functions.resetStats();
         game.buildings.functions.resetData();
+        game.military.functions.resetData();
+        game.laws.functions.resetData();
         localStorage.clear();
     };
 
@@ -46,6 +50,7 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData, 
     game.myCountry = myCountryData;
     game.buildings = buildingsData;
     game.military = militaryData;
+    game.laws = lawsData;
 
     //Load Game's Settings
     if (!localStorage['gameData']) {
@@ -169,8 +174,9 @@ wciApp.controller('StructureController', function (buildingsData) {
 
 });
 
-wciApp.controller('CountryController', function ($interval, myCountryData) {
+wciApp.controller('CountryController', function ($interval, myCountryData, lawsData) {
     this.myCountry = myCountryData;
+    this.laws = lawsData;
 
     var myCountry = this.myCountry;
 });

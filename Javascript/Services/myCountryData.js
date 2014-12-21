@@ -21,10 +21,10 @@ wciApp.factory('myCountryData', function () {
 
     myCountry.dependentStats = {
         actualGrowthRate: function () {
-            return Math.round(myCountry.baseStats.baseGrowthRate * ((2 * myCountry.baseStats.happiness) / 100));
+            return myCountry.baseStats.baseGrowthRate * ((3 * myCountry.baseStats.happiness) / 100);
         },
         actualMortalityRate: function () {
-            return myCountry.baseStats.baseMortalityRate * (100 / (4 * myCountry.baseStats.happiness));
+            return myCountry.baseStats.baseMortalityRate * (100 / (5 * myCountry.baseStats.happiness));
         },
         populationGrowth: function () {
             return myCountry.baseStats.population * ((this.actualGrowthRate() - this.actualMortalityRate()) / 100);

@@ -52,7 +52,7 @@ var setInitialLawsData = function (laws, myCountryData) {
                this.isActive = !this.isActive;
                //If Active
                if (this.isActive) {
-                   if (myCountryData.dependentStats.actualGrowthRate > myCountryData.dependentStats.actualMortalityRate) {
+                   if (myCountryData.dependentStats.actualGrowthRate() > myCountryData.dependentStats.actualMortalityRate()) {
                        myCountryData.dependentStats.actualGrowthRate = myCountryData.dependentStats.actualMortalityRate;
                    }
                    myCountryData.baseStats.currentStabilityIndex += this.stabilityAffected;

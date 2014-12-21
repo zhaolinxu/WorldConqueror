@@ -46,7 +46,7 @@ wciApp.filter('niceNumber', ['$filter', function ($filter) {
             number = multiple.toFixed(decimal) + "K";
         }
         else {
-            var multiple = number;
+            var multiple = number / 1;
             var decimal = decimalPlaces(multiple, 1);
 
             number = multiple.toFixed(decimal);
@@ -63,7 +63,7 @@ function decimalPlaces(num, min) {
     var match = ('' + num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
     if (!match) { return 0; }
     return Math.min(
-         2,
+         min,
          //Number of digits right of decimal point.
          (match[1] ? match[1].length : 0)
          //Adjust for scientific notation.

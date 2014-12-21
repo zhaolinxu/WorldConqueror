@@ -1,13 +1,19 @@
 ﻿'use strict';
 
-wciApp.filter('roundInt', function (input) {
-    //TODO: 10/1/2014, Figure out how this works.
-    var roundNum = Math.round(input);
+wciApp.filter('roundInt',  ['$filter', function ($filter) {
+    return function (input) {
+        var roundNum = Math.round(input);
+        return roundNum;
+    };
+}]);
 
+wciApp.filter('fixedDecimalPlaces', ['$filter', function ($filter){
 
-    return roundNum;
-
-});
+    return function (input, decimals) {
+        var returnNum = input.toFixed(decimals);
+        return returnNum;
+    };
+}]);
 
 wciApp.filter('niceNumber', ['$filter', function ($filter) {
 
@@ -38,7 +44,12 @@ wciApp.filter('niceNumber', ['$filter', function ($filter) {
             var decimal = decimalPlaces(multiple, 1);
 
             number = multiple.toFixed(decimal) + "K";
+        }
+        else {
+            var multiple = number;
+            var decimal = decimalPlaces(multiple, 1);
 
+            number = multiple.toFixed(decimal);
         }
         return number;
     };
@@ -46,14 +57,16 @@ wciApp.filter('niceNumber', ['$filter', function ($filter) {
 }]);
 
 
-
+//#region Private Methods
+//This calculates the number of decimal places needed.
 function decimalPlaces(num, min) {
     var match = ('' + num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
     if (!match) { return 0; }
     return Math.min(
          2,
-         // Number of digits right of decimal point.
+         //Number of digits right of decimal point.
          (match[1] ? match[1].length : 0)
-         // Adjust for scientific notation.
+         //Adjust for scientific notation.
          - (match[2] ? +match[2] : 0));
-}
+};
+//#endregion

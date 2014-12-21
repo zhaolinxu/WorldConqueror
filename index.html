@@ -123,7 +123,9 @@
                                         </span>
                                         <span>
                                             {{game.myCountry.baseStats.population | number: 0 | niceNumber }}
-                                            (<span class="bold" ng-class="game.myCountry.dependentStats.populationGrowth() > 0 ? 'text-success' : 'text-danger'">
+                                            (<span class="bold" ng-class="game.myCountry.dependentStats.populationGrowth() >= 0 ? 'text-success' : 'text-danger'"
+                                                   tooltip-html-unsafe="Growth Rate: <span class='bold text-success'>{{game.myCountry.dependentStats.actualGrowthRate() | fixedDecimalPlaces : 2}}%</span> <br/>
+                                                    Mortality Rate: <span class='bold text-danger'>{{game.myCountry.dependentStats.actualMortalityRate() | fixedDecimalPlaces: 2}}%</span>">
                                                 {{game.myCountry.dependentStats.populationGrowth() | number: 0 | niceNumber }}
                                             </span>)
                                         </span>

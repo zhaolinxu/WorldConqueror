@@ -41,7 +41,7 @@ wciApp.config(function ($routeProvider, $locationProvider) {
         controllerAs: 're'
     })
     .otherwise({
-        redirectTo: '/structure'
+        redirectTo: '/ia'
     });
     
 });

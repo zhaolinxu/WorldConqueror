@@ -31,10 +31,10 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="pull-right clickableArea" ng-show="law.isUnlocked">
-                                    <button class="btn" ng-click="law.act()" ng-class="!law.isActive ? 'btn-sucess': ''" ng-disabled="!law.isActive">
+                                    <button class="btn" ng-click="law.act()" ng-class="!law.isActive ? 'btn-success': ''" ng-disabled="law.isActive">
                                         Enact
                                     </button>
-                                    <button class="btn" ng-click="law.act()" ng-class="law.isActive ? 'btn-danger': ''" ng-disabled="law.isActive">
+                                    <button class="btn" ng-click="law.act()" ng-class="law.isActive ? 'btn-danger': ''" ng-disabled="!law.isActive">
                                         Repeal
                                     </button>
                                 </div>

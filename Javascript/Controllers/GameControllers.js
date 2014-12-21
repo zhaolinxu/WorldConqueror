@@ -11,6 +11,7 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData, 
         game.myCountry.functions.getNewConsumption();
         game.myCountry.functions.getNewEconomics();
         game.myCountry.functions.getNewDemographics();
+        game.laws.functions.updateActiveFor();
         //game.saveGame();
 
     };
@@ -29,7 +30,7 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData, 
                 isFirstTime: true
             },
             paused: false,
-            speed: 10000
+            speed: 1000
         };
 
         //TODO: The extend functions don't attach themselves on reset. Fix

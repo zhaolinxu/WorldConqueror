@@ -7,6 +7,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
         functions: {}
     };
 
+    //First Load
     if (!localStorage['buildingData']) {
         setInitialBuildingData(buildings);
     }
@@ -39,7 +40,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
             }
 
         });
-    }
+    };
 
     //Build logic for Science buildings.
     for (var i = 0; i < buildings.baseStats.Science.structures.length; i++) {
@@ -61,7 +62,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
             }
 
         });
-    }
+    };
 
     //Build logic for Housing buildings.
     for (var i = 0; i < buildings.baseStats.Housing.structures.length; i++) {
@@ -83,7 +84,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
             }
 
         });
-    }
+    };
 
     //Build logic for Food buildings.
     for (var i = 0; i < buildings.baseStats.Food.structures.length; i++) {
@@ -105,7 +106,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
             }
 
         });
-    }
+    };
 
     //Build logic for Military buildings.
     for (var i = 0; i < buildings.baseStats.Military.structures.length; i++) {
@@ -127,7 +128,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
             }
 
         });
-    }
+    };
 
 
     buildings.functions.saveData = function () {

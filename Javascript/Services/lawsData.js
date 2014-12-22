@@ -8,12 +8,34 @@ wciApp.factory('lawsData', function (myCountryData, buildingsData) {
 
     };
 
+    //First Load
     if (!localStorage['lawsData']) {
         setInitialLawsData(laws, myCountryData);
     }
     else {
         laws.baseStats = JSON.parse(localStorage['lawsData']);
     }
+
+    //Extenders
+    for (var i = 0; i < laws.baseStats.length; i++) {
+
+        angular.extend(laws.baseStats[i], {
+
+            act: function () {
+                this.isActive = !this.isActive;
+                //If Active
+                if (this.isActive) {
+                    myCountryData.events[this.eventAffected] = true;
+                    myCountryData.baseStats.currentStabilityIndex += this.stabilityAffected;
+                }
+                else {
+                    myCountryData.events[this.eventAffected] = false;
+                    myCountryData.baseStats.currentStabilityIndex -= this.stabilityAffected;
+                }
+            }
+
+        });
+    };
 
     laws.functions.updateActiveFor = function () {
         for (var i = 0; i < laws.baseStats.length; i++) {
@@ -48,42 +70,17 @@ var setInitialLawsData = function (laws, myCountryData) {
            description: "This freezes the population growth. If the population is growing. One child policy decreases the growth rate till there's no more growth.",
            activeFor: 0,
            stabilityAffected: -1,
-           act: function () {
-               this.isActive = !this.isActive;
-               //If Active
-               if (this.isActive) {
-                   if (myCountryData.dependentStats.actualGrowthRate() > myCountryData.dependentStats.actualMortalityRate()) {
-                       myCountryData.dependentStats.actualGrowthRate = myCountryData.dependentStats.actualMortalityRate;
-                   }
-                   myCountryData.baseStats.currentStabilityIndex += this.stabilityAffected;
-               }
-               else {
-                   actualGrowthRate = (function () {
-                       return Math.round(myCountryData.baseStats.baseGrowthRate * ((2 * myCountryData.baseStats.happiness) / 100));
-                   })();
-                   myCountryData.baseStats.currentStabilityIndex -= this.stabilityAffected;
-               }
-           }
+           eventAffected: 'oneChildPolicy'
        },
        {
-           name: "Population Freeze",
+           name: "Birth Freeze",
            isUnlocked: true,
            isActive: false,
            icon: 'fa-flask',
-           description: "Population Freeze",
+           description: "This stops any new births. Your citizens won't be happy and stability will be massively affected. ",
            activeFor: 0,
-           stabilityAffected: -1,
-           act: function () {
-               this.isActive = !this.isActive;
-               //If Active
-               if (this.isActive) {
-                   
-                   myCountryData.baseStats.currentStabilityIndex += this.stabilityAffected;
-               }
-               else {
-                   myCountryData.baseStats.currentStabilityIndex -= this.stabilityAffected;
-               }
-           }
+           stabilityAffected: -3,
+           eventAffected: 'birthFreeze'
        },
        {
            name: "Mandatory One Child Policy",
@@ -92,17 +89,7 @@ var setInitialLawsData = function (laws, myCountryData) {
            icon: 'fa-flask',
            description: "Mandatory One Child Policy",
            activeFor: 0,
-           valueAffected: -1,
-           act: function () {
-               this.isActive = !this.isActive;
-               //If Active
-               if (this.isActive) {
-                   myCountryData.baseStats.currentStabilityIndex += this.valueAffected;
-               }
-               else {
-                   myCountryData.baseStats.currentStabilityIndex -= this.valueAffected;
-               }
-           }
+           valueAffected: -1
        }
     ]
 };

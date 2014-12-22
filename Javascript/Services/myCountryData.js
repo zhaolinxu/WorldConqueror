@@ -6,28 +6,25 @@ wciApp.factory('myCountryData', function () {
 
     var myCountry = {
         baseStats: {},
+        events: {},
         dependentStats: {},
         functions: {},
         descriptions: {}
     };
 
-    if (!localStorage['baseStats']) {
+    //First Load
+    if (!localStorage['countryBaseStats']) {
         setInitialStats(myCountry);
     }
     else {
         //JSON.parse(atob(localStorage['wci_gameData']));
-        myCountry.baseStats = JSON.parse(localStorage['baseStats']);
+        myCountry.baseStats = JSON.parse(localStorage['countryBaseStats']);
+        myCountry.events = JSON.parse(localStorage['countryEvents']);
     }
 
     myCountry.dependentStats = {
-        actualGrowthRate: function () {
-            return myCountry.baseStats.baseGrowthRate * ((3 * myCountry.baseStats.happiness) / 100);
-        },
-        actualMortalityRate: function () {
-            return myCountry.baseStats.baseMortalityRate * (100 / (5 * myCountry.baseStats.happiness));
-        },
         populationGrowth: function () {
-            return myCountry.baseStats.population * ((this.actualGrowthRate() - this.actualMortalityRate()) / 100);
+            return myCountry.baseStats.population * ((myCountry.baseStats.actualGrowthRate - myCountry.baseStats.actualMortalityRate) / 100);
         },
         //Consumption
         foodFlow: function () {
@@ -109,44 +106,30 @@ wciApp.factory('myCountryData', function () {
         }
 
     };
-
     myCountry.functions.getNewDemographics = function () {
 
+        //Getting Growth and Mortality Rates
+        var actualGrowthRate = (function () {
+            return myCountry.baseStats.baseGrowthRate * ((3 * myCountry.baseStats.happiness) / 100);
+        })();
+        var actualMortalityRate = (function () {
+            return myCountry.baseStats.baseMortalityRate * (100 / (5 * myCountry.baseStats.happiness));
+        })();
+
+        //Handling Events for Growth Rate
+        if (myCountry.events.oneChildPolicy) {
+            myCountry.baseStats.actualGrowthRate = actualMortalityRate;
+        } else if (myCountry.events.birthFreeze) {
+            myCountry.baseStats.actualGrowthRate = 0;
+        } else {
+            myCountry.baseStats.actualGrowthRate = actualGrowthRate;
+        }
+
+        myCountry.baseStats.actualMortalityRate = actualMortalityRate;
         myCountry.baseStats.population += myCountry.dependentStats.populationGrowth();
 
-        //TODO: Figure out a more elegant solution for this.. but currently. happiness goes down slowly a first, then speeds up as the individual ratios go up, then slows down again after the ratios hit a certain point.
-        var unemployment = myCountry.dependentStats.unemployment();
-        var unempHappinessFactor = 0;
-        var hunger = myCountry.baseStats.hunger;
-        var hungerHappinessFactor = 0;
-        var homeless = myCountry.dependentStats.homelessness();
-        var homelessHappinessFactor = 0;
-        var stability = myCountry.baseStats.stability;
-
-        myCountry.baseStats.happiness = Math.round(100 - (unemployment / 4) - (hunger / 4) - (homeless / 4) - ((100 - stability) / 4));
-
-        //Set the size.
-        if (myCountry.dependentStats.gdp() <= 100000) {
-            myCountry.baseStats.size = 1;
-        }
-        else if (myCountry.dependentStats.gdp() <= 10000000) {
-            myCountry.baseStats.size = 2;
-        }
-        else if (myCountry.dependentStats.gdp() <= 1000000000) {
-            myCountry.baseStats.size = 3;
-        }
-        else if (myCountry.dependentStats.gdp() <= 100000000000) {
-            myCountry.baseStats.size = 4;
-        }
-        else if (myCountry.dependentStats.gdp() <= 10000000000000) {
-            myCountry.baseStats.size = 5;
-        }
-        else if (myCountry.dependentStats.gdp() <= 1000000000000000) {
-            myCountry.baseStats.size = 6;
-        }
-        else {
-            myCountry.baseStats.size = 7;
-        }
+        setHappiness(myCountry);
+        setCountrySize(myCountry);
 
         //Handling edge cases.
         if (myCountry.baseStats.population < 0) {
@@ -182,7 +165,8 @@ wciApp.factory('myCountryData', function () {
     };
     myCountry.functions.saveData = function () {
         //btoa(JSON.stringify(game.data));
-        localStorage['baseStats'] = JSON.stringify(myCountry.baseStats);
+        localStorage['countryBaseStats'] = JSON.stringify(myCountry.baseStats);
+        localStorage['countryEvents'] = JSON.stringify(myCountry.events);
     };
 
     return myCountry;
@@ -205,7 +189,9 @@ var setInitialStats = function (myCountry) {
         size: 1,
         population: 10,
         baseGrowthRate: 1, //Based on the size of the country (lower size = lower growth rate)
+        actualGrowthRate: 0,
         baseMortalityRate: 6, //Based on the size (lower size = higher mortality rate)
+        actualMortalityRate: 0,
         housingCapacity: 16,
         //Consumption
         perCapitaConsumption: 5, // 1 person's monthly consumption = 3 Mcal * 30 ~ 100 Mcal. (3Mcal is based on the nation's development level. http://www.who.int/nutrition/topics/3_foodconsumption/en/)
@@ -222,4 +208,46 @@ var setInitialStats = function (myCountry) {
 
         //isCountry: false, //Use this when the feature is built to start from a campsite and grow upto a city and then ask for independence.
     };
+    myCountry.events = {
+        oneChildPolicy : false, //Law
+        birthFreeze: false //Law
+    };
+};
+
+var setCountrySize = function (myCountry) {
+
+    if (myCountry.dependentStats.gdp() <= 100000) { //100k
+        myCountry.baseStats.size = 1;
+    }
+    else if (myCountry.dependentStats.gdp() <= 10000000) { //10m
+        myCountry.baseStats.size = 2;
+    }
+    else if (myCountry.dependentStats.gdp() <= 1000000000) { //1b
+        myCountry.baseStats.size = 3;
+    }
+    else if (myCountry.dependentStats.gdp() <= 100000000000) { //100b
+        myCountry.baseStats.size = 4;
+    }
+    else if (myCountry.dependentStats.gdp() <= 10000000000000) { //10t
+        myCountry.baseStats.size = 5;
+    }
+    else if (myCountry.dependentStats.gdp() <= 1000000000000000) { //1q
+        myCountry.baseStats.size = 6;
+    }
+    else {
+        myCountry.baseStats.size = 7;
+    }
+};
+
+var setHappiness = function (myCountry) {
+
+    var unemployment = myCountry.dependentStats.unemployment();
+    var unempHappinessFactor = 0;
+    var hunger = myCountry.baseStats.hunger;
+    var hungerHappinessFactor = 0;
+    var homeless = myCountry.dependentStats.homelessness();
+    var homelessHappinessFactor = 0;
+    var stability = myCountry.baseStats.stability;
+
+    myCountry.baseStats.happiness = Math.round(100 - (unemployment / 4) - (hunger / 4) - (homeless / 4) - ((100 - stability) / 4));
 };

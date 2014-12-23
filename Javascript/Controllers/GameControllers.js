@@ -12,6 +12,7 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData, 
         game.myCountry.functions.getNewEconomics();
         game.myCountry.functions.getNewDemographics();
         game.laws.functions.updateActiveFor();
+        game.buildings.functions.getTotalUpkeep();
         //game.saveGame();
 
     };

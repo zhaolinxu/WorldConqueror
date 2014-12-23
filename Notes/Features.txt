@@ -65,6 +65,8 @@ Version 1.1.0 Features
 2) Add a prestige system.
 3) Add random events.
 4) Humor in research and building names.
+5) Have leader characters with stats.. like charisma, which helps with decisions
+6) Add government. (Democracy, dictatorship etc.)
 
 
 Version 2.0.0 Features

@@ -81,6 +81,10 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     this.count += count;
                     //this.cost = cost;
                 }
+            },
+            updateCost: function (count) {
+                var cost = this.cost * count;
+                this.displayCost = cost;
             }
 
         });
@@ -103,6 +107,10 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     this.count += count;
                     //this.cost = cost;
                 }
+            },
+            updateCost: function (count) {
+                var cost = this.cost * count;
+                this.displayCost = cost;
             }
 
         });
@@ -137,7 +145,29 @@ wciApp.factory('buildingsData', function (myCountryData) {
     buildings.functions.resetData = function () {
         setInitialBuildingData(buildings);
     };
- 
+    buildings.functions.getTotalUpkeep = function () {
+
+        var upkeep = 0;
+
+        for (var j = 0; j < buildings.baseStats.Economic.structures.length; j++) {
+            upkeep += buildings.baseStats.Economic.structures[j].upkeep * buildings.baseStats.Economic.structures[j].count;
+        };
+        for (var j = 0; j < buildings.baseStats.Science.structures.length; j++) {
+            upkeep += buildings.baseStats.Science.structures[j].upkeep * buildings.baseStats.Science.structures[j].count;
+        };
+        for (var j = 0; j < buildings.baseStats.Housing.structures.length; j++) {
+            upkeep += buildings.baseStats.Housing.structures[j].upkeep * buildings.baseStats.Housing.structures[j].count;
+        };
+        for (var j = 0; j < buildings.baseStats.Food.structures.length; j++) {
+            upkeep += buildings.baseStats.Food.structures[j].upkeep * buildings.baseStats.Food.structures[j].count;
+        };
+        for (var j = 0; j < buildings.baseStats.Military.structures.length; j++) {
+            upkeep += buildings.baseStats.Military.structures[j].upkeep * buildings.baseStats.Military.structures[j].count;
+        };
+
+        myCountryData.baseStats.upkeep = upkeep;
+    };
+
     return buildings;
 
 });
@@ -154,7 +184,7 @@ var setInitialBuildingData = function (buildings) {
                     name: 'Market',
                     description: 'This building adds 2 jobs per structure.',
                     count: 8,
-                    upkeep: 500,
+                    upkeep: 1,
                     cost: 500,
                     displayCost: 500,
                     costMultiplier: 1,
@@ -201,7 +231,7 @@ var setInitialBuildingData = function (buildings) {
                     count: 0,
                     upkeep: 1000000, //1M
                     cost: 100000000, //100M
-                    displayCost: 100000000, 
+                    displayCost: 100000000,
                     costMultiplier: 1,
 
                     isUnlocked: false,
@@ -216,7 +246,7 @@ var setInitialBuildingData = function (buildings) {
                     count: 0,
                     upkeep: 1000000, //1M
                     cost: 500000000, //500M
-                    displayCost: 500000000, 
+                    displayCost: 500000000,
                     costMultiplier: 1,
 
                     isUnlocked: false,
@@ -249,68 +279,91 @@ var setInitialBuildingData = function (buildings) {
                     name: 'Library',
                     description: 'This building unlocks researches and gives research points.',
                     count: 0,
+                    upkeep: 500,
                     cost: 100,
                     displayCost: 500,
                     costMultiplier: 9,
+
                     isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
-                    countMultiplier: 1.8
+                    countMultiplier: 1.8,
+                    jobsIncreased: 10
                 },
                 {
                     name: 'School',
                     description: 'This building increases money growth.',
                     count: 0,
+                    upkeep: 500,
                     cost: 100,
+                    displayCost: 500,
                     costMultiplier: 9,
+
                     isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
-                    countMultiplier: 1.8
+                    countMultiplier: 1.8,
+                    jobsIncreased: 10
                 },
                 {
                     name: 'University',
                     description: 'This building increases money growth.',
                     count: 0,
+                    upkeep: 500,
                     cost: 100,
+                    displayCost: 500,
                     costMultiplier: 9,
+
                     isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
-                    countMultiplier: 1.8
+                    countMultiplier: 1.8,
+                    jobsIncreased: 10
                 },
                 {
                     name: 'Laboratory',
                     description: 'This building increases money growth.',
                     count: 0,
+                    upkeep: 500,
                     cost: 100,
+                    displayCost: 500,
                     costMultiplier: 9,
+
                     isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
-                    countMultiplier: 1.8
+                    countMultiplier: 1.8,
+                    jobsIncreased: 10
                 },
                 {
                     name: 'Observatory',
                     description: 'This building increases money growth.',
                     count: 0,
+                    upkeep: 500,
                     cost: 100,
+                    displayCost: 500,
                     costMultiplier: 9,
+
                     isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
-                    countMultiplier: 1.8
+                    countMultiplier: 1.8,
+                    jobsIncreased: 10
                 },
                 {
                     name: 'Space Station',
                     description: 'This building increases money growth.',
                     count: 0,
+                    upkeep: 500,
                     cost: 100,
+                    displayCost: 500,
                     costMultiplier: 9,
+
                     isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
-                    countMultiplier: 1.8
+                    countMultiplier: 1.8,
+                    jobsIncreased: 10
                 }
             ]
         },
@@ -321,8 +374,11 @@ var setInitialBuildingData = function (buildings) {
                     name: 'Shack',
                     description: 'This building adds 2 housing capacity.',
                     count: 8,
+                    upkeep: 1,
                     cost: 500,
+                    displayCost: 500,
                     costMultiplier: 1,
+
                     isUnlocked: true,
                     statAffected: 'housingCapacity',
                     statMultiplier: 2,
@@ -333,8 +389,11 @@ var setInitialBuildingData = function (buildings) {
                     name: 'House',
                     description: 'This building adds 6 housing capacity and 1 new job.',
                     count: 0,
+                    upkeep: 5,
                     cost: 5000,
+                    displayCost: 500,
                     costMultiplier: 1,
+
                     isUnlocked: false,
                     statAffected: 'housingCapacity',
                     statMultiplier: 6,
@@ -345,8 +404,11 @@ var setInitialBuildingData = function (buildings) {
                     name: 'Duplex',
                     description: 'This building adds 12 housing capacity and 3 new jobs.',
                     count: 0,
+                    upkeep: 5,
                     cost: 100000,
+                    displayCost: 500,
                     costMultiplier: 1,
+
                     isUnlocked: false,
                     statAffected: 'housingCapacity',
                     statMultiplier: 12,
@@ -357,8 +419,11 @@ var setInitialBuildingData = function (buildings) {
                     name: 'Small Apartments',
                     description: 'This building adds 1000 housing capacity and 50 new jobs.',
                     count: 0,
+                    upkeep: 5,
                     cost: 100000000,
+                    displayCost: 500,
                     costMultiplier: 1,
+
                     isUnlocked: false,
                     statAffected: 'housingCapacity',
                     statMultiplier: 1000,
@@ -369,8 +434,11 @@ var setInitialBuildingData = function (buildings) {
                     name: 'Apartment Complex',
                     description: 'This building adds 10000 housing capacity and 500 new jobs.',
                     count: 0,
+                    upkeep: 5,
                     cost: 5000000000,
+                    displayCost: 500,
                     costMultiplier: 1,
+
                     isUnlocked: false,
                     statAffected: 'housingCapacity',
                     statMultiplier: 10000,
@@ -381,8 +449,11 @@ var setInitialBuildingData = function (buildings) {
                     name: 'High Rise',
                     description: 'This building adds 50000 housing capacity and 1000 new jobs',
                     count: 0,
+                    upkeep: 5,
                     cost: 50000000000,
+                    displayCost: 500,
                     costMultiplier: 1,
+
                     isUnlocked: false,
                     statAffected: 'housingCapacity',
                     statMultiplier: 50000,
@@ -399,7 +470,10 @@ var setInitialBuildingData = function (buildings) {
                     description: 'This building increases base food growth by 200.',
                     count: 5,
                     cost: 500,
+                    upkeep: 1,
+                    displayCost: 500,
                     costMultiplier: 1,
+
                     isUnlocked: true,
                     statAffected: 'basefoodGrowth',
                     statMultiplier: 200,
@@ -411,7 +485,10 @@ var setInitialBuildingData = function (buildings) {
                     description: 'This building increases base food growth by 50,000 and adds 10 jobs',
                     count: 0,
                     cost: 100000,
+                    upkeep: 5,
+                    displayCost: 500,
                     costMultiplier: 1,
+
                     isUnlocked: false,
                     statAffected: 'basefoodGrowth',
                     statMultiplier: 50000,
@@ -423,7 +500,10 @@ var setInitialBuildingData = function (buildings) {
                     description: 'This building increases base food growth by 40,000 and adds 100 jobs',
                     count: 0,
                     cost: 100000,
+                    upkeep: 5,
+                    displayCost: 500,
                     costMultiplier: 1,
+
                     isUnlocked: false,
                     statAffected: 'basefoodGrowth',
                     statMultiplier: 40000,
@@ -435,7 +515,10 @@ var setInitialBuildingData = function (buildings) {
                     description: 'This building increases base food growth by 250,000 and adds 500 jobs',
                     count: 0,
                     cost: 5000000,
+                    upkeep: 5,
+                    displayCost: 500,
                     costMultiplier: 1,
+
                     isUnlocked: false,
                     statAffected: 'basefoodGrowth',
                     statMultiplier: 250000,
@@ -448,7 +531,10 @@ var setInitialBuildingData = function (buildings) {
                     description: 'This building increases food growth by a factor of 3 and adds 1000 jobs',
                     count: 0,
                     cost: 1500000000,
+                    upkeep: 5,
+                    displayCost: 500,
                     costMultiplier: 1,
+
                     isUnlocked: false,
                     statAffected: 'basefoodGrowth',
                     statMultiplier: 3,
@@ -460,7 +546,10 @@ var setInitialBuildingData = function (buildings) {
                     description: 'This building increases food growth by a factor of 2.5 and adds 500 jobs',
                     count: 0,
                     cost: 10000000000,
+                    upkeep: 5,
+                    displayCost: 500,
                     costMultiplier: 1,
+
                     isUnlocked: false,
                     statAffected: 'basefoodGrowth',
                     statMultiplier: 2.5,
@@ -476,67 +565,91 @@ var setInitialBuildingData = function (buildings) {
                     name: 'Barracks',
                     description: 'This building increases money growth.',
                     count: 0,
+                    upkeep: 5,
                     cost: 100,
+                    displayCost: 500,
                     costMultiplier: 9,
+
                     isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
-                    countMultiplier: 1.8
+                    countMultiplier: 1.8,
+                    jobsIncreased: 500
                 },
                 {
                     name: 'Weapons Factory',
                     description: 'This building increases money growth.',
                     count: 0,
+                    upkeep: 5,
                     cost: 100,
+                    displayCost: 500,
                     costMultiplier: 9,
+
                     isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
-                    countMultiplier: 1.8
+                    countMultiplier: 1.8,
+                    jobsIncreased: 500
                 },
                 {
                     name: 'Naval Base',
                     description: 'This building increases money growth.',
                     count: 0,
+                    upkeep: 5,
                     cost: 100,
+                    displayCost: 500,
                     costMultiplier: 9,
+
                     isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
-                    countMultiplier: 1.8
+                    countMultiplier: 1.8,
+                    jobsIncreased: 500
                 },
                 {
                     name: 'Air Base',
                     description: 'This building increases money growth.',
                     count: 0,
+                    upkeep: 5,
                     cost: 100,
+                    displayCost: 500,
                     costMultiplier: 9,
+
                     isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
-                    countMultiplier: 1.8
+                    countMultiplier: 1.8,
+                    jobsIncreased: 500
                 },
                 {
                     name: 'Special Forces',
                     description: 'This building increases money growth.',
                     count: 0,
+                    upkeep: 5,
                     cost: 100,
+                    displayCost: 500,
                     costMultiplier: 9,
+
                     isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
-                    countMultiplier: 1.8
+                    countMultiplier: 1.8,
+                    jobsIncreased: 500
                 },
                 {
                     name: 'Satelitte uplink',
                     description: 'This building increases money growth.',
                     count: 0,
+                    upkeep: 5,
                     cost: 100,
+                    displayCost: 500,
                     costMultiplier: 9,
+
                     isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
-                    countMultiplier: 1.8
+                    countMultiplier: 1.8,
+                    jobsIncreased: 500
                 }
             ]
         }

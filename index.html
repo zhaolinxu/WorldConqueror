@@ -82,14 +82,14 @@
                                     x1
                                 </span>
                             </button>
-                            <button class="btn" ng-class="game.data.speed === 100 ? 'btn-info' : 'btn-primary'" ng-click="game.adjustGameSpeed(10)">
+                            <button class="btn" ng-class="game.data.speed === 0.01 ? 'btn-info' : 'btn-primary'" ng-click="game.adjustGameSpeed(0.01)">
                                 <span>
-                                    x10
+                                    x0.01
                                 </span>
                             </button>
-                            <button class="btn" ng-class="game.data.speed === 10 ? 'btn-info' : 'btn-primary'" ng-click="game.adjustGameSpeed(100)">
+                            <button class="btn" ng-class="game.data.speed === 1 ? 'btn-info' : 'btn-primary'" ng-click="game.adjustGameSpeed(1000)">
                                 <span>
-                                    x100
+                                    x1000
                                 </span>
                             </button>
                             <button class="btn btn-primary" ng-click="game.resetGame()">
@@ -124,8 +124,8 @@
                                         <span>
                                             {{game.myCountry.baseStats.population | number: 0 | niceNumber }}
                                             (<span class="bold" ng-class="game.myCountry.dependentStats.populationGrowth() >= 0 ? 'text-success' : 'text-danger'"
-                                                   tooltip-html-unsafe="Growth Rate: <span class='bold text-success'>{{game.myCountry.baseStats.actualGrowthRate | fixedDecimalPlaces : 2}}%</span> <br/>
-                                                    Mortality Rate: <span class='bold text-danger'>{{game.myCountry.baseStats.actualMortalityRate | fixedDecimalPlaces: 2}}%</span>">
+                                                   tooltip-html-unsafe="Growth Rate: <span class='bold text-success'>{{game.myCountry.dependentStats.actualGrowthRate() | fixedDecimalPlaces : 2}}%</span> <br/>
+                                                    Mortality Rate: <span class='bold text-danger'>{{game.myCountry.dependentStats.actualMortalityRate() | fixedDecimalPlaces: 2}}%</span>">
                                                 {{game.myCountry.dependentStats.populationGrowth() | number: 0 | niceNumber }}
                                             </span>)
                                         </span>
@@ -137,7 +137,9 @@
                                         </span>
                                         <span>
                                             {{game.myCountry.baseStats.money | number:0 | niceNumber}}
-                                            (<span class="bold" ng-class="game.myCountry.dependentStats.moneyGrowth() > 0 ? 'text-success': 'text-danger'">
+                                            (<span class="bold" ng-class="game.myCountry.dependentStats.moneyGrowth() > 0 ? 'text-success': 'text-danger'"
+                                                    tooltip-html-unsafe="Income: <span class='bold text-success'>{{game.myCountry.dependentStats.income() | fixedDecimalPlaces : 2}}</span> <br/>
+                                                    Upkeep: <span class='bold text-danger'>{{game.myCountry.baseStats.upkeep | fixedDecimalPlaces: 2}}</span>">
                                                 {{game.myCountry.dependentStats.moneyGrowth() | number: 0 | niceNumber}}
                                             </span>)
                                         </span>

@@ -23,8 +23,30 @@ wciApp.factory('myCountryData', function () {
     }
 
     myCountry.dependentStats = {
+        actualGrowthRate: function () {
+            var growthRate;
+            if (myCountry.events.oneChildPolicy) {
+                growthRate = this.actualMortalityRate();
+            } else if (myCountry.events.birthFreeze) {
+                growthRate = 0;
+            } else {
+                growthRate = (function () {
+                    return myCountry.baseStats.baseGrowthRate * ((3 * myCountry.baseStats.happiness) / 100);
+                })();
+            }
+
+            return growthRate;
+        },
+        actualMortalityRate: function(){
+            var mortalityRate;
+            mortalityRate = (function () {
+                return myCountry.baseStats.baseMortalityRate * (100 / (5 * myCountry.baseStats.happiness));
+            })();
+
+            return mortalityRate;
+        },
         populationGrowth: function () {
-            return myCountry.baseStats.population * ((myCountry.baseStats.actualGrowthRate - myCountry.baseStats.actualMortalityRate) / 100);
+            return myCountry.baseStats.population * ((this.actualGrowthRate() - this.actualMortalityRate()) / 100);
         },
         //Consumption
         foodFlow: function () {
@@ -37,8 +59,14 @@ wciApp.factory('myCountryData', function () {
             return myCountry.baseStats.perCapitaConsumption * myCountry.baseStats.population;
         },
         //Economics
-        moneyGrowth: function () {
-            return this.gdp() * 0.04;
+        income: function () {
+            //TODO: 12/22/2014: This might need to be reduced.
+            var income = this.gdp() * 0.04;  //You get 4% of the gdp every turn. (Which is one month)
+            return income;
+        },
+        moneyGrowth: function(){
+            var growth = this.income() - myCountry.baseStats.upkeep;
+            return growth;
         },
         //Determine what curreny do we want to use? or allow user to name the currency. This is dependent to employment rate, productivity (which is based on happiness).
         gdp: function () {
@@ -89,7 +117,7 @@ wciApp.factory('myCountryData', function () {
         //Every Month
         if (myCountry.baseStats.time % 720 == 0) {
             //This checks and see if current and previous were either both +ve or both -ve.
-            if (((currentStabilityIndex >= 0) && (previousStabilityIndex >= 0)) ||
+            if (((currentStabilityIndex > 0) && (previousStabilityIndex > 0)) ||
                 ((currentStabilityIndex < 0) && (previousStabilityIndex < 0))) {
                 myCountry.baseStats.stability += currentStabilityIndex * myCountry.baseStats.turnsAtCurrentState;
                 myCountry.baseStats.turnsAtCurrentState++;
@@ -101,6 +129,9 @@ wciApp.factory('myCountryData', function () {
                     myCountry.baseStats.stability = 0;
                 }
             }
+            else {
+                myCountry.baseStats.turnsAtCurrentState = 0;
+            }
             previousStabilityIndex = currentStabilityIndex;
 
         }
@@ -108,24 +139,6 @@ wciApp.factory('myCountryData', function () {
     };
     myCountry.functions.getNewDemographics = function () {
 
-        //Getting Growth and Mortality Rates
-        var actualGrowthRate = (function () {
-            return myCountry.baseStats.baseGrowthRate * ((3 * myCountry.baseStats.happiness) / 100);
-        })();
-        var actualMortalityRate = (function () {
-            return myCountry.baseStats.baseMortalityRate * (100 / (5 * myCountry.baseStats.happiness));
-        })();
-
-        //Handling Events for Growth Rate
-        if (myCountry.events.oneChildPolicy) {
-            myCountry.baseStats.actualGrowthRate = actualMortalityRate;
-        } else if (myCountry.events.birthFreeze) {
-            myCountry.baseStats.actualGrowthRate = 0;
-        } else {
-            myCountry.baseStats.actualGrowthRate = actualGrowthRate;
-        }
-
-        myCountry.baseStats.actualMortalityRate = actualMortalityRate;
         myCountry.baseStats.population += myCountry.dependentStats.populationGrowth();
 
         setHappiness(myCountry);
@@ -189,9 +202,7 @@ var setInitialStats = function (myCountry) {
         size: 1,
         population: 10,
         baseGrowthRate: 1, //Based on the size of the country (lower size = lower growth rate)
-        actualGrowthRate: 0,
         baseMortalityRate: 6, //Based on the size (lower size = higher mortality rate)
-        actualMortalityRate: 0,
         housingCapacity: 16,
         //Consumption
         perCapitaConsumption: 5, // 1 person's monthly consumption = 3 Mcal * 30 ~ 100 Mcal. (3Mcal is based on the nation's development level. http://www.who.int/nutrition/topics/3_foodconsumption/en/)
@@ -202,6 +213,7 @@ var setInitialStats = function (myCountry) {
         taxRate: 40, //In percentage... high tax affects happiness. 
         avgSalary: 10, //Based on size, gdp, job types.
         money: 100, //Earned from Taxes and economic factors.
+        upkeep: 0, //Upkeep of buildings and soldiers.
         totalJobs: 16,
         jobGdpMultiplier: 100 //This is how jobs effect the gdp.
 

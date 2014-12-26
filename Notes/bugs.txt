@@ -1,0 +1,3 @@
+﻿1) Resetting doesn't reset the speed
+2) Resetting loses all the functions of the services.
+3) Filter shows numbers as NaN after reaching 1Million

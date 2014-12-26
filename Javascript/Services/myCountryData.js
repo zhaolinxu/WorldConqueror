@@ -210,15 +210,10 @@ var setInitialStats = function (myCountry) {
         basefoodGrowth: 100,
         hunger: 0,
         //Economics
-        taxRate: 40, //In percentage... high tax affects happiness. 
-        avgSalary: 10, //Based on size, gdp, job types.
         money: 100, //Earned from Taxes and economic factors.
         upkeep: 0, //Upkeep of buildings and soldiers.
         totalJobs: 16,
         jobGdpMultiplier: 100 //This is how jobs effect the gdp.
-
-
-        //isCountry: false, //Use this when the feature is built to start from a campsite and grow upto a city and then ask for independence.
     };
     myCountry.events = {
         oneChildPolicy : false, //Law

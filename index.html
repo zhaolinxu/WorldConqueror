@@ -182,7 +182,9 @@
                                             </span>
                                             <span>
                                                 {{game.myCountry.baseStats.totalFood | number: 0 | niceNumber}}
-                                                (<span class="bold" ng-class="game.myCountry.dependentStats.foodFlow() > 0 ? 'text-success' : 'text-danger'">
+                                                (<span class="bold" ng-class="game.myCountry.dependentStats.foodFlow() > 0 ? 'text-success' : 'text-danger'"
+                                                    tooltip-html-unsafe="Production: <span class='bold text-success'>{{game.myCountry.dependentStats.foodGrowth() | fixedDecimalPlaces : 2}}</span> <br/>
+                                                    Consumption: <span class='bold text-danger'>{{game.myCountry.dependentStats.foodDemand() | fixedDecimalPlaces: 2}}</span>">
                                                     {{game.myCountry.dependentStats.foodFlow() | number: 0 | niceNumber}}
                                                 </span>)
                                             </span>

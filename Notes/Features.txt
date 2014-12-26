@@ -83,6 +83,8 @@ Version 2.0.0 Features
 11) Add Import and Export
 12) Add logic where too much of a type of building will reduce its multiplier
 13) Add Real Map action
+14) Add taxation and avgSalary as parameters which affect money income.
+15) Add growth from a little settlement to city, to state to country and so on.
 
 
 Version 3.0.0 Features

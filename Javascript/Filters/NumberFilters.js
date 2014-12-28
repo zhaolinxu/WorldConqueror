@@ -22,44 +22,19 @@ wciApp.filter('niceNumber', ['$filter', function ($filter) {
         var number = number.toString().replace(',', '');
         var absVal = Math.abs(number);
 
-        if (absVal >= Math.pow(10, 15)) {
+        var suffixes = ["K", "M", "B", "T", "Q"];
 
-            var multiple = (number / Math.pow(10, 15));
-            var decimal = decimalPlaces(multiple, 2);
+        for (var i = suffixes.length - 1; i >= 0; i--) {
+            if (absVal > Math.pow(1000, i + 1)) {
+                var multiple = (number / Math.pow(1000, i + 1));
+                var decimal = decimalPlaces(multiple, 2);
+
+                return multiple.toFixed(decimal) + suffixes[i];
+            } else if (absVal < Math.pow(1000, 1)){
+                //For small numbers no decimals.
+                return parseInt(number).toFixed(0);
+            }
         }
-        else if (absVal >= Math.pow(10, 12)) {
-
-            var multiple = (number / Math.pow(10, 12));
-            var decimal = decimalPlaces(multiple, 2);
-
-            number = multiple.toFixed(decimal) + "T";
-        }
-        else if (absVal >= Math.pow(10, 9)) {
-
-            var multiple = (number / Math.pow(10, 9));
-            var decimal = decimalPlaces(multiple, 2);
-
-            number = multiple.toFixed(decimal) + "B";
-        }
-        else if (absVal >= Math.pow(10, 6)) {
-
-            var multiple = (number / Math.pow(10, 6));
-            var decimal = decimalPlaces(multiple, 2);
-
-            number = multiple.toFixed(decimal) + "M";
-        }
-        else if (absVal >= Math.pow(10, 3)) {
-
-            var multiple = (number / Math.pow(10, 3));
-            var decimal = decimalPlaces(multiple, 2);
-
-            number = multiple.toFixed(decimal) + "K";
-        }
-        else {
-            //For small numbers no decimals.
-            number = parseInt(number).toFixed(0);
-        }
-        return number;
     };
 
 }]);

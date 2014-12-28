@@ -149,9 +149,6 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData, 
     //#endregion
 
 
-    
-
-
     //Making sure interval is cancelled on destroy
     $scope.$on(
         "$destroy",

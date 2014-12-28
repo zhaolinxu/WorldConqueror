@@ -25,31 +25,39 @@ wciApp.filter('niceNumber', ['$filter', function ($filter) {
         if (absVal >= Math.pow(10, 15)) {
 
             var multiple = (number / Math.pow(10, 15));
-            var decimal = decimalPlaces(multiple, 1);
-
-            number = multiple.toFixed(decimal) + "Q";
+            var decimal = decimalPlaces(multiple, 2);
         }
         else if (absVal >= Math.pow(10, 12)) {
-            number = (number / Math.pow(10, 12)).toFixed(0) + "T";
+
+            var multiple = (number / Math.pow(10, 12));
+            var decimal = decimalPlaces(multiple, 2);
+
+            number = multiple.toFixed(decimal) + "T";
         }
         else if (absVal >= Math.pow(10, 9)) {
-            number = (number / Math.pow(10, 9)).toFixed(0) + "B";
+
+            var multiple = (number / Math.pow(10, 9));
+            var decimal = decimalPlaces(multiple, 2);
+
+            number = multiple.toFixed(decimal) + "B";
         }
         else if (absVal >= Math.pow(10, 6)) {
-            number = (number / Math.pow(10, 6)).toFixed(0) + "M";
+
+            var multiple = (number / Math.pow(10, 6));
+            var decimal = decimalPlaces(multiple, 2);
+
+            number = multiple.toFixed(decimal) + "M";
         }
         else if (absVal >= Math.pow(10, 3)) {
 
             var multiple = (number / Math.pow(10, 3));
-            var decimal = decimalPlaces(multiple, 1);
+            var decimal = decimalPlaces(multiple, 2);
 
             number = multiple.toFixed(decimal) + "K";
         }
         else {
-            var multiple = number / 1;
-            var decimal = decimalPlaces(multiple, 1);
-
-            number = multiple.toFixed(decimal);
+            //For small numbers no decimals.
+            number = multiple.toFixed(0);
         }
         return number;
     };

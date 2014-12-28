@@ -138,8 +138,8 @@
                                         <span>
                                             {{game.myCountry.baseStats.money | number:0 | niceNumber}}
                                             (<span class="bold" ng-class="game.myCountry.dependentStats.moneyGrowth() > 0 ? 'text-success': 'text-danger'"
-                                                    tooltip-html-unsafe="Income: <span class='bold text-success'>{{game.myCountry.dependentStats.income() | fixedDecimalPlaces : 2}}</span> <br/>
-                                                    Upkeep: <span class='bold text-danger'>{{game.myCountry.baseStats.upkeep | fixedDecimalPlaces: 2}}</span>">
+                                                    tooltip-html-unsafe="Income: <span class='bold text-success'>{{game.myCountry.dependentStats.income() | niceNumber}}</span> <br/>
+                                                    Upkeep: <span class='bold text-danger'>{{game.myCountry.baseStats.upkeep | niceNumber}}</span>">
                                                 {{game.myCountry.dependentStats.moneyGrowth() | number: 0 | niceNumber}}
                                             </span>)
                                         </span>
@@ -183,8 +183,8 @@
                                             <span>
                                                 {{game.myCountry.baseStats.totalFood | number: 0 | niceNumber}}
                                                 (<span class="bold" ng-class="game.myCountry.dependentStats.foodFlow() > 0 ? 'text-success' : 'text-danger'"
-                                                    tooltip-html-unsafe="Production: <span class='bold text-success'>{{game.myCountry.dependentStats.foodGrowth() | fixedDecimalPlaces : 2}}</span> <br/>
-                                                    Consumption: <span class='bold text-danger'>{{game.myCountry.dependentStats.foodDemand() | fixedDecimalPlaces: 2}}</span>">
+                                                    tooltip-html-unsafe="Production: <span class='bold text-success'>{{game.myCountry.dependentStats.foodGrowth() | niceNumber}}</span> <br/>
+                                                    Consumption: <span class='bold text-danger'>{{game.myCountry.dependentStats.foodDemand() | niceNumber}}</span>">
                                                     {{game.myCountry.dependentStats.foodFlow() | number: 0 | niceNumber}}
                                                 </span>)
                                             </span>

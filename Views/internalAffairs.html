@@ -2,7 +2,19 @@
     <h4>
         <span class="glyphicon glyphicon-flag"></span>
         <span>
-            Welcome {{countryCtrl.myCountry.baseStats.title}} of {{countryCtrl.myCountry.baseStats.name}}!
+            Welcome
+            <span class="bold font-color-green">{{countryCtrl.myCountry.baseStats.leaderName}}</span>!
+            You are the
+            <span class="bold font-color-orange">
+                {{countryCtrl.myCountry.baseStats.leaderTitle}}
+            </span>
+            of the
+            <i>
+                {{countryCtrl.myCountry.baseStats.sizeName}}
+            </i>
+            <span class="bold font-color-red">
+                {{countryCtrl.myCountry.baseStats.countryName}}!
+            </span>
         </span>
     </h4>
     <hr>

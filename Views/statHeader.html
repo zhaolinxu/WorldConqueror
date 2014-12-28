@@ -1,0 +1,134 @@
+﻿<div id="Common Header">
+        <div class="row well font-11pt">
+
+            <div class="col-md-12">
+                <span class="fa fa-clock-o"></span>
+                <span class="bold">
+                    {{game.myCountry.baseStats.time | niceTime }}
+                </span>
+            </div>
+
+            <div id="Main Stats" class="col-sm-4">
+                <div class="row">
+                    <div id="population" class="col-sm-6">
+                        <span>
+                            <i class="fa fa-users" tooltip="Population"></i>
+                        </span>
+                        <span>
+                            {{game.myCountry.baseStats.population | number: 0 | niceNumber }}
+                            (<span class="bold" ng-class="game.myCountry.dependentStats.populationGrowth() >= 0 ? 'text-success' : 'text-danger'"
+                                   tooltip-html-unsafe="Growth Rate: <span class='bold text-success'>{{game.myCountry.dependentStats.actualGrowthRate() | fixedDecimalPlaces : 2}}%</span> <br/>
+                                                    Mortality Rate: <span class='bold text-danger'>{{game.myCountry.dependentStats.actualMortalityRate() | fixedDecimalPlaces: 2}}%</span>">
+                                                {{game.myCountry.dependentStats.populationGrowth() | number: 0 | niceNumber }}
+                                            </span>)
+                        </span>
+                    </div>
+
+                    <div id="money" class="col-sm-6">
+                        <span>
+                            <i class="fa fa-money" tooltip="Money"></i>
+                        </span>
+                        <span>
+                            {{game.myCountry.baseStats.money | number:0 | niceNumber}}
+                            (<span class="bold" ng-class="game.myCountry.dependentStats.moneyGrowth() > 0 ? 'text-success': 'text-danger'"
+                                   tooltip-html-unsafe="Income: <span class='bold text-success'>{{game.myCountry.dependentStats.income() | niceNumber}}</span> <br/>
+                                                    Upkeep: <span class='bold text-danger'>{{game.myCountry.baseStats.upkeep | niceNumber}}</span>">
+                                                {{game.myCountry.dependentStats.moneyGrowth() | number: 0 | niceNumber}}
+                                            </span>)
+                        </span>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div id="happiness" class="col-sm-6" ng-class="game.myCountry.baseStats.happiness > 75 ? 'text-success' : game.myCountry.baseStats.happiness > 50 ? 'text-warning' : 'text-danger'">
+                        <span>
+                            <i class="fa bold" ng-class="game.myCountry.baseStats.happiness > 75 ? 'fa-smile-o' : game.myCountry.baseStats.happiness > 50 ? 'fa-meh-o' : 'fa-frown-o'"
+                               tooltip="Happiness"></i>
+                        </span>
+                        <span class="bold">
+                            {{game.myCountry.baseStats.happiness}}
+                        </span>
+                    </div>
+
+                    <!--<div id="size" class="col-sm-6">
+                        N/A
+                    </div>-->
+
+                    <div id="stability" class="col-sm-6" ng-class="game.myCountry.baseStats.stability > 66 ? 'text-success' : game.myCountry.baseStats.stability > 33 ? 'text-warning' : 'text-danger'">
+                        <span>
+                            <i class="fa bold fa-anchor" tooltip="Stability"></i>
+                        </span>
+                        <span class="bold">
+                            {{game.myCountry.baseStats.stability}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="side stats" class="col-sm-8">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div id="population">
+                            <span class="font-color-orange">
+                                <i class="glyphicon glyphicon-cutlery"></i> Food:
+                            </span>
+                            <span>
+                                {{game.myCountry.baseStats.totalFood | number: 0 | niceNumber}}
+                                (<span class="bold" ng-class="game.myCountry.dependentStats.foodFlow() > 0 ? 'text-success' : 'text-danger'"
+                                       tooltip-html-unsafe="Production: <span class='bold text-success'>{{game.myCountry.dependentStats.foodGrowth() | niceNumber}}</span> <br/>
+                                                    Consumption: <span class='bold text-danger'>{{game.myCountry.dependentStats.foodDemand() | niceNumber}}</span>">
+                                                    {{game.myCountry.dependentStats.foodFlow() | number: 0 | niceNumber}}
+                                                </span>)
+                            </span>
+                        </div>
+                        <div id="happiness">
+                            <span class="font-color-orange">
+                                <i class="fa fa-area-chart"></i> Hunger:
+                            </span>
+                            <span class="bold" ng-class="game.myCountry.baseStats.hunger === 0 ? 'text-success' : 'text-danger'">
+                                {{game.myCountry.baseStats.hunger}}%
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div id="population">
+                            <span class="font-color-blue">
+                                <i class="fa fa-briefcase"></i> Jobs:
+                            </span>
+                            <span>
+                                {{game.myCountry.baseStats.totalJobs | niceNumber}}
+                            </span>
+                        </div>
+                        <div id="happiness">
+                            <span class="font-color-blue">
+                                <i class="fa fa-area-chart"></i> Unemployment:
+                            </span>
+                            <span class="bold" ng-class="game.myCountry.dependentStats.unemployment() === 0 ? 'text-success' : 'text-danger'">
+                                {{game.myCountry.dependentStats.unemployment()}}%
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div id="population">
+                            <span class="font-color-blue">
+                                <i class="fa fa-home"></i> Housing:
+                            </span>
+                            <span>
+                                {{game.myCountry.baseStats.housingCapacity | niceNumber}}
+                            </span>
+                        </div>
+                        <div id="happiness">
+                            <span class="font-color-blue">
+                                <i class="fa fa-area-chart"></i> Homeless:
+                            </span>
+                            <span class="bold" ng-class="game.myCountry.dependentStats.homelessness() === 0 ? 'text-success' : 'text-danger'">
+                                {{game.myCountry.dependentStats.homelessness()}}%
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>

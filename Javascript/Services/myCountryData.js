@@ -7,6 +7,7 @@ wciApp.factory('myCountryData', function () {
     var myCountry = {
         baseStats: {},
         events: {},
+        leaderTitltes: [],
         dependentStats: {},
         functions: {},
         descriptions: {}
@@ -21,6 +22,8 @@ wciApp.factory('myCountryData', function () {
         myCountry.baseStats = JSON.parse(localStorage['countryBaseStats']);
         myCountry.events = JSON.parse(localStorage['countryEvents']);
     }
+
+    getLookups(myCountry);
 
     myCountry.dependentStats = {
         actualGrowthRate: function () {
@@ -171,6 +174,11 @@ wciApp.factory('myCountryData', function () {
     myCountry.functions.getNewEconomics = function () {
 
         myCountry.baseStats.money += myCountry.dependentStats.moneyGrowth();
+
+        //Set the money to a minimum of 0. Once Lending is implemented, then it will be possible for the country to go negative. 
+        if (myCountry.baseStats.money < 0) {
+            myCountry.baseStats.money = 0;
+        }
     };
 
     myCountry.functions.resetStats = function () {
@@ -190,8 +198,13 @@ wciApp.factory('myCountryData', function () {
 var setInitialStats = function (myCountry) {
     myCountry.baseStats = {
         //One Month is signfied as one second
-        name: 'World',
-        title: 'Conqueror',
+        countryName: 'Wadiya',
+        leaderName: 'Rohan',
+        leaderTitle: 'King',
+        difficultyLevel: {
+            Desc: "I am a noob, have mercy!",
+            Value: 1
+        },
         time: 0, //in hours
         currentStabilityIndex: 1, //This is used to determine whether stability will grow or decrease this turn. +ve means growth in stability, -ve means decrease. This is set by various policies etc.
         previousStabilityIndex: 1, //Storing previous stability index to determine if stability has gone down or not.
@@ -200,6 +213,7 @@ var setInitialStats = function (myCountry) {
         happiness: 100, //% calculated based on hunger(fg-fc), homelessness, unemployment, stability.. etc.
         stability: 25, //% calculated based on warring history, friendly laws.
         size: 1,
+        sizeName: 'Speck',
         population: 10,
         baseGrowthRate: 1, //Based on the size of the country (lower size = lower growth rate)
         baseMortalityRate: 6, //Based on the size (lower size = higher mortality rate)
@@ -221,27 +235,68 @@ var setInitialStats = function (myCountry) {
     };
 };
 
+var getLookups = function (myCountry) {
+    myCountry.leaderTitles = [
+        'President',
+        'PM',
+        'Lord',
+        'Lady',
+        'King',
+        'Queen'
+    ];
+
+    myCountry.difficultyLevels = [
+        {
+            Desc: "I am a noob, have mercy!",
+            Value: 1
+        },
+        {
+            Desc: "I am a big boy, I saw a horror movie today and didn't piss my pants.",
+            Value: 1
+        },
+        {
+            Desc: "I am just your average chump with a pc.",
+            Value: 1
+        },
+        {
+            Desc: "I am a jedi wrapped in human skin.",
+            Value: 1
+        },
+        {
+            Desc: "Feeble human mind exterminated. Skynet does not tolerate mediocrity.",
+            Value: 1
+        }
+    ];
+};
+
 var setCountrySize = function (myCountry) {
 
     if (myCountry.dependentStats.gdp() <= 100000) { //100k
+        myCountry.baseStats.sizeName = 'City State';
         myCountry.baseStats.size = 1;
     }
     else if (myCountry.dependentStats.gdp() <= 10000000) { //10m
+        myCountry.baseStats.sizeName = 'Least Developed Country';
         myCountry.baseStats.size = 2;
     }
     else if (myCountry.dependentStats.gdp() <= 1000000000) { //1b
+        myCountry.baseStats.sizeName = 'Developing Nation';
         myCountry.baseStats.size = 3;
     }
     else if (myCountry.dependentStats.gdp() <= 100000000000) { //100b
+        myCountry.baseStats.sizeName = 'Emerging Economy';
         myCountry.baseStats.size = 4;
     }
     else if (myCountry.dependentStats.gdp() <= 10000000000000) { //10t
+        myCountry.baseStats.sizeName = 'Developed Nation';
         myCountry.baseStats.size = 5;
     }
     else if (myCountry.dependentStats.gdp() <= 1000000000000000) { //1q
+        myCountry.baseStats.sizeName = 'World Power';
         myCountry.baseStats.size = 6;
     }
     else {
+        //World Conqueror
         myCountry.baseStats.size = 7;
     }
 };

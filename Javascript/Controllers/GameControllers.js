@@ -77,28 +77,27 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData, 
 
     //#endregion
 
-
     //#region Page Load
 
 
     //#endregion
 
-
     //#region Click Events
 
     game.startGame = function () {
-        if (game.myCountry.baseStats.name.length > 0 && game.myCountry.baseStats.title.length > 0) {
+        if (game.myCountry.baseStats.countryName.length > 0 &&
+            game.myCountry.baseStats.leaderName.length > 0) {
             game.validation.initCountryName = true;
-            game.validation.initCountryTitle = true;
+            game.validation.initLeaderName = true;
             game.data.init.isFirstTime = false;
 
         } else {
-            if (game.myCountry.baseStats.name.length < 1) {
+            if (game.myCountry.baseStats.countryName.length < 1) {
                 game.validation.initCountryName = false;
             }
 
-            if (game.myCountry.baseStats.title.length < 1) {
-                game.validation.initCountryTitle = false;
+            if (game.myCountry.baseStats.leaderName.length < 1) {
+                game.validation.initLeaderName = false;
             }
         }
     };
@@ -112,7 +111,6 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData, 
     };
 
     //#endregion
-
 
     //#region Automated Functions
 
@@ -148,12 +146,10 @@ wciApp.controller('GameController', function ($scope, $interval, myCountryData, 
 
     //#endregion
 
-
     //Making sure interval is cancelled on destroy
     $scope.$on(
         "$destroy",
         function (event) {
-
             $interval.cancel(timer)
         }
     );
@@ -166,11 +162,6 @@ wciApp.controller('MilitaryController', function (militaryData) {
 
 wciApp.controller('StructureController', function (buildingsData) {
     this.buildings = buildingsData;
-
-    this.buildingClick = function (structure) {
-        var structureBuilt = structure.build();
-    }
-
 });
 
 wciApp.controller('CountryController', function ($interval, myCountryData, lawsData) {

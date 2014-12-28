@@ -57,7 +57,7 @@ wciApp.filter('niceNumber', ['$filter', function ($filter) {
         }
         else {
             //For small numbers no decimals.
-            number = multiple.toFixed(0);
+            number = parseInt(number).toFixed(0);
         }
         return number;
     };

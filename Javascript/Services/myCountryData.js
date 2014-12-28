@@ -210,7 +210,7 @@ var setInitialStats = function (myCountry) {
         basefoodGrowth: 100,
         hunger: 0,
         //Economics
-        money: 100, //Earned from Taxes and economic factors.
+        money: 100000, //Earned from Taxes and economic factors.
         upkeep: 0, //Upkeep of buildings and soldiers.
         totalJobs: 16,
         jobGdpMultiplier: 100 //This is how jobs effect the gdp.

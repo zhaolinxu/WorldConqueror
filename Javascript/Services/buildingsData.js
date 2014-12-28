@@ -31,7 +31,6 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     myCountryData.baseStats.money -= cost;
 
                     this.count += count;
-                    //this.cost = cost;
                 }
             },
             updateCost: function (count) {
@@ -79,7 +78,6 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     myCountryData.baseStats.money -= cost;
 
                     this.count += count;
-                    //this.cost = cost;
                 }
             },
             updateCost: function (count) {
@@ -105,7 +103,6 @@ wciApp.factory('buildingsData', function (myCountryData) {
                     myCountryData.baseStats.money -= cost;
 
                     this.count += count;
-                    //this.cost = cost;
                 }
             },
             updateCost: function (count) {
@@ -185,90 +182,90 @@ var setInitialBuildingData = function (buildings) {
                     description: 'This building adds 2 jobs per structure.',
                     count: 8,
                     upkeep: 1,
-                    cost: 500,
-                    displayCost: 500,
+                    cost: 1000,
+                    displayCost: 1000,
                     costMultiplier: 1,
 
                     isUnlocked: true,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1,
                     countMultiplier: 1,
-                    jobsIncreased: 10
+                    jobsIncreased: 1
                 },
                 {
                     name: 'Bank',
                     description: 'This building adds 50 jobs per structure.',
                     count: 0,
-                    upkeep: 25000,
+                    upkeep: 100,
                     cost: 50000,
                     displayCost: 50000,
                     costMultiplier: 1,
 
                     isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
-                    statMultiplier: 1.00001, //20,000 power = 1.221
+                    statMultiplier: 1.0000001,
                     countMultiplier: 1,
-                    jobsIncreased: 500
+                    jobsIncreased: 50
                 },
                 {
                     name: 'Port',
                     description: 'This building adds 1000 jobs per structure and also increases the income from every job.',
                     count: 0,
-                    upkeep: 250000,
+                    upkeep: 2000,
                     cost: 1000000, //1M
                     displayCost: 1000000,
                     costMultiplier: 1,
 
                     isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
-                    statMultiplier: 1.003, //100 power = 1.349
+                    statMultiplier: 1.000006,
                     countMultiplier: 1,
-                    jobsIncreased: 10000 //10k
+                    jobsIncreased: 1000
                 },
                 {
                     name: 'Industry',
                     description: 'This building adds 100,000 jobs per structure and also increases the income from every job.',
                     count: 0,
-                    upkeep: 1000000, //1M
+                    upkeep: 100000, //100k
                     cost: 100000000, //100M
                     displayCost: 100000000,
                     costMultiplier: 1,
 
                     isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
-                    statMultiplier: 1.04, //10 power = 1.480
+                    statMultiplier: 1.0006,
                     countMultiplier: 1,
-                    jobsIncreased: 50000 //50k
+                    jobsIncreased: 200000 //200k
                 },
                 {
                     name: 'Services',
                     description: 'This building adds 100,000 jobs per structure and also increases the income from every job.',
                     count: 0,
-                    upkeep: 1000000, //1M
+                    upkeep: 200000, //200k
                     cost: 500000000, //500M
                     displayCost: 500000000,
                     costMultiplier: 1,
 
                     isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
-                    statMultiplier: 1.2, //2 power = 1.44
+                    statMultiplier: 1.0035,
                     countMultiplier: 1,
-                    jobsIncreased: 1000000 //1M
+                    jobsIncreased: 1000000 //1m
                 },
                 {
                     name: 'Stock Exchange',
                     description: 'This building adds 100,000 jobs per structure and also increases the income from every job.',
                     count: 0,
-                    upkeep: 10000000, //10M
+                    upkeep: 1000000, //1M
                     cost: 10000000000, //10B
                     displayCost: 10000000000,
                     costMultiplier: 1,
 
                     isUnlocked: false,
                     statAffected: 'jobGdpMultiplier',
-                    statMultiplier: 3,
+                    statMultiplier: 1.1,
                     countMultiplier: 1,
-                    jobsIncreased: 100000
+                    jobsIncreased: 10000 //10k
                 }
             ]
         },
@@ -371,94 +368,94 @@ var setInitialBuildingData = function (buildings) {
             name: 'Housing',
             structures: [
                 {
-                    name: 'Shack',
+                    name: 'House',
                     description: 'This building adds 2 housing capacity.',
                     count: 8,
                     upkeep: 1,
-                    cost: 500,
-                    displayCost: 500,
+                    cost: 1000,
+                    displayCost: 1000,
                     costMultiplier: 1,
 
                     isUnlocked: true,
                     statAffected: 'housingCapacity',
-                    statMultiplier: 2,
+                    statMultiplier: 1,
                     countMultiplier: 1,
                     jobsIncreased: 0
                 },
                 {
-                    name: 'House',
+                    name: 'Multiplex',
                     description: 'This building adds 6 housing capacity and 1 new job.',
                     count: 0,
-                    upkeep: 5,
-                    cost: 5000,
-                    displayCost: 500,
+                    upkeep: 200,
+                    cost: 100000, //100k
+                    displayCost: 100000,
                     costMultiplier: 1,
 
                     isUnlocked: false,
                     statAffected: 'housingCapacity',
-                    statMultiplier: 6,
+                    statMultiplier: 150,
                     countMultiplier: 1,
-                    jobsIncreased: 1
+                    jobsIncreased: 8
                 },
                 {
-                    name: 'Duplex',
+                    name: 'Apartment Block',
                     description: 'This building adds 12 housing capacity and 3 new jobs.',
                     count: 0,
-                    upkeep: 5,
-                    cost: 100000,
-                    displayCost: 500,
+                    upkeep: 2000,
+                    cost: 1000000, //1M
+                    displayCost: 1000000,
                     costMultiplier: 1,
 
                     isUnlocked: false,
                     statAffected: 'housingCapacity',
-                    statMultiplier: 12,
+                    statMultiplier: 2000,
                     countMultiplier: 1,
-                    jobsIncreased: 3
-                },
-                {
-                    name: 'Small Apartments',
-                    description: 'This building adds 1000 housing capacity and 50 new jobs.',
-                    count: 0,
-                    upkeep: 5,
-                    cost: 100000000,
-                    displayCost: 500,
-                    costMultiplier: 1,
-
-                    isUnlocked: false,
-                    statAffected: 'housingCapacity',
-                    statMultiplier: 1000,
-                    countMultiplier: 1,
-                    jobsIncreased: 50
+                    jobsIncreased: 100
                 },
                 {
                     name: 'Apartment Complex',
-                    description: 'This building adds 10000 housing capacity and 500 new jobs.',
+                    description: 'This building adds 1000 housing capacity and 50 new jobs.',
                     count: 0,
-                    upkeep: 5,
-                    cost: 5000000000,
-                    displayCost: 500,
+                    upkeep: 100000, //100k
+                    cost: 100000000, //100M
+                    displayCost: 100000000,
                     costMultiplier: 1,
 
                     isUnlocked: false,
                     statAffected: 'housingCapacity',
-                    statMultiplier: 10000,
+                    statMultiplier: 250000, //250k
                     countMultiplier: 1,
-                    jobsIncreased: 500
+                    jobsIncreased: 10000 //10k
+                },
+                {
+                    name: 'Condominiums',
+                    description: 'This building adds 10000 housing capacity and 500 new jobs.',
+                    count: 0,
+                    upkeep: 200000, //200k
+                    cost: 500000000, //500M
+                    displayCost: 500000000,
+                    costMultiplier: 1,
+
+                    isUnlocked: false,
+                    statAffected: 'housingCapacity',
+                    statMultiplier: 1500000, //1.5M
+                    countMultiplier: 1,
+                    jobsIncreased: 50000 //50k
                 },
                 {
                     name: 'High Rise',
                     description: 'This building adds 50000 housing capacity and 1000 new jobs',
                     count: 0,
-                    upkeep: 5,
-                    cost: 50000000000,
-                    displayCost: 500,
+                    upkeep: 1000000, //1M
+                    cost: 10000000000, //10B
+                    displayCost: 10000000000,
                     costMultiplier: 1,
 
                     isUnlocked: false,
                     statAffected: 'housingCapacity',
-                    statMultiplier: 50000,
+                    statMultiplier: 40000000, //40M
                     countMultiplier: 1,
-                    jobsIncreased: 1000
+                    jobsIncreased: 100000 //100k
                 }
             ]
         },
@@ -469,44 +466,44 @@ var setInitialBuildingData = function (buildings) {
                     name: 'Garden',
                     description: 'This building increases base food growth by 200.',
                     count: 5,
-                    cost: 500,
-                    upkeep: 1,
-                    displayCost: 500,
+                    cost: 2000,
+                    upkeep: 2,
+                    displayCost: 2000,
                     costMultiplier: 1,
 
                     isUnlocked: true,
                     statAffected: 'basefoodGrowth',
-                    statMultiplier: 200,
+                    statMultiplier: 10,
                     countMultiplier: 1,
-                    jobsIncreased: 0
+                    jobsIncreased: 1
                 },
                 {
                     name: 'Fishery',
                     description: 'This building increases base food growth by 50,000 and adds 10 jobs',
                     count: 0,
-                    cost: 100000,
-                    upkeep: 5,
-                    displayCost: 500,
+                    cost: 50000, //50k
+                    upkeep: 100,
+                    displayCost: 50000,
                     costMultiplier: 1,
 
                     isUnlocked: false,
                     statAffected: 'basefoodGrowth',
-                    statMultiplier: 50000,
-                    countMultiplier: 0.999,
-                    jobsIncreased: 10
+                    statMultiplier: 375,
+                    countMultiplier: 1,
+                    jobsIncreased: 20
                 },
                 {
                     name: 'Farm',
                     description: 'This building increases base food growth by 40,000 and adds 100 jobs',
                     count: 0,
-                    cost: 100000,
-                    upkeep: 5,
-                    displayCost: 500,
+                    cost: 1000000, //1m
+                    upkeep: 2000,
+                    displayCost: 1000000,
                     costMultiplier: 1,
 
                     isUnlocked: false,
                     statAffected: 'basefoodGrowth',
-                    statMultiplier: 40000,
+                    statMultiplier: 10000,
                     countMultiplier: 1,
                     jobsIncreased: 100
                 },
@@ -514,47 +511,46 @@ var setInitialBuildingData = function (buildings) {
                     name: 'Husbandry',
                     description: 'This building increases base food growth by 250,000 and adds 500 jobs',
                     count: 0,
-                    cost: 5000000,
-                    upkeep: 5,
-                    displayCost: 500,
+                    cost: 10000000, //10m
+                    upkeep: 10000, //10k
+                    displayCost: 10000000,
                     costMultiplier: 1,
 
                     isUnlocked: false,
                     statAffected: 'basefoodGrowth',
-                    statMultiplier: 250000,
-                    countMultiplier: 1.001,
+                    statMultiplier: 125000, //125k
+                    countMultiplier: 1,
                     jobsIncreased: 500
                 },
-                //GMO Lab and Hydro Dam.. multiply the total production, rather than adding to it. (TODO: Think about other food places and convert these to researches down the line)
                 {
                     name: 'Hydro Dam',
                     description: 'This building increases food growth by a factor of 3 and adds 1000 jobs',
                     count: 0,
-                    cost: 1500000000,
-                    upkeep: 5,
-                    displayCost: 500,
+                    cost: 500000000, //500m
+                    upkeep: 200000, //200k
+                    displayCost: 500000000,
                     costMultiplier: 1,
 
                     isUnlocked: false,
                     statAffected: 'basefoodGrowth',
-                    statMultiplier: 3,
-                    countMultiplier: 0.95,
-                    jobsIncreased: 1000
+                    statMultiplier: 7500000, //7.5M
+                    countMultiplier: 1,
+                    jobsIncreased: 10000 //10k
                 },
                 {
                     name: 'GMO Lab',
                     description: 'This building increases food growth by a factor of 2.5 and adds 500 jobs',
                     count: 0,
-                    cost: 10000000000,
-                    upkeep: 5,
-                    displayCost: 500,
+                    cost: 10000000000, //10b
+                    upkeep: 1000000, //1m
+                    displayCost: 10000000000,
                     costMultiplier: 1,
 
                     isUnlocked: false,
                     statAffected: 'basefoodGrowth',
-                    statMultiplier: 2.5,
-                    countMultiplier: 1.5,
-                    jobsIncreased: 500
+                    statMultiplier: 200000000, //200m
+                    countMultiplier: 1,
+                    jobsIncreased: 10000 //10k
                 }
             ]
         },

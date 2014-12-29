@@ -64,7 +64,7 @@ wciApp.factory('myCountryData', function () {
         //Economics
         income: function () {
             //TODO: 12/22/2014: This might need to be reduced.
-            var income = this.gdp() * 0.04;  //You get 4% of the gdp every turn. (Which is one month)
+            var income = this.gdp() * 0.4;  //You get 4% of the gdp every turn. (Which is one month)
             return income;
         },
         moneyGrowth: function(){
@@ -238,11 +238,15 @@ var setInitialStats = function (myCountry) {
 var getLookups = function (myCountry) {
     myCountry.leaderTitles = [
         'President',
-        'PM',
+        'Prime Minister',
         'Lord',
         'Lady',
         'King',
-        'Queen'
+        'Queen',
+        'Drag Queen',
+        'Dictator',
+        'Emperor',
+        'Emperess'
     ];
 
     myCountry.difficultyLevels = [

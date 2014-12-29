@@ -19,13 +19,14 @@ wciApp.filter('niceNumber', ['$filter', function ($filter) {
 
     return function (number) {
 
-        var number = number.toString().replace(',', '');
+        //Regexp helps with replace all. 
+        var number = number.toString().replace(new RegExp(',','g'), '');
         var absVal = Math.abs(number);
 
         var suffixes = ["K", "M", "B", "T", "Q"];
 
         for (var i = suffixes.length - 1; i >= 0; i--) {
-            if (absVal > Math.pow(1000, i + 1)) {
+            if (absVal >= Math.pow(1000, i + 1)) {
                 var multiple = (number / Math.pow(1000, i + 1));
                 var decimal = decimalPlaces(multiple, 2);
 

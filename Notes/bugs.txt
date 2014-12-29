@@ -1,3 +1,6 @@
 ﻿1) Resetting doesn't reset the speed
 2) Resetting loses all the functions of the services.
+3) Enacting One Child Policy does not affect stability negatively. Need to add a parameter (no negative law, which gives +1 stability.. this way at one child policy.. the stability will become -1)
 4) Timer keeps going on while the intro screen is live.
+6) Money growth is too slow.
+7) Job through Food, makes market useless.

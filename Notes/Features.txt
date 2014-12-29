@@ -13,9 +13,12 @@ Version 0.0.2 Features
 2) Add Base Happiness factor and happiness multiplier
 3) Add Description for each building.
 4) Made numbers nicer to see
-5) Add upkeep
-6) Add time period, showing how long realistically this country has lasted.
-7) Use verbiage for size.
+5) Added upkeep
+6) Added time period, showing how long realistically this country has lasted.
+7) Using verbiage for size.
+8) Added basic laws to control population growth
+9) Added option to pick title and difficulty level at game start
+10) Rebalancing the buildings. 
 
 
 Version 0.0.3 Features

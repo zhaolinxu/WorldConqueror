@@ -37,29 +37,45 @@ wciApp.factory('researchData', function (myCountryData, buildingsData) {
 });
 
 var setInitialResearchData = function (researches) {
-    researches.baseStats.tech = [
-       {
-           name: "Tech1",
-           cost: 1,
-           isUnlocked: true,
-           isCompleted: false,
-           researchIcon: 'fa-flask',
-           countryStat: '',
-           countryStatAffect: '',
-           structureType: '',
-           building: '',
-           buildingStat: '',
-           buildingStatAffect: '',
-           militaryType: '',
-           unit: '',
-           unitStat: '',
-           unitStatAffect: '',
-           researchType: '',
-           tech: '',
-           techStat: '',
-           tectStatAffect: ''
-       }
-    ]
+    /*
+        types of tech: 
+        Unlockables
+        Bulding Upgrades
+        Unit Upgrades
+        Country Upgrades
+    */
+    researches.baseStats = {
+        Library: {
+            name: 'Library',
+            techs: [
+            ]
+        },
+        School: {
+            name: 'School',
+            techs: [
+            ]
+        },
+        University: {
+            name: 'University',
+            techs: [
+            ]
+        },
+        Laboratory: {
+            name: 'Laboratory',
+            techs: [
+            ]
+        },
+        Observatory: {
+            name: 'Observatory',
+            techs: [
+            ]
+        },
+        SpaceStation: {
+            name: 'Space Station',
+            techs: [
+            ]
+        }
+    }
 };
 
 
@@ -68,3 +84,25 @@ var setInitialResearchData = function (researches) {
 //Energy Grid - imrpoves economy.. max housing capacity of buildings
 //Horticulture - Food
 //Fertilizer
+
+{
+    name: "Tech1",
+    cost: 1,
+    isUnlocked: true,
+    isCompleted: false,
+    researchIcon: 'fa-flask',
+    countryStat: '',
+    countryStatAffect: '',
+    structureType: '',
+    building: '',
+    buildingStat: '',
+    buildingStatAffect: '',
+    militaryType: '',
+    unit: '',
+    unitStat: '',
+    unitStatAffect: '',
+    researchType: '',
+    tech: '',
+    techStat: '',
+    tectStatAffect: ''
+}

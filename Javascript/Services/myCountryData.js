@@ -256,19 +256,19 @@ var getLookups = function (myCountry) {
         },
         {
             Desc: "I am a big boy, I saw a horror movie today and didn't piss my pants.",
-            Value: 1
+            Value: 2
         },
         {
             Desc: "I am just your average chump with a pc.",
-            Value: 1
+            Value: 3
         },
         {
             Desc: "I am a jedi wrapped in human skin.",
-            Value: 1
+            Value: 4
         },
         {
             Desc: "Feeble human mind exterminated. Skynet does not tolerate mediocrity.",
-            Value: 1
+            Value: 5
         }
     ];
 };
@@ -282,6 +282,8 @@ var setCountrySize = function (myCountry) {
     else if (myCountry.dependentStats.gdp() <= 10000000) { //10m
         myCountry.baseStats.sizeName = 'Least Developed Country';
         myCountry.baseStats.size = 2;
+
+        sizeIncreaseEvents(2);
     }
     else if (myCountry.dependentStats.gdp() <= 1000000000) { //1b
         myCountry.baseStats.sizeName = 'Developing Nation';
@@ -316,4 +318,8 @@ var setHappiness = function (myCountry) {
     var stability = myCountry.baseStats.stability;
 
     myCountry.baseStats.happiness = Math.round(100 - (unemployment / 4) - (hunger / 4) - (homeless / 4) - ((100 - stability) / 4));
+};
+
+var sizeIncreaseEvents = function (myCountry) {
+
 };

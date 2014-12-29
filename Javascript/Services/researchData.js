@@ -15,13 +15,13 @@ wciApp.factory('researchData', function (myCountryData, buildingsData) {
         researches.baseStats = JSON.parse(localStorage['researchData']);
     }
 
-    for (var i = 0; i < researches.baseStats.tech; i++) {
-        angular.extend(researches.baseStats.tech[i], {
-            research: function () {
+    //for (var i = 0; i < researches.baseStats.tech; i++) {
+    //    angular.extend(researches.baseStats.tech[i], {
+    //        research: function () {
 
-            }
-        });
-    }
+    //        }
+    //    });
+    //}
 
 
     researches.functions.saveData = function () {
@@ -48,11 +48,13 @@ var setInitialResearchData = function (researches) {
         Library: {
             name: 'Library',
             techs: [
+
             ]
         },
         School: {
             name: 'School',
             techs: [
+
             ]
         },
         University: {

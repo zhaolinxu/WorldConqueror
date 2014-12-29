@@ -28,6 +28,7 @@ Version 0.0.3 Features
 4) Give player ability to tweak the parameters
 5) Add Land and Land Limits
 6) Add Research and Science Buildings
+7) Adding advisors. Advisors will have personality (which will give specific bonuses) and experience level which will effect the amount of the bonus.
 
 
 Version 0.0.4 Features

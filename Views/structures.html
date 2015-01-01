@@ -10,7 +10,7 @@
                 <div class="row">
                     <div id="build" class="col-md-6">
                         <div class="panel panel-primary panelLocked" ng-repeat="structure in building.structures"
-                             ng-class="{'clickableArea panelUnlocked':structure.isUnlocked}">
+                             ng-class="{'clickableArea panelUnlocked':structure.isUnlocked()}">
                             <div class="panel-body">
                                 <div class="col-md-6">
                                     <span class="fa fa-info-circle" tooltip="{{structure.description}}"></span>
@@ -19,7 +19,7 @@
                                     <!--TODO: Remove some padding around the icon-->
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="pull-right clickableArea" ng-show="structure.isUnlocked">
+                                    <div class="pull-right clickableArea" ng-show="structure.isUnlocked()">
                                         <button class="btn btn-primary" ng-click="structure.build(1)">
                                             x1
                                         </button>

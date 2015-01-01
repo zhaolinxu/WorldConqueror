@@ -24,7 +24,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
             build: function (count) {
                 var cost = this.cost * count;
 
-                if ((myCountryData.baseStats.money > cost) && this.isUnlocked) {
+                if ((myCountryData.baseStats.money > cost) && this.isUnlocked()) {
 
                     myCountryData.baseStats[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
                     myCountryData.baseStats.totalJobs += (this.jobsIncreased * count);
@@ -36,6 +36,12 @@ wciApp.factory('buildingsData', function (myCountryData) {
             updateCost: function (count) {
                 var cost = this.cost * count;
                 this.displayCost = cost;
+            },
+            isUnlocked: function () {
+                if (myCountryData.baseStats.size >= this.sizeRequired) {
+                    return true;
+                }
+                return false;
             }
 
         });
@@ -71,7 +77,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
             build: function (count) {
                 var cost = this.cost * count;
 
-                if ((myCountryData.baseStats.money > cost) && this.isUnlocked) {
+                if ((myCountryData.baseStats.money > cost) && this.isUnlocked()) {
 
                     myCountryData.baseStats[this.statAffected] += (this.statMultiplier * count);
                     myCountryData.baseStats.totalJobs += (this.jobsIncreased * count);
@@ -83,6 +89,12 @@ wciApp.factory('buildingsData', function (myCountryData) {
             updateCost: function (count) {
                 var cost = this.cost * count;
                 this.displayCost = cost;
+            },
+            isUnlocked: function () {
+                if(myCountryData.baseStats.size >= this.sizeRequired) {
+                    return true;
+                }
+                return false;
             }
 
         });
@@ -96,7 +108,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
             build: function (count) {
                 var cost = this.cost * count;
 
-                if ((myCountryData.baseStats.money > cost) && this.isUnlocked) {
+                if ((myCountryData.baseStats.money > cost) && this.isUnlocked()) {
 
                     myCountryData.baseStats[this.statAffected] += (this.statMultiplier * count);
                     myCountryData.baseStats.totalJobs += (this.jobsIncreased * count);
@@ -108,6 +120,12 @@ wciApp.factory('buildingsData', function (myCountryData) {
             updateCost: function (count) {
                 var cost = this.cost * count;
                 this.displayCost = cost;
+            },
+            isUnlocked: function () {
+                if (myCountryData.baseStats.size >= this.sizeRequired) {
+                    return true;
+                }
+                return false;
             }
 
         });
@@ -169,7 +187,6 @@ wciApp.factory('buildingsData', function (myCountryData) {
 
 });
 
-
 var setInitialBuildingData = function (buildings) {
     buildings.baseStats = {
         //TODO: Store this information in a json.
@@ -186,7 +203,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 1000,
                     costMultiplier: 1,
 
-                    isUnlocked: true,
+                    sizeRequired: 1,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1,
                     countMultiplier: 1,
@@ -201,7 +218,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 50000,
                     costMultiplier: 1,
 
-                    isUnlocked: false,
+                    sizeRequired: 2,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.0000001,
                     countMultiplier: 1,
@@ -216,7 +233,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 1000000,
                     costMultiplier: 1,
 
-                    isUnlocked: false,
+                    sizeRequired: 3,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.000006,
                     countMultiplier: 1,
@@ -231,7 +248,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 100000000,
                     costMultiplier: 1,
 
-                    isUnlocked: false,
+                    sizeRequired: 4,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.0006,
                     countMultiplier: 1,
@@ -246,7 +263,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 500000000,
                     costMultiplier: 1,
 
-                    isUnlocked: false,
+                    sizeRequired: 5,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.0035,
                     countMultiplier: 1,
@@ -261,7 +278,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 10000000000,
                     costMultiplier: 1,
 
-                    isUnlocked: false,
+                    sizeRequired: 6,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.1,
                     countMultiplier: 1,
@@ -281,7 +298,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 500,
                     costMultiplier: 9,
 
-                    isUnlocked: false,
+                    sizeRequired: 2,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
                     countMultiplier: 1.8,
@@ -296,7 +313,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 500,
                     costMultiplier: 9,
 
-                    isUnlocked: false,
+                    sizeRequired: 2,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
                     countMultiplier: 1.8,
@@ -311,7 +328,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 500,
                     costMultiplier: 9,
 
-                    isUnlocked: false,
+                    sizeRequired: 2,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
                     countMultiplier: 1.8,
@@ -326,7 +343,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 500,
                     costMultiplier: 9,
 
-                    isUnlocked: false,
+                    sizeRequired: 2,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
                     countMultiplier: 1.8,
@@ -341,7 +358,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 500,
                     costMultiplier: 9,
 
-                    isUnlocked: false,
+                    sizeRequired: 2,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
                     countMultiplier: 1.8,
@@ -356,7 +373,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 500,
                     costMultiplier: 9,
 
-                    isUnlocked: false,
+                    sizeRequired: 2,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
                     countMultiplier: 1.8,
@@ -376,7 +393,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 1000,
                     costMultiplier: 1,
 
-                    isUnlocked: true,
+                    sizeRequired: 1,
                     statAffected: 'housingCapacity',
                     statMultiplier: 1,
                     countMultiplier: 1,
@@ -391,7 +408,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 100000,
                     costMultiplier: 1,
 
-                    isUnlocked: false,
+                    sizeRequired: 2,
                     statAffected: 'housingCapacity',
                     statMultiplier: 150,
                     countMultiplier: 1,
@@ -406,7 +423,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 1000000,
                     costMultiplier: 1,
 
-                    isUnlocked: false,
+                    sizeRequired: 3,
                     statAffected: 'housingCapacity',
                     statMultiplier: 2000,
                     countMultiplier: 1,
@@ -421,7 +438,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 100000000,
                     costMultiplier: 1,
 
-                    isUnlocked: false,
+                    sizeRequired: 4,
                     statAffected: 'housingCapacity',
                     statMultiplier: 250000, //250k
                     countMultiplier: 1,
@@ -436,7 +453,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 500000000,
                     costMultiplier: 1,
 
-                    isUnlocked: false,
+                    sizeRequired: 5,
                     statAffected: 'housingCapacity',
                     statMultiplier: 1500000, //1.5M
                     countMultiplier: 1,
@@ -451,7 +468,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 10000000000,
                     costMultiplier: 1,
 
-                    isUnlocked: false,
+                    sizeRequired: 6,
                     statAffected: 'housingCapacity',
                     statMultiplier: 40000000, //40M
                     countMultiplier: 1,
@@ -471,7 +488,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 2000,
                     costMultiplier: 1,
 
-                    isUnlocked: true,
+                    sizeRequired: 1,
                     statAffected: 'basefoodGrowth',
                     statMultiplier: 10,
                     countMultiplier: 1,
@@ -486,7 +503,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 50000,
                     costMultiplier: 1,
 
-                    isUnlocked: false,
+                    sizeRequired: 2,
                     statAffected: 'basefoodGrowth',
                     statMultiplier: 375,
                     countMultiplier: 1,
@@ -501,7 +518,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 1000000,
                     costMultiplier: 1,
 
-                    isUnlocked: false,
+                    sizeRequired: 3,
                     statAffected: 'basefoodGrowth',
                     statMultiplier: 10000,
                     countMultiplier: 1,
@@ -516,7 +533,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 10000000,
                     costMultiplier: 1,
 
-                    isUnlocked: false,
+                    sizeRequired: 4,
                     statAffected: 'basefoodGrowth',
                     statMultiplier: 125000, //125k
                     countMultiplier: 1,
@@ -531,7 +548,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 500000000,
                     costMultiplier: 1,
 
-                    isUnlocked: false,
+                    sizeRequired: 5,
                     statAffected: 'basefoodGrowth',
                     statMultiplier: 7500000, //7.5M
                     countMultiplier: 1,
@@ -546,7 +563,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 10000000000,
                     costMultiplier: 1,
 
-                    isUnlocked: false,
+                    sizeRequired: 6,
                     statAffected: 'basefoodGrowth',
                     statMultiplier: 200000000, //200m
                     countMultiplier: 1,
@@ -566,7 +583,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 500,
                     costMultiplier: 9,
 
-                    isUnlocked: false,
+                    sizeRequired: 2,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
                     countMultiplier: 1.8,
@@ -581,7 +598,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 500,
                     costMultiplier: 9,
 
-                    isUnlocked: false,
+                    sizeRequired: 2,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
                     countMultiplier: 1.8,
@@ -596,7 +613,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 500,
                     costMultiplier: 9,
 
-                    isUnlocked: false,
+                    sizeRequired: 2,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
                     countMultiplier: 1.8,
@@ -611,7 +628,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 500,
                     costMultiplier: 9,
 
-                    isUnlocked: false,
+                    sizeRequired: 2,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
                     countMultiplier: 1.8,
@@ -626,7 +643,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 500,
                     costMultiplier: 9,
 
-                    isUnlocked: false,
+                    sizeRequired: 2,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
                     countMultiplier: 1.8,
@@ -641,7 +658,7 @@ var setInitialBuildingData = function (buildings) {
                     displayCost: 500,
                     costMultiplier: 9,
 
-                    isUnlocked: false,
+                    sizeRequired: 2,
                     statAffected: 'jobGdpMultiplier',
                     statMultiplier: 1.5,
                     countMultiplier: 1.8,

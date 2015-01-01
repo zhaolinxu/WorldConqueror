@@ -87,24 +87,24 @@ var setInitialResearchData = function (researches) {
 //Horticulture - Food
 //Fertilizer
 
-{
-    name: "Tech1",
-    cost: 1,
-    isUnlocked: true,
-    isCompleted: false,
-    researchIcon: 'fa-flask',
-    countryStat: '',
-    countryStatAffect: '',
-    structureType: '',
-    building: '',
-    buildingStat: '',
-    buildingStatAffect: '',
-    militaryType: '',
-    unit: '',
-    unitStat: '',
-    unitStatAffect: '',
-    researchType: '',
-    tech: '',
-    techStat: '',
-    tectStatAffect: ''
-}
+//{
+//    name: "Tech1",
+//    cost: 1,
+//    isUnlocked: true,
+//    isCompleted: false,
+//    researchIcon: 'fa-flask',
+//    countryStat: '',
+//    countryStatAffect: '',
+//    structureType: '',
+//    building: '',
+//    buildingStat: '',
+//    buildingStatAffect: '',
+//    militaryType: '',
+//    unit: '',
+//    unitStat: '',
+//    unitStatAffect: '',
+//    researchType: '',
+//    tech: '',
+//    techStat: '',
+//    tectStatAffect: ''
+//}

@@ -20,7 +20,7 @@ wciApp.filter('niceNumber', ['$filter', function ($filter) {
     return function (number) {
 
         //Regexp helps with replace all. 
-        var number = number.toString().replace(new RegExp(',','g'), '');
+        number = number.toString().replace(new RegExp(',','g'), '');
         var absVal = Math.abs(number);
 
         var suffixes = ["K", "M", "B", "T", "Q"];

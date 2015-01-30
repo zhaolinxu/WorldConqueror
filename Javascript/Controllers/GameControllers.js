@@ -160,8 +160,9 @@ wciApp.controller('MilitaryController', function (militaryData) {
     this.military = militaryData;
 });
 
-wciApp.controller('StructureController', function (buildingsData) {
+wciApp.controller('StructureController', function (buildingsData, advisorsData) {
     this.buildings = buildingsData;
+    this.advisors = advisorsData;
 });
 
 wciApp.controller('CountryController', function ($interval, myCountryData, lawsData) {

@@ -81,15 +81,6 @@ var setInitialLawsData = function (laws, myCountryData) {
            activeFor: 0,
            stabilityAffected: -3,
            eventAffected: 'birthFreeze'
-       },
-       {
-           name: "Mandatory One Child Policy",
-           isUnlocked: true,
-           isActive: false,
-           icon: 'fa-flask',
-           description: "Mandatory One Child Policy",
-           activeFor: 0,
-           valueAffected: -1
        }
     ]
 };

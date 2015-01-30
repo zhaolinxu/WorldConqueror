@@ -13,7 +13,7 @@ Version 0.0.2 Features
 2) Add Base Happiness factor and happiness multiplier
 3) Add Description for each building.
 4) Made numbers nicer to see
-5) Added upkeep
+5) Added upkeep.
 6) Added time period, showing how long realistically this country has lasted.
 7) Using verbiage for size.
 8) Added basic laws to control population growth
@@ -89,6 +89,7 @@ Version 2.0.0 Features
 13) Add Real Map action
 14) Add taxation and avgSalary as parameters which affect money income.
 15) Add growth from a little settlement to city, to state to country and so on.
+16) Battler Formations (Maybe?)
 
 
 Version 3.0.0 Features

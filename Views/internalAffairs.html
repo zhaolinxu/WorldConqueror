@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     <div ng-repeat="law in countryCtrl.laws.baseStats">
-                        <div class="panel-body law-panel" ng-click="law.enactLaw()">
+                        <div class="panel-body custom-panel" ng-click="law.enactLaw()">
                             <div class="col-md-6">
                                 <span class="fa fa-info-circle" tooltip="{{law.description}}"></span>
                                 <span class="fa" ng-class="law.icon"></span>
@@ -55,20 +55,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-sm-12">
-                <div id="advisors" class="panel panel-primary">
-                    <div class="panel-heading">
-                        <div class="panel-title">
-                            <span>
-                                Advisors
-                            </span>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        Test
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </div>
 </div>

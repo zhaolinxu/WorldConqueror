@@ -45,10 +45,10 @@ wciApp.factory('buildingsData', function (myCountryData) {
             }
 
         });
-    };
+    }
 
     //Build logic for Science buildings.
-    for (var i = 0; i < buildings.baseStats.Science.structures.length; i++) {
+    for (i = 0; i < buildings.baseStats.Science.structures.length; i++) {
 
         angular.extend(buildings.baseStats.Science.structures[i], {
 
@@ -67,10 +67,10 @@ wciApp.factory('buildingsData', function (myCountryData) {
             }
 
         });
-    };
+    }
 
     //Build logic for Housing buildings.
-    for (var i = 0; i < buildings.baseStats.Housing.structures.length; i++) {
+    for (i = 0; i < buildings.baseStats.Housing.structures.length; i++) {
 
         angular.extend(buildings.baseStats.Housing.structures[i], {
 
@@ -98,10 +98,10 @@ wciApp.factory('buildingsData', function (myCountryData) {
             }
 
         });
-    };
+    }
 
     //Build logic for Food buildings.
-    for (var i = 0; i < buildings.baseStats.Food.structures.length; i++) {
+    for (i = 0; i < buildings.baseStats.Food.structures.length; i++) {
 
         angular.extend(buildings.baseStats.Food.structures[i], {
 
@@ -129,10 +129,10 @@ wciApp.factory('buildingsData', function (myCountryData) {
             }
 
         });
-    };
+    }
 
     //Build logic for Military buildings.
-    for (var i = 0; i < buildings.baseStats.Military.structures.length; i++) {
+    for (i = 0; i < buildings.baseStats.Military.structures.length; i++) {
 
         angular.extend(buildings.baseStats.Military.structures[i], {
 
@@ -151,7 +151,7 @@ wciApp.factory('buildingsData', function (myCountryData) {
             }
 
         });
-    };
+    }
 
 
     buildings.functions.saveData = function () {
@@ -166,19 +166,19 @@ wciApp.factory('buildingsData', function (myCountryData) {
 
         for (var j = 0; j < buildings.baseStats.Economic.structures.length; j++) {
             upkeep += buildings.baseStats.Economic.structures[j].upkeep * buildings.baseStats.Economic.structures[j].count;
-        };
-        for (var j = 0; j < buildings.baseStats.Science.structures.length; j++) {
+        }
+        for (j = 0; j < buildings.baseStats.Science.structures.length; j++) {
             upkeep += buildings.baseStats.Science.structures[j].upkeep * buildings.baseStats.Science.structures[j].count;
-        };
-        for (var j = 0; j < buildings.baseStats.Housing.structures.length; j++) {
+        }
+        for (j = 0; j < buildings.baseStats.Housing.structures.length; j++) {
             upkeep += buildings.baseStats.Housing.structures[j].upkeep * buildings.baseStats.Housing.structures[j].count;
-        };
-        for (var j = 0; j < buildings.baseStats.Food.structures.length; j++) {
+        }
+        for (j = 0; j < buildings.baseStats.Food.structures.length; j++) {
             upkeep += buildings.baseStats.Food.structures[j].upkeep * buildings.baseStats.Food.structures[j].count;
-        };
-        for (var j = 0; j < buildings.baseStats.Military.structures.length; j++) {
+        }
+        for (j = 0; j < buildings.baseStats.Military.structures.length; j++) {
             upkeep += buildings.baseStats.Military.structures[j].upkeep * buildings.baseStats.Military.structures[j].count;
-        };
+        }
 
         myCountryData.baseStats.upkeep = upkeep;
     };

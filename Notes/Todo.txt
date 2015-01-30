@@ -7,3 +7,13 @@ Add War Room UI
 Add Research room.
 
 Add ability to delete buildings.
+
+Add units like medic, mechanic.
+
+Make minimum population as 2.
+
+Pause the game at 5 population to warn the user of dying country. 
+
+Have user select amount of food to send with an attacking army. the food = (consumption per person)* #  of soldiers * # of days you want to fight. If the food runs out before army wins.. You retreat. 
+
+Have special units in the army like medics, cooks, which can help extend the battle. 1- 5 stars can be bought with game money and 6 star unit needs to bought with real money.

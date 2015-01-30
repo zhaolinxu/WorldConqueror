@@ -77,6 +77,11 @@
     padding:15px;
 }
 
+.custom-panel:hover {
+    background-color: #888;
+    color: white;
+}
+
 /*Borders*/
 .all-border {
     border-width: 1px;

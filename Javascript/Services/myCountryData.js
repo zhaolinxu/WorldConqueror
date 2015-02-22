@@ -37,7 +37,6 @@ wciApp.factory('myCountryData', function () {
                     return myCountry.baseStats.baseGrowthRate * ((3 * myCountry.baseStats.happiness) / 100);
                 })();
             }
-
             return growthRate;
         },
         actualMortalityRate: function(){
@@ -225,7 +224,7 @@ var setInitialStats = function (myCountry) {
         hunger: 0,
         //Economics
         money: 100000, //Earned from Taxes and economic factors.
-        upkeep: 0, //Upkeep of buildings and soldiers.
+        upkeep: 0, //Upkeep of buildings, advisors and soldiers.
         totalJobs: 16,
         jobGdpMultiplier: 100 //This is how jobs effect the gdp.
     };

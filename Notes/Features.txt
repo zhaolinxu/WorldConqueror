@@ -24,7 +24,7 @@ Version 0.0.2 Features
 Version 0.0.3 Features
 1) Add custom titles
 2) Add Local Saves
-3) Conver the City Name to HQ Section and create another Stats section.
+3) Convert the City Name to HQ Section and create another Stats section.
 4) Give player ability to tweak the parameters
 5) Add Land and Land Limits
 6) Add Research and Science Buildings

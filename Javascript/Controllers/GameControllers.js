@@ -9,7 +9,8 @@ wciApp.controller(
         buildingsData,
         militaryData,
         lawsData,
-        advisorsData) {
+        advisorsData,
+        helperModalsData) {
 
     //#region Private Methods
 
@@ -69,6 +70,8 @@ wciApp.controller(
     game.advisors = advisorsData;
     game.military = militaryData;
     game.laws = lawsData;
+    game.helperModals = helperModalsData;
+
 
     //Load Game's Settings
     if (!localStorage['gameData']) {
@@ -117,11 +120,9 @@ wciApp.controller(
             }
         }
     };
-
     game.saveGame = function () {
         saveGame();
     };
-
     game.resetGame = function () {
         resetGame();
     };
@@ -176,9 +177,16 @@ wciApp.controller('MilitaryController', function (militaryData) {
     this.military = militaryData;
 });
 
-wciApp.controller('StructureController', function (buildingsData, advisorsData) {
+wciApp.controller(
+    'StructureController',
+    function (
+        buildingsData,
+        advisorsData,
+        helperModalsData) {
+
     this.buildings = buildingsData;
     this.advisors = advisorsData;
+    this.helperModals = helperModalsData;
 });
 
 wciApp.controller('CountryController', function ($interval, myCountryData, lawsData) {

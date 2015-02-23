@@ -37,11 +37,9 @@ wciApp.factory(
                 advisors.baseStats.activeAdvisors[advisor.Type] = advisor;
             });
         };
-
         advisors.functions.upgradeAdvisor = function (advisor) {
 
         };
-
         advisors.functions.removeAdvisor = function (advisor) {
             angular.forEach(buildingsData.baseStats[advisor.Type].structures, function (structure) {
 
@@ -50,7 +48,6 @@ wciApp.factory(
             });
             advisors.baseStats.activeAdvisors[advisor.Type] = { Type: advisor.Type };
         };
-
         advisors.functions.enableAutoBuy = function (advisor) {
             advisor.IsAutobuyActive = !advisor.IsAutobuyActive;
         };
@@ -63,7 +60,6 @@ wciApp.factory(
         };
 
         advisors.functions.advisorTimedEffects = function () {
-
             getUpkeep();
             activateSkills();
         };
@@ -82,12 +78,6 @@ wciApp.factory(
                         structure.displayCost = structure.baseCost * (1 - (Math.pow(advisor.EducationLevel, 2) / 100));
                     });
                     advisor.IsSkillActive = true;
-                //} else {
-                //    angular.forEach(buildingsData.baseStats[activeAdvisor].structures, function (structure) {
-
-                //        structure.cost = structure.baseCost;
-                //        structure.displayCost = structure.baseCost;
-                //    });
                 }
             }
         };
@@ -101,13 +91,10 @@ wciApp.factory(
                     upkeep += advisor.Salary / 8640; //breakdown yearly salary in hourly = 12*30*24
                 }
             }
-
             myCountryData.baseStats.upkeep += upkeep;
         };
 
-
         return advisors;
-
     });
 
 var setInitialAdvisorsData = function (advisors) {
@@ -138,24 +125,10 @@ var setInitialAdvisorsData = function (advisors) {
                 Type: 'Housing'
             },
             Military: {
-                Name: 'Test Name',
-                Age: 24,
-                Type: 'Military',
-                EducationLevel: 1,
-                IsAutobuyActive: false,
-                IsSkillActive: false,
-                Image: '../Images/avatar_blank.jpeg',
-                Salary: 50000 //50k
+                Type: 'Military'
             },
             Science: {
-                Name: 'Test Name',
-                Age: 24,
-                Type: 'Science',
-                EducationLevel: 1,
-                IsAutobuyActive: false,
-                IsSkillActive: false,
-                Image: '../Images/avatar_blank.jpeg',
-                Salary: 50000 //50k
+                Type: 'Science'
             }
         }
     };

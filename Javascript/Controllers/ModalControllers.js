@@ -7,51 +7,64 @@ wciApp.controller(
         $modalInstance,
         advisorType) {
 
-    $scope.advisors = [];
+        $scope.advisors = [];
 
-    var generateRandomAdvisors = function () {
-        for (var i = 0; i < 5; i++) {
-            var advisor = {
-                Name: getRandomName(),
-                Age: getRandomAge(),
-                EducationLevel: getRandomEducationLevel(),
-                IsAutobuyActive: false,
-                IsSkillActive: false,
-                Type: advisorType,
-                Image: '../Images/avatar_blank.jpeg',
-                Salary: 0
-            };
-            advisor.Salary = getSalary(advisor);
+        var generateRandomAdvisors = function () {
+            for (var i = 0; i < 5; i++) {
+                var advisor = {
+                    Name: getRandomName(),
+                    Age: getRandomAge(),
+                    EducationLevel: getRandomEducationLevel(),
+                    IsAutobuyActive: false,
+                    IsSkillActive: false,
+                    Type: advisorType,
+                    Image: '../Images/avatar_blank.jpeg',
+                    Salary: 0
+                };
+                advisor.Salary = getSalary(advisor);
 
-            $scope.advisors.push(advisor);
-        }
-    };
+                $scope.advisors.push(advisor);
+            }
+        };
 
-    var getRandomAge = function () {
-        var age = Math.floor((Math.random() * (80 - 18)) + 18);
-        return age;
-    };
-    var getRandomEducationLevel = function () {
-        var educationLevel = Math.floor((Math.random() * (5)) + 1);
-        return educationLevel;
-    };
-    var getRandomName = function () {
-        return 'Test Name';
-    };
+        var getRandomAge = function () {
+            var age = Math.floor((Math.random() * (80 - 18)) + 18);
+            return age;
+        };
+        var getRandomEducationLevel = function () {
+            var educationLevel = Math.floor((Math.random() * (5)) + 1);
+            return educationLevel;
+        };
+        var getRandomName = function () {
+            return 'Test Name';
+        };
 
-    var getSalary = function (advisor) {
-        var salary = Math.pow(advisor.EducationLevel, 5) * 100000; //square*100k
-        return salary;
-    };
+        var getSalary = function (advisor) {
+            var salary = Math.pow(advisor.EducationLevel, 5) * 100000; //square*100k
+            return salary;
+        };
 
-    generateRandomAdvisors();
+        generateRandomAdvisors();
 
-    $scope.hire = function (advisor) {
-        $modalInstance.close(advisor);
-    };
+        $scope.hire = function (advisor) {
+            $modalInstance.close(advisor);
+        };
+        $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+        };
+        $scope.refreshList = function () {
+            $scope.advisors = [];
+            generateRandomAdvisors();
+        };
+    });
 
-    $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
-    };
+wciApp.controller(
+    'advisorsHelpModalController',
+    function (
+        $scope,
+        $modalInstance) {
 
-});
+        $scope.ok = function () {
+            $modalInstance.dismiss('ok');
+        };
+    });

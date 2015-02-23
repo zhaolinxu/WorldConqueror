@@ -1,0 +1,34 @@
+﻿<div>
+    <script type="text/ng-template" id="advisorsHiringModal.html">
+        <div class="modal-header">
+            <h4 class="modal-title">Hire New Advisor</h4>
+        </div>
+        <div class="modal-body font-9pt">
+            <div ng-repeat="advisor in advisors">
+                <div class="panel-body custom-panel">
+                    <div class="col-md-2 col-sm-3 avatar">
+                        <img class="img-responsive" src="{{advisor.Image}}" />
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <span>{{advisor.Name}}</span>
+                        <br />
+                        <span>{{advisor.Age}} years</span>
+                        <br />
+                        <span>{{advisor.Type}}</span>
+                        <br />
+                        <span tooltip-html-unsafe="Upkeep per hour: {{advisor.Salary/8640 | niceNumber}}">{{advisor.Salary | niceNumber}}</span>
+                        <br />
+                        <rating ng-model="advisor.EducationLevel" max="5" readonly="true"></rating>
+                    </div>
+                    <div class="col-md-3 col-sm-3 pull-right">
+                        <button class="btn btn-success pull-right" tooltip="Hire Advisor" ng-click="hire(advisor)">Hire</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-info"ng-click="refreshList()">Refresh List</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+</div>

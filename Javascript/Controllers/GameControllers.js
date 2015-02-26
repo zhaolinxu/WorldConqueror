@@ -26,6 +26,7 @@ wciApp.controller(
 
         game.myCountry.baseStats.upkeep = 0;
         game.buildings.functions.getTotalUpkeep();
+        game.military.functions.militaryTimedEffects();
         game.advisors.functions.advisorTimedEffects();
         //game.saveGame();
 

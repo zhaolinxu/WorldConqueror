@@ -19,9 +19,9 @@ wciApp.controller(
                     IsSkillActive: false,
                     Type: advisorType,
                     Image: '../Images/avatar_blank.jpeg',
-                    Salary: 0
+                    Upkeep: 0
                 };
-                advisor.Salary = getSalary(advisor);
+                advisor.Upkeep = getSalary(advisor);
 
                 $scope.advisors.push(advisor);
             }
@@ -40,7 +40,7 @@ wciApp.controller(
         };
 
         var getSalary = function (advisor) {
-            var salary = Math.pow(advisor.EducationLevel, 5) * 100000; //square*100k
+            var salary = Math.pow(advisor.EducationLevel, 5) * 10; //square*100k
             return salary;
         };
 

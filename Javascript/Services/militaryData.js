@@ -40,6 +40,22 @@ wciApp.factory('militaryData', function (myCountryData) {
     military.functions.resetData = function () {
         setInitialUnitsData(military);
     };
+    military.functions.advisorTimedEffects = function () {
+        getUpkeep();
+    };
+
+    var getUpkeep = function () {
+
+        var upkeep = 0;
+
+        for (var force in military.baseStats) {
+            var militaryType = military.baseStats[force];
+            for (var i = 0; i < militaryType.Units.length; i++) {
+                upkeep += militaryType.Units[i].upkeep;
+            }
+        }
+        myCountryData.baseStats.upkeep += upkeep;
+    };
 
 
     return military;

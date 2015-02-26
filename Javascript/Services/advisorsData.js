@@ -86,7 +86,7 @@ wciApp.factory(
             var upkeep = 0;
 
             for (var activeAdvisor in advisors.baseStats.activeAdvisors) {
-                var advisor = advisors.baseStats.activeAdvisors[activeAdvisor]
+                var advisor = advisors.baseStats.activeAdvisors[activeAdvisor];
                 if (advisor.Salary) {
                     upkeep += advisor.Salary / 8640; //breakdown yearly salary in hourly = 12*30*24
                 }
@@ -109,7 +109,7 @@ var setInitialAdvisorsData = function (advisors) {
                 IsAutobuyActive: false,
                 IsSkillActive: false,
                 Image: '../Images/avatar_blank.jpeg',
-                Salary: 50000 //50k
+                Upkeep: 10
             },
             Food: {
                 Name: 'Test Name',
@@ -119,7 +119,7 @@ var setInitialAdvisorsData = function (advisors) {
                 IsAutobuyActive: false,
                 IsSkillActive: false,
                 Image: '../Images/avatar_blank.jpeg',
-                Salary: 50000 //50k
+                Upkeep: 10
             },
             Housing: {
                 Type: 'Housing'

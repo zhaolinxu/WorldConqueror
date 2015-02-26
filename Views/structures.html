@@ -66,7 +66,7 @@
                         <br />
                         <span>{{advisor.Type}}</span>
                         <br />
-                        <span tooltip-html-unsafe="Upkeep per hour: {{advisor.Salary/8640 | niceNumber}}">{{advisor.Salary | niceNumber}} <span class="font-8pt">per year</span></span>
+                        <span>{{advisor.Upkeep | niceNumber}}</span>
                         <br />
                         <rating ng-model="advisor.EducationLevel" max="5" readonly="true"></rating>
                     </div>

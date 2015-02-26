@@ -22,6 +22,11 @@ Version 0.0.2 Features
 
 
 Version 0.0.3 Features
+1) Convert Advisor salary to upkeep.
+2) Added Army Upkeep
+
+
+Version 0.0.3 Features
 1) Difficulty Level logic
 2) Add Local Saves
 3) Convert the City Name to HQ Section and create another Stats section.
@@ -40,7 +45,6 @@ Add units like medic, mechanic.
 Make minimum population as 2.
 Have user select amount of food to send with an attacking army. the food = (consumption per person)* #  of soldiers * # of days you want to fight. If the food runs out before army wins.. You retreat. 
 Have special units in the army like medics, cooks, which can help extend the battle. 1- 5 stars can be bought with game money and 6 star unit needs to bought with real money.
-Convert Advisor salary to upkeep.
 Pause the game at 5 population to warn the user of dying country. 
 
 

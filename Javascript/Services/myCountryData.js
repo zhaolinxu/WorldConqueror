@@ -146,9 +146,9 @@ wciApp.factory('myCountryData', function () {
         setHappiness(myCountry);
         setCountrySize(myCountry);
 
-        //Handling edge cases.
-        if (myCountry.baseStats.population < 0) {
-            myCountry.baseStats.population = 0;
+        //Handling edge cases. (Minimum is 2, you and your partner)
+        if (myCountry.baseStats.population < 2) {
+            myCountry.baseStats.population = 2;
         }
         //happiness can not be zero, or formulas will break
         if (myCountry.baseStats.happiness <= 1) {

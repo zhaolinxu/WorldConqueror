@@ -34,7 +34,7 @@
                     </div>
                     <div ng-repeat="law in countryCtrl.laws.baseStats">
                         <div class="panel-body custom-panel" ng-click="law.enactLaw()">
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <span class="fa fa-info-circle" tooltip="{{law.description}}"></span>
                                 <span class="fa" ng-class="law.icon"></span>
                                 <span class="bold">
@@ -44,7 +44,7 @@
                                     </span>
                                 </span>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="pull-right clickableArea" ng-show="law.isUnlocked">
                                     <button class="btn" ng-click="law.act()" ng-class="!law.isActive ? 'btn-success': ''" ng-disabled="law.isActive">
                                         Enact

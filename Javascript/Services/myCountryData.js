@@ -135,7 +135,6 @@ wciApp.factory('myCountryData', function () {
                 myCountry.baseStats.turnsAtCurrentState = 0;
             }
             previousStabilityIndex = currentStabilityIndex;
-
         }
 
     };

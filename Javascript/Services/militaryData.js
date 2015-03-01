@@ -1,6 +1,8 @@
 ﻿'use strict';
 
-wciApp.factory('militaryData', function (myCountryData) {
+wciApp.factory('militaryData', function (
+    myCountryData
+    ) {
 
     var military = {
         baseStats: {},
@@ -14,24 +16,27 @@ wciApp.factory('militaryData', function (myCountryData) {
         military.baseStats = JSON.parse(localStorage['militaryData']);
     }
 
-    for (var i = 0; i < military.baseStats.army.Units.length; i++) {
 
-        angular.extend(military.baseStats.army.Units[i], {
+    for (var force in military.baseStats) {
+        var militaryType = military.baseStats[force];
+        for (var i = 0; i < militaryType.Units.length; i++) {
 
-            hire: function (count) {
-                var cost = this.cost * count;
+            angular.extend(militaryType.Units[i], {
+                hire: function (count) {
+                    var cost = this.cost * count;
 
-                if ((myCountryData.baseStats.money > cost) && this.isUnlocked) {
+                    if ((myCountryData.baseStats.money > cost) && this.isUnlocked) {
 
-                    myCountryData.baseStats.money -= cost;
-                    this.count += count;
+                        myCountryData.baseStats.money -= cost;
+                        this.count += count;
+                    }
+                },
+                updateCost: function (count) {
+                    var cost = this.cost * count;
+                    this.displayCost = cost;
                 }
-            },
-            updateCost: function (count) {
-                var cost = this.cost * count;
-                this.displayCost = cost;
-            },
-        });
+            });
+        }
     }
 
     military.functions.saveData = function () {
@@ -40,7 +45,7 @@ wciApp.factory('militaryData', function (myCountryData) {
     military.functions.resetData = function () {
         setInitialUnitsData(military);
     };
-    military.functions.advisorTimedEffects = function () {
+    military.functions.militaryTimedEffects = function () {
         getUpkeep();
     };
 
@@ -51,7 +56,7 @@ wciApp.factory('militaryData', function (myCountryData) {
         for (var force in military.baseStats) {
             var militaryType = military.baseStats[force];
             for (var i = 0; i < militaryType.Units.length; i++) {
-                upkeep += militaryType.Units[i].upkeep;
+                upkeep += militaryType.Units[i].upkeep * militaryType.Units[i].count;
             }
         }
         myCountryData.baseStats.upkeep += upkeep;
@@ -90,7 +95,7 @@ var setInitialUnitsData = function (military) {
                     displayCost: 10,
                     count: 0,
                     popCost: 1,
-                    upkeep: 5,
+                    upkeep: 2,
 
                     attack: 5,
                     defense: 5,
@@ -104,7 +109,7 @@ var setInitialUnitsData = function (military) {
                     displayCost: 10000,
                     count: 0,
                     popCost: 5,
-                    upkeep: 2000,
+                    upkeep: 20,
 
                     attack: 10,
                     defense: 1000,
@@ -118,7 +123,7 @@ var setInitialUnitsData = function (military) {
                     displayCost: 100000,
                     count: 0,
                     popCost: 20,
-                    upkeep: 10000,
+                    upkeep: 100,
 
                     attack: 30000, //30k
                     defense: 1000,
@@ -132,7 +137,7 @@ var setInitialUnitsData = function (military) {
                     displayCost: 10000000,
                     count: 0,
                     popCost: 50,
-                    upkeep: 750000, //750k
+                    upkeep: 750, //750k
 
                     attack: 1000000, //1m
                     defense: 1000000, //1m
@@ -146,7 +151,7 @@ var setInitialUnitsData = function (military) {
                     displayCost: 100000000,
                     count: 0,
                     popCost: 100,
-                    upkeep: 1000000, //1m
+                    upkeep: 1000, //1m
 
                     attack: 10000000, //10m
                     defense: 1000000, //1m

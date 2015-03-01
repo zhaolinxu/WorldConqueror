@@ -11,7 +11,7 @@ wciApp.controller(
         lawsData,
         advisorsData,
         helperModalsData,
-        notificationsData) {
+        notificationData) {
 
     //#region Private Methods
 
@@ -73,7 +73,7 @@ wciApp.controller(
     game.military = militaryData;
     game.laws = lawsData;
     game.helperModals = helperModalsData;
-    game.notification = notificationsData;
+    game.notification = notificationData;
 
 
     //Load Game's Settings

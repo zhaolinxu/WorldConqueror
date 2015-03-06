@@ -1,4 +1,4 @@
-﻿<div id="Army" ng-controller="MilitaryController as militaryCtrl" ng-cloak>
+﻿<div id="Army">
     <h3>
         <span class="glyphicon glyphicon-screenshot"></span> Army
 
@@ -18,13 +18,13 @@
                                 <!--TODO: Remove some padding around the icon-->
                                 <span ng-show="!unit.isUnlocked" class="fa fa-lock pull-left"></span>
                                 <div class="pull-right clickableArea" ng-show="unit.isUnlocked">
-                                    <button class="btn btn-primary" ng-click="unit.hire(1)" ng-mouseover="unit.updateCost(10)" ng-mouseleave="unit.updateCost(1)">
+                                    <button class="btn btn-primary" ng-click="unit.hire(1)" ng-mouseover="unit.updateCost(1)" ng-mouseleave="unit.updateCost(1)">
                                         x1
                                     </button>
-                                    <button class="btn btn-primary" ng-click="unit.hire(10)" ng-mouseover="unit.updateCost(10)" ng-mouseleave="unit.updateCost(1)">
+                                    <button class="btn btn-primary" ng-click="unit.hire(10)" ng-mouseover="unit.updateCost(10)" ng-mouseleave="unit.updateCost(10)">
                                         x10
                                     </button>
-                                    <button class="btn btn-primary" ng-click="unit.hire(100)" ng-mouseover="unit.updateCost(10)" ng-mouseleave="unit.updateCost(1)">
+                                    <button class="btn btn-primary" ng-click="unit.hire(100)" ng-mouseover="unit.updateCost(100)" ng-mouseleave="unit.updateCost(100)">
                                         x100
                                     </button>
                                 </div>

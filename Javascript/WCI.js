@@ -42,6 +42,12 @@ wciApp.config(function ($routeProvider, $locationProvider) {
         controller: 'ResearchController',
         controllerAs: 're'
     })
+    .when('/war',
+    {
+        templateUrl: 'Views/war.html',
+        controller: 'WarController',
+        controllerAs: 'war'
+    })
     .otherwise({
         redirectTo: '/ia'
     });

@@ -225,7 +225,11 @@ var setInitialStats = function (myCountry) {
         money: 100000, //Earned from Taxes and economic factors.
         upkeep: 0, //Upkeep of buildings, advisors and soldiers.
         totalJobs: 16,
-        jobGdpMultiplier: 100 //This is how jobs effect the gdp.
+        jobGdpMultiplier: 100, //This is how jobs effect the gdp.
+        //Military
+        attack: 0,
+        defense: 0,
+        siege: 0
     };
     myCountry.events = {
         oneChildPolicy : false, //Law

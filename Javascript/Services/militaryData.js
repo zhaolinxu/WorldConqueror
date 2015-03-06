@@ -47,6 +47,7 @@ wciApp.factory('militaryData', function (
     };
     military.functions.militaryTimedEffects = function () {
         getUpkeep();
+        getTotalStrength();
     };
 
     var getUpkeep = function () {
@@ -61,7 +62,24 @@ wciApp.factory('militaryData', function (
         }
         myCountryData.baseStats.upkeep += upkeep;
     };
+    var getTotalStrength = function () {
+        var attack = 0;
+        var defense = 0;
+        var siege = 0;
 
+        for (var force in military.baseStats) {
+            var militaryType = military.baseStats[force];
+            for (var i = 0; i < militaryType.Units.length; i++) {
+                attack += militaryType.Units[i].attack * militaryType.Units[i].count;
+                defense += militaryType.Units[i].defense * militaryType.Units[i].count;
+                siege += militaryType.Units[i].siege * militaryType.Units[i].count;
+            }
+        }
+        
+        myCountryData.baseStats.attack = attack;
+        myCountryData.baseStats.defense = defense;
+        myCountryData.baseStats.siege = siege;
+    };
 
     return military;
 });

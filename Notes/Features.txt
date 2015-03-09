@@ -78,6 +78,8 @@ Version 1.0.0 Features
 12) Government
 13) Interactive map
 14) Add options for different numbering schemes.
+15) Add Special Attacks like nuclear bomb, Spy attack.. etc which have a cooldown. Maybe unlock them via research and then maybe have a build component to it.
+16) Possibly think about recruiting advisors/commanders from the countries you just defeated. 
 
 Version 1.1.0 Features
 1) Add growth from campsite to country.

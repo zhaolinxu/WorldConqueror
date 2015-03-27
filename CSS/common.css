@@ -30,11 +30,19 @@
     text-align: right;
 }
 
+.align-center {
+    text-align: center;
+}
+
 .align-middle {
     vertical-align: middle;
 }
 
 /*Font Styles*/
+.font-12pt {
+    font-size: 12pt;
+}
+
 .font-9pt {
     font-size: 9pt;
 }

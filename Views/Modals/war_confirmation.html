@@ -1,0 +1,37 @@
+﻿<div>
+    <script type="text/ng-template" id="warConfirmationModal.html">
+        <div class="modal-header">
+            <h4 class="modal-title">Confirmation</h4>
+        </div>
+        <div class="modal-body font-9pt row">
+            <span class="col-md-12">
+                <span class="col-md-6 align-right">
+                    Your strength:
+                </span>
+                <span class="bold col-md-6">
+                    {{myCountryStrength | niceNumber}}
+                </span>
+            </span>
+            <span class="col-md-12">
+                <span class="col-md-6 align-right">
+                    Enemy strength:
+                </span>
+                <span class="bold col-md-6">
+                    {{targetCountryStrength | niceNumber}}
+                </span>
+            </span>
+            <span class="col-md-12">
+                <span class="col-md-6 align-right">
+                    Probability of Success:
+                </span>
+                <span class="bold col-md-6" ng-class="successProbability > 80 ? 'text-success' : successProbability > 40 ? 'text-warning' : 'text-danger'" ">
+                    {{successProbability | number: 2}}%
+                </span>
+            </span>
+        </div>
+        <div class="modal-footer align-center">
+            <button class="btn btn-warning" ng-click="declareWar()">Declare War!</button>
+            <button class="btn btn-danger" ng-click="cancel()">No way Jose!</button>
+        </div>
+    </script>
+</div>

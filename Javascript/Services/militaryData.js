@@ -11,8 +11,7 @@ wciApp.factory('militaryData', function (
 
     if (!localStorage['militaryData']) {
         setInitialUnitsData(military);
-    }
-    else {
+    } else {
         military.baseStats = JSON.parse(localStorage['militaryData']);
     }
 
@@ -76,9 +75,9 @@ wciApp.factory('militaryData', function (
             }
         }
         
-        myCountryData.baseStats.attack = attack;
-        myCountryData.baseStats.defense = defense;
-        myCountryData.baseStats.siege = siege;
+        myCountryData.baseStats.totalAttack = attack;
+        myCountryData.baseStats.totalDefense = defense;
+        myCountryData.baseStats.totalSiege = siege;
     };
 
     return military;
@@ -188,7 +187,7 @@ var setInitialUnitsData = function (military) {
                 displayCost: 10,
                 count: 0,
                 popCost: 3,
-                upkeep: 10,
+                upkeep: 1,
 
                 attack: 10,
                 defense: 10,
@@ -202,7 +201,7 @@ var setInitialUnitsData = function (military) {
                 displayCost: 10000,
                 count: 0,
                 popCost: 20,
-                upkeep: 5000,
+                upkeep: 1,
 
                 attack: 8000,
                 defense: 1000,
@@ -216,7 +215,7 @@ var setInitialUnitsData = function (military) {
                 displayCost: 100000,
                 count: 0,
                 popCost: 100,
-                upkeep: 40000,
+                upkeep: 1,
 
                 attack: 10000,
                 defense: 100000, //100k
@@ -230,7 +229,7 @@ var setInitialUnitsData = function (military) {
                 displayCost: 10000000,
                 count: 0,
                 popCost: 1000,
-                upkeep: 1000000, //1m
+                upkeep: 1, //1m
 
                 attack: 1000000, //1m
                 defense: 1000000, //1m
@@ -244,7 +243,7 @@ var setInitialUnitsData = function (military) {
                 displayCost: 100000000,
                 count: 0,
                 popCost: 2000,
-                upkeep: 5000000, //5m
+                upkeep: 1, //5m
 
                 attack: 10000000, //10m
                 defense: 20000000, //20m
@@ -258,7 +257,7 @@ var setInitialUnitsData = function (military) {
                 displayCost: 1000000000,
                 count: 0,
                 popCost: 10000,
-                upkeep: 25000000, //25m
+                upkeep: 1, //25m
 
                 attack: 100000000, //100m
                 defense: 80000000, //80m
@@ -277,7 +276,7 @@ var setInitialUnitsData = function (military) {
                 displayCost: 10000,
                 count: 0,
                 popCost: 5,
-                upkeep: 10000,
+                upkeep: 1,
 
                 attack: 10000,
                 defense: 10000,
@@ -291,7 +290,7 @@ var setInitialUnitsData = function (military) {
                 displayCost: 100000,
                 count: 0,
                 popCost: 2,
-                upkeep: 50000,
+                upkeep: 1,
 
                 attack: 100000, //100k
                 defense: 10000,
@@ -305,7 +304,7 @@ var setInitialUnitsData = function (military) {
                 displayCost: 1000000,
                 count: 0,
                 popCost: 20,
-                upkeep: 200000, //200k
+                upkeep: 1, //200k
 
                 attack: 100000, //100k
                 defense: 300000, //300k
@@ -319,7 +318,7 @@ var setInitialUnitsData = function (military) {
                 displayCost: 10000000,
                 count: 0,
                 popCost: 50,
-                upkeep: 1000000, //1m
+                upkeep: 1, //1m
 
                 attack: 500000, //500k
                 defense: 2000000, //2m
@@ -333,7 +332,7 @@ var setInitialUnitsData = function (military) {
                 displayCost: 100000000,
                 count: 0,
                 popCost: 5,
-                upkeep: 5000000, //5m
+                upkeep: 1, //5m
 
                 attack: 10000000, //10m
                 defense: 100000, //100k
@@ -347,7 +346,7 @@ var setInitialUnitsData = function (military) {
                 displayCost: 1000000000,
                 count: 0,
                 popCost: 10000,
-                upkeep: 10000000, //10m
+                upkeep: 1, //10m
 
                 attack: 10000000, //10m
                 defense: 100000000, //100m

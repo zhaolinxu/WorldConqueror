@@ -1,0 +1,18 @@
+﻿{
+    "AF": {
+        "isLandLocked": false,
+        "army": {
+            "attack": 100,
+            "defense": 100
+        },
+        "navy": {
+            "attack": 100,
+            "defense": 100
+        },
+        "airForce": {
+            "attack": 100,
+            "defense": 100
+        },
+        "shield": 100
+    }
+}

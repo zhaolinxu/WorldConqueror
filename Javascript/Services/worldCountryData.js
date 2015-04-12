@@ -1,6 +1,8 @@
 ﻿'use strict';
 
-wciApp.factory('worldCountryData', function ($modal) {
+wciApp.factory('worldCountryData', function (
+    $modal,
+    $http) {
 
     //var worldCountries = {
     //    "AF": 16.63,
@@ -51,6 +53,17 @@ wciApp.factory('worldCountryData', function ($modal) {
             //$('#world-map').slideToggle();
         });
     }
+
+
+    worldCountries.countryData = $http
+        .get('Json/worldCountries.json')
+        .success(function (data) {
+            return data;
+        })
+        .error(function (data, status, headers, config) {
+            console.log(status);
+        })
+
     
     return worldCountries;
 });

@@ -55,15 +55,18 @@ wciApp.factory('worldCountryData', function (
     }
 
 
-    worldCountries.countryData = $http
-        .get('Json/worldCountries.json')
-        .success(function (data) {
-            return data;
-        })
-        .error(function (data, status, headers, config) {
-            console.log(status);
-        })
+    var getCountryData = function () {
 
+        $http
+            .get('Json/worldCountries.json')
+            .success(function (data) {
+                worldCountries.baseStats.countryData = data;
+            })
+            .error(function (data, status, headers, config) {
+                console.log(status);
+            })
+    }
+    getCountryData();
     
     return worldCountries;
 });
@@ -76,40 +79,6 @@ var setInitialWorldCountryData = function (worldCountries) {
             "AL": 11.58,
             "DZ": 158.97,
             "US": 17342.12
-        },
-        countryData: {
-            "AF": {
-                isLandLocked: false,
-                army: {
-                    attack: 100,
-                    defense: 100
-                },
-                navy: {
-                    attack: 100,
-                    defense: 100
-                },
-                airForce: {
-                    attack: 100,
-                    defense: 100
-                },
-                shield: 100
-            },
-            "US": {
-                isLandLocked: false,
-                army: {
-                    attack: 1000,
-                    defense: 500
-                },
-                navy: {
-                    attack: 1090,
-                    defense: 190
-                },
-                airForce: {
-                    attack: 320,
-                    defense: 150
-                },
-                shield: 10000
-            }
         }
     };
 

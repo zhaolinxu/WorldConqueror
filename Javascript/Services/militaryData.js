@@ -93,13 +93,13 @@ var setInitialUnitsData = function (military) {
             Units: [
                 {
                     name: 'Militia',
+                    code: 'Mi',
                     description: 'desc',
                     cost: 1,
                     displayCost: 1,
                     count: 0,
                     popCost: 1,
                     upkeep: 1,
-
                     attack: 1,
                     defense: 1,
                     siege: 0,

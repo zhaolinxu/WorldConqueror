@@ -5,14 +5,14 @@
     <hr>
     <div class="col-md-6 col-sm-12">
         <tabset>
-            <tab ng-repeat="building in structureCtrl.buildings.baseStats" heading="{{building.name}}" class="clickable margin-bottom-20 bg-success">
+            <tab ng-repeat="building in structureCtrl.buildings.baseStats" heading="{{building.buildingTypeName}}" class="clickable margin-bottom-20 bg-success">
                 <div class="row">
                     <div id="build" class="col-md-12">
                         <div class="panel panel-primary panelLocked" ng-repeat="structure in building.structures"
                              ng-class="{'clickableArea panelUnlocked':structure.isUnlocked()}">
                             <div class="panel-body">
                                 <div class="col-md-6">
-                                    <span class="fa fa-info-circle" tooltip="{{structure.description}}"></span>
+                                    <span class="fa fa-info-circle" tooltip="{{structure.desc}}"></span>
                                     {{structure.name}} <span class="badge">{{structure.count}}</span> <br />
                                     <b>Cost: {{structure.displayCost | niceNumber}}; Upkeep: {{structure.upkeep | niceNumber}}</b>
                                     <!--TODO: Remove some padding around the icon-->

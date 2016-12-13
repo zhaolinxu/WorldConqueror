@@ -31,6 +31,7 @@ wciApp.factory(
                     if ((myCountryData.baseStats.money > cost) && this.isUnlocked()) {
 
                         myCountryData.baseStats[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
+                        myCountryData.baseStats[this.statAffected] += (this.statAdder * count);
                         myCountryData.baseStats.totalJobs += (this.jobsIncreased * count);
                         myCountryData.baseStats.money -= cost;
 

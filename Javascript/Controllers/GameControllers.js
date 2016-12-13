@@ -29,7 +29,7 @@ wciApp.controller(
             game.myCountry.baseStats.upkeep = 0;
             game.buildings.functions.getTotalUpkeep();
             game.military.functions.militaryTimedEffects();
-            game.advisors.functions.advisorTimedEffects();
+            //game.advisors.functions.advisorTimedEffects();
             //game.saveGame();
 
         };
@@ -174,7 +174,8 @@ wciApp.controller(
         $scope.$on(
             "$destroy",
             function (event) {
-                $interval.cancel(timer)
+                $interval.cancel(playTimer)
+                $interval.cancel(saveTimer)
             }
         );
 
@@ -273,9 +274,9 @@ wciApp.controller('WarController', function (
         war.logger.push(log);
 
     };
-
+    var warTimer;
     var beginWar = function () {
-        var warTimer = $interval(warFunction, 5000);
+        warTimer = $interval(warFunction, 10000);
     };
 
     if (war.worldCountries.baseStats.IsWarActive) {

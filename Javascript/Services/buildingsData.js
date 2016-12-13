@@ -19,143 +19,38 @@ wciApp.factory(
     }
 
 
-    //Build logic for Economic buildings.
-    for (var i = 0; i < buildings.baseStats.Economic.structures.length; i++) {
+    for (var j = 0; j < buildings.baseStats.length; j++) {
 
-        angular.extend(buildings.baseStats.Economic.structures[i], {
+        for (var i = 0; i < buildings.baseStats[j].structures.length; i++) {
 
-            build: function (count) {
-                var cost = this.cost * count;
+            angular.extend(buildings.baseStats[j].structures[i], {
 
-                if ((myCountryData.baseStats.money > cost) && this.isUnlocked()) {
+                build: function (count) {
+                    var cost = this.cost * count;
 
-                    myCountryData.baseStats[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
-                    myCountryData.baseStats.totalJobs += (this.jobsIncreased * count);
-                    myCountryData.baseStats.money -= cost;
+                    if ((myCountryData.baseStats.money > cost) && this.isUnlocked()) {
 
-                    this.count += count;
+                        myCountryData.baseStats[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
+                        myCountryData.baseStats.totalJobs += (this.jobsIncreased * count);
+                        myCountryData.baseStats.money -= cost;
+
+                        this.count = this.count*1 + count; //*1 to force math add and not string add.
+                    }
+                },
+                updateCost: function (count) {
+                    var cost = this.cost * count;
+                    this.displayCost = cost;
+                },
+                isUnlocked: function () {
+                    if (myCountryData.baseStats.size >= this.sizeRequired) {
+                        return true;
+                    }
+                    return false;
                 }
-            },
-            updateCost: function (count) {
-                var cost = this.cost * count;
-                this.displayCost = cost;
-            },
-            isUnlocked: function () {
-                if (myCountryData.baseStats.size >= this.sizeRequired) {
-                    return true;
-                }
-                return false;
-            }
 
-        });
+            });
+        }
     }
-
-    //Build logic for Science buildings.
-    for (i = 0; i < buildings.baseStats.Science.structures.length; i++) {
-
-        angular.extend(buildings.baseStats.Science.structures[i], {
-
-            build: function (count) {
-                var cost = this.cost;
-
-                if ((myCountryData.baseStats.money > cost) && this.isUnlocked) {
-
-                    myCountryData.baseStats[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
-                    myCountryData.baseStats.totalJobs += (this.jobsIncreased * count);
-                    myCountryData.baseStats.money -= cost;
-
-                    this.count += count;
-                    //this.cost = cost;
-                }
-            }
-
-        });
-    }
-
-    //Build logic for Housing buildings.
-    for (i = 0; i < buildings.baseStats.Housing.structures.length; i++) {
-
-        angular.extend(buildings.baseStats.Housing.structures[i], {
-
-            build: function (count) {
-                var cost = this.cost * count;
-
-                if ((myCountryData.baseStats.money > cost) && this.isUnlocked()) {
-
-                    myCountryData.baseStats[this.statAffected] += (this.statMultiplier * count);
-                    myCountryData.baseStats.totalJobs += (this.jobsIncreased * count);
-                    myCountryData.baseStats.money -= cost;
-
-                    this.count += count;
-                }
-            },
-            updateCost: function (count) {
-                var cost = this.cost * count;
-                this.displayCost = cost;
-            },
-            isUnlocked: function () {
-                if(myCountryData.baseStats.size >= this.sizeRequired) {
-                    return true;
-                }
-                return false;
-            }
-
-        });
-    }
-
-    //Build logic for Food buildings.
-    for (i = 0; i < buildings.baseStats.Food.structures.length; i++) {
-
-        angular.extend(buildings.baseStats.Food.structures[i], {
-
-            build: function (count) {
-                var cost = this.cost * count;
-
-                if ((myCountryData.baseStats.money > cost) && this.isUnlocked()) {
-
-                    myCountryData.baseStats[this.statAffected] += (this.statMultiplier * count);
-                    myCountryData.baseStats.totalJobs += (this.jobsIncreased * count);
-                    myCountryData.baseStats.money -= cost;
-
-                    this.count += count;
-                }
-            },
-            updateCost: function (count) {
-                var cost = this.cost * count;
-                this.displayCost = cost;
-            },
-            isUnlocked: function () {
-                if (myCountryData.baseStats.size >= this.sizeRequired) {
-                    return true;
-                }
-                return false;
-            }
-
-        });
-    }
-
-    //Build logic for Military buildings.
-    for (i = 0; i < buildings.baseStats.Military.structures.length; i++) {
-
-        angular.extend(buildings.baseStats.Military.structures[i], {
-
-            build: function (count) {
-                var cost = this.cost * count;
-
-                if ((myCountryData.baseStats.money > cost) && this.isUnlocked) {
-
-                    myCountryData.baseStats[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
-                    myCountryData.baseStats.totalJobs += (this.jobsIncreased * count);
-                    myCountryData.baseStats.money -= cost;
-
-                    this.count += count;
-                    //this.cost = cost;
-                }
-            }
-
-        });
-    }
-
 
     buildings.functions.saveData = function () {
         localStorage['buildingData'] = JSON.stringify(buildings.baseStats);
@@ -167,22 +62,12 @@ wciApp.factory(
 
         var upkeep = 0;
 
-        for (var j = 0; j < buildings.baseStats.Economic.structures.length; j++) {
-            upkeep += buildings.baseStats.Economic.structures[j].upkeep * buildings.baseStats.Economic.structures[j].count;
-        }
-        for (j = 0; j < buildings.baseStats.Science.structures.length; j++) {
-            upkeep += buildings.baseStats.Science.structures[j].upkeep * buildings.baseStats.Science.structures[j].count;
-        }
-        for (j = 0; j < buildings.baseStats.Housing.structures.length; j++) {
-            upkeep += buildings.baseStats.Housing.structures[j].upkeep * buildings.baseStats.Housing.structures[j].count;
-        }
-        for (j = 0; j < buildings.baseStats.Food.structures.length; j++) {
-            upkeep += buildings.baseStats.Food.structures[j].upkeep * buildings.baseStats.Food.structures[j].count;
-        }
-        for (j = 0; j < buildings.baseStats.Military.structures.length; j++) {
-            upkeep += buildings.baseStats.Military.structures[j].upkeep * buildings.baseStats.Military.structures[j].count;
-        }
+        for (var i = 0; i < buildings.baseStats.length; i++) {
+            for (var j = 0; j < buildings.baseStats[i].structures.length; j++) {
 
+                upkeep += buildings.baseStats[i].structures[j].upkeep * buildings.baseStats[i].structures[j].count;
+            }
+        }
         myCountryData.baseStats.upkeep += upkeep;
     };
 

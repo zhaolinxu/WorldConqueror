@@ -6,18 +6,17 @@
     <hr>
     <div class="col-md-6 col-sm-12">
         <tabset>
-            <tab ng-repeat="force in militaryCtrl.military.baseStats" heading="{{force.name}}" class="clickable margin-bottom-20">
+            <tab ng-repeat="unitType in militaryCtrl.military.baseStats" heading="{{unitType.unitTypeName}}" class="clickable margin-bottom-20">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="panel panel-primary panelLocked" ng-repeat="unit in force.Units"
-                             ng-class="{'clickable clickableArea panelUnlocked':unit.isUnlocked}">
+                        <div class="panel panel-primary panelLocked" ng-repeat="unit in unitType.units" ng-class="{'clickableArea panelUnlocked': unit.isUnlocked()}">
                             <div class="panel-body">
                                 <span class="fa fa-info-circle" tooltip="{{unit.description}}"></span>
                                 {{unit.name}} <span class="badge">{{unit.count}}</span> <br />
                                 <b>Cost: {{unit.displayCost | niceNumber}}; Upkeep: {{unit.upkeep | niceNumber}}</b>
                                 <!--TODO: Remove some padding around the icon-->
                                 <span ng-show="!unit.isUnlocked" class="fa fa-lock pull-left"></span>
-                                <div class="pull-right clickableArea" ng-show="unit.isUnlocked">
+                                <div class="pull-right clickableArea" ng-show="unit.isUnlocked()">
                                     <button class="btn btn-primary" ng-click="unit.hire(1)" ng-mouseover="unit.updateCost(1)" ng-mouseleave="unit.updateCost(1)">
                                         x1
                                     </button>

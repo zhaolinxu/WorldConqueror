@@ -29,7 +29,7 @@ wciApp.factory(
                 build: function (count) {
                     var cost = this.cost * count;
 
-                    if ((myCountryData.baseStats.money > cost) && this.isUnlocked()) {
+                    if ((myCountryData.baseStats.money > cost)) {
 
                         myCountryData.baseStats[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
                         myCountryData.baseStats[this.statAffected] += (this.statAdder * count);

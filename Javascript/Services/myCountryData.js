@@ -109,15 +109,13 @@ wciApp.factory('myCountryData', function () {
 
     //Timer Methods
     myCountry.functions.getGameTime = function () {
-
-        var currentStabilityIndex = myCountry.baseStats.currentStabilityIndex;
-        var previousStabilityIndex = myCountry.baseStats.previousStabilityIndex;
-
         //Hour
         myCountry.baseStats.time++;
 
-        //Every Month
+        //Every Month //Right now 720 hours is not exactly one month. So, handle that.
         if (myCountry.baseStats.time % 720 == 0) {
+            var currentStabilityIndex = myCountry.baseStats.currentStabilityIndex;
+            var previousStabilityIndex = myCountry.baseStats.previousStabilityIndex;
             //This checks and see if current and previous were either both +ve or both -ve.
             if (((currentStabilityIndex > 0) && (previousStabilityIndex > 0)) ||
                 ((currentStabilityIndex < 0) && (previousStabilityIndex < 0))) {
@@ -134,7 +132,7 @@ wciApp.factory('myCountryData', function () {
             else {
                 myCountry.baseStats.turnsAtCurrentState = 0;
             }
-            previousStabilityIndex = currentStabilityIndex;
+            myCountry.baseStats.previousStabilityIndex = currentStabilityIndex;
         }
 
     };

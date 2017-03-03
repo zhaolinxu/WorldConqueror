@@ -49,7 +49,7 @@ wciApp.factory('militaryData', function (
     };
     military.functions.militaryTimedEffects = function () {
         getUpkeep();
-        //getTotalStrength();
+        getTotalStrength();
     };
 
     var getUpkeep = function () {
@@ -68,12 +68,11 @@ wciApp.factory('militaryData', function (
         var defense = 0;
         var siege = 0;
 
-        for (var force in military.baseStats) {
-            var militaryType = military.baseStats[force];
-            for (var i = 0; i < militaryType.Units.length; i++) {
-                attack += militaryType.Units[i].attack * militaryType.Units[i].count;
-                defense += militaryType.Units[i].defense * militaryType.Units[i].count;
-                siege += militaryType.Units[i].siege * militaryType.Units[i].count;
+        for (var i = 0; i < military.baseStats.length; i++) {
+            for (var j = 0; j < military.baseStats[i].units.length; j++) {
+                attack += military.baseStats[i].units[i].attack * military.baseStats[i].units[i].count;
+                defense += military.baseStats[i].units[i].defense * military.baseStats[i].units[i].count;
+                siege += military.baseStats[i].units[i].siege * military.baseStats[i].units[i].count;
             }
         }
         

@@ -5,7 +5,7 @@
     <hr>
     <div class="col-md-6 col-sm-12">
         <tabset>
-            <tab ng-repeat="building in structureCtrl.buildings.baseStats" heading="{{building.buildingTypeName}}" class="clickable margin-bottom-20 bg-success">
+            <tab ng-repeat="building in structureCtrl.buildings.baseStats" heading="{{building.buildingTypeName}}" class="clickable margin-bottom-20 bg-success" ng-if="building.isActive">
                 <div class="row">
                     <div id="build" class="col-md-12">
                         <div class="panel panel-primary panelLocked" ng-repeat="structure in building.structures"

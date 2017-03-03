@@ -16,6 +16,7 @@ wciApp.factory(
     }
     else {
         buildings.baseStats = JSON.parse(localStorage['buildingData']);
+        //setInitialBuildingData(buildings);
     }
 
 
@@ -43,7 +44,7 @@ wciApp.factory(
                     this.displayCost = cost;
                 },
                 isUnlocked: function () {
-                    if (myCountryData.baseStats.size >= this.sizeRequired) {
+                    if (myCountryData.baseStats.size >= (this.sizeRequired*1)) {
                         return true;
                     }
                     return false;

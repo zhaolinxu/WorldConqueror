@@ -4,13 +4,6 @@ wciApp.factory('worldCountryData', function (
     $modal,
     $http) {
 
-    //var worldCountries = {
-    //    "AF": 16.63,
-    //    "AL": 11.58,
-    //    "DZ": 158.97,
-    //    "US": 1342.12
-    //};
-
     var worldCountries = {
         baseStats: {},
         functions: {}
@@ -73,14 +66,40 @@ wciApp.factory('worldCountryData', function (
 
 var setInitialWorldCountryData = function (worldCountries) {
 
-    worldCountries.baseStats = {
-        countryStrength: {
-            "AF": 16.63,
-            "AL": 11.58,
-            "DZ": 158.97,
-            "US": 17342.12
-        }
-    };
+
+    var fileUrl = "../Notes/Data.xlsx?_=" + new Date().getTime();
+    var oReq = new XMLHttpRequest();
+    oReq.open("GET", fileUrl, true);
+    oReq.responseType = "arraybuffer";
+
+    oReq.onload = function (e) {
+        var arraybuffer = oReq.response;
+
+        /* convert data to binary string */
+        var data = new Uint8Array(arraybuffer);
+        var arr = new Array();
+        for (var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+        var bstr = arr.join("");
+
+        /* Call XLSX */
+        var workbook = XLSX.read(bstr, { type: "binary" });
+
+        /* DO SOMETHING WITH workbook HERE */
+        var wcWorksheet = workbook.Sheets["WorldCountries"];
+
+        worldCountries.baseStats = XLSX.utils.sheet_to_json(wcWorksheet);
+    }
+
+    oReq.send();
+
+    //worldCountries.baseStats = {
+    //    countryStrength: {
+    //        "AF": 16.63,
+    //        "AL": 11.58,
+    //        "DZ": 158.97,
+    //        "US": 17342.12
+    //    }
+    //};
 
     worldCountries.baseStats.IsWarActive = false;
 };

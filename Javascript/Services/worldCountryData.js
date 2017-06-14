@@ -2,11 +2,13 @@
 
 wciApp.factory('worldCountryData', function (
     $modal,
-    $http) {
+    $http,
+    militaryData) {
 
     var worldCountries = {
         baseStats: {},
-        functions: {}
+        functions: {},
+        mapCountries: {}
     };
 
     //First Load
@@ -14,9 +16,30 @@ wciApp.factory('worldCountryData', function (
         setInitialWorldCountryData(worldCountries);
     }
     else {
-        //JSON.parse(atob(localStorage['wci_gameData']));
         worldCountries.baseStats = JSON.parse(localStorage['worldCountryBaseStats']);
     }
+
+    //for (var i = 0; i < worldCountries.baseStats.length; i++) {
+    //    var worldCountry = worldCountries.baseStats[i];
+
+    //    angular.extend(worldCountry, {
+    //        totalStrength: function () {
+    //            var strength = 0;
+    //            for (var j = 0; j < militaryData.baseStats.length; j++) {
+    //                for (var k = 0; k < military.baseStats[j].units.length; k++) {
+    //                    var unit = military.baseStats[j].units[k];
+    //                    var attack = unit.attack;
+    //                    var def = unit.defense;
+    //                    var siege = unit.siege;
+
+    //                    var count = worldCountry[unit.code];
+    //                    strength += (attack + def + siege) * count;
+    //                }
+    //            }
+    //            return strength;
+    //        }
+    //    });
+    //}
 
     worldCountries.functions.resetData = function () {
         setInitialWorldCountryData(worldCountries);
@@ -24,6 +47,25 @@ wciApp.factory('worldCountryData', function (
     worldCountries.functions.saveData = function () {
         //btoa(JSON.stringify(game.data));
         localStorage['worldCountryBaseStats'] = JSON.stringify(worldCountries.baseStats);
+    };
+    worldCountries.functions.getMapCountries = function () {
+        for (var i = 0; i < worldCountries.baseStats.length; i++) {
+            var worldCountry = worldCountries.baseStats[i];
+            var strength = 0;
+
+            for (var j = 0; j < militaryData.baseStats.length; j++) {
+                for (var k = 0; k < militaryData.baseStats[j].units.length; k++) {
+                    var unit = militaryData.baseStats[j].units[k];
+                    var attack = unit.attack;
+                    var def = unit.defense;
+                    var siege = unit.siege;
+
+                    var count = worldCountry[unit.code];
+                    strength += Math.round(((attack * 1 + def * 1 + siege * 1) * count) / 1000000);
+                }
+            }
+            worldCountries.mapCountries[worldCountry.countryCode] = strength;
+        }
     };
 
 
@@ -46,21 +88,6 @@ wciApp.factory('worldCountryData', function (
             //$('#world-map').slideToggle();
         });
     }
-
-
-    var getCountryData = function () {
-
-        $http
-            .get('Json/worldCountries.json')
-            .success(function (data) {
-                worldCountries.baseStats.countryData = data;
-            })
-            .error(function (data, status, headers, config) {
-                console.log(status);
-            })
-    }
-    getCountryData();
-    
     return worldCountries;
 });
 

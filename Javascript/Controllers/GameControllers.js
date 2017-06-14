@@ -29,6 +29,7 @@ wciApp.controller(
             game.myCountry.baseStats.upkeep = 0;
             game.buildings.functions.getTotalUpkeep();
             game.military.functions.militaryTimedEffects();
+            game.worldCountries.functions.getMapCountries();
             //game.advisors.functions.advisorTimedEffects();
             //game.saveGame();
 
@@ -252,13 +253,13 @@ wciApp.controller('WarController', function (
         map: 'world_mill_en',
         series: {
             regions: [{
-                values: war.worldCountries.baseStats.countryStrength,
+                values: war.worldCountries.mapCountries,
                 scale: ['#C8EEFF', '#0071A4'],
                 normalizeFunction: 'polynomial'
             }]
         },
         onRegionTipShow: function (e, el, code) {
-            var country = war.worldCountries.baseStats.countryStrength[code];
+            var country = war.worldCountries.mapCountries[code];
 
             el.html(el.html() + ' (Strength - ' + country + ')');
         },

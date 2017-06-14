@@ -70,9 +70,9 @@ wciApp.factory('militaryData', function (
 
         for (var i = 0; i < military.baseStats.length; i++) {
             for (var j = 0; j < military.baseStats[i].units.length; j++) {
-                attack += military.baseStats[i].units[i].attack * military.baseStats[i].units[i].count;
-                defense += military.baseStats[i].units[i].defense * military.baseStats[i].units[i].count;
-                siege += military.baseStats[i].units[i].siege * military.baseStats[i].units[i].count;
+                attack += military.baseStats[i].units[j].attack * military.baseStats[i].units[j].count;
+                defense += military.baseStats[i].units[j].defense * military.baseStats[i].units[j].count;
+                siege += military.baseStats[i].units[j].siege * military.baseStats[i].units[j].count;
             }
         }
         

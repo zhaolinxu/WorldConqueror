@@ -1,0 +1,2 @@
+component folder is used for services/controllers/views and even directives which are not reusable!
+Shared folder is used for reusable stuff like image border or some tooltips etc.

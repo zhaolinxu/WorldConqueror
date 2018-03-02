@@ -5,25 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>World Conqueror</title>
     <!--Javascript-->
-    <script src="Libraries/js/jquery.min.js"></script>
-    <script src="Libraries/js/angular.min.js"></script>
-    <script src="Libraries/js/angular-sanitize.min.js"></script>
-    <script src="Libraries/js/angular-route.js"></script>
-    <script src="Libraries/js/select.min.js"></script>
-    <script src="Libraries/js/xlsx.core.min.js"></script>
-    <script src="Libraries/js/ui-bootstrap-tps-0.11.0.min.js"></script>
-    <script src="Libraries/js/jquery-jvectormap-2.0.2.min.js"></script>
-    <script src="Libraries/js/jquery-jvectormap-world-mill-en.js"></script>
-    <!--CSS-->
+    <script src="assets/libs/js/jquery.min.js"></script>
+    <script src="assets/libs/js/angular.js"></script>
+    <script src="assets/libs/js/angular-sanitize.js"></script>
+    <script src="assets/libs/js/angular-route.js"></script>
+    <script src="assets/libs/js/select.js"></script>
+    <script src="assets/libs/js/xlsx.full.min.js"></script>
+    <script src="assets/libs/js/cpexcel.js"></script>
+    <script src="assets/libs/js/ui-bootstrap-tpls-2.5.0.min.js"></script>
+    <script src="assets/libs/js/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="assets/libs/js/jquery-jvectormap-world-mill-en.js"></script>
+    <!--css-->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="Libraries/css/select.min.css">
-    <link rel="stylesheet" href="Libraries/css/jquery-jvectormap-2.0.2.css">
-    <!--<link rel="stylesheet" href="Libraries/css/metro-bootstrap.css">
-    <link rel="stylesheet" href="Libraries/fonts/metroSysIcons.svg">
-    <link rel="stylesheet" href="Libraries/fonts/metroSysIcons.tff">
-    <link rel="stylesheet" href="Libraries/fonts/metroSysIcons.woff">
-    <link rel="stylesheet" href="Libraries/font-awesome.min.css">-->
+    <link rel="stylesheet" href="assets/libs/css/select.min.css">
+    <link rel="stylesheet" href="assets/libs/css/jquery-jvectormap-2.0.2.css">
+    <!--<link rel="stylesheet" href="libs/css/metro-bootstrap.css">
+    <link rel="stylesheet" href="libs/fonts/metroSysIcons.svg">
+    <link rel="stylesheet" href="libs/fonts/metroSysIcons.tff">
+    <link rel="stylesheet" href="libs/fonts/metroSysIcons.woff">
+    <link rel="stylesheet" href="libs/font-awesome.min.css">-->
 </head>
 <body ng-controller="GameController as game" ng-cloak>
     <div class="main_overlay">
@@ -31,7 +32,7 @@
             <div class="row" ng-show="game.data.init.isFirstTime != true">
                 <nav class="navbar navbar-default" role="navigation">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#/changelog">
+                        <a class="navbar-brand" href="#!/changelog">
                             <span>
                                 W<i class="glyphicon glyphicon-globe font-9pt font-color-lightblue"></i>rld Conqueror
                                 <sub class="text-muted small">v{{game.version}}</sub>
@@ -42,7 +43,7 @@
                         <ul class="nav navbar-nav">
                             <li class="menu-divider"></li>
                             <li>
-                                <a href="#/ia">
+                                <a href="#!/internalAffairs">
                                     <i class="glyphicon glyphicon-flag"></i>
                                     <span class="hidden-sm hidden-xs">
                                         Governance
@@ -51,7 +52,7 @@
                             </li>
                             <li class="menu-divider"></li>
                             <li>
-                                <a href="#/structure">
+                                <a href="#!/structure">
                                     <i class="fa fa-institution"></i>
                                     <span class="hidden-sm hidden-xs">
                                         Construction
@@ -60,7 +61,7 @@
                             </li>
                             <li class="menu-divider"></li>
                             <li>
-                                <a href="#/military">
+                                <a href="#!/military">
                                     <i class="glyphicon glyphicon-screenshot"></i>
                                     <span class="hidden-sm hidden-xs">
                                         Military
@@ -69,7 +70,7 @@
                             </li>
                             <li class="menu-divider"></li>
                             <li>
-                                <a href="#/research">
+                                <a href="#!/research">
                                     <i class="fa fa-flask"></i>
                                     <span class="hidden-sm hidden-xs">
                                         Research
@@ -78,7 +79,7 @@
                             </li>
                             <li class="menu-divider"></li>
                             <li>
-                                <a href="#/war">
+                                <a href="#!/war">
                                     <i class="fa fa-fire"></i>
                                     <span class="hidden-sm hidden-xs">
                                         War
@@ -120,16 +121,16 @@
                 </nav>
 
                 <div id="Game Window" class="col-sm-12">
-                    <div ng-include="'Views/statHeader.html'"></div>
+                    <div ng-include="'app/components/statHeader/statHeaderView.html'"></div>
                     
                     <div id="views" ng-view>
                     </div>
                 </div>
             </div>
 
-            <div ng-include="'Views/introscreen.html'"></div>
+            <div ng-include="'app/components/introScreen/introscreenView.html'"></div>
 
-            <div ng-include="'Views/notifications.html'"></div>
+            <div ng-include="'app/shared/notifications/notificationsView.html'"></div>
             
         </div>
     </div>
@@ -150,27 +151,45 @@
 
     <footer>
 
-        <script src="Javascript/WCI.js"></script>
-        <script src="Javascript/Services/myCountryData.js"></script>
-        <script src="Javascript/Services/buildingsData.js"></script>
-        <script src="Javascript/Services/militaryData.js"></script>
-        <script src="Javascript/Services/lawsData.js"></script>
-        <script src="Javascript/Services/researchData.js"></script>
-        <script src="Javascript/Services/advisorsData.js"></script>
-        <script src="Javascript/Services/helperModalsData.js"></script>
-        <script src="Javascript/Services/notificationData.js"></script>
-        <script src="Javascript/Services/worldCountryData.js"></script>
+        <!-- App and Routing -->
+        <script src="app/app.module.js"></script>
+        <script src="app/app.routes.js"></script>
 
-        <script src="Javascript/Controllers/GameControllers.js"></script>
-        <script src="Javascript/Controllers/ChangeLogController.js"></script>
-        <script src="Javascript/Controllers/ModalControllers.js"></script>
+        <!-- Controllers -->
+        <script src="app/components/changelog/changelogController.js"></script>
+        <script src="app/components/country/countryController.js"></script>
+        <script src="app/components/game/GameControllers.js"></script>
+        <script src="app/components/military/militaryController.js"></script>
+        <script src="app/components/research/researchController.js"></script>
+        <script src="app/components/structure/structureController.js"></script>
+        <script src="app/components/tooltip/tooltipController.js"></script>
+        <script src="app/components/war/warController.js"></script>
 
-        <script src="Javascript/Filters/NumberFilters.js"></script>
-        <script src="Javascript/Filters/DateTimeFilters.js"></script>
+        <!-- Services -->
+        <script src="app/components/advisors/advisorsService.js"></script>
+        <script src="app/components/country/countryService.js"></script>
+        <script src="app/components/laws/lawsService.js"></script>
+        <script src="app/components/military/militaryService.js"></script>
+        <script src="app/components/research/researchService.js"></script>
+        <script src="app/components/structure/structureService.js"></script>
+        <script src="app/components/worldCountry/worldCountryService.js"></script>
+
+        <!-- Shared Controllers -->
+        <script src="app/shared/advisorHelp/advisorHelperController.js"></script>
+        <script src="app/shared/advisorHire/advisorHiringController.js"></script>
+        <script src="app/shared/warConfirmation/warConfirmationController.js"></script>
+
+        <!-- Shared Services -->
+        <script src="app/shared/helperModal/helperModalsService.js"></script>
+        <script src="app/shared/notifications/notificationService.js"></script>
+
+        <!-- Filters -->
+        <script src="app/shared/filters/NumberFilters.js"></script>
+        <script src="app/shared/filters/DateTimeFilters.js"></script>
 
 
-        <link rel="stylesheet" href="CSS/main.css" />
-        <link rel="stylesheet" href="CSS/common.css" />
+        <link rel="stylesheet" href="assets/css/main.css" />
+        <link rel="stylesheet" href="assets/css/common.css" />
 
     </footer>
 </body>

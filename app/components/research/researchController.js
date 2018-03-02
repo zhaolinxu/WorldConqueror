@@ -1,0 +1,3 @@
+wciApp.controller('ResearchController', function () {
+
+});

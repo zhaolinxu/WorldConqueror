@@ -1,0 +1,64 @@
+﻿<div id="War" class="row">
+    <div class="col-sm-12">
+        <div id="world-map" style="height: 500px" ng-show="!war.worldCountries.baseStats.IsWarActive">
+
+        </div>
+        <div id="war-control" ng-show="war.worldCountries.baseStats.IsWarActive" class="row">
+            <div id="battleScreen" class="col-md-8">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <span>
+                                Control Room
+                            </span>
+                            <span>
+                                <i class="fa fa-exclamation-triangle clickable" ng-click="war.retreat()"></i>
+                            </span>
+                            <span class="pull-right">
+                                <i class="fa fa-info-circle clickable" ng-click=""></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="panel-body custom-panel font-9pt">
+                        <div class="row">
+                            <button type="button" class="btn btn-danger pull-right" ng-click="war.retreat()">Surrender</button>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 pull-left">
+
+                            </div>
+                            <div class="col-sm-6 pull-right">
+                                Shield: {{war.worldCountries.baseStats.CountryAttacked.shield}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="warLog" class="col-md-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <span>
+                                Log
+                            </span>
+                            <span class="pull-right">
+                                <i class="fa fa-info-circle clickable" ng-click=""></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="panel-body custom-panel font-9pt">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <span ng-repeat="log in war.logger" class="col-sm-12">
+                                    {{log.text}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+<ng-include src="'app/shared/warConfirmation/war_confirmationView.html'"></ng-include>

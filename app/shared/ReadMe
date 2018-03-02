@@ -1,0 +1,3 @@
+Shared folder is used for reusable components
+Usually directives and their html part
+If you use a service as well for that specific directive then keep it here as well...

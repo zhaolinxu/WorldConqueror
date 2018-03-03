@@ -81,7 +81,7 @@ wciApp.factory(
 
 var setInitialBuildingData = function(buildings, $q) {
     return $q(function(resolve, reject){
-        var fileUrl = "assets/excel/Data.xlsx?_="+ new Date().getTime();
+        var fileUrl = "assets/excel/Data.ods?_="+ new Date().getTime();
         var oReq = new XMLHttpRequest();
         oReq.open("GET", fileUrl, true);
         oReq.responseType = "arraybuffer";

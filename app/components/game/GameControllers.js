@@ -12,7 +12,10 @@ wciApp.controller(
         lawsData,
         advisorsData,
         helperModalsData,
-        notificationData) {
+        notificationData,
+        saveService,
+        initService
+        ) {
 
         //#region Private Methods
         var timerfunction = function () {
@@ -25,18 +28,13 @@ wciApp.controller(
             game.laws.functions.updateActiveFor();
 
             game.myCountry.baseStats.upkeep = 0;
-            game.buildings.functions.getTotalUpkeep();
+            game.buildings.getTotalUpkeep();
             game.military.functions.militaryTimedEffects();
             //game.advisors.functions.advisorTimedEffects();
             //game.saveGame();
         };
         var saveGame = function () {
-            game.myCountry.functions.saveData();
-            game.buildings.functions.saveData();
-            game.advisors.functions.saveData();
-            game.military.functions.saveData();
-            game.laws.functions.saveData();
-            game.worldCountries.functions.saveData();
+            saveService.save();
             localStorage['gameData'] = JSON.stringify(game.data);
         };
         var resetGame = function () {
@@ -49,7 +47,7 @@ wciApp.controller(
             };
             //TODO: The extend functions don't attach themselves on reset. Fix
             game.myCountry.functions.resetStats();
-            game.buildings.functions.resetData();
+            saveService.reset();
             game.advisors.functions.resetData();
             game.worldCountries.functions.resetData();
             game.military.functions.resetData();
@@ -62,6 +60,9 @@ wciApp.controller(
         var game = this;
         game.data = {};
         game.myCountry = myCountryData;
+        initService().then(function(){
+            saveService.load();
+        });
         game.buildings = buildingsData;
         game.advisors = advisorsData;
         game.military = militaryData;

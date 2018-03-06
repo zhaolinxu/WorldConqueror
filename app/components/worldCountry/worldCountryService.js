@@ -28,10 +28,7 @@ wciApp.factory('worldCountryData', function (
     worldCountries.functions.resetData = function () {
         setInitialWorldCountryData(worldCountries);
     };
-    worldCountries.functions.saveData = function () {
-        //btoa(JSON.stringify(game.data));
-        localStorage['worldCountryBaseStats'] = JSON.stringify(worldCountries.baseStats);
-    };
+
 
 
     worldCountries.functions.attack = function (code) {

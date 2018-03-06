@@ -13,7 +13,6 @@ wciApp.controller(
             var upkeep = $filter("niceNumber")(myCountryData.baseStats.upkeep);
             var foodProduction = $filter("niceNumber")(myCountryData.dependentStats.foodGrowth());
             var foodDemand = $filter("niceNumber")(myCountryData.dependentStats.foodDemand());
-            console.log("upkeep " + upkeep);
             $scope.population = $sce.trustAsHtml(
                 "Growth Rate: <span class='bold text-success'>" + growth + "%</span> <br/>\n" +
                 "Mortality Rate: <span class='bold text-danger'>" + mortality + "%</span>"

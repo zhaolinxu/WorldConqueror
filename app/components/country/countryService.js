@@ -182,11 +182,7 @@ wciApp.factory('myCountryData', function () {
     myCountry.functions.resetStats = function () {
         setInitialStats(myCountry);
     };
-    myCountry.functions.saveData = function () {
-        //btoa(JSON.stringify(game.data));
-        localStorage['countryBaseStats'] = JSON.stringify(myCountry.baseStats);
-        localStorage['countryEvents'] = JSON.stringify(myCountry.events);
-    };
+
 
     return myCountry;
 });

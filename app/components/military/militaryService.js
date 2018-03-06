@@ -38,9 +38,7 @@ wciApp.factory('militaryData', function (
         }
     }
 
-    military.functions.saveData = function () {
-        localStorage['militaryData'] = JSON.stringify(military.baseStats);
-    };
+   
     military.functions.resetData = function () {
         setInitialUnitsData(military);
     };

@@ -24,9 +24,7 @@ wciApp.factory('researchData', function (myCountryData, buildingsData) {
     //}
 
 
-    researches.functions.saveData = function () {
-        localStorage['researchData'] = JSON.stringify(researches.baseStats);
-    };
+
     researches.functions.resetData = function () {
         setInitialResearchData(researches);
     };

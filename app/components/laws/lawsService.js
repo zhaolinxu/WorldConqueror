@@ -48,9 +48,6 @@ wciApp.factory('lawsData', function (myCountryData, buildingsData) {
         }
     };
 
-    laws.functions.saveData = function () {
-        localStorage['lawsData'] = JSON.stringify(laws.baseStats);
-    };
     laws.functions.resetData = function () {
         setInitialLawsData(laws, myCountryData);
     };

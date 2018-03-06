@@ -4,20 +4,26 @@
     </h3>
     <hr>
     <div class="col-md-6 col-sm-12">
-        <tabset>
-            <tab ng-repeat="building in structureCtrl.buildings.baseStats" heading="{{building.buildingTypeName}}" class="clickable margin-bottom-20 bg-success">
+        <uib-tabset active="active">
+            <uib-tab ng-repeat="building in structureCtrl.buildings.types" index="$index" class="clickable margin-bottom-20 bg-success">
+                <uib-tab-heading>
+                    <span>{{building.buildingTypeName}}</span>
+                </uib-tab-heading>
                 <div class="row">
                     <div id="build" class="col-md-12">
                         <div class="panel panel-primary panelLocked" ng-repeat="structure in building.structures"
                              ng-class="{'clickableArea panelUnlocked':structure.isUnlocked()}">
                             <div class="panel-body">
-                                <div class="col-md-6">
+                                <div class="col-md-2 col-sm-2 avatar">
+                                    <img class="img-responsive" ng-src="assets/img/{{structure.image}}.png" />
+                                </div>
+                                <div class="col-md-5">
                                     <span class="fa fa-info-circle" tooltip="{{structure.desc}}"></span>
                                     {{structure.name}} <span class="badge">{{structure.count}}</span> <br />
                                     <b>Cost: {{structure.displayCost | niceNumber}}; Upkeep: {{structure.upkeep | niceNumber}}</b>
                                     <!--TODO: Remove some padding around the icon-->
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <div class="pull-right clickableArea" ng-show="structure.isUnlocked()">
                                         <button class="btn btn-primary" ng-click="structure.build(1)">
                                             x1
@@ -28,17 +34,14 @@
                                         <button class="btn btn-primary" ng-click="structure.build(100)" ng-mouseover="structure.updateCost(100)" ng-mouseleave="structure.updateCost(1)">
                                             x100
                                         </button>
-                                        <button class="btn btn-primary" ng-click="structure.build(1000)" ng-mouseover="structure.updateCost(1000)" ng-mouseleave="structure.updateCost(1)">
-                                            x1000
-                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </tab>
-        </tabset>
+            </uib-tab>
+        </uib-tabset>
     </div>
 
     <ng-include src="'app/components/advisors/advisorsView.html'"></ng-include>

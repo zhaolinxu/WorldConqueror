@@ -3,50 +3,100 @@
         <span class="glyphicon glyphicon-home"></span> Buildings
     </h3>
     <hr>
-    <div class="col-md-6 col-sm-12">
-        <uib-tabset active="active">
-            <uib-tab ng-repeat="building in structureCtrl.buildings.types" index="$index" class="clickable margin-bottom-20 bg-success">
-                <uib-tab-heading>
-                    <span>{{building.buildingTypeName}}</span>
-                </uib-tab-heading>
+    <div class="col-md-12 col-sm-12">
+        <div class="row">
+            <div id="build" class="col-xs-8">
                 <div class="row">
-                    <div id="build" class="col-md-12">
-                        <div class="panel panel-primary panelLocked" ng-repeat="structure in building.structures"
-                             ng-class="{'clickableArea panelUnlocked':structure.isUnlocked()}">
-                            <div class="panel-body">
-                                <div class="col-md-2 col-sm-2 avatar">
-                                    <img class="img-responsive" ng-src="assets/img/{{structure.image}}.png" />
-                                </div>
-                                <div class="col-md-5">
-                                    <span class="fa fa-info-circle" tooltip="{{structure.desc}}"></span>
-                                    {{structure.name}} <span class="badge">{{structure.count}}</span> <br />
-                                    <b>Cost: {{structure.displayCost | niceNumber}}; Upkeep: {{structure.upkeep | niceNumber}}</b>
-                                    <!--TODO: Remove some padding around the icon-->
-                                </div>
-                                <div class="col-md-5">
-                                    <div class="pull-right clickableArea" ng-show="structure.isUnlocked()">
-                                        <button class="btn btn-primary" ng-click="structure.build(1)">
-                                            x1
-                                        </button>
-                                        <button class="btn btn-primary" ng-click="structure.build(10)" ng-mouseover="structure.updateCost(10)" ng-mouseleave="structure.updateCost(1)">
-                                            x10
-                                        </button>
-                                        <button class="btn btn-primary" ng-click="structure.build(100)" ng-mouseover="structure.updateCost(100)" ng-mouseleave="structure.updateCost(1)">
-                                            x100
-                                        </button>
-                                    </div>
+                    <div class="panel panel-primary panelLocked col-xs-4 clickableArea panelUnlocked"
+                         ng-repeat="structure in structureCtrl.buildings.structures"
+                         ng-class="{'invisible': !structure.isUnlocked()}">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                        <span class="tag label label-default center-block">
+                                            <span>{{structure.name}}</span>
+                                            <a><i class="remove glyphicon glyphicon-info-sign glyphicon-white"></i></a>
+                                        </span>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+                                    <p class="text-center all-border">
+                                        {{structure.count}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-md-offset-4">
+                                    <img class="center-block img-responsive"
+                                         ng-src="assets/img/{{structure.image}}.png"/>
+                                </div>
+                            </div>
+                            <!--TODO: Hide stat bonuses in a well and/or tooltip, currently might be too much info displayed at once-->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="text-center">Production: {{structure.statAdder}}
+                                        <br>
+                                        Multiplier: {{structure.statMultiplier}}
+                                        <br>
+                                        Count Multiplier: {{structure.countMultiplier}}
+                                        <br>
+                                        Upkeep: {{structure.upkeep}}
+                                        <br>
+                                        Jobs: {{structure.jobsIncreased}}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!--<div class="row">-->
+                            <!--<div class="col-md-2 col-sm-2 avatar">-->
+                            <!--<img class="img-responsive" ng-src="assets/img/{{structure.image}}.png" />-->
+                            <!--</div>-->
+                            <!--<div class="col-md-7" ng-if="structure.isUnlocked()">-->
+                            <!--<span class="fa fa-info-circle" tooltip="{{structure.desc}}"></span>-->
+                            <!--<b>{{structure.name}}</b> <span class="badge">{{structure.count}}</span> <br />-->
+                            <!--Cost: {{structure.cost | niceNumber}} |-->
+                            <!--Upkeep: {{structure.upkeep | niceNumber}}-->
+                            <!--&lt;!&ndash;TODO: Remove some padding around the icon&ndash;&gt;-->
+                            <!--</div>-->
+                            <!--<div class="col-md-7" ng-if="!structure.isUnlocked()">-->
+                            <!--<span class="fa fa-info-circle" tooltip="Not unlocked yet"></span>-->
+                            <!--<b>??? <br />-->
+                            <!--Cost: ??? |-->
+                            <!--Upkeep: ???</b>-->
+                            <!--</div>-->
+                            <!--<div class="col-md-3">-->
+                            <!--<div class="pull-right clickableArea" ng-show="structure.isUnlocked()">-->
+                            <!--<button class="btn btn-primary" ng-click="structure.build(1)">-->
+                            <!--x1-->
+                            <!--</button>-->
+                            <!--&lt;!&ndash;TODO: Might consider adding shortcuts for buying more, like ctrl + click = 25 at once&ndash;&gt;-->
+                            <!--&lt;!&ndash;TODO: Holding down ctrl should also update prices on screen. &ndash;&gt;-->
+                            <!--&lt;!&ndash;<button class="btn btn-primary" ng-click="structure.build(10)" ng-mouseover="structure.updateCost(10)" ng-mouseleave="structure.updateCost(1)">&ndash;&gt;-->
+                            <!--&lt;!&ndash;x10&ndash;&gt;-->
+                            <!--&lt;!&ndash;</button>&ndash;&gt;-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <!--</div>-->
                         </div>
+                        <button class="btn btn-block btn-success" ng-class="structure.isUnlocked() ? '' : 'disabled'"
+                                ng-click="structure.build(1)">
+                            <h3>Buy</h3>
+                            <div class="col-md-6">
+                                <i class="fa fa-money"></i> {{structure.cost}}
+                            </div>
+                            <div class="col-md-6">
+                                <i class="fa fa-flag"></i> {{structure.landCost}}
+                            </div>
+                        </button>
+
                     </div>
                 </div>
-            </uib-tab>
-        </uib-tabset>
+            </div>
+        </div>
+        <!--<ng-include src="'app/components/advisors/advisorsView.html'"></ng-include>-->
     </div>
-
-    <ng-include src="'app/components/advisors/advisorsView.html'"></ng-include>
 </div>
-
-<ng-include src="'app/shared/advisorHire/advisors_hireView.html'"></ng-include>
-<ng-include src="'app/shared/advisorHelp/help_advisorsView.html'"></ng-include>
+<!--<ng-include src="'app/shared/advisorHire/advisors_hireView.html'"></ng-include>-->
+<!--<ng-include src="'app/shared/advisorHelp/help_advisorsView.html'"></ng-include>-->
 

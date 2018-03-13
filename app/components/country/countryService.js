@@ -225,7 +225,9 @@ var setInitialStats = function (myCountry) {
         //Military
         attack: 0,
         defense: 0,
-        siege: 0
+        siege: 0,
+        unitCap: 0,
+        baseResearchPoints: 0
     };
     myCountry.events = {
         oneChildPolicy : false, //Law

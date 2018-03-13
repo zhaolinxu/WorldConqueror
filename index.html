@@ -90,23 +90,11 @@
 
                         </ul>
                         <div id="Speed Buttons" class="navbar-form clickableArea">
-                            <button class="btn margin-left-15" ng-class="game.data.paused === true ? 'btn-success' : 'btn-warning'" ng-click="game.pauseGame()">
-                                <i class="fa" ng-class="game.data.paused === true ? 'fa-play' : 'fa-pause'"></i>
-                            </button>
-                            <button class="btn" ng-class="game.data.speed === 1000 ? 'btn-info' : 'btn-primary'" ng-click="game.adjustGameSpeed(1)">
-                                <span>
-                                    x1
-                                </span>
-                            </button>
-                            <button class="btn" ng-class="game.data.speed === 0.01 ? 'btn-info' : 'btn-primary'" ng-click="game.adjustGameSpeed(0.01)">
-                                <span>
-                                    x0.01
-                                </span>
-                            </button>
-                            <button class="btn" ng-class="game.data.speed === 1 ? 'btn-info' : 'btn-primary'" ng-click="game.adjustGameSpeed(1000)">
-                                <span>
-                                    x1000
-                                </span>
+                            <span class="margin-left-15">
+                                Current turn: {{currentTurn}}
+                            </span>
+                            <button class="btn margin-left-15" ng-click="game.nextTurn()">
+                                <i class="fa fa-play"></i>
                             </button>
                             <button class="btn btn-primary" ng-click="game.resetGame()">
                                 <span>
@@ -176,6 +164,7 @@
         <script src="app/components/game/saveService.js"></script>
         <script src="app/components/game/initService.js"></script>
         <script src="app/components/structure/buildingsService.js"></script>
+        <script src="app/components/military/unitService.js"></script>
 
         <!-- Shared Controllers -->
         <script src="app/shared/advisorHelp/advisorHelperController.js"></script>
@@ -190,6 +179,8 @@
         <script src="app/shared/filters/NumberFilters.js"></script>
         <script src="app/shared/filters/DateTimeFilters.js"></script>
 
+        <!-- Functions -->
+        <script src="app/shared/excelLoader.js"></script>
 
         <link rel="stylesheet" href="assets/css/main.css" />
         <link rel="stylesheet" href="assets/css/common.css" />

@@ -4,6 +4,7 @@ wciApp.factory(
         myCountryData,
         buildingsData,
         militaryData,
+        unitData,
         worldCountryData,
         lawsData,
         advisorsData,
@@ -11,42 +12,35 @@ wciApp.factory(
         structureService,
         $q
     ) {
-        var sheets = ["BuildingType", "Buildings"];
-
+        var sheets = ["Buildings", "Units"];
         var init = function() {
             return $q(function(resolve){
                 var data = getDataFromExcel($q, sheets, null);
                 data.then(function(value){
                     //we return value which is an object of our sheets, we can access them like value.Buildings.
-                    buildingInit(value);
+                    buildingInit(value.Buildings);
+                    militaryInit(value.Units);
                     resolve(value);
                 });
             })
         };
 
-
-        var buildingInit = function(value) {
-            var type = value[sheets[0]];
-            var structures = value[sheets[1]];
+        var buildingInit = function(arr) {
             var self = buildingsData;
-            self.types = [];//resetting array
-            for (var i = 0; i < type.length; i++) {
-                self.types[i] = {};
-                //this is necessary only for the sake of removing __rowNum__ property
-                for (var key in type[i]) {
-                    if (type[i].hasOwnProperty(key) && type[i].propertyIsEnumerable(key)) {
-                        self.types[i][key] = type[i][key];
-                    }
-                }
-                var currentType = self.types[i];
-                currentType.structures = [];
-                for (var j = 0; j < structures.length; j++) {
-                    if (currentType.buildingTabCode === structures[j].buildingTabCode) {
-                        var structureObj = new structureService();
-                        structureObj.init(structures[j]);
-                        currentType.structures.push(structureObj);
-                    }
-                }
+            self.structures = [];
+            for (var j = 0; j < arr.length; j++) {
+                    var structureObj = new structureService();
+                    structureObj.init(arr[j]);
+                    self.structures.push(structureObj);
+            }
+        };
+        var militaryInit = function (arr) {
+            var self = militaryData;
+            self.units = [];
+            for(var i = 0; i < arr.length; i++){
+                var obj = arr[i];
+                self.units[i] = new unitData();
+                self.units[i].init(obj);
             }
             console.log(self);
         };

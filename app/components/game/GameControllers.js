@@ -16,7 +16,7 @@ wciApp.controller(
         saveService,
         initService
         ) {
-
+        $scope.currentTurn = 0;
         //#region Private Methods
         var timerfunction = function () {
             //TODO: Put logic here to prompt user of game ending/death due to 0 population.
@@ -50,7 +50,6 @@ wciApp.controller(
             saveService.reset();
             game.advisors.functions.resetData();
             game.worldCountries.functions.resetData();
-            game.military.functions.resetData();
             game.laws.functions.resetData();
             localStorage.clear();
         };
@@ -121,36 +120,41 @@ wciApp.controller(
         };
         //#endregion
 
-        //#region Automated Functions
-        if (!game.data.paused) {
-            var playTimer = $interval(timerfunction, game.data.speed);
-        }
         var saveTimer = $interval(saveGame, 1000);
+        //#region Automated Functions
+        // if (!game.data.paused) {
+        //     var playTimer = $interval(timerfunction, game.data.speed);
+        // }
+        //
+        // game.pauseGame = function () {
+        //     game.data.paused = !game.data.paused;
+        //     if (!game.data.paused) {
+        //         playTimer = $interval(timerfunction, game.data.speed);
+        //     }
+        //     else {
+        //         $interval.cancel(playTimer)
+        //     }
+        // };
+        // game.adjustGameSpeed = function (speed) {
+        //     game.data.speed = (1000 / speed);
+        //     game.data.paused = false;
+        //     $interval.cancel(playTimer);
+        //     playTimer = $interval(timerfunction, game.data.speed);
+        //
+        // };
 
-        game.pauseGame = function () {
-            game.data.paused = !game.data.paused;
-            if (!game.data.paused) {
-                playTimer = $interval(timerfunction, game.data.speed);
-            }
-            else {
-                $interval.cancel(playTimer)
-            }
+        //next turn button
+        game.nextTurn = function(){
+            timerfunction();
+            $scope.currentTurn += 1;
         };
-        game.adjustGameSpeed = function (speed) {
-            game.data.speed = (1000 / speed);
-            game.data.paused = false;
-            $interval.cancel(playTimer);
-            playTimer = $interval(timerfunction, game.data.speed);
-
-        };
-
         //#endregion
 
         //Making sure interval is cancelled on destroy
         $scope.$on(
             "$destroy",
             function (event) {
-                $interval.cancel(playTimer)
+                // $interval.cancel(playTimer)
                 $interval.cancel(saveTimer)
             }
         );

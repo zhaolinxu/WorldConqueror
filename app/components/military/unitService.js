@@ -3,17 +3,17 @@
 wciApp.factory('unitService', function (myCountryService) {
 
     function Unit() {
+        //array to store objects with units we purchase
+        this.queue = [];
     }
 
     //pass unit data then initialize it.
-    Unit.prototype.init = function (obj) {
-        for (var key in obj) {
-            if (obj.hasOwnProperty(key)) {
-                this[key] = obj[key];
+    Unit.prototype.init = function (unitExcelData) {
+        for (var key in unitExcelData) {
+            if (unitExcelData.hasOwnProperty(key)) {
+                this[key] = unitExcelData[key];
             }
         }
-        //array to store objects with units we purchase
-        this.queue = [];
     };
     Unit.prototype.cancelQueue = function (index) {
         //TODO: Prompt user when canceling a queue

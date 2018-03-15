@@ -1,13 +1,13 @@
 wciApp.factory(
     'saveService',
     function (
-        myCountryData,
-        buildingsData,
-        militaryData,
-        worldCountryData,
-        lawsData,
-        advisorsData,
-        researchData,
+        myCountryService,
+        buildingsService,
+        militaryService,
+        worldCountryService,
+        lawsService,
+        advisorsService,
+        researchService,
         initService,
         $location
         ) {
@@ -19,14 +19,13 @@ wciApp.factory(
         };
         data.save = function() {
             //TODO: create an array of all data we want to save/load and use a loop/forEach.
-            localStorage['buildings'] = angular.toJson(buildingsData);
-            localStorage['militaryData'] = angular.toJson(militaryData);
-            localStorage['countryBaseStats'] = angular.toJson(myCountryData.baseStats);
-            localStorage['countryEvents'] = angular.toJson(myCountryData.events);
-            localStorage['lawsData'] = angular.toJson(lawsData.baseStats);
-            localStorage['researchData'] = angular.toJson(researchData.baseStats);
-            localStorage['worldCountryBaseStats'] = angular.toJson(worldCountryData.baseStats);
-            console.log('test');
+            localStorage['buildings'] = angular.toJson(buildingsService);
+            localStorage['militaryData'] = angular.toJson(militaryService);
+            localStorage['countryBaseStats'] = angular.toJson(myCountryService.baseStats);
+            localStorage['countryEvents'] = angular.toJson(myCountryService.events);
+            localStorage['lawsData'] = angular.toJson(lawsService.baseStats);
+            localStorage['researchData'] = angular.toJson(researchService.baseStats);
+            localStorage['worldCountryBaseStats'] = angular.toJson(worldCountryService.baseStats);
         };
         data.load = function() {
             var saved = angular.fromJson(localStorage['buildings']);
@@ -35,8 +34,8 @@ wciApp.factory(
             //TODO: Check if saved data exist before merging, also remember to init data before merging(init is like a reset)
             //TODO: Removing data from excel does not remove it from a save. Fix: Remove properties from save file that does not exist in game anymore.
             //TODO: UP, might be a problem with arrays(of buildings/units etc), we might consider using objects only.
-            angular.merge(buildingsData, saved);
-            angular.merge(militaryData, saved2);
+            angular.merge(buildingsService, saved);
+            angular.merge(militaryService, saved2);
         };
         //Separated from "newGame" in order to give us an ability to do other stuff which applies only when resetting
         data.reset = function() {

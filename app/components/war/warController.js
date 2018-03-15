@@ -1,10 +1,10 @@
 wciApp.controller('WarController', function (
     $interval,
     $uibModal,
-    worldCountryData) {
+    worldCountryService) {
 
     var war = this;
-    war.worldCountries = worldCountryData;
+    war.worldCountries = worldCountryService;
     war.logger = [];
 
     var openAttackConfirmation = function (code) {

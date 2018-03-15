@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-wciApp.factory('worldCountryData', function (
+wciApp.factory('worldCountryService', function (
     $uibModal,
     $http) {
 

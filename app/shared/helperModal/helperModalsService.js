@@ -1,7 +1,7 @@
 ﻿'use strict';
 
 wciApp.factory(
-    'helperModalsData',
+    'helperModalsService',
     function (
         $uibModal) {
 

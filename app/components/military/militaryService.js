@@ -1,13 +1,13 @@
 ﻿'use strict';
 
 wciApp.factory(
-    'militaryData',
+    'militaryService',
     function (
-    myCountryData,
-    unitData
+    myCountryService,
+    unitService
     )
 {
-        //TODO: Consider using this object as a "group", and calculate total upkeep in worldCountry(myCountryData) service.
+        //TODO: Consider using this object as a "group", and calculate total upkeep in worldCountry(myCountryService) service.
         //TODO: This way we can make multiple copies of this object, without having to use "this.unitsOnMission" array.
     var Military = function () {
         this.units = [];
@@ -15,6 +15,7 @@ wciApp.factory(
         //E.x: 100Militia and 10Battle Ships.  Calculate their upkeep.
         this.unitsOnMission = [];
         this.totalUpkeep = 0;
+        this.unitCap = 0;
     };
 
     Military.prototype.getTotalUpkeep = function () {
@@ -26,7 +27,11 @@ wciApp.factory(
         this.totalUpkeep = total;
         return total;
     };
-
+    Military.prototype.updateUnitsBuyQueue = function() {
+      this.units.forEach(function(unit){
+         unit.updateQueue();
+      });
+    };
     //TODO: Probably need to create another array of arrays which will store currently sent units "unit group", so we can calculate their cost
     //TODO: Sending units to fight should increase their upkeep :]
     Military.prototype.getTotalAttack = function(){

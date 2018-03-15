@@ -2,7 +2,7 @@
 
 wciApp.factory(
     'structureService',
-    function (myCountryData,
+    function (myCountryService,
               $q) {
 
         //single structure such as Market/House/Garden
@@ -22,17 +22,18 @@ wciApp.factory(
 
         Structure.prototype.build = function (count) {
             var cost = this.cost * count;
-            if ((myCountryData.baseStats.money > cost) && this.isUnlocked()) {
-                myCountryData.baseStats[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
-                myCountryData.baseStats[this.statAffected] += (this.statAdder * count);
-                myCountryData.baseStats.totalJobs += (this.jobsIncreased * count);
-                myCountryData.baseStats.money -= cost;
+            if ((myCountryService.baseStats.money > cost) && this.isUnlocked()) {
+                myCountryService.baseStats[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
+                myCountryService.baseStats[this.statAffected] += (this.statAdder * count);
+                myCountryService.baseStats.totalJobs += (this.jobsIncreased * count);
+                myCountryService.baseStats.money -= cost;
                 this.count = this.count * 1 + count; //*1 to force math add and not string add.
             }
+            console.log(myCountryService.baseStats.unitCap)
         };
 
         Structure.prototype.isUnlocked = function () {
-            return myCountryData.baseStats.size >= this.sizeRequired;//returns true or false
+            return myCountryService.baseStats.size >= this.sizeRequired;//returns true or false
         };
 
         Structure.prototype.updateCost = function (count) {
@@ -41,15 +42,15 @@ wciApp.factory(
         };
 
         // First Load
-        if (!localStorage['buildingData']) {
+        if (!localStorage['buildingService']) {
             // setInitialBuildingData(buildings, $q);
         }
         else {
-            // buildings.baseStats = JSON.parse(localStorage['buildingData']);
+            // buildings.baseStats = JSON.parse(localStorage['buildingService']);
         }
 
         // buildings.functions.saveData = function () {
-        //     localStorage['buildingData'] = JSON.stringify(buildings.baseStats);
+        //     localStorage['buildingService'] = JSON.stringify(buildings.baseStats);
         // };
         // buildings.functions.resetData = function () {
         //     //promise, it will wait for http request to finish before extending buildings methods...

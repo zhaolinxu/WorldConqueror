@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-wciApp.factory('lawsData', function (myCountryData, buildingsData) {
+wciApp.factory('lawsService', function (myCountryService, buildingsService) {
 
     var laws = {
         baseStats: {},
@@ -9,11 +9,11 @@ wciApp.factory('lawsData', function (myCountryData, buildingsData) {
     };
 
     //First Load
-    if (!localStorage['lawsData']) {
-        setInitialLawsData(laws, myCountryData);
+    if (!localStorage['lawsService']) {
+        setInitialLawsData(laws, myCountryService);
     }
     else {
-        laws.baseStats = JSON.parse(localStorage['lawsData']);
+        laws.baseStats = JSON.parse(localStorage['lawsService']);
     }
 
     //Extenders
@@ -25,12 +25,12 @@ wciApp.factory('lawsData', function (myCountryData, buildingsData) {
                 this.isActive = !this.isActive;
                 //If Active
                 if (this.isActive) {
-                    myCountryData.events[this.eventAffected] = true;
-                    myCountryData.baseStats.currentStabilityIndex += this.stabilityAffected;
+                    myCountryService.events[this.eventAffected] = true;
+                    myCountryService.baseStats.currentStabilityIndex += this.stabilityAffected;
                 }
                 else {
-                    myCountryData.events[this.eventAffected] = false;
-                    myCountryData.baseStats.currentStabilityIndex -= this.stabilityAffected;
+                    myCountryService.events[this.eventAffected] = false;
+                    myCountryService.baseStats.currentStabilityIndex -= this.stabilityAffected;
                 }
             }
 
@@ -49,7 +49,7 @@ wciApp.factory('lawsData', function (myCountryData, buildingsData) {
     };
 
     laws.functions.resetData = function () {
-        setInitialLawsData(laws, myCountryData);
+        setInitialLawsData(laws, myCountryService);
     };
 
 
@@ -57,7 +57,7 @@ wciApp.factory('lawsData', function (myCountryData, buildingsData) {
 
 });
 
-var setInitialLawsData = function (laws, myCountryData) {
+var setInitialLawsData = function (laws, myCountryService) {
     laws.baseStats = [
        {
            name: "Mandatory One Child Policy",

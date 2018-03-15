@@ -125,3 +125,24 @@ a {
 .tag a .glyphicon-white {
     color: #fff;
 }
+
+.removePadding-hireBtn {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.unitRecruitment {
+    overflow: auto;
+    height: 60vh;
+}
+
+.progress-bar span {
+    display: block;
+    position: absolute;
+    width: 100%;
+    color: black;
+}
+
+a {
+    cursor: pointer;
+}

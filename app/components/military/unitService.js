@@ -1,6 +1,6 @@
 'use strict';
 
-wciApp.factory('unitData', function (myCountryData) {
+wciApp.factory('unitService', function (myCountryService) {
 
     function Unit() {
     }
@@ -16,23 +16,29 @@ wciApp.factory('unitData', function (myCountryData) {
         this.queue = [];
     };
     Unit.prototype.cancelQueue = function (index) {
+        //TODO: Prompt user when canceling a queue
         //TODO: Tell the player about the possible lose of money, change formula to give less money, the longer player waits.
         //Cancel queue gives back ~50% money or so
         var amount = this.queue[index].amount;
-        myCountryData.baseStats.money += (amount * this.cost) / 2;
-        myCountryData.baseStats.population += amount * this.popCost;//give back population
-        myCountryData.baseScale.unitCap += amount * this.unitCapCost;//give back unit cap...
+        myCountryService.baseStats.money += (amount * this.cost) / 2;
+        myCountryService.baseStats.population += amount * this.popCost;//give back population
+        myCountryService.baseStats.unitCap += amount * this.unitCapCost;//give back unit cap...
         //remove units from queue
         this.queue.splice(index, 1);
     };
     //adding units to queue when buying, it might take 1 or more turns
     Unit.prototype.buyQueue = function (value) {
-        if (worldCountryData.baseStats.money >= value * this.cost &&
-            worldCountryData.baseStats.unitCap >= value * this.unitCapCost) {
+        //TODO: Consider merging same unit queue if done on same turn.
+        //TODO: For example, militia 10x, instead of storing 10x objects, we can combine them into 1...
+        //TODO: Since time for training them will be the same(because they are queued on same turn)
+        //TODO: Can be easily done by checking last element in the array and comparing it's timer with current unit timer.
+        if (myCountryService.baseStats.money >= value * this.cost &&
+            myCountryService.baseStats.unitCap >= value * this.unitCapCost &&
+            myCountryService.baseStats.population >= value * this.popCost) {
             //pay for hiring...
-            worldCountryData.baseStats.unitCap -= value * this.unitCapCost;
-            worldCountryData.baseStats.money -= value * this.cost;
-            worldCountryData.baseStats.population -= value * this.popCost;
+            myCountryService.baseStats.unitCap -= value * this.unitCapCost;
+            myCountryService.baseStats.money -= value * this.cost;
+            myCountryService.baseStats.population -= value * this.popCost;
             //TODO: Training speed might be reduced here...
             this.queue.push({amount: value, time: this.trainingSpeed});
         }

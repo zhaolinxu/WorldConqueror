@@ -4,15 +4,15 @@ wciApp.controller(
         $scope,
         $sce,
         $filter,
-        myCountryData) {
-        this.myCountry = myCountryData;
+        myCountryService) {
+        this.myCountry = myCountryService;
         $scope.updateTooltip = function() {
-            var growth = $filter("fixedDecimalPlaces")(myCountryData.dependentStats.actualGrowthRate(), 2);
-            var mortality = $filter("fixedDecimalPlaces")(myCountryData.dependentStats.actualMortalityRate(), 2);
-            var income = $filter("niceNumber")(myCountryData.dependentStats.income());
-            var upkeep = $filter("niceNumber")(myCountryData.baseStats.upkeep);
-            var foodProduction = $filter("niceNumber")(myCountryData.dependentStats.foodGrowth());
-            var foodDemand = $filter("niceNumber")(myCountryData.dependentStats.foodDemand());
+            var growth = $filter("fixedDecimalPlaces")(myCountryService.dependentStats.actualGrowthRate(), 2);
+            var mortality = $filter("fixedDecimalPlaces")(myCountryService.dependentStats.actualMortalityRate(), 2);
+            var income = $filter("niceNumber")(myCountryService.dependentStats.income());
+            var upkeep = $filter("niceNumber")(myCountryService.baseStats.upkeep);
+            var foodProduction = $filter("niceNumber")(myCountryService.dependentStats.foodGrowth());
+            var foodDemand = $filter("niceNumber")(myCountryService.dependentStats.foodDemand());
             $scope.population = $sce.trustAsHtml(
                 "Growth Rate: <span class='bold text-success'>" + growth + "%</span> <br/>\n" +
                 "Mortality Rate: <span class='bold text-danger'>" + mortality + "%</span>"

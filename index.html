@@ -17,14 +17,14 @@
     <script src="assets/libs/js/jquery-jvectormap-world-mill-en.js"></script>
     <!--css-->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/libs/css/select.min.css">
     <link rel="stylesheet" href="assets/libs/css/jquery-jvectormap-2.0.2.css">
     <!--<link rel="stylesheet" href="libs/css/metro-bootstrap.css">
     <link rel="stylesheet" href="libs/fonts/metroSysIcons.svg">
     <link rel="stylesheet" href="libs/fonts/metroSysIcons.tff">
     <link rel="stylesheet" href="libs/fonts/metroSysIcons.woff">
-    <link rel="stylesheet" href="libs/font-awesome.min.css">-->
+    -->
 </head>
 <body ng-controller="GameController as game" ng-cloak>
     <div class="main_overlay">
@@ -91,7 +91,7 @@
                         </ul>
                         <div id="Speed Buttons" class="navbar-form clickableArea">
                             <span class="margin-left-15">
-                                Current turn: {{currentTurn}}
+                                Current turn: {{game.myCountry.baseStats.currentTurn}}
                             </span>
                             <button class="btn margin-left-15" ng-click="game.nextTurn()">
                                 <i class="fa fa-play"></i>

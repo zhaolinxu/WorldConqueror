@@ -2,15 +2,46 @@
     <h3>
         <span class="glyphicon glyphicon-home"></span> Buildings
     </h3>
+    <div class="col-md-12 col-sm-12">
+        <div class="row panel panel-primary">
+            <div class="panel-body">
+                <div class="col-xs-3">
+                    Land: 10/120
+                </div>
+                <div class="col-xs-3">
+                    Multiplier: 50%
+                </div>
+                <div class="col-xs-3">
+                    Upkeep: 2400
+                </div>
+                <div class="col-xs-3">
+                    Jobs: 10
+                </div>
+            </div>
+        </div>
+    </div>
     <hr>
     <div class="col-md-12 col-sm-12">
         <div class="row">
-            <div id="build" class="col-xs-8">
+            <div id="build" class="col-xs-12 col-sm-8">
                 <div class="row">
-                    <div class="panel panel-primary panelLocked col-xs-4 clickableArea panelUnlocked"
+                    <div class="panel panel-primary panelLocked col-xs-12 col-sm-4 col-md-4 clickableArea panelUnlocked"
                          ng-repeat="structure in structureCtrl.buildings.structures"
                          ng-class="{'invisible': !structure.isUnlocked()}">
                         <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-6 text-center">
+                                <span class="all-border">
+                                    <!--TODO: Add tooltips on hover-->
+                                    <i class="fa fa-angle-double-up"></i> {{structure.countMultiplier}}
+                                </span>
+                                </div>
+                                <div class="col-xs-6 text-center">
+                                <span class="all-border">
+                                    <i class="fa fa-percent"></i> {{structure.statMultiplier}}
+                                </span>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-12">
                                         <span class="tag label label-default center-block">
@@ -20,14 +51,14 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+                                <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
                                     <p class="text-center all-border">
                                         {{structure.count}}
                                     </p>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4 col-md-offset-4">
+                                <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
                                     <img class="center-block img-responsive"
                                          ng-src="assets/img/{{structure.image}}.png"/>
                                 </div>
@@ -35,61 +66,30 @@
                             <!--TODO: Hide stat bonuses in a well and/or tooltip, currently might be too much info displayed at once-->
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p class="text-center">Production: {{structure.statAdder}}
+                                    <p class="text-center">
+                                        <!-- TODO: Hide stats with a value of 0 -->
+                                        <i class="fa fa-cog"></i> {{structure.statAdder}}/turn
                                         <br>
-                                        Multiplier: {{structure.statMultiplier}}
+                                        <i class="fa fa-money"></i> -{{structure.upkeep}}/turn
                                         <br>
-                                        Count Multiplier: {{structure.countMultiplier}}
-                                        <br>
-                                        Upkeep: {{structure.upkeep}}
-                                        <br>
-                                        Jobs: {{structure.jobsIncreased}}
+                                        <i class="fa fa-briefcase"></i> {{structure.jobsIncreased}}
                                     </p>
                                 </div>
                             </div>
-
-                            <!--<div class="row">-->
-                            <!--<div class="col-md-2 col-sm-2 avatar">-->
-                            <!--<img class="img-responsive" ng-src="assets/img/{{structure.image}}.png" />-->
-                            <!--</div>-->
-                            <!--<div class="col-md-7" ng-if="structure.isUnlocked()">-->
-                            <!--<span class="fa fa-info-circle" tooltip="{{structure.desc}}"></span>-->
-                            <!--<b>{{structure.name}}</b> <span class="badge">{{structure.count}}</span> <br />-->
-                            <!--Cost: {{structure.cost | niceNumber}} |-->
-                            <!--Upkeep: {{structure.upkeep | niceNumber}}-->
-                            <!--&lt;!&ndash;TODO: Remove some padding around the icon&ndash;&gt;-->
-                            <!--</div>-->
-                            <!--<div class="col-md-7" ng-if="!structure.isUnlocked()">-->
-                            <!--<span class="fa fa-info-circle" tooltip="Not unlocked yet"></span>-->
-                            <!--<b>??? <br />-->
-                            <!--Cost: ??? |-->
-                            <!--Upkeep: ???</b>-->
-                            <!--</div>-->
-                            <!--<div class="col-md-3">-->
-                            <!--<div class="pull-right clickableArea" ng-show="structure.isUnlocked()">-->
-                            <!--<button class="btn btn-primary" ng-click="structure.build(1)">-->
-                            <!--x1-->
-                            <!--</button>-->
-                            <!--&lt;!&ndash;TODO: Might consider adding shortcuts for buying more, like ctrl + click = 25 at once&ndash;&gt;-->
-                            <!--&lt;!&ndash;TODO: Holding down ctrl should also update prices on screen. &ndash;&gt;-->
-                            <!--&lt;!&ndash;<button class="btn btn-primary" ng-click="structure.build(10)" ng-mouseover="structure.updateCost(10)" ng-mouseleave="structure.updateCost(1)">&ndash;&gt;-->
-                            <!--&lt;!&ndash;x10&ndash;&gt;-->
-                            <!--&lt;!&ndash;</button>&ndash;&gt;-->
-                            <!--</div>-->
-                            <!--</div>-->
-                            <!--</div>-->
-                        </div>
                         <button class="btn btn-block btn-success" ng-class="structure.isUnlocked() ? '' : 'disabled'"
                                 ng-click="structure.build(1)">
-                            <h3>Buy</h3>
+                            <p class="align-center">Buy</p>
+                            <div class="row">
                             <div class="col-md-6">
                                 <i class="fa fa-money"></i> {{structure.cost}}
                             </div>
                             <div class="col-md-6">
                                 <i class="fa fa-flag"></i> {{structure.landCost}}
                             </div>
+                            </div>
                         </button>
 
+                        </div>
                     </div>
                 </div>
             </div>

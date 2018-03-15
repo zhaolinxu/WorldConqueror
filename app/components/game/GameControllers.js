@@ -5,21 +5,21 @@ wciApp.controller(
     function (
         $scope,
         $interval,
-        myCountryData,
-        buildingsData,
-        militaryData,
-        worldCountryData,
-        lawsData,
-        advisorsData,
-        helperModalsData,
-        notificationData,
+        myCountryService,
+        buildingsService,
+        militaryService,
+        worldCountryService,
+        lawsService,
+        advisorsService,
+        helperModalsService,
+        notificationService,
         saveService,
         initService
         ) {
-        $scope.currentTurn = 0;
         //#region Private Methods
         var timerfunction = function () {
             //TODO: Put logic here to prompt user of game ending/death due to 0 population.
+            militaryService.updateUnitsBuyQueue();
             game.myCountry.functions.getGameTime();
             game.myCountry.functions.getNewConsumption();
             game.myCountry.functions.getNewEconomics();
@@ -29,7 +29,6 @@ wciApp.controller(
 
             game.myCountry.baseStats.upkeep = 0;
             game.buildings.getTotalUpkeep();
-            game.military.functions.militaryTimedEffects();
             //game.advisors.functions.advisorTimedEffects();
             //game.saveGame();
         };
@@ -58,17 +57,17 @@ wciApp.controller(
         //#region Default Values
         var game = this;
         game.data = {};
-        game.myCountry = myCountryData;
+        game.myCountry = myCountryService;
         initService().then(function(){
             saveService.load();
         });
-        game.buildings = buildingsData;
-        game.advisors = advisorsData;
-        game.military = militaryData;
-        game.worldCountries = worldCountryData;
-        game.laws = lawsData;
-        game.helperModals = helperModalsData;
-        game.notification = notificationData;
+        game.buildings = buildingsService;
+        game.advisors = advisorsService;
+        game.military = militaryService;
+        game.worldCountries = worldCountryService;
+        game.laws = lawsService;
+        game.helperModals = helperModalsService;
+        game.notification = notificationService;
 
         //Load Game's Settings
         if (!localStorage['gameData']) {
@@ -146,7 +145,7 @@ wciApp.controller(
         //next turn button
         game.nextTurn = function(){
             timerfunction();
-            $scope.currentTurn += 1;
+            game.myCountry.baseStats.currentTurn += 1;
         };
         //#endregion
 

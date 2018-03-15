@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-wciApp.factory('researchData', function (myCountryData, buildingsData) {
+wciApp.factory('researchService', function (myCountryService, buildingsService) {
 
     var researches = {
         baseStats: {},

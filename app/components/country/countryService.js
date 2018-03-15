@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-wciApp.factory('myCountryData', function () {
+wciApp.factory('myCountryService', function () {
 
     //TODO: put the stats in a sub object
 
@@ -227,7 +227,8 @@ var setInitialStats = function (myCountry) {
         defense: 0,
         siege: 0,
         unitCap: 0,
-        baseResearchPoints: 0
+        baseResearchPoints: 0,
+        currentTurn: 0
     };
     myCountry.events = {
         oneChildPolicy : false, //Law

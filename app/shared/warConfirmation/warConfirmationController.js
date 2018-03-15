@@ -4,13 +4,13 @@ wciApp.controller(
         $scope,
         $modalInstance,
         countryAttacked,
-        myCountryData,
-        worldCountryData,
-        militaryData) {
+        myCountryService,
+        worldCountryService,
+        militaryService) {
 
-        $scope.myCountryStrength = myCountryData.baseStats.totalAttack + myCountryData.baseStats.totalDefense + myCountryData.baseStats.totalSiege;
+        $scope.myCountryStrength = myCountryService.baseStats.totalAttack + myCountryService.baseStats.totalDefense + myCountryService.baseStats.totalSiege;
 
-        $scope.targetCountryStrength = worldCountryData.baseStats.countryStrength[countryAttacked];
+        $scope.targetCountryStrength = worldCountryService.baseStats.countryStrength[countryAttacked];
 
         $scope.successProbability = calculateSuccessProbability($scope);
 

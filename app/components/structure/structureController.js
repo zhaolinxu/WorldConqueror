@@ -3,9 +3,11 @@ wciApp.controller(
     function (
         buildingsService,
         advisorsService,
-        helperModalsService) {
+        helperModalsService,
+        myCountryService) {
 
         this.buildings = buildingsService;
+        this.countryStats = myCountryService.baseStats;
         this.advisors = advisorsService;
         this.helperModals = helperModalsService;
     });

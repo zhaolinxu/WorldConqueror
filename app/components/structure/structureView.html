@@ -6,13 +6,13 @@
         <div class="row panel panel-primary">
             <div class="panel-body">
                 <div class="col-xs-3">
-                    Land: 10/120
+                    Land: <i class="fa fa-flag"></i> {{structureCtrl.countryStats.land}}
                 </div>
                 <div class="col-xs-3">
-                    Multiplier: 50%
+                    Multiplier: {{structureCtrl.buildings.getTotalMultiplier()}}
                 </div>
                 <div class="col-xs-3">
-                    Upkeep: 2400
+                    Upkeep: <i class="fa fa-money"></i> {{structureCtrl.buildings.getTotalUpkeep()}}/turn
                 </div>
                 <div class="col-xs-3">
                     Jobs: 10
@@ -81,9 +81,21 @@
                         </div>
                         <button class="btn btn-block btn-success" ng-class="structure.isUnlocked() ? '' : 'disabled'"
                                 ng-click="structure.build(1)">
+<<<<<<< HEAD
                             <span class="col-md-4">Buy:</span>
                             <i class="fa fa-money"></i> {{structure.cost}}
                             <i class="fa fa-flag"></i> {{structure.landCost}}
+=======
+                            <p class="align-center">Buy</p>
+                            <div class="row">
+                            <div class="col-md-6" ng-class="structureCtrl.countryStats.money < structure.cost ? 'text-danger' : ''">
+                                <i class="fa fa-money"></i> {{structure.cost}}
+                            </div>
+                            <div class="col-md-6" ng-class="structureCtrl.countryStats.land < structure.landCost ? 'text-danger' : ''">
+                                <i class="fa fa-flag"></i> {{structure.landCost}}
+                            </div>
+                            </div>
+>>>>>>> ffcee1f84c9bfd8d486a4d93ba4bd6b165c39841
                         </button>
 
                     </div>

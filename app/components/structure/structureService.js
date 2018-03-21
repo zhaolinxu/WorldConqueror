@@ -22,14 +22,15 @@ wciApp.factory(
 
         Structure.prototype.build = function (count) {
             var cost = this.cost * count;
-            if ((myCountryService.baseStats.money > cost) && this.isUnlocked()) {
+            if ((myCountryService.baseStats.money > cost) && this.isUnlocked() &&
+                 myCountryService.baseStats.land >= this.landCost) {
                 myCountryService.baseStats[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
                 myCountryService.baseStats[this.statAffected] += (this.statAdder * count);
                 myCountryService.baseStats.totalJobs += (this.jobsIncreased * count);
                 myCountryService.baseStats.money -= cost;
+                myCountryService.baseStats.land -= this.landCost;
                 this.count = this.count * 1 + count; //*1 to force math add and not string add.
             }
-            console.log(myCountryService.baseStats.unitCap)
         };
 
         Structure.prototype.isUnlocked = function () {

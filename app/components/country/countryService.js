@@ -228,7 +228,8 @@ var setInitialStats = function (myCountry) {
         siege: 0,
         unitCap: 0,
         baseResearchPoints: 0,
-        currentTurn: 0
+        currentTurn: 0,
+        land: 100
     };
     myCountry.events = {
         oneChildPolicy : false, //Law

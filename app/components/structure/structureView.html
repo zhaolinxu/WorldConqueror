@@ -29,74 +29,70 @@
                          ng-repeat="structure in structureCtrl.buildings.structures"
                          ng-class="{'invisible': !structure.isUnlocked()}">
                         <div class="panel-body">
-                            <div class="row">
-                                <div class="col-xs-6 text-center">
-                                <span class="all-border">
-                                    <!--TODO: Add tooltips on hover-->
-                                    <i class="fa fa-angle-double-up"></i> {{structure.countMultiplier}}
-                                </span>
-                                </div>
-                                <div class="col-xs-6 text-center">
-                                <span class="all-border">
-                                    <i class="fa fa-percent"></i> {{structure.statMultiplier}}
-                                </span>
-                                </div>
-                            </div>
+
                             <div class="row">
                                 <div class="col-md-12">
-                                        <span class="tag label label-default center-block">
-                                            <span>{{structure.name}}</span>
-                                            <a><i class="remove glyphicon glyphicon-info-sign glyphicon-white"></i></a>
-                                        </span>
+                                    <span class="tag label label-default center-block">
+                                        <span>{{structure.name}}</span>
+                                        <a><i class="remove glyphicon glyphicon-info-sign glyphicon-white"></i></a>
+                                    </span>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                            <div class="row margin-top-5">
+                                <div class="col-sm-8 col-md-6">
+                                    <img class="center-block img-responsive"
+                                         ng-src="assets/img/{{structure.image}}.png" />
                                     <p class="text-center all-border">
                                         {{structure.count}}
                                     </p>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-                                    <img class="center-block img-responsive"
-                                         ng-src="assets/img/{{structure.image}}.png"/>
+                                <div class="col-sm-4 col-md-6 text-center">
+                                    <!--TODO: Add tooltips on hover-->
+                                    <i class="fa fa-angle-double-up"></i> {{structure.countMultiplier}}
                                 </div>
-                            </div>
-                            <!--TODO: Hide stat bonuses in a well and/or tooltip, currently might be too much info displayed at once-->
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <p class="text-center">
-                                        <!-- TODO: Hide stats with a value of 0 -->
-                                        <i class="fa fa-cog"></i> {{structure.statAdder}}/turn
-                                        <br>
-                                        <i class="fa fa-money"></i> -{{structure.upkeep}}/turn
-                                        <br>
-                                        <i class="fa fa-briefcase"></i> {{structure.jobsIncreased}}
-                                    </p>
+                                <div class="col-sm-4 col-md-6 text-center">
+                                    <i class="fa fa-percent"></i> {{structure.statMultiplier}}
                                 </div>
-                            </div>
-                        <button class="btn btn-block btn-success" ng-class="structure.isUnlocked() ? '' : 'disabled'"
-                                ng-click="structure.build(1)">
-                            <p class="align-center">Buy</p>
-                            <div class="row">
-                            <div class="col-md-6">
-                                <i class="fa fa-money"></i> {{structure.cost}}
-                            </div>
-                            <div class="col-md-6">
-                                <i class="fa fa-flag"></i> {{structure.landCost}}
-                            </div>
-                            </div>
-                        </button>
+                                <div class="col-sm-4 col-md-6 text-center">
+                                    <i class="fa fa-cog"></i> {{structure.statAdder}}/t
+                                </div>
+                                <div class="col-sm-4 col-md-6 text-center">
+                                    <i class="fa fa-money"></i> -{{structure.upkeep}}/t
+                                </div>
+                                <div class="col-sm-4 col-md-6 text-center">
+                                    <i class="fa fa-briefcase"></i> {{structure.jobsIncreased}}
+                                </div>
+                        </div>
+                        <div class="row">
 
                         </div>
+
+                        <!--TODO: Hide stat bonuses in a well and/or tooltip, currently might be too much info displayed at once-->
+                        <div class="row">
+                            <div class="row">
+                                <!-- TODO: Hide stats with a value of 0 -->
+                                <span class="col-md-4">
+                                </span>
+                                <span class="col-md-4">
+                                </span>
+                                <span class="col-md-4">
+                                </span>
+                            </div>
+                        </div>
+                        <button class="btn btn-block btn-success" ng-class="structure.isUnlocked() ? '' : 'disabled'"
+                                ng-click="structure.build(1)">
+                            <span class="col-md-4">Buy:</span>
+                            <i class="fa fa-money"></i> {{structure.cost}}
+                            <i class="fa fa-flag"></i> {{structure.landCost}}
+                        </button>
+
                     </div>
                 </div>
             </div>
         </div>
-        <!--<ng-include src="'app/components/advisors/advisorsView.html'"></ng-include>-->
     </div>
+    <!--<ng-include src="'app/components/advisors/advisorsView.html'"></ng-include>-->
+</div>
 </div>
 <!--<ng-include src="'app/shared/advisorHire/advisors_hireView.html'"></ng-include>-->
 <!--<ng-include src="'app/shared/advisorHelp/help_advisorsView.html'"></ng-include>-->
-

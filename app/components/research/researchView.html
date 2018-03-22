@@ -4,9 +4,16 @@
         <span class="fa fa-flask"></span> Research
     </h3>
     <hr>
-    <div class="col-sm-12">
-        <table>
-
-        </table>
+    <div class="col-sm-4" ng-repeat="(key, type) in researchCtrl.research.types">
+       <h3>{{key}}</h3>
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        {{type[researchCtrl.research.currentResearchIndex].name}}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

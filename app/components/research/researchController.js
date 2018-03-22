@@ -1,3 +1,6 @@
-wciApp.controller('ResearchController', function () {
-
+wciApp.controller(
+    'ResearchController',
+    function (researchService) {
+        this.research = researchService;
+        console.log(this.research)
 });

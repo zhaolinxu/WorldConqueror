@@ -10,7 +10,7 @@ wciApp.factory(
               researchService,
               structureService,
               $q) {
-        var sheets = ["Buildings", "Units"];
+        var sheets = ["Buildings", "Units", "ResearchData"];
         var init = function () {
             return $q(function (resolve) {
                 var data = getDataFromExcel($q, sheets, null);
@@ -18,6 +18,7 @@ wciApp.factory(
                     //we return value which is an object of our sheets, we can access them like value.Buildings.
                     buildingInit(excelObject['Buildings']);
                     militaryInit(excelObject['Units']);
+                    researchInit(excelObject['ResearchData']);
                     resolve(excelObject);
                 });
             })
@@ -40,7 +41,10 @@ wciApp.factory(
                 self.units[i] = new unitService();
                 self.units[i].init(unitObject);
             }
-            console.log(self);
+        };
+        var researchInit = function (researchArray) {
+            console.log("D");
+            researchService.init(researchArray);
         };
         return init;
     }

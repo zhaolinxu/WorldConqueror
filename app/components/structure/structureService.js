@@ -15,6 +15,10 @@ wciApp.factory(
                 if (data.hasOwnProperty(key) && data.propertyIsEnumerable(key)) {
                     //isEnumerable to remove __rowNum__ from excel object, since it's set to Not enumerable and we dont want it
                     this[key] = {};
+                    if(key === "isUnlocked"){
+                        this[key] = (data[key] === 'true');//convert string boolean value to boolean i.e. 'true' to true
+                        continue;
+                    }
                     this[key] = data[key];
                 }
             }
@@ -22,7 +26,7 @@ wciApp.factory(
 
         Structure.prototype.build = function (count) {
             var cost = this.cost * count;
-            if ((myCountryService.baseStats.money > cost) && this.isUnlocked() &&
+            if ((myCountryService.baseStats.money > cost) && this.isUnlocked &&
                  myCountryService.baseStats.land >= this.landCost) {
                 myCountryService.baseStats[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
                 myCountryService.baseStats[this.statAffected] += (this.statAdder * count);
@@ -33,8 +37,8 @@ wciApp.factory(
             }
         };
 
-        Structure.prototype.isUnlocked = function () {
-            return myCountryService.baseStats.size >= this.sizeRequired;//returns true or false
+        Structure.prototype.isVisible = function () {
+            return this.isUnlocked;
         };
 
         Structure.prototype.updateCost = function (count) {

@@ -1,16 +1,33 @@
-﻿
-<div id="Research" ng-controller="ResearchController as researchCtrl" ng-cloak>
+﻿<div id="Research" ng-controller="ResearchController as researchCtrl" ng-cloak>
     <h3>
         <span class="fa fa-flask"></span> Research
     </h3>
     <hr>
-    <div class="col-sm-4" ng-repeat="(key, type) in researchCtrl.research.types">
-       <h3>{{key}}</h3>
-        <div class="panel panel-primary">
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-xs-12">
-                        {{type[researchCtrl.research.currentResearchIndex].name}}
+    <div class="col-sm-12" ng-repeat="(key, type) in researchCtrl.research.types">
+        <h3>{{key}}</h3>
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <button class="btn btn-lg btn-success"
+                        ng-class="key === researchCtrl.research.currentResearchTypeName ? 'btn-danger' : ''"
+                        ng-click="researchCtrl.research.chooseResearch(key)">
+                    Research
+                </button>
+            </div>
+        </div>
+        <div class="panel panel-primary"
+             ng-class="key === researchCtrl.research.currentResearchTypeName ? '' : 'notAllowed'">
+            <div class="panel-body" ng-class="key === researchCtrl.research.currentResearchTypeName ? '' : 'lockPanel'">
+                <div class="row text-center">
+                    <div class="col-xs-2" ng-repeat="research in type.researchList"
+                         ng-class="type.researchPoints > research.cost ? '' : 'notAllowed'">
+                        <div class="row" ng-class="type.researchPoints > research.cost ? '' : 'lockPanel'">
+                            <!--{{type.researchList[type.currentResearchLevel].name}}-->
+                            {{research.bonuses[0].ID}}
+                            <uib-progressbar class="researchProgress" value="(type.researchPoints/research.cost * 100)">
+                                <span>{{type.researchPoints}}/{{research.cost}}</span>
+                            </uib-progressbar>
+                            {{research.bonuses[1].ID}}
+                        </div>
                     </div>
                 </div>
             </div>

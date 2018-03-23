@@ -13,6 +13,7 @@ wciApp.controller(
         advisorsService,
         helperModalsService,
         notificationService,
+        researchService,
         saveService,
         initService
         ) {
@@ -29,6 +30,7 @@ wciApp.controller(
 
             game.myCountry.baseStats.upkeep = 0;
             game.buildings.getTotalUpkeep();
+            game.research.update();
             //game.advisors.functions.advisorTimedEffects();
             //game.saveGame();
         };
@@ -63,6 +65,7 @@ wciApp.controller(
         });
         game.buildings = buildingsService;
         game.advisors = advisorsService;
+        game.research = researchService;
         game.military = militaryService;
         game.worldCountries = worldCountryService;
         game.laws = lawsService;

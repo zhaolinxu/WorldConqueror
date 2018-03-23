@@ -27,7 +27,7 @@
                 <div class="row">
                     <div class="panel panel-primary panelLocked col-xs-12 col-sm-4 col-md-4 clickableArea panelUnlocked"
                          ng-repeat="structure in structureCtrl.buildings.structures"
-                         ng-class="{'invisible': !structure.isUnlocked()}">
+                         ng-class="{'invisible': !structure.isVisible()}">
                         <div class="panel-body">
 
                             <div class="row">
@@ -79,7 +79,7 @@
                                 </span>
                             </div>
                         </div>
-                        <button class="btn btn-block btn-success" ng-class="structure.isUnlocked() ? '' : 'disabled'"
+                        <button class="btn btn-block btn-success" ng-class="structure.isVisible() ? '' : 'disabled'"
                                 ng-click="structure.build(1)">
                             <span class="col-md-4">Buy:</span>
                             <i class="fa fa-money"></i> {{structure.cost}}

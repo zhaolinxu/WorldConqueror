@@ -3,30 +3,37 @@
         <span class="fa fa-flask"></span> Research
     </h3>
     <hr>
-    <div class="col-sm-12" ng-repeat="(key, type) in researchCtrl.research.types">
-        <h3>{{key}}</h3>
+    <div class="col-sm-12" ng-repeat="(index, type) in researchCtrl.research.types">
         <div class="row">
             <div class="col-xs-12 text-center">
                 <button class="btn btn-lg btn-success"
-                        ng-class="key === researchCtrl.research.currentResearchTypeName ? 'btn-danger' : ''"
-                        ng-click="researchCtrl.research.chooseResearch(key)">
-                    Research
+                        ng-class="index === researchCtrl.research.currentResearchTypeIndex ? 'btn-danger' : ''"
+                        ng-click="researchCtrl.research.chooseResearch(index)">
+                    Research {{type.name}}
                 </button>
             </div>
         </div>
         <div class="panel panel-primary"
-             ng-class="key === researchCtrl.research.currentResearchTypeName ? '' : 'notAllowed'">
-            <div class="panel-body" ng-class="key === researchCtrl.research.currentResearchTypeName ? '' : 'lockPanel'">
+             ng-class="index === researchCtrl.research.currentResearchTypeIndex ? '' : 'notAllowed'">
+            <div class="panel-body" ng-class="index === researchCtrl.research.currentResearchTypeIndex ? '' : 'lockPanel'">
                 <div class="row text-center">
-                    <div class="col-xs-2" ng-repeat="research in type.researchList"
-                         ng-class="type.researchPoints > research.cost ? '' : 'notAllowed'">
-                        <div class="row" ng-class="type.researchPoints > research.cost ? '' : 'lockPanel'">
-                            <!--{{type.researchList[type.currentResearchLevel].name}}-->
-                            {{research.bonuses[0].ID}}
-                            <uib-progressbar class="researchProgress" value="(type.researchPoints/research.cost * 100)">
-                                <span>{{type.researchPoints}}/{{research.cost}}</span>
+                    <div class="col-xs-2" ng-repeat="(researchIndex, research) in type.researchList"
+                         ng-class="researchCtrl.research.researchProgress[index].points >= research.cost
+                                    && !research.bonusGiven ? '' : 'notAllowed'">
+                        <div class="row" ng-class="researchCtrl.research.researchProgress[index].points >= research.cost
+                                                    && !research.bonusGiven ? '' : 'lockPanel'">
+
+                            <!--TODO: Can't use a loop for bonuses here, due to having a progress bar in between, there probably is a better way to do it tho...-->
+                            <button class="btn btn-success" ng-click="researchCtrl.research.chooseBonus(0, researchIndex)"
+                                    ng-class="research.bonusGivenIndex === 0 ? 'btn-info' : '' ">{{research.bonuses[0].ID}}
+                            </button>
+                            <uib-progressbar class="researchProgress" value="(researchCtrl.research.researchProgress[index].points/research.cost * 100)">
+                                <span>{{researchCtrl.research.researchProgress[index].points}}/{{research.cost}}</span>
                             </uib-progressbar>
-                            {{research.bonuses[1].ID}}
+                            <button class="btn btn-success" ng-click="researchCtrl.research.chooseBonus(1, researchIndex)"
+                                    ng-class="research.bonusGivenIndex === 1 ? 'btn-info' : '' ">{{research.bonuses[1].ID}}
+                            </button>
+
                         </div>
                     </div>
                 </div>

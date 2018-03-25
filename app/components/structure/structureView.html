@@ -23,13 +23,12 @@
     <hr>
     <div class="col-md-12 col-sm-12">
         <div class="row">
-            <div id="build" class="col-xs-12 col-sm-8">
+            <div id="build" class="col-xs-12 col-sm-12">
                 <div class="row">
                     <div class="panel panel-primary panelLocked col-xs-12 col-sm-4 col-md-4 clickableArea panelUnlocked"
                          ng-repeat="structure in structureCtrl.buildings.structures"
                          ng-class="{'invisible': !structure.isVisible()}">
                         <div class="panel-body">
-
                             <div class="row">
                                 <div class="col-md-12">
                                     <span class="tag label label-default center-block">
@@ -38,70 +37,76 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="row margin-top-5">
-                                <div class="col-sm-8 col-md-6">
-                                    <img class="center-block img-responsive"
-                                         ng-src="assets/img/{{structure.image}}.png" />
-                                    <p class="text-center all-border">
-                                        {{structure.count}}
-                                    </p>
+                            <div class="row margin-top-5 form-inline">
+                                <div class="col-sm-2 col-md-2">
+                                    <img class="img-responsive" ng-src="assets/img/{{structure.image}}.png" />
                                 </div>
-                                <div class="col-sm-4 col-md-6 text-center">
+                                <div class="col-sm-2 col-md-2 text-center">
                                     <!--TODO: Add tooltips on hover-->
-                                    <i class="fa fa-angle-double-up"></i> {{structure.countMultiplier}}
+                                    <i class="fa fa-angle-double-up"></i>
+                                    <span class="font-8pt">
+                                        {{structure.countMultiplier}}
+                                    </span>
                                 </div>
-                                <div class="col-sm-4 col-md-6 text-center">
-                                    <i class="fa fa-percent"></i> {{structure.statMultiplier}}
+                                <div class="col-sm-2 col-md-2 text-center">
+                                    <i class="fa fa-percent"></i>
+                                    <span class="font-8pt">
+                                        {{structure.statMultiplier}}
+                                    </span>
                                 </div>
-                                <div class="col-sm-4 col-md-6 text-center">
-                                    <i class="fa fa-cog"></i> {{structure.statAdder}}/t
+                                <div class="col-sm-2 col-md-2 text-center">
+                                    <i class="fa fa-cog"></i>
+                                    <span class="font-8pt">
+                                        {{structure.statAdder}}/t
+                                    </span>
                                 </div>
-                                <div class="col-sm-4 col-md-6 text-center">
-                                    <i class="fa fa-money"></i> -{{structure.upkeep}}/t
+                                <div class="col-sm-2 col-md-2 text-center">
+                                    <i class="fa fa-money"></i>
+                                    <span class="font-8pt">
+                                        -{{structure.upkeep}}/t
+                                    </span>
                                 </div>
-                                <div class="col-sm-4 col-md-6 text-center">
-                                    <i class="fa fa-briefcase"></i> {{structure.jobsIncreased}}
+                                <div class="col-sm-2 col-md-2 text-center">
+                                    <i class="fa fa-briefcase"></i>
+                                    <span class="font-8pt">
+                                        {{structure.jobsIncreased}}
+                                    </span>
                                 </div>
-                        </div>
-                        <div class="row">
+                            </div>
 
-                        </div>
-
-                        <!--TODO: Hide stat bonuses in a well and/or tooltip, currently might be too much info displayed at once-->
-                        <div class="row">
+                            <!--TODO: Hide stat bonuses in a well and/or tooltip, currently might be too much info displayed at once-->
                             <div class="row">
-                                <!-- TODO: Hide stats with a value of 0 -->
-                                <span class="col-md-4">
-                                </span>
-                                <span class="col-md-4">
-                                </span>
-                                <span class="col-md-4">
-                                </span>
+                                <div class="row">
+                                    <!-- TODO: Hide stats with a value of 0 -->
+                                    <span class="col-md-4">
+                                    </span>
+                                    <span class="col-md-4">
+                                    </span>
+                                    <span class="col-md-4">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row form-horizontal">
+                                <div>
+                                    <div class="col-sm-2">
+                                        <input class="form-control" disabled ng-model="structure.count" />
+                                    </div>
+                                    <div class="col-sm-8 col-sm-offset-2">
+                                        <button class="btn btn-success" ng-class="structure.isVisible() ? '' : 'disabled'" ng-click="structure.build(1)">
+                                            <span class="col-sm-4">Buy:</span>
+                                            <i class="fa fa-money" ng-class="structureCtrl.countryStats.money < structure.cost ? 'text-danger' : ''"></i> {{structure.cost}}
+                                            <i class="fa fa-flag" ng-class="structureCtrl.countryStats.land < structure.landCost ? 'text-danger' : ''"></i> {{structure.landCost}}
+                                        </button>
+                                    </div>
+                                    </div>
                             </div>
                         </div>
-                        <button class="btn btn-block btn-success" ng-class="structure.isVisible() ? '' : 'disabled'"
-                                ng-click="structure.build(1)">
-                            <span class="col-md-4">Buy:</span>
-                            <i class="fa fa-money"></i> {{structure.cost}}
-                            <i class="fa fa-flag"></i> {{structure.landCost}}
-                            <p class="align-center">Buy</p>
-                            <div class="row">
-                            <div class="col-md-6" ng-class="structureCtrl.countryStats.money < structure.cost ? 'text-danger' : ''">
-                                <i class="fa fa-money"></i> {{structure.cost}}
-                            </div>
-                            <div class="col-md-6" ng-class="structureCtrl.countryStats.land < structure.landCost ? 'text-danger' : ''">
-                                <i class="fa fa-flag"></i> {{structure.landCost}}
-                            </div>
-                            </div>
-                        </button>
-
                     </div>
                 </div>
             </div>
         </div>
+        <!--<ng-include src="'app/components/advisors/advisorsView.html'"></ng-include>-->
     </div>
-    <!--<ng-include src="'app/components/advisors/advisorsView.html'"></ng-include>-->
-</div>
 </div>
 <!--<ng-include src="'app/shared/advisorHire/advisors_hireView.html'"></ng-include>-->
 <!--<ng-include src="'app/shared/advisorHelp/help_advisorsView.html'"></ng-include>-->

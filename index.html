@@ -107,7 +107,11 @@
                         </div>
                     </div>
                 </nav>
-
+                <div class="col-sm-8">
+                    <button ng-click="game.debug.addLand()">Land +100</button>
+                    <button ng-click="game.debug.addEachBuilding()">Unlock Structures +10</button>
+                    <button ng-click="game.debug.addResearchPoints()">Add Science +1k</button>
+                </div>
                 <div id="Game Window" class="col-sm-12">
                     <div ng-include="'app/components/statHeader/statHeaderView.html'"></div>
                     
@@ -165,6 +169,7 @@
         <script src="app/components/game/initService.js"></script>
         <script src="app/components/structure/buildingsService.js"></script>
         <script src="app/components/military/unitService.js"></script>
+        <script src="app/components/bonuses/bonusesService.js"></script>
 
         <!-- Shared Controllers -->
         <script src="app/shared/advisorHelp/advisorHelperController.js"></script>
@@ -184,6 +189,9 @@
 
         <link rel="stylesheet" href="assets/css/main.css" />
         <link rel="stylesheet" href="assets/css/common.css" />
+
+        <!-- Debug service -->
+        <script src="app/shared/debugService.js"></script>
 
     </footer>
 </body>

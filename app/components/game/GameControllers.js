@@ -15,18 +15,19 @@ wciApp.controller(
         notificationService,
         researchService,
         saveService,
-        initService
+        initService,
+        debugService,
+        bonusesService
         ) {
         //#region Private Methods
         var timerfunction = function () {
             //TODO: Put logic here to prompt user of game ending/death due to 0 population.
+            game.bonuses.update(game);
             militaryService.updateUnitsBuyQueue();
             game.myCountry.functions.getGameTime();
             game.myCountry.functions.getNewConsumption();
             game.myCountry.functions.getNewEconomics();
             game.myCountry.functions.getNewDemographics();
-
-            game.laws.functions.updateActiveFor();
 
             game.myCountry.baseStats.upkeep = 0;
             game.buildings.getTotalUpkeep();
@@ -51,7 +52,6 @@ wciApp.controller(
             saveService.reset();
             game.advisors.functions.resetData();
             game.worldCountries.functions.resetData();
-            game.laws.functions.resetData();
             localStorage.clear();
         };
         //#endregion
@@ -63,6 +63,7 @@ wciApp.controller(
         initService().then(function(){
             saveService.load();
         });
+        game.bonuses = bonusesService;
         game.buildings = buildingsService;
         game.advisors = advisorsService;
         game.research = researchService;
@@ -71,6 +72,7 @@ wciApp.controller(
         game.laws = lawsService;
         game.helperModals = helperModalsService;
         game.notification = notificationService;
+        game.debug = debugService;
 
         //Load Game's Settings
         if (!localStorage['gameData']) {

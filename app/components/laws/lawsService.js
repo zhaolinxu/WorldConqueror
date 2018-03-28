@@ -1,59 +1,62 @@
 ﻿'use strict';
 
-wciApp.factory('lawsService', function (myCountryService, buildingsService) {
+wciApp.factory('lawsService', function () {
 
-    var laws = {
-        baseStats: {},
-        functions: {},
-
+    let Laws = function () {
+        this.laws = [];//list of laws from excel/json file
+        this.unlockedLaws = [];//list of unlocked laws from research/ministers
+        this.activeLaws = [];//list of active laws
     };
 
-    //First Load
-    if (!localStorage['lawsService']) {
-        setInitialLawsData(laws, myCountryService);
-    }
-    else {
-        laws.baseStats = JSON.parse(localStorage['lawsService']);
-    }
-
-    //Extenders
-    for (var i = 0; i < laws.baseStats.length; i++) {
-
-        angular.extend(laws.baseStats[i], {
-
-            act: function () {
-                this.isActive = !this.isActive;
-                //If Active
-                if (this.isActive) {
-                    myCountryService.events[this.eventAffected] = true;
-                    myCountryService.baseStats.currentStabilityIndex += this.stabilityAffected;
-                }
-                else {
-                    myCountryService.events[this.eventAffected] = false;
-                    myCountryService.baseStats.currentStabilityIndex -= this.stabilityAffected;
-                }
-            }
-
+    Laws.prototype.init = function (lawsArrayExcel) {
+        this.laws = [];
+        this.unlockedLaws = [];
+        this.activeLaws = [];
+        let self = this;
+        lawsArrayExcel.forEach(function (law) {
+            self.laws.push(law);
         });
     };
 
-    laws.functions.updateActiveFor = function () {
-        for (var i = 0; i < laws.baseStats.length; i++) {
-            if (laws.baseStats[i].isActive) {
-                laws.baseStats[i].activeFor++;
-            }
-            else {
-                laws.baseStats[i].activeFor = 0;
-            }
-        }
+    Laws.prototype.unlockLaw = function (id) {
+        let law = this.filterLaw(id);
+        if(law) this.unlockedLaws.push(law);
     };
 
-    laws.functions.resetData = function () {
-        setInitialLawsData(laws, myCountryService);
+    Laws.prototype.removeLaw = function (id) {
+        let law = this.filterLaw(id);
+        this.unlockedLaws.splice(law, 1);
     };
 
+    Laws.prototype.enactLaw = function (index) {
+        let law = this.unlockedLaws[index];
+        let lawType = law.type;//this is used to prevent from using same type of laws(e.x. one increase income, while other decreases)
+        let filterSameType = this.filterLawByType(lawType);
+        if(filterSameType) return;//it means that we found another law with the same "type"
+        //TODO: We might want to tell the player that he cant active a law due to other of the same type being active.
+        law.isActive = true;
+        this.activeLaws.push(law);
+    };
 
-    return laws;
+    Laws.prototype.repealLaw = function (index) {
+        let law = this.unlockedLaws[index];
+        let removeIndex = this.activeLaws.indexOf(law);
+        this.activeLaws.splice(removeIndex, 1);
+        law.isActive = false;
+    };
+
+    Laws.prototype.filterLawByType = function (lawType) {
+        return this.activeLaws.filter(function (lawObject) {
+            return lawObject.type === lawType;
+        })[0];
+    };
+
+    Laws.prototype.filterLaw = function (id) {
+        return this.laws.filter(function (lawObject) {
+            return lawObject.ID.includes(id);
+        })[0];
+    };
+    return new Laws();
 
 });
 

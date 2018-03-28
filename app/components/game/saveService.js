@@ -17,7 +17,7 @@ wciApp.factory(
             buildingsService: buildingsService,
             militaryService: militaryService,
             // worldCountryService: worldCountryService,
-            // lawsService: lawsService,
+            lawsService: lawsService,
             // advisorsService: advisorsService,
             researchService: researchService
         };

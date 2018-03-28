@@ -15,24 +15,25 @@ wciApp.factory(
                 if (data.hasOwnProperty(key) && data.propertyIsEnumerable(key)) {
                     //isEnumerable to remove __rowNum__ from excel object, since it's set to Not enumerable and we dont want it
                     this[key] = {};
-                    if(key === "isUnlocked"){
-                        this[key] = (data[key] === 'true');//convert string boolean value to boolean i.e. 'true' to true
-                        continue;
-                    }
+                    // if(key === "isUnlocked"){
+                    //     this[key] = (data[key] === 'true');//convert string boolean value to boolean i.e. 'true' to true
+                    //     continue;
+                    // }
                     this[key] = data[key];
                 }
             }
         };
 
         Structure.prototype.build = function (count) {
-            var cost = this.cost * count;
+            let cost = this.cost * count;
+            let landCost = this.landCost * count;
             if ((myCountryService.baseStats.money > cost) && this.isUnlocked &&
-                 myCountryService.baseStats.land >= this.landCost) {
+                 myCountryService.baseStats.land >= landCost) {
                 myCountryService.baseStats[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
                 myCountryService.baseStats[this.statAffected] += (this.statAdder * count);
                 myCountryService.baseStats.totalJobs += (this.jobsIncreased * count);
                 myCountryService.baseStats.money -= cost;
-                myCountryService.baseStats.land -= this.landCost;
+                myCountryService.baseStats.land -= landCost;
                 this.count = this.count * 1 + count; //*1 to force math add and not string add.
             }
         };
@@ -42,7 +43,7 @@ wciApp.factory(
         };
 
         Structure.prototype.updateCost = function (count) {
-            var cost = this.cost * count;
+            let cost = this.cost * count;
             this.displayCost = cost;
         };
 

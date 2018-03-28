@@ -1,10 +1,10 @@
 ﻿'use strict';
 
-wciApp.factory('myCountryService', function () {
+wciApp.factory('myCountryService', function (bonusesService) {
 
     //TODO: put the stats in a sub object
 
-    var myCountry = {
+    let myCountry = {
         baseStats: {},
         events: {},
         leaderTitltes: [],
@@ -27,20 +27,33 @@ wciApp.factory('myCountryService', function () {
 
     myCountry.dependentStats = {
         actualGrowthRate: function () {
-            var growthRate;
-            if (myCountry.events.oneChildPolicy) {
-                growthRate = this.actualMortalityRate();
-            } else if (myCountry.events.birthFreeze) {
+            let growthRate;
+            let freezeGrowth = bonusesService.lawsBonuses.freezeGrowth;
+            let freezeBirth = bonusesService.lawsBonuses.freezeBirth;
+            if(freezeGrowth) {
+                growthRate =  this.actualMortalityRate();
+            } else if(freezeBirth){
                 growthRate = 0;
-            } else {
+            }
+            else {
                 growthRate = (function () {
                     return myCountry.baseStats.baseGrowthRate * ((3 * myCountry.baseStats.happiness) / 100);
                 })();
             }
+
+            // if (myCountry.events.oneChildPolicy) {
+            //     growthRate = this.actualMortalityRate();
+            // } else if (myCountry.events.birthFreeze) {
+            //     growthRate = 0;
+            // } else {
+            //     growthRate = (function () {
+            //         return myCountry.baseStats.baseGrowthRate * ((3 * myCountry.baseStats.happiness) / 100);
+            //     })();
+            // }
             return growthRate;
         },
         actualMortalityRate: function(){
-            var mortalityRate;
+            let mortalityRate;
             mortalityRate = (function () {
                 return myCountry.baseStats.baseMortalityRate * (100 / (5 * myCountry.baseStats.happiness));
             })();
@@ -63,24 +76,24 @@ wciApp.factory('myCountryService', function () {
         //Economics
         income: function () {
             //TODO: 12/22/2014: This might need to be reduced.
-            var income = this.gdp() * 0.1;  //You get 4% of the gdp every turn. (Which is one month)
+            let income = this.gdp() * 0.1;  //You get 4% of the gdp every turn. (Which is one month)
             return income;
         },
         moneyGrowth: function(){
-            var growth = this.income() - myCountry.baseStats.upkeep;
+            let growth = this.income() - myCountry.baseStats.upkeep;
             return growth;
         },
         //Determine what curreny do we want to use? or allow user to name the currency. This is dependent to employment rate, productivity (which is based on happiness).
         gdp: function () {
-            var gdp = Math.round(((this.filledJobs() * myCountry.baseStats.jobGdpMultiplier)) * (myCountry.baseStats.happiness / 100));
+            let gdp = Math.round(((this.filledJobs() * myCountry.baseStats.jobGdpMultiplier)) * (myCountry.baseStats.happiness / 100));
             return gdp;
         },
         filledJobs: function () {
-            var jobs = Math.min(myCountry.baseStats.totalJobs, myCountry.baseStats.population)
+            let jobs = Math.min(myCountry.baseStats.totalJobs, myCountry.baseStats.population)
             return jobs;
         }, //How many of these jobs are actually filled.
         unemployment: function () {
-            var unemployment = Math.round((myCountry.baseStats.population - (myCountry.baseStats.totalJobs)) / (myCountry.baseStats.population) * 100);
+            let unemployment = Math.round((myCountry.baseStats.population - (myCountry.baseStats.totalJobs)) / (myCountry.baseStats.population) * 100);
             if (unemployment < 0) {
                 unemployment = 0;
             }
@@ -88,7 +101,7 @@ wciApp.factory('myCountryService', function () {
             return unemployment;
         },
         homelessness: function () {
-            var homelessness = Math.round(((myCountry.baseStats.population - myCountry.baseStats.housingCapacity) / (myCountry.baseStats.population)) * 100);
+            let homelessness = Math.round(((myCountry.baseStats.population - myCountry.baseStats.housingCapacity) / (myCountry.baseStats.population)) * 100);
             if (homelessness < 0) {
                 homelessness = 0;
             }
@@ -110,8 +123,8 @@ wciApp.factory('myCountryService', function () {
     //Timer Methods
     myCountry.functions.getGameTime = function () {
 
-        var currentStabilityIndex = myCountry.baseStats.currentStabilityIndex;
-        var previousStabilityIndex = myCountry.baseStats.previousStabilityIndex;
+        let currentStabilityIndex = myCountry.baseStats.currentStabilityIndex;
+        let previousStabilityIndex = myCountry.baseStats.previousStabilityIndex;
 
         //Hour
         myCountry.baseStats.time++;
@@ -189,7 +202,7 @@ wciApp.factory('myCountryService', function () {
 
 
 
-var setInitialStats = function (myCountry) {
+let setInitialStats = function (myCountry) {
     myCountry.baseStats = {
         //One Month is signfied as one second
         countryName: 'Wadiya',
@@ -237,7 +250,7 @@ var setInitialStats = function (myCountry) {
     };
 };
 
-var getLookups = function (myCountry) {
+let getLookups = function (myCountry) {
     myCountry.leaderTitles = [
         'President',
         'Prime Minister',
@@ -275,7 +288,7 @@ var getLookups = function (myCountry) {
     ];
 };
 
-var setCountrySize = function (myCountry) {
+let setCountrySize = function (myCountry) {
 
     if (myCountry.dependentStats.gdp() <= 100000) { //100k
         myCountry.baseStats.sizeName = 'City State';
@@ -309,19 +322,19 @@ var setCountrySize = function (myCountry) {
     }
 };
 
-var setHappiness = function (myCountry) {
+let setHappiness = function (myCountry) {
 
-    var unemployment = myCountry.dependentStats.unemployment();
-    var unempHappinessFactor = 0;
-    var hunger = myCountry.baseStats.hunger;
-    var hungerHappinessFactor = 0;
-    var homeless = myCountry.dependentStats.homelessness();
-    var homelessHappinessFactor = 0;
-    var stability = myCountry.baseStats.stability;
+    let unemployment = myCountry.dependentStats.unemployment();
+    let unempHappinessFactor = 0;
+    let hunger = myCountry.baseStats.hunger;
+    let hungerHappinessFactor = 0;
+    let homeless = myCountry.dependentStats.homelessness();
+    let homelessHappinessFactor = 0;
+    let stability = myCountry.baseStats.stability;
 
     myCountry.baseStats.happiness = Math.round(100 - (unemployment / 4) - (hunger / 4) - (homeless / 4) - ((100 - stability) / 4));
 };
 
-var sizeIncreaseEvents = function (myCountry) {
+let sizeIncreaseEvents = function (myCountry) {
 
 };

@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-wciApp.factory('researchService', function (myCountryService) {
+wciApp.factory('researchService', function (myCountryService, lawsService) {
 
     //constructor store all researches, each time we complete a research we add index + 1 to current research type...
     let Research = function () {
@@ -12,7 +12,6 @@ wciApp.factory('researchService', function (myCountryService) {
             {level: 0, points: 0}
         ];
         this.bonuses = [];
-        this.totalBonuses = {};//Object with all bonuses added together...
     };
 
     Research.prototype.init = function (researchDataFromExcel, researchBonusesDataFromExcel){
@@ -23,7 +22,6 @@ wciApp.factory('researchService', function (myCountryService) {
         this.currentResearchTypeIndex = 0;
         this.researchProgress = [];
         this.bonuses = [];
-        this.totalBonuses = [];
 
         //Initialize object with data from excel
         for (let i = 0; i < researchDataFromExcel.length; i++) {
@@ -54,7 +52,6 @@ wciApp.factory('researchService', function (myCountryService) {
         // for(var researchType in this.types){
         //     this.types[researchType].researchList.reverse();
         // }
-        console.log(this);
     };
 
     Research.prototype.chooseResearch = function (researchTypeIndex) {
@@ -63,15 +60,12 @@ wciApp.factory('researchService', function (myCountryService) {
         console.log(this.types[this.currentResearchTypeIndex]);
     };
 
-    Research.prototype.chooseBonus = function (bonusTypeIndex, researchIndex) {
-        let currentResearchProgress = this.getCurrentResearchProgress();
-        let currentResearchList = this.getCurrentResearchList();
-        let currentResearch = currentResearchList[researchIndex];
+    Research.prototype.chooseBonus = function (bonusTypeIndex, researchIndex, researchTypeIndex) {
+        let currentResearch = this.types[researchTypeIndex].researchList[researchIndex];
         if (currentResearch.isUnlocked && !currentResearch.bonusGiven) {
             currentResearch.bonusGiven = true;
             currentResearch.bonusGivenIndex = bonusTypeIndex;
             this.bonuses.push(currentResearch.bonuses[bonusTypeIndex]);
-            this.updateBonuses();
         }
     };
 
@@ -83,12 +77,14 @@ wciApp.factory('researchService', function (myCountryService) {
         currentResearchProgress.points += myCountryService.baseStats.baseResearchPoints;
 
         if(currentResearchProgress.points >= currentResearch.cost){
+            //TODO: Important to unlock laws before adding a level to the research
+            let lawUnlock = currentResearch.lawUnlock;
+            lawsService.unlockLaw(lawUnlock);
             currentResearchProgress.level++;
             currentResearch.isUnlocked = true;
             //TODO: Need to check if we reached max research level, to prevent further progress and errors :|
             console.log("Research Unlocked");
         }
-        console.log(this);
     };
 
     //Helper methods
@@ -97,21 +93,6 @@ wciApp.factory('researchService', function (myCountryService) {
     };
     Research.prototype.getCurrentResearchList = function (){
         return this.types[this.currentResearchTypeIndex].researchList;//List of researches based on current type being researched(War/Economy...)
-    };
-
-    Research.prototype.updateBonuses = function () {
-        let allBonuses = {};
-        for(let i = 0; i < this.bonuses.length; i++){
-            for(let bonusProp in this.bonuses[i]){
-                if(this.bonuses[i].hasOwnProperty(bonusProp)){
-                    if(this.bonuses[i][bonusProp] >= 0){
-                        if(!allBonuses[bonusProp]) allBonuses[bonusProp] = 0;
-                        allBonuses[bonusProp] += this.bonuses[i][bonusProp];
-                    }
-                }
-            }
-        }
-        console.log(allBonuses);
     };
 
     return new Research();

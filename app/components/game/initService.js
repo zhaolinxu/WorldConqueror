@@ -9,6 +9,7 @@ wciApp.factory(
               advisorsService,
               researchService,
               structureService,
+              bonusesService,
               $q) {
         let sheets = ["Buildings", "Units", "ResearchData", "ResearchBonuses", "Laws"];
         let init = function () {
@@ -20,6 +21,8 @@ wciApp.factory(
                     militaryInit(excelObject['Units']);
                     researchInit(excelObject['ResearchData'], excelObject['ResearchBonuses']);
                     lawsInit(excelObject['Laws']);
+                    myCountryService.functions.resetStats();
+                    bonusesService.init();
                     resolve(excelObject);
                 });
             })

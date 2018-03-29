@@ -95,7 +95,7 @@
                                         <button class="btn btn-success" ng-class="structure.isVisible() ? '' : 'disabled'" ng-click="structure.build(1)">
                                             <span class="col-sm-4">Buy:</span>
                                             <i class="fa fa-money" ng-class="structureCtrl.countryStats.money < structure.cost ? 'text-danger' : ''"></i> {{structure.cost}}
-                                            <i class="fa fa-flag" ng-class="structureCtrl.countryStats.land < structure.landCost ? 'text-danger' : ''"></i> {{structure.landCost}}
+                                            <i class="fa fa-flag" ng-class="structureCtrl.countryStats.land < structure.landCost ? 'text-danger' : ''"></i> {{structure.getLandCost()}}
                                         </button>
                                     </div>
                                     </div>

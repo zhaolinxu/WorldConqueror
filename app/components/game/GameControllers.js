@@ -32,6 +32,7 @@ wciApp.controller(
             game.myCountry.baseStats.upkeep = 0;
             game.buildings.getTotalUpkeep();
             game.research.update();
+            game.laws.update();
             //game.advisors.functions.advisorTimedEffects();
             //game.saveGame();
         };

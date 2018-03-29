@@ -10,6 +10,11 @@ wciApp.factory('bonusesService', function () {
         this.updateLaws(gameObj.laws);
     };
 
+    Bonuses.prototype.init = function () {
+      this.researchBonuses = {};
+      this.lawsBonuses = {};
+    };
+
     Bonuses.prototype.updateResearch = function (researchService) {
         let allBonuses = {};
         for (let i = 0; i < researchService.bonuses.length; i++) {

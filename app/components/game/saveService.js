@@ -8,12 +8,14 @@ wciApp.factory(
               advisorsService,
               researchService,
               initService,
+              bonusesService,
               $location) {
 
         let data = {};
         //list of services we want to save/load
         let servicesToSave = {
-            myCountryService: myCountryService.baseStats,
+            myCountryService: myCountryService,
+            bonusesService: bonusesService,
             buildingsService: buildingsService,
             militaryService: militaryService,
             // worldCountryService: worldCountryService,

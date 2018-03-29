@@ -3,7 +3,8 @@
 wciApp.factory(
     'structureService',
     function (myCountryService,
-              $q) {
+              bonusesService,
+                            ) {
 
         //single structure such as Market/House/Garden
         var Structure = function () {
@@ -26,7 +27,7 @@ wciApp.factory(
 
         Structure.prototype.build = function (count) {
             let cost = this.cost * count;
-            let landCost = this.landCost * count;
+            let landCost = this.getLandCost() * count;
             if ((myCountryService.baseStats.money > cost) && this.isUnlocked &&
                  myCountryService.baseStats.land >= landCost) {
                 myCountryService.baseStats[this.statAffected] *= Math.pow((this.statMultiplier * this.countMultiplier), count);
@@ -36,6 +37,17 @@ wciApp.factory(
                 myCountryService.baseStats.land -= landCost;
                 this.count = this.count * 1 + count; //*1 to force math add and not string add.
             }
+        };
+
+        Structure.prototype.getLandCost = function () {
+            let bonusCost = bonusesService.researchBonuses.landCostAdder || 0;
+            let cost = this.landCost - bonusCost;
+            if(cost <= 1) return 1;
+            return cost;
+        };
+        Structure.prototype.getUpkeep = function () {
+            let upkeepBonus = bonusesService.researchBonuses.buildUpkeepMultiplier || 1;
+            return this.upkeep * upkeepBonus;
         };
 
         Structure.prototype.isVisible = function () {

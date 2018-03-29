@@ -13,16 +13,6 @@ wciApp.factory('myCountryService', function (bonusesService) {
         descriptions: {},
     };
 
-    //First Load
-    if (!localStorage['countryBaseStats']) {
-        setInitialStats(myCountry);
-    }
-    else {
-        //JSON.parse(atob(localStorage['wci_gameData']));
-        myCountry.baseStats = JSON.parse(localStorage['countryBaseStats']);
-        myCountry.events = JSON.parse(localStorage['countryEvents']);
-    }
-
     getLookups(myCountry);
 
     myCountry.dependentStats = {
@@ -129,8 +119,7 @@ wciApp.factory('myCountryService', function (bonusesService) {
         //Hour
         myCountry.baseStats.time++;
 
-        //Every Month
-        if (myCountry.baseStats.time % 720 == 0) {
+
             //This checks and see if current and previous were either both +ve or both -ve.
             if (((currentStabilityIndex > 0) && (previousStabilityIndex > 0)) ||
                 ((currentStabilityIndex < 0) && (previousStabilityIndex < 0))) {
@@ -148,9 +137,8 @@ wciApp.factory('myCountryService', function (bonusesService) {
                 myCountry.baseStats.turnsAtCurrentState = 0;
             }
             previousStabilityIndex = currentStabilityIndex;
-        }
+        };
 
-    };
     myCountry.functions.getNewDemographics = function () {
 
         myCountry.baseStats.population += myCountry.dependentStats.populationGrowth();

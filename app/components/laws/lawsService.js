@@ -18,12 +18,20 @@ wciApp.factory('lawsService', function () {
         });
     };
 
+    Laws.prototype.update = function () {
+        //Update active laws for their duration.
+        this.activeLaws.forEach(function (law) {
+            law.duration++;
+        })
+    };
+
     Laws.prototype.unlockLaw = function (id) {
         let law = this.filterLaw(id);
         if(law) this.unlockedLaws.push(law);
     };
 
     Laws.prototype.removeLaw = function (id) {
+        //This is necessary if you fire a minister, it will remove a law from that minister.
         let law = this.filterLaw(id);
         this.unlockedLaws.splice(law, 1);
     };
@@ -35,6 +43,7 @@ wciApp.factory('lawsService', function () {
         if(filterSameType) return;//it means that we found another law with the same "type"
         //TODO: We might want to tell the player that he cant active a law due to other of the same type being active.
         law.isActive = true;
+        law.duration = 0;
         this.activeLaws.push(law);
     };
 

@@ -20,14 +20,14 @@ wciApp.controller(
         bonusesService
         ) {
         //#region Private Methods
-        var timerfunction = function () {
+        let timerfunction = function () {
             //TODO: Put logic here to prompt user of game ending/death due to 0 population.
             game.bonuses.update(game);
             militaryService.updateUnitsBuyQueue();
-            game.myCountry.functions.getGameTime();
-            game.myCountry.functions.getNewConsumption();
-            game.myCountry.functions.getNewEconomics();
-            game.myCountry.functions.getNewDemographics();
+            game.myCountry.getGameTime();
+            game.myCountry.getNewConsumption();
+            game.myCountry.getNewEconomics();
+            game.myCountry.getNewDemographics();
 
             game.myCountry.baseStats.upkeep = 0;
             game.buildings.getTotalUpkeep();
@@ -36,11 +36,11 @@ wciApp.controller(
             //game.advisors.functions.advisorTimedEffects();
             //game.saveGame();
         };
-        var saveGame = function () {
+        let saveGame = function () {
             saveService.save();
             localStorage['gameData'] = JSON.stringify(game.data);
         };
-        var resetGame = function () {
+        let resetGame = function () {
             game.data = {
                 init: {
                     isFirstTime: true
@@ -49,7 +49,7 @@ wciApp.controller(
                 speed: 1000
             };
             //TODO: The extend functions don't attach themselves on reset. Fix
-            game.myCountry.functions.resetStats();
+            game.myCountry.resetStats();
             saveService.reset();
             game.advisors.functions.resetData();
             game.worldCountries.functions.resetData();
@@ -58,7 +58,7 @@ wciApp.controller(
         //#endregion
 
         //#region Default Values
-        var game = this;
+        let game = this;
         game.data = {};
         game.myCountry = myCountryService;
         initService().then(function(){
@@ -125,10 +125,10 @@ wciApp.controller(
         };
         //#endregion
 
-        var saveTimer = $interval(saveGame, 1000);
+        let saveTimer = $interval(saveGame, 1000);
         //#region Automated Functions
         // if (!game.data.paused) {
-        //     var playTimer = $interval(timerfunction, game.data.speed);
+        //     let playTimer = $interval(timerfunction, game.data.speed);
         // }
         //
         // game.pauseGame = function () {

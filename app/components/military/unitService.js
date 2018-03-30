@@ -9,7 +9,7 @@ wciApp.factory('unitService', function (myCountryService) {
 
     //pass unit data then initialize it.
     Unit.prototype.init = function (unitExcelData) {
-        for (var key in unitExcelData) {
+        for (let key in unitExcelData) {
             if (unitExcelData.hasOwnProperty(key)) {
                 this[key] = unitExcelData[key];
             }
@@ -19,7 +19,7 @@ wciApp.factory('unitService', function (myCountryService) {
         //TODO: Prompt user when canceling a queue
         //TODO: Tell the player about the possible lose of money, change formula to give less money, the longer player waits.
         //Cancel queue gives back ~50% money or so
-        var amount = this.queue[index].amount;
+        let amount = this.queue[index].amount;
         myCountryService.baseStats.money += (amount * this.cost) / 2;
         myCountryService.baseStats.population += amount * this.popCost;//give back population
         myCountryService.baseStats.unitCap += amount * this.unitCapCost;//give back unit cap...
@@ -45,7 +45,7 @@ wciApp.factory('unitService', function (myCountryService) {
     };
     //call every game turn
     Unit.prototype.updateQueue = function () {
-        for (var i = this.queue.length - 1; i >= 0; i--) {
+        for (let i = this.queue.length - 1; i >= 0; i--) {
             this.queue[i].time--;//reduce value by 1(1 turn)
             //TODO: add more logic which takes research and other bonuses that improve speed.
             if (this.queue[i].time <= 0) {

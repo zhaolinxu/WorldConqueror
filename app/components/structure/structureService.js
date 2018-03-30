@@ -7,19 +7,15 @@ wciApp.factory(
                             ) {
 
         //single structure such as Market/House/Garden
-        var Structure = function () {
+        let Structure = function () {
 
         };
 
         Structure.prototype.init = function (data) {
-            for (var key in data) {
+            for (let key in data) {
                 if (data.hasOwnProperty(key) && data.propertyIsEnumerable(key)) {
                     //isEnumerable to remove __rowNum__ from excel object, since it's set to Not enumerable and we dont want it
                     this[key] = {};
-                    // if(key === "isUnlocked"){
-                    //     this[key] = (data[key] === 'true');//convert string boolean value to boolean i.e. 'true' to true
-                    //     continue;
-                    // }
                     this[key] = data[key];
                 }
             }
@@ -40,6 +36,7 @@ wciApp.factory(
         };
 
         Structure.prototype.getLandCost = function () {
+            //TODO: Also update currently built structures landCost. This might be a bit tricky tho...
             let bonusCost = bonusesService.researchBonuses.landCostAdder || 0;
             let cost = this.landCost - bonusCost;
             if(cost <= 1) return 1;
@@ -58,25 +55,6 @@ wciApp.factory(
             let cost = this.cost * count;
             this.displayCost = cost;
         };
-
-        // First Load
-        if (!localStorage['buildingService']) {
-            // setInitialBuildingData(buildings, $q);
-        }
-        else {
-            // buildings.baseStats = JSON.parse(localStorage['buildingService']);
-        }
-
-        // buildings.functions.saveData = function () {
-        //     localStorage['buildingService'] = JSON.stringify(buildings.baseStats);
-        // };
-        // buildings.functions.resetData = function () {
-        //     //promise, it will wait for http request to finish before extending buildings methods...
-        //     var promise = getDataFromExcel($q, ["BuildingType", "Buildings"]);
-        //     promise.then(function(value){
-        //         console.log(value);
-        //     });
-        // };
 
         return Structure;
     });

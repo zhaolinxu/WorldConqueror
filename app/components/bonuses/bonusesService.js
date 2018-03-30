@@ -35,12 +35,17 @@ wciApp.factory('bonusesService', function () {
         lawsService.activeLaws.forEach(function (law) {
             for(let lawProperty in law){
                 if(law.hasOwnProperty(lawProperty)){
+                    if(typeof law[lawProperty] === "string"){
+                        totalBonus[lawProperty] = law[lawProperty];
+                        continue;
+                    }
                     if(!totalBonus[lawProperty]) totalBonus[lawProperty] = 0;
                     totalBonus[lawProperty] += law[lawProperty];
                 }
             }
         });
         this.lawsBonuses = totalBonus;
+        console.log(this);
       //unlock or lock laws.
     };
 

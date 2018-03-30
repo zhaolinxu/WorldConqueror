@@ -9,7 +9,7 @@ wciApp.factory(
 {
         //TODO: Consider using this object as a "group", and calculate total upkeep in worldCountry(myCountryService) service.
         //TODO: This way we can make multiple copies of this object, without having to use "this.unitsOnMission" array.
-    var Military = function () {
+    let Military = function () {
         this.units = [];
         //This array of arrays might contain mixed amount of different units...
         //E.x: 100Militia and 10Battle Ships.  Calculate their upkeep.
@@ -19,7 +19,7 @@ wciApp.factory(
     };
 
     Military.prototype.getTotalUpkeep = function () {
-        var total = 0;
+        let total = 0;
         this.units.forEach(function (unit) {
         total += unit.getUpkeep();
         });

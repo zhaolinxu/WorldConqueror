@@ -21,7 +21,7 @@ wciApp.factory(
                     militaryInit(excelObject['Units']);
                     researchInit(excelObject['ResearchData'], excelObject['ResearchBonuses']);
                     lawsInit(excelObject['Laws']);
-                    myCountryService.functions.resetStats();
+                    myCountryService.resetStats();
                     bonusesService.init();
                     resolve(excelObject);
                 });

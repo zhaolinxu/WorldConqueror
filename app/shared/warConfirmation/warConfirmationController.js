@@ -2,23 +2,20 @@ wciApp.controller(
     'warConfirmationModalController',
     function (
         $scope,
-        $modalInstance,
+        $uibModalInstance,
         countryAttacked,
-        myCountryService,
-        worldCountryService,
-        militaryService) {
+        myCountryService) {
 
-        $scope.myCountryStrength = myCountryService.baseStats.totalAttack + myCountryService.baseStats.totalDefense + myCountryService.baseStats.totalSiege;
-
-        $scope.targetCountryStrength = worldCountryService.baseStats.countryStrength[countryAttacked];
+        $scope.myCountryStrength = myCountryService.totalAttack + myCountryService.baseStats.totalDefense + myCountryService.baseStats.totalSiege;
+        $scope.targetCountryStrength = myCountryService.worldCountries.countries[countryAttacked].strength;
 
         $scope.successProbability = calculateSuccessProbability($scope);
 
         $scope.declareWar = function () {
-            $modalInstance.close('ok');
+            $uibModalInstance.close('ok');
         };
         $scope.cancel = function () {
-            $modalInstance.dismiss('cancel');
+            $uibModalInstance.dismiss('cancel');
         };
 
 

@@ -2,7 +2,7 @@
 
 wciApp.factory(
     'buildingsService',
-    function (myCountryService, bonusesService) {
+    function (myCountryService, structureService, bonusesService) {
 
         //store all buildings by type/tab
         let Buildings = function () {
@@ -10,6 +10,14 @@ wciApp.factory(
         };
 
         //TODO: All methods below are basically the same, need to use an universal method for them instead.
+        Buildings.prototype.init = function(buildingsArray) {
+            this.structures = [];
+            for (let j = 0; j < buildingsArray.length; j++) {
+                let structureObject = new structureService();
+                structureObject.init(buildingsArray[j]);
+                this.structures.push(structureObject);
+            }
+        };
         Buildings.prototype.getTotalUpkeep = function () {
             let upkeep = 0;
             this.structures.forEach(function (building) {
@@ -27,5 +35,5 @@ wciApp.factory(
             return Math.floor(multiplier * 100) + "%";
         };
 
-        return new Buildings();
+        return Buildings;
     });

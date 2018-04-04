@@ -104,16 +104,16 @@
                                 <span class="bold">
                                     {{law.name}} <br />
                                     <span class="font-9pt">
-                                        Active for: {{law.activeFor | niceTime}}
+                                        Active for: {{law.duration}} turns
                                     </span>
                                 </span>
                             </div>
                             <div class="col-md-4">
                                 <div class="pull-right clickableArea">
-                                    <button class="btn" ng-click="countryCtrl.laws.enactLaw($index)" ng-class="!law.isActive ? 'btn-success': ''" ng-disabled="law.isActive">
+                                    <button class="btn" ng-click="countryCtrl.laws.enactLaw($index)" ng-class="!law.isActive ? 'btn-success': 'hidden'" ng-disabled="law.isActive">
                                         Enact
                                     </button>
-                                    <button class="btn" ng-click="countryCtrl.laws.repealLaw($index)" ng-class="law.isActive ? 'btn-danger': ''" ng-disabled="!law.isActive">
+                                    <button class="btn" ng-click="countryCtrl.laws.repealLaw($index)" ng-class="law.isActive ? 'btn-danger': 'hidden'" ng-disabled="!law.isActive">
                                         Repeal
                                     </button>
                                 </div>
@@ -122,7 +122,15 @@
                     </div>
                 </div>
             </div>
-            
+            <div class="col-md-6 col-sm-12">
+                <div id="government" class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <span>Government</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

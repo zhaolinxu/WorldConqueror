@@ -6,7 +6,7 @@ wciApp.controller(
         helperModalsService,
         myCountryService) {
 
-        this.buildings = buildingsService;
+        this.buildings = myCountryService.buildings;
         this.countryStats = myCountryService.baseStats;
         this.advisors = advisorsService;
         this.helperModals = helperModalsService;

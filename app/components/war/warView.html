@@ -1,9 +1,9 @@
 ﻿<div id="War" class="row">
     <div class="col-sm-12">
-        <div id="world-map" style="height: 500px" ng-show="!war.worldCountries.baseStats.IsWarActive">
+        <div id="world-map" style="height: 500px" ng-show="!war.IsWarActive">
 
         </div>
-        <div id="war-control" ng-show="war.worldCountries.baseStats.IsWarActive" class="row">
+        <div id="war-control" ng-show="war.IsWarActive" class="row">
             <div id="battleScreen" class="col-md-8">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -28,7 +28,7 @@
 
                             </div>
                             <div class="col-sm-6 pull-right">
-                                Shield: {{war.worldCountries.baseStats.CountryAttacked.shield}}
+                                Shield: {{war.worldCountries.CountryAttacked.shield}}
                             </div>
                         </div>
                     </div>

@@ -3,7 +3,6 @@
 wciApp.factory(
     'militaryService',
     function (
-    myCountryService,
     unitService
     )
 {
@@ -16,6 +15,15 @@ wciApp.factory(
         this.unitsOnMission = [];
         this.totalUpkeep = 0;
         this.unitCap = 0;
+    };
+
+    Military.prototype.init = function(unitsArray) {
+        this.units = [];
+        for (let i = 0; i < unitsArray.length; i++) {
+            let unitObject = unitsArray[i];
+            this.units[i] = new unitService();
+            this.units[i].init(unitObject);
+        }
     };
 
     Military.prototype.getTotalUpkeep = function () {
@@ -44,5 +52,5 @@ wciApp.factory(
 
     };
 
-    return new Military()
+    return Military;
 });

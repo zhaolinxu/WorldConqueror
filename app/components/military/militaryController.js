@@ -1,6 +1,6 @@
 wciApp.controller(
     'MilitaryController',
-    function (militaryService) {
+    function (myCountryService) {
 
-        this.military = militaryService;
+        this.military = myCountryService.military;
     });

@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-wciApp.factory('researchService', function (myCountryService, lawsService) {
+wciApp.factory('researchService', function (myCountryService) {
 
     //constructor store all researches, each time we complete a research we add index + 1 to current research type...
     let Research = function () {
@@ -79,7 +79,7 @@ wciApp.factory('researchService', function (myCountryService, lawsService) {
         if(currentResearchProgress.points >= currentResearch.cost){
             //TODO: Important to unlock laws before adding a level to the research
             let lawUnlock = currentResearch.lawUnlock;
-            lawsService.unlockLaw(lawUnlock);
+            myCountryService.laws.unlockLaw(lawUnlock);
             currentResearchProgress.level++;
             currentResearch.isUnlocked = true;
             //TODO: Need to check if we reached max research level, to prevent further progress and errors :|
@@ -95,7 +95,7 @@ wciApp.factory('researchService', function (myCountryService, lawsService) {
         return this.types[this.currentResearchTypeIndex].researchList;//List of researches based on current type being researched(War/Economy...)
     };
 
-    return new Research();
+    return Research;
 
 });
 

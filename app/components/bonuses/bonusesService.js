@@ -6,8 +6,8 @@ wciApp.factory('bonusesService', function () {
     }
 
     Bonuses.prototype.update = function (gameObj) {
-        this.updateResearch(gameObj.research);
-        this.updateLaws(gameObj.laws);
+        this.updateResearch(gameObj.myCountry.research);
+        this.updateLaws(gameObj.myCountry.laws);
     };
 
     Bonuses.prototype.init = function () {
@@ -45,7 +45,6 @@ wciApp.factory('bonusesService', function () {
             }
         });
         this.lawsBonuses = totalBonus;
-        console.log(this);
       //unlock or lock laws.
     };
 

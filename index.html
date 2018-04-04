@@ -13,13 +13,13 @@
     <script src="assets/libs/js/xlsx.full.min.js"></script>
     <script src="assets/libs/js/cpexcel.js"></script>
     <script src="assets/libs/js/ui-bootstrap-tpls-2.5.0.min.js"></script>
-    <script src="assets/libs/js/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="assets/libs/js/jquery-jvectormap-2.0.3.min.js"></script>
     <script src="assets/libs/js/jquery-jvectormap-world-mill-en.js"></script>
     <!--css-->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/libs/css/select.min.css">
-    <link rel="stylesheet" href="assets/libs/css/jquery-jvectormap-2.0.2.css">
+    <link rel="stylesheet" href="assets/libs/css/jquery-jvectormap-2.0.3.css">
     <!--<link rel="stylesheet" href="libs/css/metro-bootstrap.css">
     <link rel="stylesheet" href="libs/fonts/metroSysIcons.svg">
     <link rel="stylesheet" href="libs/fonts/metroSysIcons.tff">
@@ -117,7 +117,7 @@
                     <button ng-click="game.debug.stabilityIndexChange(-1)">StabilityIndex -1</button>
                 </div>
                 <div id="Game Window" class="col-sm-12">
-                    <div ng-include="'app/components/statHeader/statHeaderView.html'"></div>
+                    <div ng-include="'app/shared/statHeader/statHeaderView.html'"></div>
                     
                     <div id="views" ng-view>
                     </div>
@@ -158,13 +158,13 @@
         <script src="app/components/military/militaryController.js"></script>
         <script src="app/components/research/researchController.js"></script>
         <script src="app/components/structure/structureController.js"></script>
-        <script src="app/components/tooltip/tooltipController.js"></script>
+        <script src="app/shared/tooltip/tooltipController.js"></script>
         <script src="app/components/war/warController.js"></script>
 
         <!-- Services -->
         <script src="app/components/advisors/advisorsService.js"></script>
         <script src="app/components/country/countryService.js"></script>
-        <script src="app/components/laws/lawsService.js"></script>
+        <script src="app/components/government/lawsService.js"></script>
         <script src="app/components/military/militaryService.js"></script>
         <script src="app/components/research/researchService.js"></script>
         <script src="app/components/structure/structureService.js"></script>
@@ -183,6 +183,7 @@
         <!-- Shared Services -->
         <script src="app/shared/helperModal/helperModalsService.js"></script>
         <script src="app/shared/notifications/notificationService.js"></script>
+        <script src="app/shared/modal/modalService.js"></script>
 
         <!-- Filters -->
         <script src="app/shared/filters/NumberFilters.js"></script>

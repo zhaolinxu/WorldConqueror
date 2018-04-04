@@ -27,7 +27,7 @@
                         <div class="row">
                             <div class="col-xs-4"
                                  ng-repeat="unit in militaryCtrl.military.units"
-                                 ng-class="{'a': !unit.isUnlocked()}">
+                                 ng-class="{'invisible': !unit.isUnlocked()}">
                                 <!--TODO: Change class to hidden, instead of invisible, to remove the empty space between unlocked and locked units-->
                                 <div class="row">
                                     <div class="col-xs-4 col-xs-offset-4">

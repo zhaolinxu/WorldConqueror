@@ -8,7 +8,6 @@ wciApp.controller(
         myCountryService,
         buildingsService,
         militaryService,
-        worldCountryService,
         lawsService,
         advisorsService,
         helperModalsService,
@@ -19,20 +18,33 @@ wciApp.controller(
         debugService,
         bonusesService
         ) {
+        let game = this;
+        let initGame = function() {
+            game.data = {};
+            initService().then(function(){
+                saveService.load();
+            });
+            game.myCountry = myCountryService;
+            game.bonuses = bonusesService;
+            game.advisors = advisorsService;
+            game.helperModals = helperModalsService;
+            game.notification = notificationService;
+            game.debug = debugService;
+        };
         //#region Private Methods
         let timerfunction = function () {
             //TODO: Put logic here to prompt user of game ending/death due to 0 population.
             game.bonuses.update(game);
-            militaryService.updateUnitsBuyQueue();
+            game.myCountry.military.updateUnitsBuyQueue();
             game.myCountry.getGameTime();
             game.myCountry.getNewConsumption();
             game.myCountry.getNewEconomics();
             game.myCountry.getNewDemographics();
-
             game.myCountry.baseStats.upkeep = 0;
-            game.buildings.getTotalUpkeep();
-            game.research.update();
-            game.laws.update();
+            game.myCountry.buildings.getTotalUpkeep();
+            game.myCountry.research.update();
+            game.myCountry.laws.update();
+            game.myCountry.worldCountries.update();
             //game.advisors.functions.advisorTimedEffects();
             //game.saveGame();
         };
@@ -49,31 +61,16 @@ wciApp.controller(
                 speed: 1000
             };
             //TODO: The extend functions don't attach themselves on reset. Fix
-            game.myCountry.resetStats();
+            game.myCountry.init();
             saveService.reset();
             game.advisors.functions.resetData();
-            game.worldCountries.functions.resetData();
             localStorage.clear();
         };
         //#endregion
 
         //#region Default Values
-        let game = this;
-        game.data = {};
-        game.myCountry = myCountryService;
-        initService().then(function(){
-            saveService.load();
-        });
-        game.bonuses = bonusesService;
-        game.buildings = buildingsService;
-        game.advisors = advisorsService;
-        game.research = researchService;
-        game.military = militaryService;
-        game.worldCountries = worldCountryService;
-        game.laws = lawsService;
-        game.helperModals = helperModalsService;
-        game.notification = notificationService;
-        game.debug = debugService;
+
+
 
         //Load Game's Settings
         if (!localStorage['gameData']) {
@@ -125,36 +122,14 @@ wciApp.controller(
         };
         //#endregion
 
+        initGame();
         let saveTimer = $interval(saveGame, 1000);
-        //#region Automated Functions
-        // if (!game.data.paused) {
-        //     let playTimer = $interval(timerfunction, game.data.speed);
-        // }
-        //
-        // game.pauseGame = function () {
-        //     game.data.paused = !game.data.paused;
-        //     if (!game.data.paused) {
-        //         playTimer = $interval(timerfunction, game.data.speed);
-        //     }
-        //     else {
-        //         $interval.cancel(playTimer)
-        //     }
-        // };
-        // game.adjustGameSpeed = function (speed) {
-        //     game.data.speed = (1000 / speed);
-        //     game.data.paused = false;
-        //     $interval.cancel(playTimer);
-        //     playTimer = $interval(timerfunction, game.data.speed);
-        //
-        // };
 
         //next turn button
         game.nextTurn = function(){
             timerfunction();
             game.myCountry.baseStats.currentTurn += 1;
         };
-        //#endregion
-
         //Making sure interval is cancelled on destroy
         $scope.$on(
             "$destroy",

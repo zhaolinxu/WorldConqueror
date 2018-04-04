@@ -2,14 +2,12 @@
 
 wciApp.factory(
     'debugService',
-    function (buildingsService,
-              researchService,
-              myCountryService) {
+    function (myCountryService) {
         let Debug = function () {
         };
 
         Debug.prototype.addEachBuilding = function () {
-            buildingsService.structures.forEach(function (structure) {
+            myCountryService.buildings.structures.forEach(function (structure) {
                 structure.build(10);
             });
         };
@@ -20,7 +18,7 @@ wciApp.factory(
 
         Debug.prototype.addResearchPoints = function () {
             myCountryService.baseStats.baseResearchPoints = 1000;
-            researchService.update();
+            myCountryService.research.update();
         };
 
         Debug.prototype.stabilityChange = function (val) {

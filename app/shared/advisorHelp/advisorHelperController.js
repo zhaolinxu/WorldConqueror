@@ -2,9 +2,9 @@ wciApp.controller(
     'advisorsHelpModalController',
     function (
         $scope,
-        $modalInstance) {
+        $uibModalInstance) {
 
         $scope.ok = function () {
-            $modalInstance.dismiss('ok');
+            $uibModalInstance.dismiss('ok');
         };
     });

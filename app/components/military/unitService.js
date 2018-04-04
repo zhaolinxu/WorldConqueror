@@ -56,7 +56,12 @@ wciApp.factory('unitService', function (myCountryService) {
             }
         }
     };
-
+    Unit.prototype.getStrength = function() {
+        return this.attack + this.defense
+    };
+    Unit.prototype.getTotalStrength = function() {
+        return this.getStrength() * this.count;
+    };
     Unit.prototype.getAttack = function () {
         //TODO: Improve formula based on research/buildings/laws/commanders and what not...
         return this.attack * this.count;
@@ -72,6 +77,11 @@ wciApp.factory('unitService', function (myCountryService) {
     };
     Unit.prototype.isUnlocked = function() {
         return this.unlocked;
+    };
+
+    //For world countries for easy buy
+    Unit.prototype.createUnit = function() {
+        this.count++;
     };
     return Unit;
 });

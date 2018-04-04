@@ -1,6 +1,11 @@
 ﻿'use strict';
 
-wciApp.factory('myCountryService', function (bonusesService) {
+wciApp.factory('myCountryService',
+    function
+        (
+            bonusesService
+
+        ) {
 
     //TODO: put the stats in a sub object
 
@@ -16,13 +21,16 @@ wciApp.factory('myCountryService', function (bonusesService) {
             jobGdp: "This is how much each job affects the gdp"
 
         };
+        this.countries = [];//a list of countries we control
     };
     Country.prototype.init = function () {
+        this.countries.push("US");
         this.baseStats = {
             //One Month is signfied as one second
             countryName: 'Wadiya',
             leaderName: 'Rohan',
             leaderTitle: 'King',
+            selectedCountry: "US",
             difficultyLevel: {
                 Desc: "I am a noob, have mercy!",
                 Value: 1
@@ -206,9 +214,6 @@ wciApp.factory('myCountryService', function (bonusesService) {
         }
     };
 
-    Country.prototype.resetStats = function () {
-        this.init();
-    };
     Country.prototype.getLookups = function () {
         this.leaderTitles = [
             'President',

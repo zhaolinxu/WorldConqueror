@@ -50,6 +50,7 @@ wciApp.factory('lawsService', function () {
     Laws.prototype.repealLaw = function (index) {
         let law = this.unlockedLaws[index];
         let removeIndex = this.activeLaws.indexOf(law);
+        law.duration = 0;
         this.activeLaws.splice(removeIndex, 1);
         law.isActive = false;
     };
@@ -65,7 +66,7 @@ wciApp.factory('lawsService', function () {
             return lawObject.ID.includes(id);
         })[0];
     };
-    return new Laws();
+    return Laws;
 
 });
 

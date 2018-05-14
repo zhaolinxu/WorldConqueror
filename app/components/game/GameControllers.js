@@ -5,7 +5,7 @@ wciApp.controller(
     function (
         $scope,
         $interval,
-        myCountryService,
+        playerService,
         buildingsService,
         militaryService,
         lawsService,
@@ -13,6 +13,7 @@ wciApp.controller(
         helperModalsService,
         notificationService,
         researchService,
+        worldCountryService,
         saveService,
         initService,
         debugService,
@@ -24,7 +25,8 @@ wciApp.controller(
             initService().then(function(){
                 saveService.load();
             });
-            game.myCountry = myCountryService;
+            game.myCountry = playerService;
+            game.worldCountries = worldCountryService;
             game.bonuses = bonusesService;
             game.advisors = advisorsService;
             game.helperModals = helperModalsService;
@@ -44,7 +46,7 @@ wciApp.controller(
             game.myCountry.buildings.getTotalUpkeep();
             game.myCountry.research.update();
             game.myCountry.laws.update();
-            game.myCountry.worldCountries.update();
+            game.worldCountries.update();
             //game.advisors.functions.advisorTimedEffects();
             //game.saveGame();
         };

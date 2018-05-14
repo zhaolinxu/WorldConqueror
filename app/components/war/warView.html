@@ -1,10 +1,7 @@
 ﻿<div id="War" class="row">
     <div class="col-sm-12">
-        <div id="world-map" style="height: 500px" ng-show="!war.IsWarActive">
-
-        </div>
-        <div id="war-control" ng-show="war.IsWarActive" class="row">
-            <div id="battleScreen" class="col-md-8">
+        <div id="war-control" class="row">
+            <div id="battleScreen" class="col-md-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <div class="panel-title">
@@ -20,45 +17,32 @@
                         </div>
                     </div>
                     <div class="panel-body custom-panel font-9pt">
-                        <div class="row">
-                            <button type="button" class="btn btn-danger pull-right" ng-click="war.retreat()">Surrender</button>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6 pull-left">
-
+                        <div class="row" ng-repeat="currentBattle in warService.currentBattles">
+                            <div class="col-sm-4">
+                                <h4>
+                                    {{currentBattle.defender.code}}
+                                </h4>
                             </div>
-                            <div class="col-sm-6 pull-right">
-                                Shield: {{war.worldCountries.CountryAttacked.shield}}
+                            <div class="col-sm-4">
+                                <button type="button" class="btn btn-danger" ng-click="sendTroops($index)">Send Troops</button>
                             </div>
+                            <div class="col-sm-4"><button type="button" class="btn btn-danger pull-right">Surrender
+                            </button></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="warLog" class="col-md-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <div class="panel-title">
-                            <span>
-                                Log
-                            </span>
-                            <span class="pull-right">
-                                <i class="fa fa-info-circle clickable" ng-click=""></i>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="panel-body custom-panel font-9pt">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <span ng-repeat="log in war.logger" class="col-sm-12">
-                                    {{log.text}}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </div>
+
         </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="well" id="world-map" style="height: 500px">
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 
-<ng-include src="'app/shared/warConfirmation/war_confirmationView.html'"></ng-include>
+<ng-include src="'app/components/war/warConfirmation/war_confirmationView.html'"></ng-include>
+<ng-include src="'app/components/war/warSendTroopsModal.html'"></ng-include>

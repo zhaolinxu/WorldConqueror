@@ -4,7 +4,7 @@ wciApp.factory(
     'advisorsService',
     function (
         $uibModal,
-        myCountryService,
+        playerService,
         buildingsService) {
 
         var advisors = {
@@ -91,7 +91,7 @@ wciApp.factory(
                     upkeep += advisor.Salary / 8640; //breakdown yearly salary in hourly = 12*30*24
                 }
             }
-            myCountryService.baseStats.upkeep += upkeep;
+            playerService.baseStats.upkeep += upkeep;
         };
 
         return advisors;

@@ -5,6 +5,9 @@
 *.suo
 *.user
 *.sln.docstates
+node_modules/
+package-lock.json
+*.~lock.Data.ods#
 
 # Build results
 

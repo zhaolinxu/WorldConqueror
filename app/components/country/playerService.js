@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-wciApp.factory('myCountryService',
+wciApp.factory('playerService',
     function
         (
             bonusesService
@@ -9,7 +9,7 @@ wciApp.factory('myCountryService',
 
     //TODO: put the stats in a sub object
 
-    let Country = function () {
+    let Player = function () {
         this.baseStats = {};
         this.events = {};
         this.leaderTitles = [];
@@ -21,10 +21,14 @@ wciApp.factory('myCountryService',
             jobGdp: "This is how much each job affects the gdp"
 
         };
-        this.countries = [];//a list of countries we control
+        this.conqueredCountries = [];//a list of countries we control
+        this.startingCountries = [];//list of strings with starting countries for a player...
+        this.countriesAtWar = [];
     };
-    Country.prototype.init = function () {
-        this.countries.push("US");
+    Player.prototype.init = function () {
+        this.conqueredCountries = [];
+        this.startingCountries = ["US"];//We can have more than 1...
+        this.countriesAtWar = [];
         this.baseStats = {
             //One Month is signfied as one second
             countryName: 'Wadiya',
@@ -73,7 +77,7 @@ wciApp.factory('myCountryService',
         };
         this.getLookups();
     };
-    Country.prototype.actualGrowthRate = function () {
+    Player.prototype.actualGrowthRate = function () {
         let growthRate;
         let freezeGrowth = bonusesService.lawsBonuses.freezeGrowth;
         let freezeBirth = bonusesService.lawsBonuses.freezeBirth;
@@ -88,43 +92,43 @@ wciApp.factory('myCountryService',
         return growthRate;
     };
 
-    Country.prototype.actualMortalityRate = function () {
+    Player.prototype.actualMortalityRate = function () {
         return this.baseStats.baseMortalityRate * (100 / (5 * this.baseStats.happiness));
     };
 
-    Country.prototype.populationGrowth = function () {
+    Player.prototype.populationGrowth = function () {
         return this.baseStats.population * ((this.actualGrowthRate() - this.actualMortalityRate()) / 100);
     };
 
-    Country.prototype.foodFlow = function () {
+    Player.prototype.foodFlow = function () {
         return this.foodGrowth() - this.foodDemand();
     };
 
-    Country.prototype.foodGrowth = function () {
+    Player.prototype.foodGrowth = function () {
         return Math.round(this.baseStats.baseFoodGrowth * (this.baseStats.happiness / 100));
     };
 
-    Country.prototype.foodDemand = function () {
+    Player.prototype.foodDemand = function () {
         return this.baseStats.perCapitaConsumption * this.baseStats.population;
     };
 
-    Country.prototype.income = function () {
+    Player.prototype.income = function () {
         //TODO: 12/22/2014: This might need to be reduced.
         return this.gdp() * 0.1;  //You get 4% of the gdp every turn. (Which is one month)
     };
 
-    Country.prototype.moneyGrowth = function () {
+    Player.prototype.moneyGrowth = function () {
         return this.income() - this.baseStats.upkeep;
     };
-    Country.prototype.gdp = function () {
+    Player.prototype.gdp = function () {
         return Math.round(((this.filledJobs() * this.baseStats.jobGdpMultiplier)) * (this.baseStats.happiness / 100));
     };
 
-    Country.prototype.filledJobs = function () {
+    Player.prototype.filledJobs = function () {
         return Math.min(this.baseStats.totalJobs, this.baseStats.population);
     };
 
-    Country.prototype.unemployment = function () {
+    Player.prototype.unemployment = function () {
         let unemployment = Math.round((this.baseStats.population - (this.baseStats.totalJobs)) / (this.baseStats.population) * 100);
         if (unemployment < 0) {
             unemployment = 0;
@@ -132,7 +136,7 @@ wciApp.factory('myCountryService',
         return unemployment;
     };
 
-    Country.prototype.homelessness = function () {
+    Player.prototype.homelessness = function () {
         let homelessness = Math.round(((this.baseStats.population - this.baseStats.housingCapacity) / (this.baseStats.population)) * 100);
         if (homelessness < 0) {
             homelessness = 0;
@@ -140,13 +144,13 @@ wciApp.factory('myCountryService',
         return homelessness;
     };
 
-    Country.prototype.getCurrentStabilityIndex = function () {
+    Player.prototype.getCurrentStabilityIndex = function () {
         let indexBonus = bonusesService.lawsBonuses.stabilityChange;
         if(typeof indexBonus !== "number") indexBonus = 0;
         return this.baseStats.currentStabilityIndex + indexBonus;
     };
     //Timer Methods
-    Country.prototype.getGameTime = function () {
+    Player.prototype.getGameTime = function () {
 
         let currentStabilityIndex = this.getCurrentStabilityIndex();
         let previousStabilityIndex = this.baseStats.previousStabilityIndex;
@@ -173,7 +177,7 @@ wciApp.factory('myCountryService',
         this.baseStats.previousStabilityIndex = currentStabilityIndex;
     };
 
-    Country.prototype.getNewDemographics = function () {
+    Player.prototype.getNewDemographics = function () {
 
         this.baseStats.population += this.populationGrowth();
 
@@ -190,7 +194,7 @@ wciApp.factory('myCountryService',
         }
 
     };
-    Country.prototype.getNewConsumption = function () {
+    Player.prototype.getNewConsumption = function () {
 
         this.baseStats.totalFood += this.foodFlow();
 
@@ -204,7 +208,7 @@ wciApp.factory('myCountryService',
         }
 
     };
-    Country.prototype.getNewEconomics = function () {
+    Player.prototype.getNewEconomics = function () {
 
         this.baseStats.money += this.moneyGrowth();
 
@@ -214,7 +218,7 @@ wciApp.factory('myCountryService',
         }
     };
 
-    Country.prototype.getLookups = function () {
+    Player.prototype.getLookups = function () {
         this.leaderTitles = [
             'President',
             'Prime Minister',
@@ -251,7 +255,7 @@ wciApp.factory('myCountryService',
             }
         ];
     };
-    Country.prototype.setCountrySize = function () {
+    Player.prototype.setCountrySize = function () {
 
         if (this.gdp() <= 100000) { //100k
             this.baseStats.sizeName = 'City State';
@@ -284,7 +288,7 @@ wciApp.factory('myCountryService',
             this.baseStats.size = 7;
         }
     };
-    Country.prototype.setHappiness = function () {
+    Player.prototype.setHappiness = function () {
 
         let unemployment = this.unemployment();
         let unempHappinessFactor = 0;
@@ -297,10 +301,10 @@ wciApp.factory('myCountryService',
         this.baseStats.happiness = Math.round(100 - (unemployment / 4) - (hunger / 4) - (homeless / 4) - ((100 - stability) / 4));
     };
 
-    Country.prototype.sizeIncreaseEvents = function () {
+    Player.prototype.sizeIncreaseEvents = function () {
 
     };
-    return new Country();
+    return new Player();
 });
 
 

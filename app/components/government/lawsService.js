@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-wciApp.factory('lawsService', function () {
+wciApp.factory('lawsService', function (gameDataService) {
 
     let Laws = function () {
         this.laws = [];//list of laws from excel/json file
@@ -8,12 +8,12 @@ wciApp.factory('lawsService', function () {
         this.activeLaws = [];//list of active laws
     };
 
-    Laws.prototype.init = function (lawsArrayExcel) {
+    Laws.prototype.init = function () {
         this.laws = [];
         this.unlockedLaws = [];
         this.activeLaws = [];
         let self = this;
-        lawsArrayExcel.forEach(function (law) {
+        gameDataService.Laws.forEach(function (law) {
             self.laws.push(law);
         });
     };
@@ -70,7 +70,7 @@ wciApp.factory('lawsService', function () {
 
 });
 
-var setInitialLawsData = function (laws, myCountryService) {
+var setInitialLawsData = function (laws, playerService) {
     laws.baseStats = [
        {
            name: "Mandatory One Child Policy",

@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-wciApp.factory('researchService', function (myCountryService) {
+wciApp.factory('researchService', function (playerService, gameDataService) {
 
     //constructor store all researches, each time we complete a research we add index + 1 to current research type...
     let Research = function () {
@@ -14,7 +14,9 @@ wciApp.factory('researchService', function (myCountryService) {
         this.bonuses = [];
     };
 
-    Research.prototype.init = function (researchDataFromExcel, researchBonusesDataFromExcel){
+    Research.prototype.init = function (){
+        let research = gameDataService.ResearchData;
+        let researchBonuses = gameDataService.ResearchBonuses;
         let temporaryTypes = {};//Used inside a loop, so we don't push too many objects at once. Like War/Economy(we only need 1 of each)
         let currentIndex = -1;//start at -1 because we are adding +1 for each new type, and we want to start at 0...
         //empty the object
@@ -24,17 +26,17 @@ wciApp.factory('researchService', function (myCountryService) {
         this.bonuses = [];
 
         //Initialize object with data from excel
-        for (let i = 0; i < researchDataFromExcel.length; i++) {
+        for (let i = 0; i < research.length; i++) {
             //loop through all researches
-            let researchData = researchDataFromExcel[i];
+            let researchData = research[i];
             researchData.bonuses = researchData.bonuses || [];
             researchData.currentBonus = null;
-            researchData.bonuses.push(filterArrayResearch(researchBonusesDataFromExcel, researchData.bonus_1));
-            researchData.bonuses.push(filterArrayResearch(researchBonusesDataFromExcel, researchData.bonus_2));
+            researchData.bonuses.push(filterArrayResearch(researchBonuses, researchData.bonus_1));
+            researchData.bonuses.push(filterArrayResearch(researchBonuses, researchData.bonus_2));
             //Delete 2 properties that we no longer need
             delete researchData.bonus_1;
             delete researchData.bonus_2;
-            let type = researchDataFromExcel[i].researchType;
+            let type = researchData.researchType;
             if (!temporaryTypes[type]) {
                 temporaryTypes[type] = type;
                 this.researchProgress.push({
@@ -74,12 +76,12 @@ wciApp.factory('researchService', function (myCountryService) {
         let currentResearchList = this.getCurrentResearchList();//List of researches based on current type being researched(War/Economy...)
         let currentResearch = currentResearchList[currentResearchProgress.level];
 
-        currentResearchProgress.points += myCountryService.baseStats.baseResearchPoints;
-
+        currentResearchProgress.points += playerService.baseStats.baseResearchPoints;
+        if(!currentResearch) return;//return if we reach the end of an array
         if(currentResearchProgress.points >= currentResearch.cost){
             //TODO: Important to unlock laws before adding a level to the research
             let lawUnlock = currentResearch.lawUnlock;
-            myCountryService.laws.unlockLaw(lawUnlock);
+            playerService.laws.unlockLaw(lawUnlock);
             currentResearchProgress.level++;
             currentResearch.isUnlocked = true;
             //TODO: Need to check if we reached max research level, to prevent further progress and errors :|

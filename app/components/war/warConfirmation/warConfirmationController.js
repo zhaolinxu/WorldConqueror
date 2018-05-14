@@ -4,10 +4,11 @@ wciApp.controller(
         $scope,
         $uibModalInstance,
         countryAttacked,
-        myCountryService) {
+        worldCountryService,
+        playerService) {
 
-        $scope.myCountryStrength = myCountryService.totalAttack + myCountryService.baseStats.totalDefense + myCountryService.baseStats.totalSiege;
-        $scope.targetCountryStrength = myCountryService.worldCountries.countries[countryAttacked].strength;
+        $scope.myCountryStrength = playerService.military.getTotalStrength();
+        $scope.targetCountryStrength = worldCountryService.getCountryStrength(countryAttacked);
 
         $scope.successProbability = calculateSuccessProbability($scope);
 
@@ -22,9 +23,9 @@ wciApp.controller(
     });
 
 
-var calculateSuccessProbability = function ($scope) {
+let calculateSuccessProbability = function ($scope) {
 
-    var probOfFailure;
+    let probOfFailure;
     if ($scope.myCountryStrength > 0) {
         probOfFailure = 100 * (($scope.targetCountryStrength - ($scope.myCountryStrength / 2)) / $scope.myCountryStrength);
     } else {
@@ -39,4 +40,4 @@ var calculateSuccessProbability = function ($scope) {
 
 
     return 100 - probOfFailure;
-}
+};

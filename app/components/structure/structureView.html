@@ -32,44 +32,44 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <span class="tag label label-default center-block">
-                                        <span>{{structure.name}}</span>
+                                        <span>{{structure.getName()}} ({{structure.getCount()}})</span>
                                         <a><i class="remove glyphicon glyphicon-info-sign glyphicon-white"></i></a>
                                     </span>
                                 </div>
                             </div>
                             <div class="row margin-top-5 form-inline">
                                 <div class="col-sm-2 col-md-2">
-                                    <img class="img-responsive" ng-src="assets/img/{{structure.image}}.png" />
+                                    <img class="img-responsive" ng-src="assets/img/{{structure.getImage()}}.png" />
                                 </div>
                                 <div class="col-sm-2 col-md-2 text-center">
                                     <!--TODO: Add tooltips on hover-->
                                     <i class="fa fa-angle-double-up"></i>
                                     <span class="font-8pt">
-                                        {{structure.countMultiplier}}
+                                        {{structure.getCountMultiplier()}}
                                     </span>
                                 </div>
                                 <div class="col-sm-2 col-md-2 text-center">
                                     <i class="fa fa-percent"></i>
                                     <span class="font-8pt">
-                                        {{structure.statMultiplier}}
+                                        {{structure.getStatMultiplier()}}
                                     </span>
                                 </div>
                                 <div class="col-sm-2 col-md-2 text-center">
                                     <i class="fa fa-cog"></i>
                                     <span class="font-8pt">
-                                        {{structure.statAdder}}/t
+                                        {{structure.getStatAdder()}}/t
                                     </span>
                                 </div>
                                 <div class="col-sm-2 col-md-2 text-center">
                                     <i class="fa fa-money"></i>
                                     <span class="font-8pt">
-                                        -{{structure.upkeep}}/t
+                                        -{{structure.getUpkeep()}}/t
                                     </span>
                                 </div>
                                 <div class="col-sm-2 col-md-2 text-center">
                                     <i class="fa fa-briefcase"></i>
                                     <span class="font-8pt">
-                                        {{structure.jobsIncreased}}
+                                        {{structure.getJobsIncreased()}}
                                     </span>
                                 </div>
                             </div>
@@ -80,6 +80,7 @@
                                     <!-- TODO: Hide stats with a value of 0 -->
                                     <span class="col-md-4">
                                     </span>
+                                    </span>
                                     <span class="col-md-4">
                                     </span>
                                     <span class="col-md-4">
@@ -88,14 +89,14 @@
                             </div>
                             <div class="row form-horizontal">
                                 <div>
-                                    <div class="col-sm-2">
-                                        <input class="form-control" disabled ng-model="structure.count" />
+                                    <div class="col-sm-4">
+                                        <input class="form-control" type="number" min="1" ng-init="count=1" ng-model="count" />
                                     </div>
-                                    <div class="col-sm-8 col-sm-offset-2">
-                                        <button class="btn btn-success" ng-class="structure.isVisible() ? '' : 'disabled'" ng-click="structure.build(1)">
+                                    <div class="col-sm-8">
+                                        <button class="btn btn-success" ng-class="structure.isVisible() ? '' : 'disabled'" ng-click="structure.build(count)">
                                             <span class="col-sm-4">Buy:</span>
-                                            <i class="fa fa-money" ng-class="structureCtrl.countryStats.money < structure.cost ? 'text-danger' : ''"></i> {{structure.cost}}
-                                            <i class="fa fa-flag" ng-class="structureCtrl.countryStats.land < structure.landCost ? 'text-danger' : ''"></i> {{structure.getLandCost()}}
+                                            <i class="fa fa-money" ng-class="structureCtrl.countryStats.money < structure.getCost() ? 'text-danger' : ''"></i> {{structure.getCost()}}
+                                            <i class="fa fa-flag" ng-class="structureCtrl.countryStats.land < structure.getLandCost() ? 'text-danger' : ''"></i> {{structure.getLandCost()}}
                                         </button>
                                     </div>
                                     </div>

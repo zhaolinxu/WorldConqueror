@@ -2,30 +2,31 @@
 
 wciApp.factory(
     'debugService',
-    function (myCountryService) {
+    function (playerService) {
         let Debug = function () {
         };
 
         Debug.prototype.addEachBuilding = function () {
-            myCountryService.buildings.structures.forEach(function (structure) {
+            playerService.buildings.structures.forEach(function (structure) {
                 structure.build(10);
             });
         };
 
         Debug.prototype.addLand = function () {
-            myCountryService.baseStats.land += 100;
+            playerService.baseStats.land += 100;
         };
 
         Debug.prototype.addResearchPoints = function () {
-            myCountryService.baseStats.baseResearchPoints = 1000;
-            myCountryService.research.update();
+            playerService.baseStats.baseResearchPoints = 1000;
+            playerService.research.update();
+            playerService.baseStats.baseResearchPoints = 0;
         };
 
         Debug.prototype.stabilityChange = function (val) {
-            myCountryService.baseStats.stability += val;
+            playerService.baseStats.stability += val;
         };
         Debug.prototype.stabilityIndexChange = function (val) {
-            myCountryService.baseStats.currentStabilityIndex += val;
+            playerService.baseStats.currentStabilityIndex += val;
         };
         return new Debug();
     });

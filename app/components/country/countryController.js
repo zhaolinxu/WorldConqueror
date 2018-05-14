@@ -1,9 +1,9 @@
 wciApp.controller('CountryController', function (
     $interval,
-    myCountryService
+    playerService
 ) {
-    this.myCountry = myCountryService;
-    this.laws = myCountryService.laws;
+    this.myCountry = playerService;
+    this.laws = playerService.laws;
 
     var myCountry = this.myCountry;
 });

@@ -88,6 +88,7 @@ wciApp.controller('WarController', function (
             worldCountryService.countriesColorsAtWar[code] = strength;
             worldCountryService.update();
             //TODO: Set up first battle phase here using warService.init(attacker,defender)
+            $scope.warService.initBattle(playerService, worldCountryService)
         }, function () {
             $log.info('Modal dismissed at: ' + new Date());
         });

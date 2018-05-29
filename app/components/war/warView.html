@@ -8,19 +8,13 @@
                             <span>
                                 Control Room
                             </span>
-                            <span>
-                                <i class="fa fa-exclamation-triangle clickable" ng-click="war.retreat()"></i>
-                            </span>
-                            <span class="pull-right">
-                                <i class="fa fa-info-circle clickable" ng-click=""></i>
-                            </span>
                         </div>
                     </div>
                     <div class="panel-body custom-panel font-9pt">
-                        <div class="row" ng-repeat="currentBattle in warService.currentBattles">
+                        <div class="row" ng-repeat="currentBattle in warService.countriesAtWar">
                             <div class="col-sm-4">
                                 <h4>
-                                    {{currentBattle.defender.code}}
+                                    {{currentBattle.countryCode}}
                                 </h4>
                             </div>
                             <div class="col-sm-4">

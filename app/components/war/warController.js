@@ -44,9 +44,7 @@ wciApp.controller('WarController', function (
             let controlledCountry = playerService.conqueredCountries.map(function(e) {
                 return e.countryCode;
             }).indexOf(code);
-            let countryOnWar = playerService.countriesAtWar.map(function (e) {
-                return e.countryCode;
-            }).indexOf(code);
+            let countryOnWar = warService.isCountryAtWar(code);
 
             //Might open modal with options to attack if we are already at war.
             if (controlledCountry !== -1 || countryOnWar !== -1) {
@@ -84,11 +82,10 @@ wciApp.controller('WarController', function (
         });
         modalInstance.result.then(function () {
             let strength = worldCountryService.getCountryStrength(code);
-            playerService.countriesAtWar.push({countryCode: code, queue: []});
             worldCountryService.countriesColorsAtWar[code] = strength;
             worldCountryService.update();
             //TODO: Set up first battle phase here using warService.init(attacker,defender)
-            $scope.warService.initBattle(playerService, worldCountryService)
+            warService.declareWar(code)
         }, function () {
             $log.info('Modal dismissed at: ' + new Date());
         });

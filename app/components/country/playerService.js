@@ -23,12 +23,10 @@ wciApp.factory('playerService',
         };
         this.conqueredCountries = [];//a list of countries we control
         this.startingCountries = [];//list of strings with starting countries for a player...
-        this.countriesAtWar = [];
     };
     Player.prototype.init = function () {
         this.conqueredCountries = [];
         this.startingCountries = ["US"];//We can have more than 1...
-        this.countriesAtWar = [];
         this.baseStats = {
             //One Month is signfied as one second
             countryName: 'Wadiya',

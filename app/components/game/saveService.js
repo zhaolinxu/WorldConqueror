@@ -9,6 +9,7 @@ wciApp.factory(
               researchService,
               initService,
               bonusesService,
+              warService,
               $location) {
 
         let data = {};
@@ -38,7 +39,7 @@ wciApp.factory(
             let laws = playerService.laws.activeLaws;
             let lawsUnlocked = playerService.laws.unlockedLaws;
             let buildings = playerService.buildings;
-            let onWar = playerService.countriesAtWar;
+            let onWar = warService.countriesAtWar;
             let onWarColors = worldCountryService.countriesColorsAtWar;
 
             let unitsToSave = [];//array of objects with basic values...
@@ -76,7 +77,7 @@ wciApp.factory(
             let lawsUnlocked = playerService.laws.unlockedLaws;
             let buildings = playerService.buildings;
             let baseStats = playerService.baseStats;
-            let onWar = playerService.countriesAtWar;
+            let onWar = warService.countriesAtWar;
             let onWarColors = worldCountryService.countriesColorsAtWar;
 
 

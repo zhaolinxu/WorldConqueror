@@ -9,6 +9,7 @@ wciApp.factory(
               researchService,
               bonusesService,
               gameDataService,
+              warService,
               $q) {
         let sheets = ["Buildings", "Units", "ResearchData", "ResearchBonuses", "Laws", "WorldCountries"];
 
@@ -20,6 +21,7 @@ wciApp.factory(
                     //we return value which is an object of our sheets, we can access them like value.Buildings.
                     //pass data to gameDataService before initializing any other service
                     gameDataService.init(excelObject);//This is important, it stores all game data, so other services can use it.
+                    warService.init();
                     myCountryInit();
                     buildingInit();
                     militaryInit();

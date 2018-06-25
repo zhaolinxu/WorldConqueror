@@ -28,5 +28,10 @@ wciApp.factory(
         Debug.prototype.stabilityIndexChange = function (val) {
             playerService.baseStats.currentStabilityIndex += val;
         };
+        Debug.prototype.addUnits = function() {
+            playerService.military.units.forEach(function(unit){
+                unit.count += 100;
+            })
+        };
         return new Debug();
     });

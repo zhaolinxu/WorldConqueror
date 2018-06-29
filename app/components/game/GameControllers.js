@@ -17,7 +17,8 @@ wciApp.controller(
         saveService,
         initService,
         debugService,
-        bonusesService
+        bonusesService,
+        warService
         ) {
         let game = this;
         let initGame = function() {
@@ -47,6 +48,7 @@ wciApp.controller(
             game.myCountry.research.update();
             game.myCountry.laws.update();
             game.worldCountries.update();
+            warService.doBattle();
             //game.advisors.functions.advisorTimedEffects();
             //game.saveGame();
         };

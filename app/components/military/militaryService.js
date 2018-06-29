@@ -53,11 +53,14 @@ wciApp.factory(
 
                 //This stacks up units queue if their training time is the same(it does not take into account reduced time of training if you make a research during the training of the unit...)
                 if (this.hiringQueue.length) {
-                    let lastQueueTime = this.hiringQueue[this.hiringQueue.length - 1].time || 0;
-                    if (this.trainingSpeed === lastQueueTime) {
+                    let lastQueueTime = this.hiringQueue[this.hiringQueue.length - 1].time || 1;
+                    if (lastQueueTime === this.trainingSpeed) {
                         this.hiringQueue[this.hiringQueue.length - 1].amount += value;
+                    } else {
+                        //TODO: Fix logic, we are repeating Array.push
+                        this.hiringQueue.push({amount: value, time: this.trainingSpeed});
                     }
-                }else {
+                } else {
                     this.hiringQueue.push({amount: value, time: this.trainingSpeed});
                 }
             }
@@ -80,6 +83,12 @@ wciApp.factory(
         };
         Unit.prototype.getTotalStrength = function () {
             return this.getStrength() * this.count;
+        };
+        Unit.prototype.getTotalAttack = function() {
+            return this.attack * this.count;
+        };
+        Unit.prototype.getTotalDefense = function() {
+            return this.defense * this.count;
         };
         Unit.prototype.getUpkeep = function () {
             return this.upkeep * this.count;
@@ -134,10 +143,18 @@ wciApp.factory(
         //TODO: Probably need to create another array of arrays which will store currently sent units "unit group", so we can calculate their cost
         //TODO: Sending units to fight should increase their upkeep :]
         Military.prototype.getTotalAttack = function () {
-
+            let total = 0;
+            this.units.forEach(function (unit) {
+                total += unit.getTotalAttack();
+            });
+            return total;
         };
         Military.prototype.getTotalDefense = function () {
-
+            let total = 0;
+            this.units.forEach(function (unit) {
+                total += unit.getTotalDefense();
+            });
+            return total;
         };
         Military.prototype.getTotalSiege = function () {
 

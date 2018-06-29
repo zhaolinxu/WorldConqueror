@@ -46,7 +46,7 @@ wciApp.factory('playerService',
             stability: 25, //% calculated based on warring history, friendly laws.
             size: 1,
             sizeName: 'Speck',
-            population: 10,
+            population: 100,
             baseGrowthRate: 1, //Based on the size of the worldCountry (lower size = lower growth rate)
             baseMortalityRate: 6, //Based on the size (lower size = higher mortality rate)
             housingCapacity: 16,

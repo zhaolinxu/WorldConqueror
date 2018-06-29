@@ -54,20 +54,20 @@ wciApp.factory('worldCountryService', function (
         if (filterCounqueredCountries !== undefined) {
             return playerService.military.getTotalStrength();
         } else {
-            let strength = 0;
-            loop1://This is a thing in js, allows you to break a look from inside a nested loop. Useful if you just need to find a specific value.
+            return this.getAiByCountryCode(code).getTotalStrength();
+        }
+    };
+    World.prototype.getAiByCountryCode = function(code) {
             for(let i = 0; i < this.AiPlayers.length; i++){
                 for(let j = 0; j < this.AiPlayers[i].countries.length; j++){
                     let country = this.AiPlayers[i].countries[j];
                     if(country.countryCode === code) {
-                        strength = this.AiPlayers[i].getTotalStrength();
-                        break loop1;//breaking first loop here
+                        return this.AiPlayers[i];
                     }
                 }
             }
-            return strength;
-        }
     };
+
     World.prototype.update = function () {
         //There goes all logic for countries...Using AiPlayerService methods, we make decisions here.
         //While looping AiPlayer array, we can update map colors based on Strength as well

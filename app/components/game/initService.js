@@ -62,8 +62,8 @@ wciApp.factory(
         let worldCountriesInit = function (countriesArray) {
             worldCountryService.init(countriesArray);
         };
-        let ministersInit = function (ministersArray) {
-            ministerService.init(ministersArray);
+        let ministersInit = function () {
+            ministerService.init();
         };
 
         return init;

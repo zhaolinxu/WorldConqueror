@@ -1,20 +1,17 @@
 ﻿'use strict';
 
-wciApp.factory('ministerService', function () {
+wciApp.factory('ministerService', function (modalService,gameDataService) {
 
     let Ministers = function () {
-        this.ministers = [];//list of laws from excel/json file
+        this.allMinisters = [];//list of laws from excel/json file
         this.activeMinisters = [];//list of active laws
         this.nextMinisterCost = 1;
     };
 
-    Ministers.prototype.init = function (lawsArrayExcel) {
-        this.ministers = [];
+    Ministers.prototype.init = function () {
+        this.allMinisters = gameDataService.Ministers;
         this.activeMinisters = [];
         let self = this;
-        lawsArrayExcel.forEach(function (minister) {
-            self.ministers.push(minister);
-        });
     };
 
     Ministers.prototype.openMinisterHire = function () {
@@ -22,23 +19,50 @@ wciApp.factory('ministerService', function () {
         var count = 0;
 
         //This is a factorial function
-        activeMinister.forEach(function (min) {
+        this.activeMinisters.forEach(function (min) {
             count++;
             ministerCost * count;
         });
         let self = this;
 
         self.nextMinisterCost = ministerCost;
+
+        //open modal
+
+        var modalInstance = modalService.open({
+            templateUrl: 'ministersHireModal.html',
+            controller: 'ministersHiringModalController',
+            size: 'md',
+            resolve: {
+                allMinisters: function () {
+                    return self.allMinisters
+                },
+                nextMinisterCost: function () {
+                    return self.nextMinisterCost
+                }
+            }
+        });
+
+        modalInstance.result.then(function (ministerType) {
+            let minister = this.filterMinister(ministerType);
+            if (minister) this.activeMinisters.push(minister);
+
+            //handle bonuses
+        });
     };
 
-    Ministers.prototype.hireMinister = function (ministerType) {
-        let minister = this.filterMinister(ministerType);
-        if (minister) this.activeMinisters.push(minister);
-    };
+    //Ministers.prototype.hireMinister = function (ministerType) {
+    //    let minister = this.filterMinister(ministerType);
+    //    if (minister) this.activeMinisters.push(minister);
+
+    //    //handle bonuses
+    //};
 
     Ministers.prototype.fireMinister = function (ministerType) {
         let minister = this.filterMinister(ministerType);
         this.activeMinisters.splice(minister);
+
+        //handle bonuses
     };
 
     Ministers.prototype.filterMinister = function (ministerType) {

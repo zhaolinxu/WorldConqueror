@@ -103,3 +103,14 @@
     border-radius: 2.5px;
     border-style: solid;
 }
+
+.bottom-border {
+    border-bottom: 1px solid;
+}
+
+.noBottom-border {
+    border-width:1px 1px 0px 1px;
+    border-top-left-radius: 2.5px;
+    border-top-right-radius: 2.5px;
+    border-style:solid;
+}

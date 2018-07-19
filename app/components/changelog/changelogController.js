@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-wciApp.controller('ChangelogController', function ($interval, myCountryData) {
+wciApp.controller('ChangelogController', function ($interval, playerService) {
 
     //#region Default Values
     this.changeLogs =

@@ -1,89 +1,78 @@
 ﻿'use strict';
 
-wciApp.factory('worldCountryData', function (
-    $uibModal,
-    $http) {
+wciApp.factory('worldCountryService', function (
+    militaryService,
+    playerService,
+    AiPlayerService,
+    gameDataService
+) {
 
-    //var worldCountries = {
-    //    "AF": 16.63,
-    //    "AL": 11.58,
-    //    "DZ": 158.97,
-    //    "US": 1342.12
-    //};
-
-    var worldCountries = {
-        baseStats: {},
-        functions: {}
+    let World = function () {
+        //Countries store some basic data such as Land.
+        this.AiPlayers = [];//list of all AI players.//This is an array, so we can loop through few countries each turn and save index for next loop on next turn. Using objects would be a pain.
+        //Other properties are objects because we need to have an easy access to them via bracket notation like country[code].someData
+        this.allCountriesColors = {};//objects with all countries colors...like this.countryColors.US = 15
+        this.countriesColorsAtWar = {};//objects with all countries we are at war.
     };
 
-    //First Load
-    if (!localStorage['worldCountryBaseStats']) {
-        setInitialWorldCountryData(worldCountries);
-    }
-    else {
-        //JSON.parse(atob(localStorage['wci_gameData']));
-        worldCountries.baseStats = JSON.parse(localStorage['worldCountryBaseStats']);
-    }
+    World.prototype.init = function () {
+        let countries = gameDataService.WorldCountries;
+        //This is where we generate all countries with starting units etc.
+        this.AiPlayers = [];
+        this.allCountriesColors = {};
+        this.conqueredCountriesColors = {};
+        this.countriesColorsAtWar = {};
+        let self = this;
+        countries.forEach(function (countryData) {
+            let countryCode = countryData.countryCode;
+            let countryObject = {};//This is the simplest possible country object, containing only base information, it will be moved around between player/ai as they conquer each other.
+            countryObject.countryCode = countryCode;
+            countryObject.land = countryData.land || Math.floor(Math.random() * 450) + 50;//50-500 land
 
-    worldCountries.functions.resetData = function () {
-        setInitialWorldCountryData(worldCountries);
-    };
-    worldCountries.functions.saveData = function () {
-        //btoa(JSON.stringify(game.data));
-        localStorage['worldCountryBaseStats'] = JSON.stringify(worldCountries.baseStats);
-    };
-
-
-    worldCountries.functions.attack = function (code) {
-
-        var modalInstance = $uibModal.open({
-            templateUrl: 'warConfirmationModal.html',
-            controller: 'warConfirmationModalController',
-            size: 'md',
-            resolve: {
-                countryAttacked: function () {
-                    return code;
-                }
+            //Below, create AI players based on countries that player is NOT controlling.
+            let playerCountry = playerService.startingCountries.map(function (code) {
+                return code === countryCode;//if player has the country...
+            })[0];
+            if (!playerCountry) {//If player is not controlling a country, we can create AI from that countryData...
+                let country = new AiPlayerService();
+                country.init(countryData, countryObject);
+                self.AiPlayers.push(country);//AI with all methods/logic and AiPlayer specific data like military...
+            } else {
+                playerService.conqueredCountries.push(countryObject);
+                self.conqueredCountriesColors[countryCode] = playerService.military.getTotalStrength();
             }
+            //AI colors for map
+            //Last element, because we pushed them above, so new element is always last.
+            self.allCountriesColors[countryCode] = self.AiPlayers[self.AiPlayers.length - 1].military.getTotalStrength();
         });
-
-        modalInstance.result.then(function () {
-            worldCountries.baseStats.IsWarActive = true;
-            worldCountries.baseStats.CountryAttacked = worldCountries.baseStats.countryData[code];
-            //$('#world-map').slideToggle();
-        });
-    }
-
-
-    var getCountryData = function () {
-        $http({
-            method: 'GET',
-            url: 'assets/json/worldCountries.json'
-        }).then(function successCallback(data) {
-            worldCountries.baseStats.countryData = data;
-            // this callback will be called asynchronously
-            // when the response is available
-        }, function errorCallback(response) {
-            console.log(response);
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-        });
-    }
-    getCountryData();
+    };
     
-    return worldCountries;
-});
-
-var setInitialWorldCountryData = function (worldCountries) {
-
-    worldCountries.baseStats = {
-        countryStrength: {
-            "AF": 16.63,
-            "AL": 11.58,
-            "DZ": 158.97,
-            "US": 17342.12
+    World.prototype.getCountryStrength = function(code) {
+        let filterCounqueredCountries = playerService.conqueredCountries.filter(function (country) {
+            return country.countryCode === code;
+        })[0];
+        if (filterCounqueredCountries !== undefined) {
+            return playerService.military.getTotalStrength();
+        } else {
+            return this.getAiByCountryCode(code).getTotalStrength();
         }
     };
+    World.prototype.getAiByCountryCode = function(code) {
+            for(let i = 0; i < this.AiPlayers.length; i++){
+                for(let j = 0; j < this.AiPlayers[i].countries.length; j++){
+                    let country = this.AiPlayers[i].countries[j];
+                    if(country.countryCode === code) {
+                        return this.AiPlayers[i];
+                    }
+                }
+            }
+    };
 
-    worldCountries.baseStats.IsWarActive = false;
-};
+    World.prototype.update = function () {
+        //There goes all logic for countries...Using AiPlayerService methods, we make decisions here.
+        //While looping AiPlayer array, we can update map colors based on Strength as well
+        // this.allCountriesColors[code] = country.getTotalStrength();//This can be called for each country to overwrite the map colors...
+    };
+
+    return new World();
+});

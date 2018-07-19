@@ -1,11 +1,13 @@
 wciApp.controller(
     'StructureController',
     function (
-        buildingsData,
-        advisorsData,
-        helperModalsData) {
+        buildingsService,
+        advisorsService,
+        helperModalsService,
+        playerService) {
 
-        this.buildings = buildingsData;
-        this.advisors = advisorsData;
-        this.helperModals = helperModalsData;
+        this.buildings = playerService.buildings;
+        this.countryStats = playerService.baseStats;
+        this.advisors = advisorsService;
+        this.helperModals = helperModalsService;
     });

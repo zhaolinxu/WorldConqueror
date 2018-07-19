@@ -6,7 +6,7 @@ var wciApp = angular.module(
         'ui.bootstrap',
         'ngRoute',
         'ngSanitize',
-        'ui.select'
+        'ui.select',
     ]
 );
 

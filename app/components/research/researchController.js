@@ -1,3 +1,5 @@
-wciApp.controller('ResearchController', function () {
-
+wciApp.controller(
+    'ResearchController',
+    function (playerService) {
+        this.research = playerService.research;
 });

@@ -5,60 +5,41 @@ wciApp.controller(
     function (
         $scope,
         $interval,
-        playerService,
-        buildingsService,
-        militaryService,
-        lawsService,
-        advisorsService,
-        helperModalsService,
-        notificationService,
-        researchService,
-        ministerService,
-        worldCountryService,
-        saveService,
-        initService,
-        debugService,
-        bonusesService,
-        warService
-        ) {
-        let game = this;
-        let initGame = function() {
-            game.data = {};
-            initService().then(function(){
-                saveService.load();
-            });
-            game.myCountry = playerService;
-            game.worldCountries = worldCountryService;
-            game.bonuses = bonusesService;
-            game.advisors = advisorsService;
-            game.ministers = ministerService;
-            game.helperModals = helperModalsService;
-            game.notification = notificationService;
-            game.debug = debugService;
-        };
+        myCountryData,
+        buildingsData,
+        militaryData,
+        worldCountryData,
+        lawsData,
+        advisorsData,
+        helperModalsData,
+        notificationData) {
+
         //#region Private Methods
-        let timerfunction = function () {
+        var timerfunction = function () {
             //TODO: Put logic here to prompt user of game ending/death due to 0 population.
-            game.bonuses.update(game);
-            game.myCountry.military.updateUnitsBuyQueue();
-            game.myCountry.getGameTime();
-            game.myCountry.getNewConsumption();
-            game.myCountry.getNewEconomics();
-            game.myCountry.getNewDemographics();
+            game.myCountry.functions.getGameTime();
+            game.myCountry.functions.getNewConsumption();
+            game.myCountry.functions.getNewEconomics();
+            game.myCountry.functions.getNewDemographics();
+
+            game.laws.functions.updateActiveFor();
+
             game.myCountry.baseStats.upkeep = 0;
-            game.myCountry.buildings.getTotalUpkeep();
-            game.myCountry.research.update();
-            game.myCountry.laws.update();
-            game.worldCountries.update();
-            warService.doBattle();
+            game.buildings.functions.getTotalUpkeep();
+            game.military.functions.militaryTimedEffects();
             //game.advisors.functions.advisorTimedEffects();
             //game.saveGame();
         };
-        let saveGame = function () {
-            saveService.save();
+        var saveGame = function () {
+            game.myCountry.functions.saveData();
+            game.buildings.functions.saveData();
+            game.advisors.functions.saveData();
+            game.military.functions.saveData();
+            game.laws.functions.saveData();
+            game.worldCountries.functions.saveData();
             localStorage['gameData'] = JSON.stringify(game.data);
         };
-        let resetGame = function () {
+        var resetGame = function () {
             game.data = {
                 init: {
                     isFirstTime: true
@@ -67,16 +48,27 @@ wciApp.controller(
                 speed: 1000
             };
             //TODO: The extend functions don't attach themselves on reset. Fix
-            game.myCountry.init();
-            saveService.reset();
+            game.myCountry.functions.resetStats();
+            game.buildings.functions.resetData();
             game.advisors.functions.resetData();
+            game.worldCountries.functions.resetData();
+            game.military.functions.resetData();
+            game.laws.functions.resetData();
             localStorage.clear();
         };
         //#endregion
 
         //#region Default Values
-
-
+        var game = this;
+        game.data = {};
+        game.myCountry = myCountryData;
+        game.buildings = buildingsData;
+        game.advisors = advisorsData;
+        game.military = militaryData;
+        game.worldCountries = worldCountryData;
+        game.laws = lawsData;
+        game.helperModals = helperModalsData;
+        game.notification = notificationData;
 
         //Load Game's Settings
         if (!localStorage['gameData']) {
@@ -128,19 +120,36 @@ wciApp.controller(
         };
         //#endregion
 
-        initGame();
-        let saveTimer = $interval(saveGame, 1000);
+        //#region Automated Functions
+        if (!game.data.paused) {
+            var playTimer = $interval(timerfunction, game.data.speed);
+        }
+        var saveTimer = $interval(saveGame, 1000);
 
-        //next turn button
-        game.nextTurn = function(){
-            timerfunction();
-            game.myCountry.baseStats.currentTurn += 1;
+        game.pauseGame = function () {
+            game.data.paused = !game.data.paused;
+            if (!game.data.paused) {
+                playTimer = $interval(timerfunction, game.data.speed);
+            }
+            else {
+                $interval.cancel(playTimer)
+            }
         };
+        game.adjustGameSpeed = function (speed) {
+            game.data.speed = (1000 / speed);
+            game.data.paused = false;
+            $interval.cancel(playTimer);
+            playTimer = $interval(timerfunction, game.data.speed);
+
+        };
+
+        //#endregion
+
         //Making sure interval is cancelled on destroy
         $scope.$on(
             "$destroy",
             function (event) {
-                // $interval.cancel(playTimer)
+                $interval.cancel(playTimer)
                 $interval.cancel(saveTimer)
             }
         );

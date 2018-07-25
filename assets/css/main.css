@@ -23,63 +23,65 @@ a {
     user-select: none;
 }
 
-.fade_overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    z-index: 1001;
-    -moz-opacity: 0.8;
-    opacity: .80;
-    filter: alpha(opacity=80);
+.fade_overlay{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	z-index:1001;
+	-moz-opacity: 0.8;
+	opacity:.80;
+	filter: alpha(opacity=80);
 }
+
 
 /*Menu Styles*/
 .menu-divider {
     border-left: 1px #ccc solid;
     width: 1px;
     padding: 15px 0;
-    height: 50px;
+    height: 50px; 
     position: relative;
 }
-
-.navbar li:hover {
+.navbar li:hover{
     background-color: #aaa;
 }
+
 
 /*Structure Styles*/
 .panelLocked {
     color: #aaa;
 }
-
 .panelUnlocked {
     color: #000;
 }
+
+
 
 /*Overriding twitter bootstrap*/
 .btn {
     border-radius: 0;
 }
-
 .btn:hover {
     background-color: #000;
     color: #fff;
 }
 
+
 /*Intro Screen*/
 .introScreen {
-    position: absolute;
-    top: 15%;
-    left: 25%;
-    width: 50%;
-    height: 70%;
-    padding: 16px;
-    border: 4px solid black;
-    background-color: white;
-    z-index: 1002;
-    overflow: auto;
+	position: absolute;
+	top: 15%;
+	left: 25%;
+	width: 50%;
+	height: 70%;
+	padding: 16px;
+	border: 4px solid black;
+	background-color: white;
+	z-index:1002;
+	overflow: auto;
 }
 
 /*Governance Screen*/
@@ -94,79 +96,4 @@ a {
 .avatar {
     padding-left: 0 !important;
     padding-right: 0 !important;
-}
-
-/* Used with glyphicons inside a label */
-.tag {
-    font-size: 14px;
-    padding: .3em .4em .4em;
-    margin: 0 .1em;
-}
-
-.tag a {
-    color: #bbb;
-    cursor: pointer;
-    opacity: 0.6;
-}
-
-.tag a:hover {
-    opacity: 1.0
-}
-
-.tag .remove {
-    vertical-align: bottom;
-    top: 0;
-}
-
-.tag a {
-    margin: 0 0 0 .3em;
-}
-
-.tag a .glyphicon-white {
-    color: #fff;
-}
-
-.removePadding-hireBtn {
-    padding-top: 0;
-    padding-bottom: 0;
-}
-
-.unitRecruitment {
-    overflow: auto;
-    height: 60vh;
-}
-
-.progress-bar span {
-    display: block;
-    position: absolute;
-    width: 100%;
-    color: black;
-}
-
-a {
-    cursor: pointer;
-}
-
-.progress {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.researchProgress {
-    border-right: 1px solid black;
-    border-radius: 0;
-    width: 80%;
-    margin-left: 10%;
-}
-
-.researchProgress span {
-    width: 80%;
-}
-
-.lockPanel {
-    pointer-events: none;
-}
-
-.notAllowed {
-    cursor: not-allowed;
 }

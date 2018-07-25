@@ -2,7 +2,7 @@ wciApp.config(function ($routeProvider) {
     $routeProvider
         .when('/',
             {
-                templateUrl: 'app/components/government/internalAffairsView.html',
+                templateUrl: 'app/components/internalAffairs/internalAffairsView.html',
                 controller: 'CountryController',
                 controllerAs: 'countryCtrl'
             })

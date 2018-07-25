@@ -4,7 +4,7 @@ wciApp.controller(
     'advisorsHiringModalController',
     function (
         $scope,
-        $uibModalInstance,
+        $modalInstance,
         advisorType) {
 
         $scope.advisors = [];
@@ -47,10 +47,10 @@ wciApp.controller(
         generateRandomAdvisors();
 
         $scope.hire = function (advisor) {
-            $uibModalInstance.close(advisor);
+            $modalInstance.close(advisor);
         };
         $scope.cancel = function () {
-            $uibModalInstance.dismiss('cancel');
+            $modalInstance.dismiss('cancel');
         };
         $scope.refreshList = function () {
             $scope.advisors = [];

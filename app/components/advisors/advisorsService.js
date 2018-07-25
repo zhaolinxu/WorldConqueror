@@ -1,11 +1,11 @@
 ﻿'use strict';
 
 wciApp.factory(
-    'advisorsService',
+    'advisorsData',
     function (
         $uibModal,
-        playerService,
-        buildingsService) {
+        myCountryData,
+        buildingsData) {
 
         var advisors = {
             baseStats: {},
@@ -13,11 +13,11 @@ wciApp.factory(
         };
 
         //First Load
-        if (!localStorage['advisorsService']) {
+        if (!localStorage['advisorsData']) {
             setInitialAdvisorsData(advisors);
         }
         else {
-            advisors.baseStats = JSON.parse(localStorage['advisorsService']);
+            advisors.baseStats = JSON.parse(localStorage['advisorsData']);
         }
 
         advisors.functions.hireNewAdvisor = function (advisor) {
@@ -41,7 +41,7 @@ wciApp.factory(
 
         };
         advisors.functions.removeAdvisor = function (advisor) {
-            angular.forEach(buildingsService.baseStats[advisor.Type].structures, function (structure) {
+            angular.forEach(buildingsData.baseStats[advisor.Type].structures, function (structure) {
 
                 structure.cost = structure.baseCost;
                 structure.displayCost = structure.baseCost;
@@ -53,7 +53,7 @@ wciApp.factory(
         };
 
         advisors.functions.saveData = function () {
-            localStorage['advisorsService'] = JSON.stringify(advisors.baseStats);
+            localStorage['advisorsData'] = JSON.stringify(advisors.baseStats);
         };
         advisors.functions.resetData = function () {
             setInitialAdvisorsData(advisors);
@@ -72,7 +72,7 @@ wciApp.factory(
                 var advisor = advisors.baseStats.activeAdvisors[activeAdvisor]
 
                 if (advisor.Name) {
-                    angular.forEach(buildingsService.baseStats[activeAdvisor].structures, function (structure) {
+                    angular.forEach(buildingsData.baseStats[activeAdvisor].structures, function (structure) {
 
                         structure.cost = structure.baseCost * (1 - (Math.pow(advisor.EducationLevel, 2) / 100));
                         structure.displayCost = structure.baseCost * (1 - (Math.pow(advisor.EducationLevel, 2) / 100));
@@ -91,7 +91,7 @@ wciApp.factory(
                     upkeep += advisor.Salary / 8640; //breakdown yearly salary in hourly = 12*30*24
                 }
             }
-            playerService.baseStats.upkeep += upkeep;
+            myCountryData.baseStats.upkeep += upkeep;
         };
 
         return advisors;

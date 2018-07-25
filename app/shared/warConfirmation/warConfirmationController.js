@@ -2,30 +2,32 @@ wciApp.controller(
     'warConfirmationModalController',
     function (
         $scope,
-        $uibModalInstance,
+        $modalInstance,
         countryAttacked,
-        worldCountryService,
-        playerService) {
+        myCountryData,
+        worldCountryData,
+        militaryData) {
 
-        $scope.myCountryStrength = playerService.military.getTotalStrength();
-        $scope.targetCountryStrength = worldCountryService.getCountryStrength(countryAttacked);
+        $scope.myCountryStrength = myCountryData.baseStats.totalAttack + myCountryData.baseStats.totalDefense + myCountryData.baseStats.totalSiege;
+
+        $scope.targetCountryStrength = worldCountryData.baseStats.countryStrength[countryAttacked];
 
         $scope.successProbability = calculateSuccessProbability($scope);
 
         $scope.declareWar = function () {
-            $uibModalInstance.close('ok');
+            $modalInstance.close('ok');
         };
         $scope.cancel = function () {
-            $uibModalInstance.dismiss('cancel');
+            $modalInstance.dismiss('cancel');
         };
 
 
     });
 
 
-let calculateSuccessProbability = function ($scope) {
+var calculateSuccessProbability = function ($scope) {
 
-    let probOfFailure;
+    var probOfFailure;
     if ($scope.myCountryStrength > 0) {
         probOfFailure = 100 * (($scope.targetCountryStrength - ($scope.myCountryStrength / 2)) / $scope.myCountryStrength);
     } else {
@@ -40,4 +42,4 @@ let calculateSuccessProbability = function ($scope) {
 
 
     return 100 - probOfFailure;
-};
+}

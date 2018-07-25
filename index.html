@@ -13,18 +13,18 @@
     <script src="assets/libs/js/xlsx.full.min.js"></script>
     <script src="assets/libs/js/cpexcel.js"></script>
     <script src="assets/libs/js/ui-bootstrap-tpls-2.5.0.min.js"></script>
-    <script src="assets/libs/js/jquery-jvectormap-2.0.3.min.js"></script>
+    <script src="assets/libs/js/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="assets/libs/js/jquery-jvectormap-world-mill-en.js"></script>
     <!--css-->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/libs/css/select.min.css">
-    <link rel="stylesheet" href="assets/libs/css/jquery-jvectormap-2.0.3.css">
+    <link rel="stylesheet" href="assets/libs/css/jquery-jvectormap-2.0.2.css">
     <!--<link rel="stylesheet" href="libs/css/metro-bootstrap.css">
     <link rel="stylesheet" href="libs/fonts/metroSysIcons.svg">
     <link rel="stylesheet" href="libs/fonts/metroSysIcons.tff">
     <link rel="stylesheet" href="libs/fonts/metroSysIcons.woff">
-    -->
+    <link rel="stylesheet" href="libs/font-awesome.min.css">-->
 </head>
 <body ng-controller="GameController as game" ng-cloak>
     <div class="main_overlay">
@@ -90,11 +90,23 @@
 
                         </ul>
                         <div id="Speed Buttons" class="navbar-form clickableArea">
-                            <span class="margin-left-15">
-                                Current turn: {{game.myCountry.baseStats.currentTurn}}
-                            </span>
-                            <button class="btn margin-left-15" ng-click="game.nextTurn()">
-                                <i class="fa fa-play"></i>
+                            <button class="btn margin-left-15" ng-class="game.data.paused === true ? 'btn-success' : 'btn-warning'" ng-click="game.pauseGame()">
+                                <i class="fa" ng-class="game.data.paused === true ? 'fa-play' : 'fa-pause'"></i>
+                            </button>
+                            <button class="btn" ng-class="game.data.speed === 1000 ? 'btn-info' : 'btn-primary'" ng-click="game.adjustGameSpeed(1)">
+                                <span>
+                                    x1
+                                </span>
+                            </button>
+                            <button class="btn" ng-class="game.data.speed === 0.01 ? 'btn-info' : 'btn-primary'" ng-click="game.adjustGameSpeed(0.01)">
+                                <span>
+                                    x0.01
+                                </span>
+                            </button>
+                            <button class="btn" ng-class="game.data.speed === 1 ? 'btn-info' : 'btn-primary'" ng-click="game.adjustGameSpeed(1000)">
+                                <span>
+                                    x1000
+                                </span>
                             </button>
                             <button class="btn btn-primary" ng-click="game.resetGame()">
                                 <span>
@@ -107,18 +119,9 @@
                         </div>
                     </div>
                 </nav>
-                <div class="col-sm-12">
-                    <button ng-click="game.debug.addLand()">Land +100</button>
-                    <button ng-click="game.debug.addUnits()">Units +100</button>
-                    <button ng-click="game.debug.addEachBuilding()">Unlock Structures +10</button>
-                    <button ng-click="game.debug.addResearchPoints()">Add Science +1k</button>
-                    <button ng-click="game.debug.stabilityChange(10)">Stability +10</button>
-                    <button ng-click="game.debug.stabilityChange(-10)">Stability -10</button>
-                    <button ng-click="game.debug.stabilityIndexChange(1)">StabilityIndex +1</button>
-                    <button ng-click="game.debug.stabilityIndexChange(-1)">StabilityIndex -1</button>
-                </div>
+
                 <div id="Game Window" class="col-sm-12">
-                    <div ng-include="'app/shared/statHeader/statHeaderView.html'"></div>
+                    <div ng-include="'app/components/statHeader/statHeaderView.html'"></div>
                     
                     <div id="views" ng-view>
                     </div>
@@ -159,49 +162,34 @@
         <script src="app/components/military/militaryController.js"></script>
         <script src="app/components/research/researchController.js"></script>
         <script src="app/components/structure/structureController.js"></script>
-        <script src="app/components/ministers/ministersHiringController.js"></script>
-        <script src="app/shared/tooltip/tooltipController.js"></script>
+        <script src="app/components/tooltip/tooltipController.js"></script>
         <script src="app/components/war/warController.js"></script>
 
         <!-- Services -->
         <script src="app/components/advisors/advisorsService.js"></script>
-        <script src="app/components/country/playerService.js"></script>
-        <script src="app/components/government/lawsService.js"></script>
+        <script src="app/components/country/countryService.js"></script>
+        <script src="app/components/laws/lawsService.js"></script>
         <script src="app/components/military/militaryService.js"></script>
         <script src="app/components/research/researchService.js"></script>
+        <script src="app/components/structure/structureService.js"></script>
         <script src="app/components/worldCountry/worldCountryService.js"></script>
-        <script src="app/components/game/saveService.js"></script>
-        <script src="app/components/game/initService.js"></script>
-        <script src="app/components/ministers/ministerService.js"></script>
-        <script src="app/components/structure/buildingsService.js"></script>
-        <script src="app/components/bonuses/bonusesService.js"></script>
-        <script src="app/components/game/gameDataService.js"></script>
-        <script src="app/components/worldCountry/aiPlayerService.js"></script>
-        <script src="app/components/war/warService.js"></script>
 
         <!-- Shared Controllers -->
         <script src="app/shared/advisorHelp/advisorHelperController.js"></script>
         <script src="app/shared/advisorHire/advisorHiringController.js"></script>
-        <script src="app/components/war/warConfirmation/warConfirmationController.js"></script>
-        <script src="app/components/war/warSendTroopsController.js"></script>
+        <script src="app/shared/warConfirmation/warConfirmationController.js"></script>
 
         <!-- Shared Services -->
         <script src="app/shared/helperModal/helperModalsService.js"></script>
         <script src="app/shared/notifications/notificationService.js"></script>
-        <script src="app/shared/modal/modalService.js"></script>
 
         <!-- Filters -->
         <script src="app/shared/filters/NumberFilters.js"></script>
         <script src="app/shared/filters/DateTimeFilters.js"></script>
 
-        <!-- Functions -->
-        <script src="app/shared/excelLoader.js"></script>
 
         <link rel="stylesheet" href="assets/css/main.css" />
         <link rel="stylesheet" href="assets/css/common.css" />
-
-        <!-- Debug service -->
-        <script src="app/shared/debugService.js"></script>
 
     </footer>
 </body>

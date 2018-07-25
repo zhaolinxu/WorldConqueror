@@ -18,8 +18,6 @@
         </span>
     </h4>
     <hr>
-    <div ng-include="'app/components/ministers/ministersView.html'"></div>
-    <div ng-include="'app/components/ministers/ministersHireModal.html'"></div>
     <div class="row">
         <div class="col-sm-12">
             <div class="col-md-6 col-sm-12">
@@ -34,24 +32,24 @@
                             </span>
                         </div>
                     </div>
-                    <div ng-repeat="law in countryCtrl.laws.unlockedLaws">
-                        <div class="panel-body">
+                    <div ng-repeat="law in countryCtrl.laws.baseStats">
+                        <div class="panel-body \" ng-click="law.enactLaw()">
                             <div class="col-md-8">
                                 <span class="fa fa-info-circle" tooltip="{{law.description}}"></span>
                                 <span class="fa" ng-class="law.icon"></span>
                                 <span class="bold">
                                     {{law.name}} <br />
                                     <span class="font-9pt">
-                                        Active for: {{law.duration}} turns
+                                        Active for: {{law.activeFor | niceTime}}
                                     </span>
                                 </span>
                             </div>
                             <div class="col-md-4">
-                                <div class="pull-right clickableArea">
-                                    <button class="btn" ng-click="countryCtrl.laws.enactLaw($index)" ng-class="!law.isActive ? 'btn-success': 'hidden'" ng-disabled="law.isActive">
+                                <div class="pull-right clickableArea" ng-show="law.isUnlocked">
+                                    <button class="btn" ng-click="law.act()" ng-class="!law.isActive ? 'btn-success': ''" ng-disabled="law.isActive">
                                         Enact
                                     </button>
-                                    <button class="btn" ng-click="countryCtrl.laws.repealLaw($index)" ng-class="law.isActive ? 'btn-danger': 'hidden'" ng-disabled="!law.isActive">
+                                    <button class="btn" ng-click="law.act()" ng-class="law.isActive ? 'btn-danger': ''" ng-disabled="!law.isActive">
                                         Repeal
                                     </button>
                                 </div>
@@ -60,15 +58,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-sm-12">
-                <div id="government" class="panel panel-primary">
-                    <div class="panel-heading">
-                        <div class="panel-title">
-                            <span>Government</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </div>
 </div>

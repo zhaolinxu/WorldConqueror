@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-wciApp.factory('notificationService', function (playerService) {
+wciApp.factory('notificationData', function (myCountryData) {
 
     var notification = {
         show: false,
